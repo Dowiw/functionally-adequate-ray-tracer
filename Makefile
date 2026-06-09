@@ -1,68 +1,55 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/09/11 16:36:57 by kmonjard          #+#    #+#              #
-#    Updated: 2025/09/11 16:36:58 by kmonjard         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = miniRT
-CC = gcc
-C_FLAGS = -Wall -Werror -Wextra -g
 
-SRC_DIR = ./src
-LIBFT = $(SRC_DIR)/libft/libft.a
+CUR_DIR = $(shell pwd)
 
-MLX_DIR = ./mlx
-MLX_REPO = https://github.com/42paris/minilibx-linux.git
-MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
+HEADER_DIR = include
 
-C_FILES = ...
+HEADERS = minirt.h
 
-SRC = $(addprefix $(SRC_DIR)/, $(C_FILES))
+SOURCE_DIR = src
 
-OBJ = $(SRC:.c=.o)
+SOURCES = main.c
 
-INCLUDES = ./includes
+LIBFT_DIR = libft
 
-#  -- Rules  --
-all: $(LIBFT) $(MLX_DIR)/libmlx.a $(NAME)
+LIBFT = $(LIBFT_DIR)/libft.a
 
-$(MLX_DIR):
-	git clone $(MLX_REPO) $(MLX_DIR)
+HEADER_FILES = $(HEADERS:%=$(HEADER_DIR)/%)
 
-$(MLX_DIR)/libmlx.a: $(MLX_DIR)
-	$(MAKE) -C $(MLX_DIR) > /dev/null
+SOURCE_FILES = $(SOURCES:%=$(SOURCE_DIR)/%)
 
-$(LIBFT):
-	make -C $(SRC_DIR)/libft/
+BUILD_DIR = build
 
-$(NAME): $(OBJ)
-	@$(CC) $(C_FLAGS) $(OBJ) $(LIBFT) -o $(NAME) $(MLX_FLAGS)
+OBJECT_FILES = $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 
-%.o: %.c
-	@echo "Compiling $<..."
-	@$(CC) $(C_FLAGS) -c $< -o $@ -I$(INCLUDES) -I$(MLX_DIR)
+DEP_FILES = $(OBJECT_FILES:.o=.d)
 
-bonus: $(LIBFT) $(O_BONUS)
-	@$(CC) $(C_FLAGS) $(O_BONUS) $(LIBFT) -o $(NAME) $(MLX_FLAGS)
+CC = cc
+
+CFLAGS += -Wall -Wextra -Werror -I$(CUR_DIR)/$(HEADER_DIR) -MMD -MP
+
+all: $(NAME)
+
+$(NAME): $(OBJECT_FILES)
+	make -C $(LIBFT_DIR) bonus
+	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) -o $(NAME) -L/usr/local/lib -I/usr/local/include -lreadline
+
+$(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@make -C ./src/libft clean
-	@echo "Deleting object files in fdf..."
-	@rm -f $(OBJ) $(O_BONUS)
+	make -C $(LIBFT_DIR) fclean
+	rm -rf $(BUILD_DIR)
 
-fclean:
-	@make -C ./src/libft fclean
-	@echo "Deleting object files in fdf..."
-	@echo "Deleting all binaries in fdf..."
-	@rm -f $(NAME)
-	@rm -f $(OBJ) $(O_BONUS)
+fclean: clean
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+only: all clean
+
+valgrind: all
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./$(NAME)
+
+-include $(DEP_FILES)
