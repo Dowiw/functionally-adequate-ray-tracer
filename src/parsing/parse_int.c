@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/09 19:35:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/09 22:32:13 by sstark           ###   ########.fr       */
+/*   Created: 2026/06/09 21:22:03 by sstark            #+#    #+#             */
+/*   Updated: 2026/06/09 22:22:41 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "parsing.h"
-#include "scene.h"
-
-static int	error(char *msg);
-
-int	main(int argc, char **argv)
+// TODO
+int	parse_int(int *num, char *str)
 {
-	t_scene		scene;
-
-	if (argc != 2)
-		return (error("Wrong arg count"));
-	if (!parse_scene(&scene, argv[1]))
-		return (error("Failed to parse scene"));
-	return (0);
-}
-
-static int	error(char *msg)
-{
-	printf("Error\n");
-	printf("%s\n", msg);
+	(void) str;
+	*num = 0;
 	return (1);
 }

@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   util_colors.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/09 19:35:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/09 22:32:13 by sstark           ###   ########.fr       */
+/*   Created: 2026/06/09 20:33:22 by sstark            #+#    #+#             */
+/*   Updated: 2026/06/09 20:35:47 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "parsing.h"
-#include "scene.h"
+#ifndef UTIL_COLORS_H
+# define UTIL_COLORS_H
 
-static int	error(char *msg);
+int	rgb(int red, int green, int blue);
 
-int	main(int argc, char **argv)
-{
-	t_scene		scene;
+int	red(int rgb);
 
-	if (argc != 2)
-		return (error("Wrong arg count"));
-	if (!parse_scene(&scene, argv[1]))
-		return (error("Failed to parse scene"));
-	return (0);
-}
+int	green(int rgb);
 
-static int	error(char *msg)
-{
-	printf("Error\n");
-	printf("%s\n", msg);
-	return (1);
-}
+int	blue(int rgb);
+
+#endif

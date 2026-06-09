@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   util_strings.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/09 19:35:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/09 22:32:13 by sstark           ###   ########.fr       */
+/*   Created: 2026/06/09 20:20:05 by sstark            #+#    #+#             */
+/*   Updated: 2026/06/09 21:12:38 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "parsing.h"
-#include "scene.h"
+#ifndef UTIL_STRINGS_H
+# define UTIL_STRINGS_H
 
-static int	error(char *msg);
+int	string_equals(char *str1, char *str2);
 
-int	main(int argc, char **argv)
-{
-	t_scene		scene;
+int	string_endswith(char *str, char *suffix);
 
-	if (argc != 2)
-		return (error("Wrong arg count"));
-	if (!parse_scene(&scene, argv[1]))
-		return (error("Failed to parse scene"));
-	return (0);
-}
-
-static int	error(char *msg)
-{
-	printf("Error\n");
-	printf("%s\n", msg);
-	return (1);
-}
+#endif
