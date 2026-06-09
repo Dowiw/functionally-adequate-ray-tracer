@@ -1,55 +1,72 @@
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kmonjard <kmonjard@student.42berlin.de>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
+#    Updated: 2026/06/10 00:14:17 by kmonjard         ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
+
 NAME = miniRT
+CC = cc
 
 CUR_DIR = $(shell pwd)
+CFLAGS = -Wall -Wextra -Werror -I$(CUR_DIR)/$(HEADER_DIR)
 
 HEADER_DIR = include
-
 HEADERS = minirt.h
 
 SOURCE_DIR = src
-
 SOURCES = main.c
 
-LIBFT_DIR = libft
-
+LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-HEADER_FILES = $(HEADERS:%=$(HEADER_DIR)/%)
+MLX_DIR = ./mlx
+MLX_REPO = https://github.com/42paris/minilibx-linux.git
+MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
+HEADER_FILES = $(HEADERS:%=$(HEADER_DIR)/%)
 SOURCE_FILES = $(SOURCES:%=$(SOURCE_DIR)/%)
 
-BUILD_DIR = build
-
+BUILD_DIR = ./build
 OBJECT_FILES = $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 
-DEP_FILES = $(OBJECT_FILES:.o=.d)
+all: $(LIBFT) $(MLX_DIR)/libmlx.a $(NAME)
 
-CC = cc
+$(MLX_DIR):
+	git clone $(MLX_REPO) $(MLX_DIR)
 
-CFLAGS += -Wall -Wextra -Werror -I$(CUR_DIR)/$(HEADER_DIR) -MMD -MP
+$(MLX_DIR)/libmlx.a: $(MLX_DIR)
+	@echo "[MAKE] $(MLX_DIR)/libmlx.a"
+	@$(MAKE) -C $(MLX_DIR) > /dev/null
 
-all: $(NAME)
+$(LIBFT):
+	@echo "[MAKE]: $(LIBFT_DIR)"
+	@make -C $(LIBFT_DIR) bonus
 
 $(NAME): $(OBJECT_FILES)
-	make -C $(LIBFT_DIR) bonus
-	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) -o $(NAME) -L/usr/local/lib -I/usr/local/include -lreadline
+	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "[COMPILE]: $<"
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) $(MLX_FLAGS)
 
 clean:
-	make -C $(LIBFT_DIR) fclean
-	rm -rf $(BUILD_DIR)
+	@echo "[FCLEAN] $(LIBFT_DIR) $<"
+	@make -C $(LIBFT_DIR) fclean
+	@echo "[CLEAN] $(MLX_DIR) $<"
+	@make -C $(MLX_DIR) clean
+	@rm -rf $(BUILD_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-only: all clean
-
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./$(NAME)
-
--include $(DEP_FILES)
