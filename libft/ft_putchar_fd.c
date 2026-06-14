@@ -3,31 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:52:27 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/12 13:52:27 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/23 14:24:54 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/23 14:24:56 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+//Write byte c into file descriptor fd
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
-
-/*
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	if (argc == 2)
-	{
-		printf("Important: Testing always uses fd=1 to print to the terminal!\n");
-		ft_putchar_fd(argv[1][0], 1);
-	}
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
-}
-*/

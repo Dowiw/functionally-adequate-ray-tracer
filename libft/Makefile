@@ -1,121 +1,62 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/05/12 11:40:15 by kmonjard          #+#    #+#              #
+#    Updated: 2025/05/12 11:40:17 by kmonjard         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libft.a
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -I../includes
 
-CUR_DIR = $(shell pwd)
+#Alt + Z to wrap a line for readability in VSC
+C_FILES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
+	 ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c ft_memcmp.c \
+	 ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c ft_strdup.c \
+	 ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strnstr.c \
+	 ft_strrchr.c ft_tolower.c ft_toupper.c ft_substr.c ft_strjoin.c \
+	 ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
+	 ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+	 get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+	 printf/ft_printf.c printf/ft_putchar.c printf/ft_puthex_low.c \
+	 printf/ft_putint_u.c printf/ft_putptr.c printf/ft_putstr.c \
+	 printf/ft_putint.c printf/ft_puthex_up.c ft_strtol.c ft_isspace.c \
+	 ft_strncpy.c ft_strcmp.c
 
-HEADERS = libft.h \
-	  ft_printf.h \
-	  get_next_line.h
+BONUS_FILES = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstadd_back_bonus.c \
+	 ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstdelone_bonus.c \
+	 ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
-SOURCES = ft_atoi.c \
-	  ft_bzero.c \
-	  ft_calloc.c \
-	  ft_isalnum.c \
-	  ft_isalpha.c \
-	  ft_isascii.c \
-	  ft_isdigit.c \
-	  ft_isprint.c \
-	  ft_itoa.c \
-	  ft_memchr.c \
-	  ft_memcmp.c \
-	  ft_memcpy.c \
-	  ft_memmove.c \
-	  ft_memset.c \
-	  ft_putchar_fd.c \
-	  ft_putendl_fd.c \
-	  ft_putnbr_fd.c \
-	  ft_putstr_fd.c \
-	  ft_split.c \
-	  ft_strchr.c \
-	  ft_strdup.c \
-	  ft_striteri.c \
-	  ft_strjoin.c \
-	  ft_strlcat.c \
-	  ft_strlcpy.c \
-	  ft_strlen.c \
-	  ft_strmapi.c \
-	  ft_strncmp.c \
-	  ft_strnstr.c \
-	  ft_strrchr.c \
-	  ft_strtrim.c \
-	  ft_substr.c \
-	  ft_tolower.c \
-	  ft_toupper.c \
-	  ft_printchar.c \
-	  ft_printf.c \
-	  ft_printnbr.c \
-	  ft_printptr.c \
-	  ft_printstr.c \
-	  ft_printunbr_base.c \
-	  ft_printunbr_hex.c \
-	  ft_printunbr_hexup.c \
-	  ft_printunbr.c \
-	  get_next_line_utils.c \
-	  get_next_line.c
+O_BONUS = $(BONUS_FILES:.c=.o)
 
-BONUS = ft_lstadd_back.c \
-	  ft_lstadd_front.c \
-	  ft_lstclear.c \
-	  ft_lstdelone.c \
-	  ft_lstiter.c \
-	  ft_lstlast.c \
-	  ft_lstmap.c \
-	  ft_lstnew.c \
-	  ft_lstsize.c
+O_FILES = $(C_FILES:.c=.o)
 
-HEADER_FILES = $(HEADERS)
+all: bonus
 
-SOURCE_FILES = $(SOURCES)
+$(NAME): $(O_FILES)
+	@ar rcs $(NAME) $(O_FILES)
 
-BONUS_SOURCE_FILES = $(BONUS)
+bonus: $(O_FILES) $(O_BONUS)
+	@echo "Creating libft library..."
+	@ar rcs $(NAME) $(O_FILES) $(O_BONUS)
 
-OBJECT_FILES = $(SOURCE_FILES:.c=.o)
-
-BONUS_OBJECT_FILES = $(BONUS_SOURCE_FILES:.c=.o)
-
-TEST_FILES = $(SOURCE_FILES:.c=.out)
-
-CFLAGS += -Wall -Wextra -Werror
-
-all: $(NAME)
-
-$(NAME): $(OBJECT_FILES) $(HEADER_FILES)
-	ar rcs $(NAME) $(OBJECT_FILES)
-
-bonus: $(OBJECT_FILES) $(HEADER_FILES) $(BONUS_OBJECT_FILES)
-	ar rcs $(NAME) $(OBJECT_FILES) $(BONUS_OBJECT_FILES)
+%.o: %.c
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECT_FILES) $(BONUS_OBJECT_FILES)
+	@echo "Deleting object files in libft..."
+	@rm -f $(O_FILES) $(O_BONUS)
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "Deleting all binaries in libft..."
+	@rm -f $(NAME)
 
 re: fclean all
 
-check:
-	@issues=0; \
-	for file in $(filter-out $(SOURCE_FILES) $(BONUS_SOURCE_FILES), $(wildcard *.c)); do \
-		echo $$file is missing from SOURCES!; \
-		issues=$$((issues+1)); \
-	done; \
-	for file in $(filter-out $(wildcard *.c), $(SOURCE_FILES) $(BONUS_SOURCE_FILES)); do \
-		echo $$file does not exist!; \
-		issues=$$((issues+1)); \
-	done; \
-	for norm in "$(shell norminette | grep -v OK!$)"; do \
-		echo $$norm; \
-		issues=$$((issues+1)); \
-	done; \
-	echo Check completed with $$issues issues.
-
-test: $(TEST_FILES)
-
-$(TEST_FILES): $(OBJECT_FILES) $(BONUS_OBJECT_FILES)
-	@sed 's\^[/][*]$$\\g' $(@:.out=.c) | sed 's\^[*][/]$$\\g' > $(@:.out=-copy.c);
-	@cc $(CFLAGS) $(@:.out=-copy.c) $(filter-out $(@:.out=.o), $(OBJECT_FILES) $(BONUS_OBJECT_FILES)) -lbsd -o $(@); \
-	rm $(@:.out=-copy.c); \
-	echo -n .
-
-tclean: fclean
-	rm -f $(SOURCE_FILES:.c=-copy.c)
-	rm -f $(SOURCE_FILES:.c=.out)
+.PHONY: all clean fclean re

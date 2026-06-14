@@ -3,32 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 15:52:52 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/07 16:26:56 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/12 11:48:40 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/12 11:48:41 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+//Same as (ft_isalpha(c) || ft_isdigit(c)): return 0 if not
 int	ft_isalnum(int c)
 {
-	return (ft_isalpha(c) || ft_isdigit(c));
-}
-
-/*
-#include <stdio.h>
-#include <ctype.h>
-int	main(int argc, char **argv)
-{
-	if (argc == 2)
-	{
-		printf("%d\n", ft_isalnum(argv[1][0]));
-		printf("%d\n", isalnum(argv[1][0]));
-	}
-	else
-		printf("Error: Wrong arg count!\n");
+	if ((c >= 'a' && c <= 'z')
+		|| (c >= 'A' && c <= 'Z')
+		|| (c >= '0' && c <= '9'))
+		return (c);
 	return (0);
 }
-*/

@@ -3,49 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:52:11 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/12 13:52:11 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/23 13:29:48 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/23 13:29:49 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
+//Applies function (*f) to characters of (*s) and stores results to new (char *)
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*result;
+	char			*out;
 	unsigned int	i;
+	unsigned int	s_len;
 
-	result = malloc(ft_strlen(s) + 1);
-	if (result == NULL)
+	if (!s || !f)
+		return (NULL);
+	s_len = ft_strlen(s);
+	out = malloc(sizeof(char) * (s_len + 1));
+	if (!out)
 		return (NULL);
 	i = 0;
-	while (s[i] != '\0')
+	while (i < s_len)
 	{
-		result[i] = f(i, s[i]);
+		out[i] = (*f)(i, s[i]);
 		i++;
 	}
-	result[i] = '\0';
-	return (result);
+	out[i] = '\0';
+	return (out);
 }
 
 /*
-#include <stdio.h>
-#include <ctype.h>
-static char	mapping(unsigned int i, char c);
-int	main(int argc, char **argv)
+char test_f(unsigned int i, char c)
 {
-	if (argc == 2)
-		printf("%s\n", ft_strmapi(argv[1], &mapping));
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
+	return (c + i);
 }
 
-static char	mapping(unsigned int i, char c)
+int main(void)
 {
-	printf("%d: %c\n", i, c);
-	return (toupper(c));
+	#include <stdio.h>
+	char *test = ft_strmapi("abcdef", test_f);
+	printf("%s\n", test);
+	free(test);
+	return (0);
 }
 */

@@ -3,178 +3,112 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 14:16:49 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/14 14:16:50 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/22 00:04:21 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/22 00:04:23 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static size_t	ft_calculate_splits(char const *s, char c);
-
-static char		**ft_populate_splits(char **result, char const *s, char c);
-
-static char		*ft_copy_split(char const *s, size_t from, size_t to);
-
-static char		**ft_free_splits(char **result, size_t size);
-
-// The question doesn't specify behaviour regarding empty strings:
-//   - Should ft_split("", 'e') return NULL, an empty array
-//     or a singleton array with an empty string?
-//   - Should ft_split("eee", 'e') return NULL, an empty array
-//     or an array with only empty strings and how many?
-//
-//    -> In this implementation, an empty array is returned.
-char	**ft_split(char const *s, char c)
+//Helper function that helps count number of strings in s
+static size_t	count_str(char const *s, char c)
 {
-	char	**result;
-	size_t	splits;
+	size_t	out;
 
-	splits = ft_calculate_splits(s, c);
-	result = malloc((splits + 1) * sizeof(char *));
-	if (result == NULL)
-		return (NULL);
-	return (ft_populate_splits(result, s, c));
-}
-
-static size_t	ft_calculate_splits(char const *s, char c)
-{
-	size_t	splits;
-	int		in_split;
-	size_t	i;
-
-	splits = 0;
-	in_split = 0;
-	i = 0;
-	while (s[i] != '\0')
+	out = 0;
+	while (*s)
 	{
-		if (!in_split && s[i] != c)
-			splits++;
-		in_split = s[i] != c;
-		i++;
+		while (*s == c)
+			s++;
+		if (*s)
+			out++;
+		while (*s && *s != c)
+			s++;
 	}
-	return (splits);
+	return (out);
 }
 
-static char	**ft_populate_splits(char **result, char const *s, char c)
+//Helper function that puts string into out[i] from its index start to its end
+static char	*dup_str(const char *start, const char *end)
 {
-	int		in_split;
-	size_t	from;
-	size_t	i;
-	size_t	j;
-
-	in_split = 0;
-	from = 0;
-	i = 0;
-	j = 0;
-	while (i == 0 || s[i - 1] != '\0')
-	{
-		if (in_split && (s[i] == c || s[i] == '\0'))
-		{
-			result[j] = ft_copy_split(s, from, i);
-			if (result[j] == NULL)
-				return (ft_free_splits(result, j));
-			j++;
-		}
-		if (!in_split && s[i] != c)
-			from = i;
-		in_split = s[i] != c;
-		i++;
-	}
-	result[j] = NULL;
-	return (result);
-}
-
-static char	*ft_copy_split(char const *s, size_t from, size_t to)
-{
-	char	*result;
+	char	*string;
 	size_t	len;
-	size_t	i;
 
-	len = to - from;
-	result = malloc(len + 1);
-	if (result == NULL)
+	len = (size_t)end - (size_t)start;
+	string = malloc(sizeof(char) * (len + 1));
+	if (!string)
 		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		result[i] = s[from + i];
-		i++;
-	}
-	result[len] = '\0';
-	return (result);
+	ft_memcpy(string, start, len);
+	string[len] = '\0';
+	return (string);
 }
 
-static char	**ft_free_splits(char **result, size_t size)
+//Helper function to fill array
+static int	fill_array(char **out, const char *s, char c)
 {
-	size_t	i;
+	size_t		i;
+	const char	*start;
 
 	i = 0;
-	while (i < size)
+	while (*s)
 	{
-		free(result[i]);
-		result[i] = NULL;
-	}
-	free(result);
-	return (NULL);
-}
-
-/*
-#include <stdio.h>
-#include <ctype.h>
-#include <bsd/string.h>
-static void	printcs(char *str, int len);
-int	main(int argc, char **argv)
-{
-	char	**result;
-	size_t	i;
-
-	if (argc == 3)
-	{
-		result = ft_split(argv[1], argv[2][0]);
-		if (result == NULL)
+		while (*s == c)
+			s++;
+		if (*s)
 		{
-			printf("NULL");
-			return (0);
-		}
-		i = 0;
-		while (result[i] != NULL)
-		{
-			printcs(result[i], strlen(result[i]));
-			printf("\n");
+			start = s;
+			while (*s && *s != c)
+				s++;
+			out[i] = dup_str(start, s);
+			if (!out[i])
+			{
+				while (i--)
+					free(out[i]);
+				return (0);
+			}
 			i++;
 		}
 	}
-	else
-		printf("Error: Wrong arg count!\n");
+	out[i] = NULL;
+	return (1);
+}
+
+/**
+ * @brief Splits str s into a mallocated array of strings based on delimiter c
+ * @return Splitted string. NULL if malloc errors or invalid string.
+ */
+char	**ft_split(char const *s, char c)
+{
+	char	**out;
+
+	if (!s)
+		return (NULL);
+	out = malloc(sizeof(char *) * (count_str(s, c) + 1));
+	if (!out)
+		return (NULL);
+	if (!fill_array(out, s, c))
+	{
+		free(out);
+		return (NULL);
+	}
+	return (out);
+}
+
+/*
+int main(void)
+{
+	#include <stdio.h>
+	char *test = "Hello,Hi,Hello";
+	char **test_out = ft_split(test, ',');
+	for (int i = 0; i < 3; i++)
+	{
+		printf("%s\n", test_out[i]);
+		free(test_out[i]);
+	}
+	free(test_out);
 	return (0);
-}
-
-static void	printc(char c)
-{
-	if (c == '\0')
-		printf("_");
-	else if (!isprint(c))
-		printf("?");
-	else
-		printf("%c", c);
-}
-
-static void	printcs(char *str, int len)
-{
-	int	i;
-
-	i = -3;
-	while (i < 0)
-		printc(str[i++]);
-	printf("|");
-	while (i < len + 1)
-		printc(str[i++]);
-	printf("|");
-	while (i < len + 4)
-		printc(str[i++]);
-	printf("\n");
 }
 */

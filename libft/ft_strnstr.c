@@ -3,47 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 12:29:20 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/12 12:29:23 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/16 17:41:44 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/18 14:42:21 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+//Look for string little in string big: return NULL if N/A, else &big
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
 	size_t	j;
 
-	if (little[0] == '\0')
-		return ((char *) big);
 	i = 0;
-	while (i < len && big[i] != '\0')
+	if (!big && !len)
+		return (NULL);
+	if (little[0] == '\0')
+		return ((char *)big);
+	if (len > ft_strlen(big))
+		len = ft_strlen(big);
+	while (i < len)
 	{
 		j = 0;
-		while (i + j < len && big[i + j] != '\0' && big[i + j] == little[j])
+		while (big[i + j] == little[j] && (i + j) < len)
+		{
 			j++;
-		if (little[j] == '\0')
-			return ((char *) &big[i]);
+			if (little[j] == '\0')
+				return ((char *)(big + i));
+		}
 		i++;
 	}
 	return (NULL);
 }
 
 /*
-#include <stdio.h>
-#include <bsd/string.h>
-int	main(int argc, char **argv)
+int main(void)
 {
-	if (argc == 4)
-	{
-		printf("%s\n", ft_strnstr(argv[1], argv[2], (size_t) atoi(argv[3])));
-		printf("%s\n", strnstr(argv[1], argv[2], (size_t) atoi(argv[3])));
-	}
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
+	#include <stdio.h>
+	#include <bsd/string.h>
+	char *test = ft_strnstr("", "aaaaa", -1);
+	char *test1 = strnstr("", "aaaaa", -1);
+	printf("%s\n", test);
+	printf("%s\n", test1);
+
+	char *test2 = ft_strnstr("", "", 0);
+	char *test3 = strnstr("", "", 0);
+	printf("%s\n", test2);
+	printf("%s\n", test3);
 }
 */

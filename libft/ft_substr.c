@@ -3,76 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:51:17 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/12 13:51:19 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/19 14:53:59 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/19 14:54:00 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
+//Create a substring with size len using string s at index start
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*result;
-	size_t	i;
+	char			*out;
+	size_t			s_len;
+	size_t			i;
 
 	i = 0;
-	while (s[i] != '\0' && i < start + len)
-		i++;
-	if (start > i)
-		start = i;
-	len = i - start;
-	result = malloc(len + 1);
-	if (result == NULL)
+	if (!s)
 		return (NULL);
-	i = 0;
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	if (len > s_len - (size_t)start)
+		len = s_len - (size_t)start;
+	out = malloc(sizeof(char) * (len + 1));
+	if (!out)
+		return (NULL);
 	while (i < len)
 	{
-		result[i] = s[start + i];
+		out[i] = s[start + i];
 		i++;
 	}
-	result[i] = '\0';
-	return (result);
+	out[i] = '\0';
+	return (out);
 }
-
-/*
-#include <stdio.h>
-#include <ctype.h>
-#include <bsd/string.h>
-static void	printcs(char *str, int len);
-int	main(int argc, char **argv)
-{
-	if (argc == 4)
-		printcs(ft_substr(argv[1], atoi(argv[2]), atoi(argv[3])), atoi(argv[3]));
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
-}
-
-static void	printc(char c)
-{
-	if (c == '\0')
-		printf("_");
-	else if (!isprint(c))
-		printf("?");
-	else
-		printf("%c", c);
-}
-
-static void	printcs(char *str, int len)
-{
-	int	i;
-
-	i = -3;
-	while (i < 0)
-		printc(str[i++]);
-	printf("|");
-	while (i < len + 1)
-		printc(str[i++]);
-	printf("|");
-	while (i < len + 4)
-		printc(str[i++]);
-	printf("\n");
-}
-*/

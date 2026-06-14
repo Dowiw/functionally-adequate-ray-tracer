@@ -3,32 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:52:49 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/12 13:52:49 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/23 14:31:31 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/23 14:31:33 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+//Put string (*s) to fd with a newline at the end
 void	ft_putendl_fd(char *s, int fd)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
-}
+	size_t	i;
 
-/*
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	if (argc == 2)
+	i = 0;
+	while (s[i])
 	{
-		printf("Important: Testing always uses fd=1 to print to the terminal!\n");
-		ft_putendl_fd(argv[1], 1);
+		write(fd, &s[i], 1);
+		i++;
 	}
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
+	write(fd, "\n", 1);
 }
-*/

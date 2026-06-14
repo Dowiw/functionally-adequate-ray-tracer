@@ -13,14 +13,21 @@
 NAME = miniRT
 CC = cc
 
-CUR_DIR = $(shell pwd)
-CFLAGS = -Wall -Wextra -Werror -I$(CUR_DIR)/$(HEADER_DIR)
+CFLAGS = -Wall -Wextra -Werror -I./$(HEADER_DIR)
 
-HEADER_DIR = include
-HEADERS = minirt.h
+HEADER_DIR = includes
+HEADERS = minirt.h libft.h
 
 SOURCE_DIR = src
-SOURCES = main.c
+SOURCES = main.c \
+		tuples/tuple_utils.c \
+		tuples/tuple_operations.c
+
+TEST_DIR = tests
+TESTS = main.c \
+		test_tuples.c
+
+TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -33,7 +40,8 @@ HEADER_FILES = $(HEADERS:%=$(HEADER_DIR)/%)
 SOURCE_FILES = $(SOURCES:%=$(SOURCE_DIR)/%)
 
 BUILD_DIR = ./build
-OBJECT_FILES = $(SOURCES:%.c=$(BUILD_DIR)/%.o)
+OBJECT_FILES = $(SOURCES:%.c=$(BUILD_DIR)/src/%.o)
+TEST_OBJS = $(TESTS:%.c=$(BUILD_DIR)/tests/%.o)
 
 all: $(LIBFT) $(MLX_DIR)/libmlx.a $(NAME)
 
@@ -51,20 +59,36 @@ $(LIBFT):
 $(NAME): $(OBJECT_FILES)
 	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
-$(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.c
+$(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@echo "[COMPILE]: $<"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) $(MLX_FLAGS)
+
+$(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@echo "[COMPILE TEST]: $<"
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) -I libunit/framework/inc
+
+test: $(LIBFT) $(TEST_OBJS) $(OBJECT_FILES)
+	@echo "[MAKE] libunit/framework"
+	@$(MAKE) -C libunit/framework > /dev/null
+	@echo "[LINK] test_bin"
+	@$(CC) $(CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)/src/main.o, $(OBJECT_FILES)) $(LIBFT) -I libunit/framework/inc -L libunit/framework -lunit -o test_bin
+	@echo "--- RUNNING TESTS ---"
+	@./test_bin
 
 clean:
 	@echo "[FCLEAN] $(LIBFT_DIR) $<"
 	@make -C $(LIBFT_DIR) fclean
 	@echo "[CLEAN] $(MLX_DIR) $<"
 	@make -C $(MLX_DIR) clean
+	@echo "[CLEAN] libunit"
+	@make -C libunit/framework clean
 	@rm -rf $(BUILD_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) test_bin
+	@make -C libunit/framework fclean
 
 re: fclean all
 

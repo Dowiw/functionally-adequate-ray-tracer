@@ -3,54 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:52:57 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/12 13:52:58 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/23 14:34:59 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/23 14:34:59 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_putnbrr_fd(long n, int fd);
-
+//Write number (n) into fd recursively
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n == 0)
+	char	one_digit;
+
+	if (n == -2147483648)
 	{
-		ft_putchar_fd('0', fd);
+		write(fd, "-2147483648", 11);
+		return ;
 	}
 	else if (n < 0)
 	{
-		ft_putchar_fd('-', fd);
-		ft_putnbrr_fd(-((long) n), fd);
+		write(fd, "-", 1);
+		n = -n;
 	}
-	else
+	if (n > 9)
 	{
-		ft_putnbrr_fd((long) n, fd);
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
 	}
-}
-
-static void	ft_putnbrr_fd(long n, int fd)
-{
-	if (n != 0)
+	if (n >= 0 && n <= 9)
 	{
-		ft_putnbrr_fd(n / 10, fd);
-		ft_putchar_fd('0' + n % 10, fd);
+		one_digit = n + '0';
+		write(fd, &one_digit, 1);
 	}
 }
 
 /*
-#include <stdio.h>
-int	main(int argc, char **argv)
+int main(void)
 {
-	if (argc == 2)
-	{
-		printf("Important: Testing always uses fd=1 to print to the terminal!\n");
-		ft_putnbr_fd(atoi(argv[1]), 1);
-	}
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
+	#include <limits.h>
+	ft_putnbr_fd(INT_MIN, 1);
 }
 */
