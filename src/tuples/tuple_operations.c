@@ -21,7 +21,7 @@ t_tuple	add_tuples(const t_tuple a, const t_tuple b)
 	sum.x = a.x + b.x;
 	sum.y = a.y + b.y;
 	sum.z = a.z + b.z;
-	sum.type = a.type + b.type;
+	sum.w = a.w + b.w;
 	return (sum);
 }
 
@@ -46,6 +46,6 @@ t_tuple sub_tuples(const t_tuple a, const t_tuple b)
 	diff.x = a.x - b.x;
 	diff.y = a.y - b.y;
 	diff.z = a.z - b.z;
-	diff.type = a.type - b.type;
+	diff.w = a.w - b.w;
 	return (diff);
 }

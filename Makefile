@@ -36,6 +36,8 @@ MLX_DIR = ./mlx
 MLX_REPO = https://github.com/42paris/minilibx-linux.git
 MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
+LIBUNIT = libunit/framework/libunit.a
+
 HEADER_FILES = $(HEADERS:%=$(HEADER_DIR)/%)
 SOURCE_FILES = $(SOURCES:%=$(SOURCE_DIR)/%)
 
@@ -56,6 +58,12 @@ $(LIBFT):
 	@echo "[MAKE]: $(LIBFT_DIR)"
 	@make -C $(LIBFT_DIR) bonus
 
+$(LIBUNIT):
+	@echo "[GIT] pulling libunit submodule update"
+	@git submodule update --init --recursive
+	@echo "[MAKE] libunit/framework"
+	@$(MAKE) -C libunit/framework > /dev/null
+
 $(NAME): $(OBJECT_FILES)
 	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
@@ -64,14 +72,12 @@ $(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c
 	@echo "[COMPILE]: $<"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) $(MLX_FLAGS)
 
-$(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c
+$(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c | $(LIBUNIT)
 	@mkdir -p $(dir $@)
 	@echo "[COMPILE TEST]: $<"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) -I libunit/framework/inc
 
-test: $(LIBFT) $(TEST_OBJS) $(OBJECT_FILES)
-	@echo "[MAKE] libunit/framework"
-	@$(MAKE) -C libunit/framework > /dev/null
+test: $(LIBFT) $(LIBUNIT) $(TEST_OBJS) $(OBJECT_FILES)
 	@echo "[LINK] test_bin"
 	@$(CC) $(CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)/src/main.o, $(OBJECT_FILES)) $(LIBFT) -I libunit/framework/inc -L libunit/framework -lunit -o test_bin
 	@echo "--- RUNNING TESTS ---"
@@ -83,12 +89,12 @@ clean:
 	@echo "[CLEAN] $(MLX_DIR) $<"
 	@make -C $(MLX_DIR) clean
 	@echo "[CLEAN] libunit"
-	@make -C libunit/framework clean
+	@if [ -d libunit/framework ]; then $(MAKE) -C libunit/framework clean; fi
 	@rm -rf $(BUILD_DIR)
 
 fclean: clean
 	rm -f $(NAME) test_bin
-	@make -C libunit/framework fclean
+	@if [ -d libunit/framework ]; then $(MAKE) -C libunit/framework fclean; fi
 
 re: fclean all
 

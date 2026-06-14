@@ -26,9 +26,7 @@ int	compare_tuples(const t_tuple *a, const t_tuple *b)
 	if (compare_doubles(a->x, b->x) == 0
 		&& compare_doubles(a->y, b->y) == 0
 		&& compare_doubles(a->z, b->z) == 0
-		&& a->type == b->type)
+		&& compare_doubles(a->w, b->w) == 0)
 		return (0);
 	return (1);
 }
-
-t_tuple	negate_tuple()

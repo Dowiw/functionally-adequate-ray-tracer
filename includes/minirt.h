@@ -17,20 +17,17 @@
 #  define UNIT_EPSILON 0.00001
 # endif
 
-typedef enum e_tuple_type
-{
-	INVALID_NEG = -1,
-	VECTOR = 0,
-	POINT = 1,
-	INVALID_POS = 2
-}	t_tuple_type;
+# define VECTOR 0.0
+# define POINT 1.0
+# define INVALID_NEG -1.0
+# define INVALID_POS 2.0
 
 typedef struct s_tuple
 {
 	double			x;
 	double			y;
 	double			z;
-	t_tuple_type	type;
+	double			w;
 }	t_tuple;
 
 /** ######################################################################### *

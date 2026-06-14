@@ -8,24 +8,24 @@ int	test_t_tuple_values(void)
 	vector.x = 1.0;
 	vector.y = 0.5;
 	vector.z = 2.0;
-	vector.type = VECTOR;
+	vector.w = VECTOR;
 
 	UNIT_ASSERT_FEQ(vector.x, 1.0);
 	UNIT_ASSERT_FEQ(vector.y, 0.5);
 	UNIT_ASSERT_FEQ(vector.z, 2.0);
-	UNIT_ASSERT_EQ(vector.type, VECTOR);
+	UNIT_ASSERT_FEQ(vector.w, VECTOR);
 
 	t_tuple	point;
 
 	point.x = 12.1;
 	point.y = 10.3;
 	point.z = 0.4;
-	point.type = POINT;
+	point.w = POINT;
 
 	UNIT_ASSERT_FEQ(point.x, 12.1);
 	UNIT_ASSERT_FEQ(point.y, 10.3);
 	UNIT_ASSERT_FEQ(point.z, 0.4);
-	UNIT_ASSERT_EQ(point.type, POINT);
+	UNIT_ASSERT_FEQ(point.w, POINT);
 
 	return (0);
 }
@@ -51,7 +51,7 @@ int	test_tuple_addition(void)
 	UNIT_ASSERT_FEQ(result.x, 1.0);
 	UNIT_ASSERT_FEQ(result.y, 1.0);
 	UNIT_ASSERT_FEQ(result.z, 6.0);
-	UNIT_ASSERT_EQ(result.type, POINT);
+	UNIT_ASSERT_FEQ(result.w, POINT);
 
 	t_tuple a2 = {3, -2, 5, VECTOR};
 	t_tuple b2 = {-2, 3, 1, VECTOR};
@@ -61,14 +61,14 @@ int	test_tuple_addition(void)
 	UNIT_ASSERT_FEQ(result2.x, 1.0);
 	UNIT_ASSERT_FEQ(result2.y, 1.0);
 	UNIT_ASSERT_FEQ(result2.z, 6.0);
-	UNIT_ASSERT_EQ(result2.type, VECTOR);
+	UNIT_ASSERT_FEQ(result2.w, VECTOR);
 	
 	t_tuple a3 = {3, -2, 5, POINT};
 	t_tuple b3 = {-2, 3, 1, POINT};
 	t_tuple result3;
 
 	result3 = add_tuples(a3, b3);
-	UNIT_ASSERT_EQ(result3.type, INVALID_POS);
+	UNIT_ASSERT_FEQ(result3.w, INVALID_POS);
 
 	t_tuple b4 = {3, -2, 5, VECTOR};
 	t_tuple a4 = {-2, 3, 1, POINT};
@@ -78,7 +78,7 @@ int	test_tuple_addition(void)
 	UNIT_ASSERT_FEQ(result4.x, 1.0);
 	UNIT_ASSERT_FEQ(result4.y, 1.0);
 	UNIT_ASSERT_FEQ(result4.z, 6.0);
-	UNIT_ASSERT_EQ(result4.type, POINT);
+	UNIT_ASSERT_FEQ(result4.w, POINT);
 
 	return (0);
 }
@@ -93,7 +93,7 @@ int	test_tuple_subtraction(void)
 	UNIT_ASSERT_FEQ(result.x, -2.0);
 	UNIT_ASSERT_FEQ(result.y, -4.0);
 	UNIT_ASSERT_FEQ(result.z, -6.0);
-	UNIT_ASSERT_EQ(result.type, VECTOR);
+	UNIT_ASSERT_FEQ(result.w, VECTOR);
 
 	t_tuple c2 = {3, 2, 1, POINT};
 	t_tuple d2 = {5, 6, 7, VECTOR};
@@ -103,7 +103,7 @@ int	test_tuple_subtraction(void)
 	UNIT_ASSERT_FEQ(result2.x, -2.0);
 	UNIT_ASSERT_FEQ(result2.y, -4.0);
 	UNIT_ASSERT_FEQ(result2.z, -6.0);
-	UNIT_ASSERT_EQ(result2.type, POINT);
+	UNIT_ASSERT_FEQ(result2.w, POINT);
 
 	t_tuple c3 = {3, 2, 1, VECTOR};
 	t_tuple d3 = {5, 6, 7, VECTOR};
@@ -113,7 +113,7 @@ int	test_tuple_subtraction(void)
 	UNIT_ASSERT_FEQ(result3.x, -2.0);
 	UNIT_ASSERT_FEQ(result3.y, -4.0);
 	UNIT_ASSERT_FEQ(result3.z, -6.0);
-	UNIT_ASSERT_EQ(result3.type, VECTOR);
+	UNIT_ASSERT_FEQ(result3.w, VECTOR);
 
 	t_tuple c4 = {3, 2, 1, VECTOR};
 	t_tuple d4 = {5, 6, 7, POINT};
@@ -123,13 +123,17 @@ int	test_tuple_subtraction(void)
 	UNIT_ASSERT_FEQ(result4.x, -2.0);
 	UNIT_ASSERT_FEQ(result4.y, -4.0);
 	UNIT_ASSERT_FEQ(result4.z, -6.0);
-	UNIT_ASSERT_EQ(result4.type, INVALID_NEG);
+	UNIT_ASSERT_FEQ(result4.w, INVALID_NEG);
 
 	t_tuple zero = {0, 0, 0, VECTOR};
 	t_tuple	v = {1, -2, 3, VECTOR};
-	t_tuple = neg;
+	t_tuple neg;
 
-	neg = sub_tuples(zero, )
+	neg = sub_tuples(zero, v);
+	UNIT_ASSERT_FEQ(neg.x, -1.0);
+	UNIT_ASSERT_FEQ(neg.y, 2.0);
+	UNIT_ASSERT_FEQ(neg.z, -3.0);
+	UNIT_ASSERT_FEQ(neg.w, VECTOR);
 	return (0);
 }
 
