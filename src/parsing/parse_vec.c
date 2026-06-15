@@ -6,14 +6,14 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:19:42 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/09 22:28:04 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/15 22:09:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "parsing.h"
 #include "scene.h"
-#include "util_arrays.h"
+#include "util/arrays.h"
 
 static int	parse_vec_params(t_vec *vec, char **params);
 

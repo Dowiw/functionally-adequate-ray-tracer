@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_arrays.h                                      :+:      :+:    :+:   */
+/*   strings.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/09 21:35:49 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/09 21:36:32 by sstark           ###   ########.fr       */
+/*   Created: 2026/06/09 20:20:05 by sstark            #+#    #+#             */
+/*   Updated: 2026/06/15 23:27:51 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTIL_ARRAYS_H
-# define UTIL_ARRAYS_H
+#ifndef STRINGS_H
+# define STRINGS_H
 
-int		array_len(void **array);
+int		string_equals(char *str1, char *str2);
 
-void	free_array(void **array);
+int		string_endswith(char *str, char *suffix);
+
+char	*string_remove_suffix(char *str, char *suffix);
 
 #endif

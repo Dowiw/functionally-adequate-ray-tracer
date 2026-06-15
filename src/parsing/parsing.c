@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:17 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/09 22:29:26 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/15 23:29:20 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 #include "../libft/get_next_line.h"
 #include "parsing.h"
 #include "scene.h"
-#include "util_arrays.h"
-#include "util_strings.h"
+#include "util/arrays.h"
+#include "util/strings.h"
 
 static int	parse_line(t_scene *scene, char *line);
 
 // TODO:
-//  - terminate on parse_line error
 //  - require exactly one initialization of ambience, camera and light
-//  - parse objects
+//  - enforce ranges where the subject requires
+//  - probably a good idea to handle over-/underflow
+//  - consider moving error printing down the parsing chain to get more details
 
 /*
  * Parses the given .rt 'file' to the 'scene' pointer.
@@ -43,7 +44,13 @@ int	parse_scene(t_scene *scene, char *file)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		parse_line(scene, line);
+		line = string_remove_suffix(line, "\n");
+		if (!parse_line(scene, line))
+		{
+			free(line);
+			close(fd);
+			return (0);
+		}
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -60,6 +67,7 @@ static int	parse_line(t_scene *scene, char *line)
 	params = ft_split(line, ' ');
 	if (params == NULL)
 		return (0);
+	result = 0;
 	id = params[0];
 	if (id == NULL)
 		result = 1;
@@ -69,8 +77,12 @@ static int	parse_line(t_scene *scene, char *line)
 		result = parse_camera(scene, params);
 	else if (string_equals(id, "L"))
 		result = parse_light(scene, params);
-	else
-		result = 0;
+	else if (string_equals(id, "sp"))
+		result = parse_sphere(scene, params);
+	else if (string_equals(id, "pl"))
+		result = parse_plane(scene, params);
+	else if (string_equals(id, "cy"))
+		result = parse_cylinder(scene, params);
 	free_array((void **) params);
 	return (result);
 }

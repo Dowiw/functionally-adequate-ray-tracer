@@ -6,11 +6,11 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:33:08 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/09 22:31:03 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/15 22:10:26 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "util_colors.h"
+#include "util/colors.h"
 
 /*
  * Returns the rgb value for the given red, green and blue components.

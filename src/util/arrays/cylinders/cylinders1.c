@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_camera.c                                     :+:      :+:    :+:   */
+/*   cylinders1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
+/*   Created: 2026/06/15 21:42:54 by sstark            #+#    #+#             */
 /*   Updated: 2026/06/15 22:09:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "scene.h"
 #include "util/arrays.h"
 
-/**
- * Parses the given 'params' to the given 'scene's camera.
- * The expected format looks like this:
- *   C <pos> <orientation> <fov> (for example: C -50.0,0,20 0,0,1 70)
- * Returns true if the parsing was succesful.
- */
-int	parse_camera(t_scene *scene, char **params)
+t_cylinder	**cylinders_create(void)
 {
-	if (array_len((void **) params) != 4)
-		return (0);
-	if (!parse_vec(&scene->camera.pos, params[1]))
-		return (0);
-	if (!parse_vec(&scene->camera.orientation, params[2]))
-		return (0);
-	if (!parse_double(&scene->camera.fov, params[3]))
-		return (0);
-	return (1);
+	return ((t_cylinder **) array_create());
+}
+
+t_cylinder	**cylinders_add(t_cylinder **array, t_cylinder *cylinder)
+{
+	return ((t_cylinder **) array_add((void **) array, (void *) cylinder));
+}
+
+int	cylinders_len(t_cylinder **array)
+{
+	return (array_len((void **) array));
+}
+
+void	free_cylinders(t_cylinder **array)
+{
+	free_array((void **) array);
 }

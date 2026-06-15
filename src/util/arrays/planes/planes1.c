@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_strings.h                                     :+:      :+:    :+:   */
+/*   planes1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/09 20:20:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/09 21:12:38 by sstark           ###   ########.fr       */
+/*   Created: 2026/06/15 21:43:23 by sstark            #+#    #+#             */
+/*   Updated: 2026/06/15 22:09:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTIL_STRINGS_H
-# define UTIL_STRINGS_H
+#include "scene.h"
+#include "util/arrays.h"
 
-int	string_equals(char *str1, char *str2);
+t_plane	**planes_create(void)
+{
+	return ((t_plane **) array_create());
+}
 
-int	string_endswith(char *str, char *suffix);
+t_plane	**planes_add(t_plane **array, t_plane *plane)
+{
+	return ((t_plane **) array_add((void **) array, (void *) plane));
+}
 
-#endif
+int	planes_len(t_plane **array)
+{
+	return (array_len((void **) array));
+}
+
+void	free_planes(t_plane **array)
+{
+	free_array((void **) array);
+}

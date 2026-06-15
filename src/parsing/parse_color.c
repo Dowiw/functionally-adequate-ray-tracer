@@ -6,15 +6,15 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:19:46 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/09 22:27:53 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/15 22:10:26 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "parsing.h"
 #include "scene.h"
-#include "util_arrays.h"
-#include "util_colors.h"
+#include "util/arrays.h"
+#include "util/colors.h"
 
 static int	parse_color_params(int *color, char **params);
 

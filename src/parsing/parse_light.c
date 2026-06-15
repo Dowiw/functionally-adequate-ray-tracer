@@ -6,13 +6,13 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:19:46 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/09 22:28:36 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/15 22:09:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "scene.h"
-#include "util_arrays.h"
+#include "util/arrays.h"
 
 /**
  * Parses the given 'params' to the given 'scene's light.

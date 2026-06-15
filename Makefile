@@ -7,9 +7,12 @@ HEADER_DIR = include
 HEADERS = minirt.h \
 	  parsing.h \
 	  scene.h \
-	  util_arrays.h \
-	  util_colors.h \
-	  util_strings.h
+	  util/arrays.h \
+	  util/colors.h \
+	  util/cylinders.h \
+	  util/planes.h \
+	  util/spheres.h \
+	  util/strings.h
 
 SOURCE_DIR = src
 
@@ -17,12 +20,19 @@ SOURCES = main.c \
 	  parsing/parse_ambience.c \
 	  parsing/parse_camera.c \
 	  parsing/parse_color.c \
+	  parsing/parse_cylinder.c \
 	  parsing/parse_double.c \
 	  parsing/parse_int.c \
 	  parsing/parse_light.c \
+	  parsing/parse_plane.c \
+	  parsing/parse_sphere.c \
 	  parsing/parse_vec.c \
 	  parsing/parsing.c \
+	  scene/scene.c \
 	  util/arrays/arrays1.c \
+	  util/arrays/cylinders/cylinders1.c \
+	  util/arrays/planes/planes1.c \
+	  util/arrays/spheres/spheres1.c \
 	  util/colors/colors1.c \
 	  util/strings/strings1.c
 
