@@ -7,3 +7,4 @@ test_bin
 # directories
 mlx/
 build/
+.cache/

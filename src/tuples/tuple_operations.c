@@ -49,3 +49,4 @@ t_tuple sub_tuples(const t_tuple a, const t_tuple b)
 	diff.w = a.w - b.w;
 	return (diff);
 }
+
