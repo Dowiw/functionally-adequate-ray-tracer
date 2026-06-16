@@ -62,7 +62,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 MLX_DIR = ./mlx
 MLX_REPO = https://github.com/42paris/minilibx-linux.git
-MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
+MLX_INCLUDE = -I$(MLX_DIR)
+MLX_LINKS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
 LIBUNIT = libunit/framework/libunit.a
 
@@ -93,12 +94,12 @@ $(LIBUNIT):
 	@$(MAKE) -C libunit/framework > /dev/null
 
 $(NAME): $(OBJECT_FILES)
-	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_LINKS) -o $(NAME)
 
 $(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@echo "[COMPILE]: $<"
-	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) $(MLX_INCLUDE)
 
 $(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c | $(LIBUNIT)
 	@mkdir -p $(dir $@)
