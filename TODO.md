@@ -36,8 +36,34 @@
   - [ ] 2.4.2: On any parsing failure, print `Error\n` followed by a specific message (e.g., "Error\nInvalid RGB range for Sphere").
 
 ## Mathematics Library
-- [ ] **Basic Vector Operations**
-  - [ ] 3.1.1: TODO
+- [ ] **Basic Tuple Operations**
+  - [ ] 3.1.1: Doubles comparison function
+  - [ ] 3.1.2: Tuples comparison function
+  - [ ] 3.1.3: Tuple addition
+  - [ ] 3.1.4: Tuple subtraction
+  - [ ] 3.1.5: Tuple scalar multiplication
+  - [ ] 3.1.6: Tuple scalar division
+  - [ ] 3.1.7: Tuple negation
+  - [ ] 3.1.8: Calculate magnitude
+  - [ ] 3.1.9: Calculate normalized vector
+  - [ ] 3.1.10: Calculate dot product
+  - [ ] 3.1.11: Calculate cross product
+- [ ] **Color Operations**
+  - [ ] 3.2.1: hadamard_product (shur product)
+- [ ] **Matrix Operations**
+  - [ ] 3.3.1: Matrix creation and inspection (4x4, 3x3, 2x2)
+  - [ ] 3.3.2: Matrix equality comparison
+  - [ ] 3.3.3: Multiply two 4x4 matrices
+  - [ ] 3.3.4: Multiply a matrix by a tuple
+  - [ ] 3.3.5: Implement identity matrix (multiplication and transposition)
+  - [ ] 3.3.6: Transpose a matrix
+  - [ ] 3.3.7: Calculate the determinant of a 2x2 matrix
+  - [ ] 3.3.8: Extract submatrices (from 3x3 and 4x4)
+  - [ ] 3.3.9: Calculate minors
+  - [ ] 3.3.10: Calculate cofactors
+  - [ ] 3.3.11: Calculate determinants of 3x3 and 4x4 matrices
+  - [ ] 3.3.12: Test matrix invertibility
+  - [ ] 3.3.13: Matrix inversion (using cofactor expansion)
 
 ## Core Raytracing Engine
 - [ ] **Viewport Setup**

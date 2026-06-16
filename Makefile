@@ -29,6 +29,7 @@ HEADERS = minirt.h \
 
 SOURCE_DIR = src
 SOURCES = main.c \
+	graphics/init_mlx.c \
 	tuples/tuple_compare.c \
 	tuples/tuple_utils.c \
 	tuples/tuple_operations.c \
@@ -48,12 +49,14 @@ SOURCES = main.c \
 	util/arrays/cylinders/cylinders1.c \
 	util/arrays/planes/planes1.c \
 	util/arrays/spheres/spheres1.c \
+	util/colors/colors_util.c \
 	util/colors/colors1.c \
-	util/strings/strings1.c
+	util/strings/strings1.c \
 
 TEST_DIR = tests
 TESTS = main.c \
-		test_tuples.c
+		test_tuples.c \
+		test_colors.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 
@@ -104,11 +107,11 @@ $(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c
 $(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c | $(LIBUNIT)
 	@mkdir -p $(dir $@)
 	@echo "[COMPILE TEST]: $<"
-	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) -I libunit/framework/inc
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) -Ilibunit/framework/inc
 
-test: $(LIBFT) $(LIBUNIT) $(TEST_OBJS) $(OBJECT_FILES)
+test: $(LIBFT) $(LIBUNIT) $(TEST_OBJS) $(OBJECT_FILES) $(MLX_DIR)/libmlx.a
 	@echo "[LINK] test_bin"
-	@$(CC) $(CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)/src/main.o, $(OBJECT_FILES)) $(LIBFT) -I libunit/framework/inc -L libunit/framework -lunit -lm -o test_bin
+	@$(CC) $(CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)/src/main.o, $(OBJECT_FILES)) $(LIBFT) $(MLX_LINKS) -Ilibunit/framework/inc -Llibunit/framework -lunit -lm -o test_bin
 	@echo "--- RUNNING TESTS ---"
 	@./test_bin
 

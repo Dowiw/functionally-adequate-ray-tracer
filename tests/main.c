@@ -18,6 +18,7 @@ int	main(void)
 {
 	t_test_suite	*suites = NULL;
 	t_test_suite	*tuple_suite;
+	t_test_suite	*color_suite;
 
 	tuple_suite = load_suite(&suites, "Tuples Suite");
 	// parser_suite->setup = suite_setup;
@@ -35,6 +36,12 @@ int	main(void)
 	load_test(tuple_suite, "Tuple Dot Product", &test_tuple_dot);
 	load_test(tuple_suite, "Tuple Cross Product", &test_tuple_cross);
 
-	
+	color_suite = load_suite(&suites, "Colors Suite");
+	load_test(color_suite, "Color Initialization", &test_color);
+	load_test(color_suite, "Color Addition", &test_color_add);
+	load_test(color_suite, "Color Subtraction", &test_color_sub);
+	load_test(color_suite, "Color Scalar Multiplication", &test_color_mult_scalar);
+	load_test(color_suite, "Color Multiplication (Hadamard)", &test_color_mult);
+
 	return (launch_tests(&suites));
 }

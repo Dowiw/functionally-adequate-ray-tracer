@@ -11,11 +11,18 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "minirt.h"
 #include "scene.h"
 #include "util/cylinders.h"
 #include "util/planes.h"
 #include "util/spheres.h"
 
+/**
+ * @brief Initialize a scene structure
+ * 
+ * @param scene
+ * @return returns 0 on fail, 1 on success
+ */
 int		init_scene(t_scene *scene)
 {
 	scene->cylinders = cylinders_create();
@@ -27,6 +34,11 @@ int		init_scene(t_scene *scene)
 	return (scene->cylinders != NULL && scene->planes != NULL && scene->spheres != NULL);
 }
 
+/**
+ * @brief Frees the scene structure
+ * 
+ * @param scene 
+ */
 void	destroy_scene(t_scene *scene)
 {
 	free_cylinders(scene->cylinders);
