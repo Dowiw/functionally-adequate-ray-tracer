@@ -1,4 +1,5 @@
 #include "minirt.h"
+#include <unistd.h>
 
 /**
  * @brief Add two tuples (a + b) and returns sum
@@ -11,10 +12,9 @@
  * 
  * @param a tuple a
  * @param b tuple b
- *
  * @returns the sum by value
  */
-t_tuple	add_tuples(const t_tuple a, const t_tuple b)
+t_tuple	tuples_add(const t_tuple a, const t_tuple b)
 {
 	t_tuple	sum;
 
@@ -36,12 +36,11 @@ t_tuple	add_tuples(const t_tuple a, const t_tuple b)
  * 
  * @param a tuple a
  * @param b tuple b
- * 
  * @returns the difference by value
  */
-t_tuple sub_tuples(const t_tuple a, const t_tuple b)
+t_tuple	tuples_sub(const t_tuple a, const t_tuple b)
 {
-	t_tuple diff;
+	t_tuple	diff;
 
 	diff.x = a.x - b.x;
 	diff.y = a.y - b.y;
@@ -50,3 +49,55 @@ t_tuple sub_tuples(const t_tuple a, const t_tuple b)
 	return (diff);
 }
 
+/**
+ * @brief Negates a tuple to its opposite form
+ * 
+ * @param a tuple a
+ * @returns negated tuple
+ */
+t_tuple	tuple_neg(const t_tuple a)
+{
+	t_tuple	neg;
+
+	neg.x = a.x * -1.0;
+	neg.y = a.y * -1.0;
+	neg.z = a.z * -1.0;
+	neg.w = a.w * -1.0;
+	return (neg);
+}
+
+/**
+ * @brief Multiplies a tuple by a scalar
+ * 
+ * @param a 
+ * @param scalar 
+ * @returns scaled tuple product
+ */
+t_tuple	tuple_mult(const t_tuple a, const double scalar)
+{
+	t_tuple	prod;
+
+	prod.x = a.x * scalar;
+	prod.y = a.y * scalar;
+	prod.z = a.z * scalar;
+	prod.w = a.w * scalar;
+	return (prod);
+}
+
+/**
+ * @brief Divides a tuple by a scalar
+ * 
+ * @param a 
+ * @param scalar 
+ * @return scaled tuple quotient
+ */
+t_tuple	tuple_div(const t_tuple a, const double scalar)
+{
+	t_tuple	quo;
+
+	quo.x = a.x / scalar;
+	quo.y = a.y / scalar;
+	quo.z = a.z / scalar;
+	quo.w = a.w / scalar;
+	return (quo);
+}

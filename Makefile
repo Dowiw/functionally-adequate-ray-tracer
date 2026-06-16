@@ -20,6 +20,7 @@ HEADERS = minirt.h libft.h
 
 SOURCE_DIR = src
 SOURCES = main.c \
+		tuples/tuple_compare.c \
 		tuples/tuple_utils.c \
 		tuples/tuple_operations.c
 
@@ -79,7 +80,7 @@ $(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c | $(LIBUNIT)
 
 test: $(LIBFT) $(LIBUNIT) $(TEST_OBJS) $(OBJECT_FILES)
 	@echo "[LINK] test_bin"
-	@$(CC) $(CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)/src/main.o, $(OBJECT_FILES)) $(LIBFT) -I libunit/framework/inc -L libunit/framework -lunit -o test_bin
+	@$(CC) $(CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)/src/main.o, $(OBJECT_FILES)) $(LIBFT) -I libunit/framework/inc -L libunit/framework -lunit -lm -o test_bin
 	@echo "--- RUNNING TESTS ---"
 	@./test_bin
 

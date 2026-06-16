@@ -1,12 +1,14 @@
 # miniRT - TODO
 
 ## Repository Setup & Architecture
-- [ ] **Makefile Creation**
-  - [ ] 1.1.1: Define compiler (`cc`) and mandatory flags (`-Wall -Wextra -Werror`).
-  - [ ] 1.1.2: Add library flags for Math (`-lm`) and MLX (e.g., `-lmlx -lXext -lX11` for Linux or framework flags for macOS).
-  - [ ] 1.1.3: Implement `all`, `clean`, `fclean`, `re`, and `bonus` rules.
-- [ ] **Core Data Structures (Headers)**
-  - [ ] 1.2.1: Define 3D vector struct (x, y, z floats/doubles).
+- [x] **Makefile Creation**
+  - [x] 1.1.1: Define compiler (`cc`) and mandatory flags (`-Wall -Wextra -Werror`).
+  - [x] 1.1.2: Add library flags for Math (`-lm`) and MLX (e.g., `-lmlx -lXext -lX11` for Linux or framework flags for macOS).
+  - [ ] 1.1.3: Implement `all`, `clean`, `fclean`, `re`, and `bonus` optionally.
+- [x] **Core Data Structures (Headers)**
+  - [x] 1.2.1: Define 3D vector struct (x, y, z floats/doubles).
+	- t_tuple is defined.
+
   - [ ] 1.2.2: Define Ray struct (origin, direction).
   - [ ] 1.2.3: Define Color struct (r, g, b integers or floats).
   - [ ] 1.2.4: Define Camera struct (origin, orientation, FOV).
