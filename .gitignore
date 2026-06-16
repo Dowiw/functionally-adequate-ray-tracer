@@ -4,7 +4,14 @@ miniRT
 libft.a
 test_bin
 
+# files
+notes.md
+.clangd
+.clang-format
+
 # directories
 mlx/
 build/
 .cache/
+.vscode/
+fun/
