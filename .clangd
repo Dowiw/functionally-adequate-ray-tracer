@@ -1,0 +1,5 @@
+CompileFlags:
+  CompilationDatabase: .configs
+
+Documentation:
+  CommentFormat: Doxygen

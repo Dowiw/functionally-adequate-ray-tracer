@@ -1,0 +1,1817 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_atoi.o",
+      "ft_atoi.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_atoi.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_atoi.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_bzero.o",
+      "ft_bzero.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_bzero.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_bzero.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_calloc.o",
+      "ft_calloc.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_calloc.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_calloc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_isalnum.o",
+      "ft_isalnum.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isalnum.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isalnum.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_isalpha.o",
+      "ft_isalpha.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isalpha.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isalpha.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_isascii.o",
+      "ft_isascii.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isascii.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isascii.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_isdigit.o",
+      "ft_isdigit.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isdigit.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isdigit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_isprint.o",
+      "ft_isprint.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isprint.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isprint.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_memchr.o",
+      "ft_memchr.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_memchr.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_memchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_memcmp.o",
+      "ft_memcmp.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_memcmp.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_memcmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_memcpy.o",
+      "ft_memcpy.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_memcpy.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_memcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_memmove.o",
+      "ft_memmove.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_memmove.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_memmove.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_memset.o",
+      "ft_memset.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_memset.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_memset.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strchr.o",
+      "ft_strchr.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strchr.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strdup.o",
+      "ft_strdup.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strdup.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strdup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strlcat.o",
+      "ft_strlcat.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strlcat.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strlcat.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strlcpy.o",
+      "ft_strlcpy.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strlcpy.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strlcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strlen.o",
+      "ft_strlen.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strlen.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strlen.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strncmp.o",
+      "ft_strncmp.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strncmp.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strncmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strnstr.o",
+      "ft_strnstr.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strnstr.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strnstr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strrchr.o",
+      "ft_strrchr.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strrchr.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strrchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_tolower.o",
+      "ft_tolower.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_tolower.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_tolower.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_toupper.o",
+      "ft_toupper.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_toupper.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_toupper.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_substr.o",
+      "ft_substr.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_substr.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_substr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strjoin.o",
+      "ft_strjoin.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strjoin.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strjoin.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strtrim.o",
+      "ft_strtrim.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strtrim.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strtrim.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_split.o",
+      "ft_split.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_split.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_split.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_itoa.o",
+      "ft_itoa.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_itoa.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_itoa.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strmapi.o",
+      "ft_strmapi.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strmapi.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strmapi.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_striteri.o",
+      "ft_striteri.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_striteri.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_striteri.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_putchar_fd.o",
+      "ft_putchar_fd.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_putchar_fd.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_putchar_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_putstr_fd.o",
+      "ft_putstr_fd.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_putstr_fd.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_putstr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_putendl_fd.o",
+      "ft_putendl_fd.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_putendl_fd.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_putendl_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_putnbr_fd.o",
+      "ft_putnbr_fd.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_putnbr_fd.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_putnbr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "get_next_line/get_next_line.o",
+      "get_next_line/get_next_line.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/get_next_line/get_next_line.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/get_next_line/get_next_line.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "get_next_line/get_next_line_utils.o",
+      "get_next_line/get_next_line_utils.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/get_next_line/get_next_line_utils.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/get_next_line/get_next_line_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "printf/ft_printf.o",
+      "printf/ft_printf.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_printf.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_printf.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "printf/ft_putchar.o",
+      "printf/ft_putchar.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_putchar.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_putchar.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "printf/ft_puthex_low.o",
+      "printf/ft_puthex_low.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_puthex_low.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_puthex_low.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "printf/ft_putint_u.o",
+      "printf/ft_putint_u.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_putint_u.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_putint_u.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "printf/ft_putptr.o",
+      "printf/ft_putptr.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_putptr.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_putptr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "printf/ft_putstr.o",
+      "printf/ft_putstr.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_putstr.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_putstr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "printf/ft_putint.o",
+      "printf/ft_putint.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_putint.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_putint.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "printf/ft_puthex_up.o",
+      "printf/ft_puthex_up.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_puthex_up.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/printf/ft_puthex_up.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strtol.o",
+      "ft_strtol.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strtol.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strtol.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_isspace.o",
+      "ft_isspace.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isspace.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_isspace.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strncpy.o",
+      "ft_strncpy.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strncpy.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strncpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_strcmp.o",
+      "ft_strcmp.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strcmp.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_strcmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_lstnew_bonus.o",
+      "ft_lstnew_bonus.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstnew_bonus.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstnew_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_lstadd_front_bonus.o",
+      "ft_lstadd_front_bonus.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstadd_front_bonus.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstadd_front_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_lstadd_back_bonus.o",
+      "ft_lstadd_back_bonus.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstadd_back_bonus.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstadd_back_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_lstsize_bonus.o",
+      "ft_lstsize_bonus.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstsize_bonus.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstsize_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_lstlast_bonus.o",
+      "ft_lstlast_bonus.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstlast_bonus.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstlast_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_lstdelone_bonus.o",
+      "ft_lstdelone_bonus.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstdelone_bonus.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstdelone_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_lstclear_bonus.o",
+      "ft_lstclear_bonus.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstclear_bonus.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstclear_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_lstiter_bonus.o",
+      "ft_lstiter_bonus.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstiter_bonus.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstiter_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-I../includes",
+      "-I../includes/libft",
+      "-c",
+      "-o",
+      "ft_lstmap_bonus.o",
+      "ft_lstmap_bonus.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/libft",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstmap_bonus.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/libft/ft_lstmap_bonus.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_init.o",
+      "mlx_init.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_init.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_init.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_new_window.o",
+      "mlx_new_window.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_new_window.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_new_window.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_pixel_put.o",
+      "mlx_pixel_put.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_pixel_put.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_pixel_put.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_loop.o",
+      "mlx_loop.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_loop.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_loop.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_mouse_hook.o",
+      "mlx_mouse_hook.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_mouse_hook.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_mouse_hook.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_key_hook.o",
+      "mlx_key_hook.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_key_hook.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_key_hook.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_expose_hook.o",
+      "mlx_expose_hook.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_expose_hook.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_expose_hook.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_loop_hook.o",
+      "mlx_loop_hook.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_loop_hook.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_loop_hook.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_int_anti_resize_win.o",
+      "mlx_int_anti_resize_win.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_int_anti_resize_win.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_int_anti_resize_win.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_int_do_nothing.o",
+      "mlx_int_do_nothing.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_int_do_nothing.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_int_do_nothing.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_int_wait_first_expose.o",
+      "mlx_int_wait_first_expose.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_int_wait_first_expose.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_int_wait_first_expose.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_int_get_visual.o",
+      "mlx_int_get_visual.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_int_get_visual.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_int_get_visual.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_flush_event.o",
+      "mlx_flush_event.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_flush_event.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_flush_event.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_string_put.o",
+      "mlx_string_put.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_string_put.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_string_put.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_set_font.o",
+      "mlx_set_font.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_set_font.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_set_font.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_new_image.o",
+      "mlx_new_image.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_new_image.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_new_image.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_get_data_addr.o",
+      "mlx_get_data_addr.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_get_data_addr.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_get_data_addr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_put_image_to_window.o",
+      "mlx_put_image_to_window.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_put_image_to_window.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_put_image_to_window.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_get_color_value.o",
+      "mlx_get_color_value.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_get_color_value.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_get_color_value.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_clear_window.o",
+      "mlx_clear_window.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_clear_window.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_clear_window.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_xpm.o",
+      "mlx_xpm.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_xpm.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_xpm.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_int_str_to_wordtab.o",
+      "mlx_int_str_to_wordtab.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_int_str_to_wordtab.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_int_str_to_wordtab.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_destroy_window.o",
+      "mlx_destroy_window.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_destroy_window.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_destroy_window.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_int_param_event.o",
+      "mlx_int_param_event.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_int_param_event.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_int_param_event.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_int_set_win_event_mask.o",
+      "mlx_int_set_win_event_mask.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_int_set_win_event_mask.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_int_set_win_event_mask.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_hook.o",
+      "mlx_hook.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_hook.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_hook.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_rgb.o",
+      "mlx_rgb.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_rgb.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_rgb.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_destroy_image.o",
+      "mlx_destroy_image.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_destroy_image.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_destroy_image.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_mouse.o",
+      "mlx_mouse.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_mouse.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_mouse.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_screen_size.o",
+      "mlx_screen_size.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_screen_size.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_screen_size.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O3",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/mlx_destroy_display.o",
+      "mlx_destroy_display.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/mlx_destroy_display.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/obj/mlx_destroy_display.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I/usr/include",
+      "-O3",
+      "-I..",
+      "-g",
+      "-c",
+      "-o",
+      "main.o",
+      "main.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT/mlx/test",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/mlx/test/main.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/mlx/test/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/main.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/tuples/tuple_compare.o",
+      "src/tuples/tuple_compare.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/tuples/tuple_compare.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/tuples/tuple_compare.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/tuples/tuple_utils.o",
+      "src/tuples/tuple_utils.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/tuples/tuple_utils.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/tuples/tuple_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/tuples/tuple_operations.o",
+      "src/tuples/tuple_operations.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/tuples/tuple_operations.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/tuples/tuple_operations.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parse_ambience.o",
+      "src/parsing/parse_ambience.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parse_ambience.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parse_ambience.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parse_camera.o",
+      "src/parsing/parse_camera.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parse_camera.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parse_camera.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parse_color.o",
+      "src/parsing/parse_color.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parse_color.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parse_color.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parse_cylinder.o",
+      "src/parsing/parse_cylinder.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parse_cylinder.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parse_cylinder.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parse_double.o",
+      "src/parsing/parse_double.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parse_double.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parse_double.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parse_int.o",
+      "src/parsing/parse_int.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parse_int.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parse_int.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parse_light.o",
+      "src/parsing/parse_light.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parse_light.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parse_light.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parse_plane.o",
+      "src/parsing/parse_plane.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parse_plane.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parse_plane.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parse_sphere.o",
+      "src/parsing/parse_sphere.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parse_sphere.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parse_sphere.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parse_vec.o",
+      "src/parsing/parse_vec.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parse_vec.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parse_vec.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/parsing/parsing.o",
+      "src/parsing/parsing.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/parsing/parsing.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/parsing/parsing.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/scene/scene.o",
+      "src/scene/scene.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/scene/scene.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/scene/scene.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/util/arrays/arrays1.o",
+      "src/util/arrays/arrays1.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/util/arrays/arrays1.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/util/arrays/arrays1.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/util/arrays/cylinders/cylinders1.o",
+      "src/util/arrays/cylinders/cylinders1.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/util/arrays/cylinders/cylinders1.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/util/arrays/cylinders/cylinders1.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/util/arrays/planes/planes1.o",
+      "src/util/arrays/planes/planes1.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/util/arrays/planes/planes1.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/util/arrays/planes/planes1.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/util/arrays/spheres/spheres1.o",
+      "src/util/arrays/spheres/spheres1.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/util/arrays/spheres/spheres1.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/util/arrays/spheres/spheres1.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/util/colors/colors1.o",
+      "src/util/colors/colors1.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/util/colors/colors1.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/util/colors/colors1.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I./includes",
+      "-c",
+      "-Iincludes",
+      "-I./mlx",
+      "-o",
+      "build/src/util/strings/strings1.o",
+      "src/util/strings/strings1.c"
+    ],
+    "directory": "/home/dowiw/42_berlin/cursus/miniRT",
+    "file": "/home/dowiw/42_berlin/cursus/miniRT/src/util/strings/strings1.c",
+    "output": "/home/dowiw/42_berlin/cursus/miniRT/build/src/util/strings/strings1.o"
+  }
+]

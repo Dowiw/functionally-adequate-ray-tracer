@@ -6,14 +6,9 @@ test_bin
 
 # files
 notes.md
-.clangd
-.clang-format
-compile_commands.json
 
 # directories
 mlx/
 build/
 .cache/
-.vscode/
-.configs/
 fun/
