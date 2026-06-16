@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 13:31:45 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/16 14:08:27 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
  */
 int	parse_camera(t_scene *scene, char **params)
 {
+	if (scene->has_camera)
+		return (0);
 	if (array_len((void **) params) != 4)
 		return (0);
 	if (!parse_vec(&scene->camera.pos, params[1]))

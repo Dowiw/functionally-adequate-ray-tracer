@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:17 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 23:29:20 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/16 14:13:34 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@
 static int	parse_line(t_scene *scene, char *line);
 
 // TODO:
-//  - require exactly one initialization of ambience, camera and light
 //  - enforce ranges where the subject requires
-//  - probably a good idea to handle over-/underflow
+//   - partially done, still needs to be implemented for vectors
 //  - consider moving error printing down the parsing chain to get more details
 
 /*
@@ -55,7 +54,7 @@ int	parse_scene(t_scene *scene, char *file)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (1);
+	return (scene->has_ambience && scene->has_camera && scene->has_light);
 }
 
 static int	parse_line(t_scene *scene, char *line)

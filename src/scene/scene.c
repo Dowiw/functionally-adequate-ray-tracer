@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:15:24 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:17:16 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/16 13:53:22 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int		init_scene(t_scene *scene)
 	scene->cylinders = cylinders_create();
 	scene->planes = planes_create();
 	scene->spheres = spheres_create();
+	scene->has_ambience = 0;
+	scene->has_camera = 0;
+	scene->has_light = 0;
 	return (scene->cylinders != NULL && scene->planes != NULL && scene->spheres != NULL);
 }
 

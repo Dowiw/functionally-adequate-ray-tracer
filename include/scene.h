@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:38:41 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/16 13:52:43 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ typedef struct s_scene {
 	t_sphere	**spheres;
 	t_plane		**planes;
 	t_cylinder	**cylinders;
+
+	int			has_ambience;
+	int			has_camera;
+	int			has_light;
 }	t_scene;
 
 int		init_scene(t_scene *scene);
