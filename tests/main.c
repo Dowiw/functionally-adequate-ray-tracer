@@ -18,6 +18,7 @@ int	main(void)
 {
 	t_test_suite	*suites = NULL;
 	t_test_suite	*tuple_suite;
+	t_test_suite	*matrices_suite;
 
 	tuple_suite = load_suite(&suites, "Tuples Suite");
 	// parser_suite->setup = suite_setup;
@@ -35,6 +36,10 @@ int	main(void)
 	load_test(tuple_suite, "Tuple Dot Product", &test_tuple_dot);
 	load_test(tuple_suite, "Tuple Cross Product", &test_tuple_cross);
 
-	
+	matrices_suite = load_suite(&suites, "Matrices Suite");
+
+	load_test(matrices_suite, "Main Matrix Functionality", &test_matrix_values);
+	load_test(matrices_suite, "Matrix Comparison", &test_matrix_compare);
+
 	return (launch_tests(&suites));
 }

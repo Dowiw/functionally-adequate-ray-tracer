@@ -13,4 +13,7 @@ int	test_tuple_norm(void);
 int	test_tuple_dot(void);
 int	test_tuple_cross(void);
 
+int	test_matrix_values(void);
+int	test_matrix_compare(void);
+
 #endif
