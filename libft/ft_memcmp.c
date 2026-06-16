@@ -3,41 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 12:26:40 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/12 12:26:48 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/16 17:21:11 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/16 17:21:11 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+//Compares 2 mem_areas based on size n: return 0 if same, else s1 - s2
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	i;
+	unsigned char	*s1_area;
+	unsigned char	*s2_area;
 
-	i = 0;
-	while (i < n)
+	s1_area = (unsigned char *)s1;
+	s2_area = (unsigned char *)s2;
+	while (n > 0)
 	{
-		if (((unsigned char *) s1)[i] != ((unsigned char *) s2)[i])
-			return (((unsigned char *) s1)[i] - ((unsigned char *) s2)[i]);
-		i++;
+		if (*s1_area != *s2_area)
+			return (*s1_area - *s2_area);
+		s1_area++;
+		s2_area++;
+		n--;
 	}
 	return (0);
 }
-
-/*
-#include <stdio.h>
-#include <bsd/string.h>
-int	main(int argc, char **argv)
-{
-	if (argc == 4)
-	{
-		printf("%d\n", ft_memcmp(argv[1], argv[2], (size_t) atoi(argv[3])));
-		printf("%d\n", memcmp(argv[1], argv[2], (size_t) atoi(argv[3])));
-	}
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
-}
-*/

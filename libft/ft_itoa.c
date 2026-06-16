@@ -3,83 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:51:59 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/12 13:51:59 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/23 10:37:47 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/23 10:37:48 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static size_t	ft_itoa_len(int n);
+//Helper function that counters the number of digits in n
+static size_t	digit_counter(long long nmbr)
+{
+	size_t	out;
 
-static void		ft_itoa_populate(char *result, long n, size_t len);
+	out = 0;
+	if (nmbr < 0)
+	{
+		out++;
+		nmbr = -nmbr;
+	}
+	if (nmbr == 0)
+		out++;
+	while (nmbr != 0)
+	{
+		nmbr /= 10;
+		out++;
+	}
+	return (out);
+}
 
+//Converts an integer into a mallocated string
 char	*ft_itoa(int n)
 {
-	char	*result;
-	size_t	len;
+	char		*out;
+	size_t		len;
+	size_t		i;
+	long long	nmbr;
 
-	if (n == 0)
-	{
-		return (ft_strdup("0"));
-	}
-	len = ft_itoa_len(n);
-	result = ft_calloc(len + 1, sizeof(char));
-	if (result == NULL)
-	{
+	nmbr = (long long)n;
+	len = digit_counter(nmbr);
+	out = malloc(sizeof(char) * (len + 1));
+	if (!out)
 		return (NULL);
-	}
-	ft_itoa_populate(result, (long) n, len);
-	return (result);
-}
-
-static size_t	ft_itoa_len(int n)
-{
-	size_t	len;
-
-	len = 0;
-	if (n < 0)
-		len = 1;
-	while (n != 0)
+	out[len] = '\0';
+	if (nmbr == 0)
+		out[0] = '0';
+	if (nmbr < 0)
 	{
-		n = n / 10;
-		len++;
+		out[0] = '-';
+		nmbr = -nmbr;
 	}
-	return (len);
-}
-
-static void	ft_itoa_populate(char *result, long n, size_t len)
-{
-	size_t	i;
-
-	if (n < 0)
+	i = len - 1;
+	while (nmbr != 0)
 	{
-		result[0] = '-';
-		n = -n;
+		out[i--] = (nmbr % 10) + '0';
+		nmbr /= 10;
 	}
-	i = 0;
-	while (n != 0)
-	{
-		result[len - 1 - i] = '0' + n % 10;
-		n = n / 10;
-		i++;
-	}
-	result[len] = '\0';
+	return (out);
 }
 
 /*
-#include <stdio.h>
-int	main(int argc, char **argv)
+int main(void)
 {
-	if (argc == 2)
-	{
-		printf("%s\n", ft_itoa(atoi(argv[1])));
-		printf("%d\n", atoi(argv[1]));
-	}
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
+	#include <limits.h>
+	char *test = ft_itoa(111);
+	printf("%s\n", test);
+	free(test); return (0);
 }
 */

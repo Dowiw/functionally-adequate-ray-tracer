@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include "parsing.h"
-#include "scene.h"
 #include "util/arrays.h"
 #include "util/colors.h"
 

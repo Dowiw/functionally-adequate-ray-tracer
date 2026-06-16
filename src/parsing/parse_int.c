@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <limits.h>
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 /*
  * Parses the given string 'str' as an integer.

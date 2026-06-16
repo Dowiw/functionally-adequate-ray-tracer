@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 static int parse_double_before_decimal(double *num, char *str, int *i, int sign);
 

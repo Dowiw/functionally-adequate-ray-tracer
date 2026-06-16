@@ -3,39 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:52:18 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/12 13:52:19 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/23 14:16:28 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/23 14:16:29 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+//Iterate through string (*s) and apply function (*f)
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	unsigned int	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i])
 	{
-		f(i, &s[i]);
+		(*f)(i, &s[i]);
 		i++;
 	}
 }
-
-/*
-#include <stdio.h>
-static void	printing(unsigned int i, char *c);
-int	main(int argc, char **argv)
-{
-	if (argc == 2)
-		ft_striteri(argv[1], &printing);
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
-}
-
-static void	printing(unsigned int i, char *c)
-{
-	printf("%d: %c\n", i, *c);
-}
-*/

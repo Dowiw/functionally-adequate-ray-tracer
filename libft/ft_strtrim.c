@@ -3,92 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:51:43 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/12 13:51:44 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/19 16:28:31 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/19 16:28:32 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static int	ft_strcontains(char const *s, char c);
-
+//Trims the beginning and end of str s1 based on characters in str set
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*result;
-	size_t	from;
-	size_t	to;
-
-	from = 0;
-	while (s1[from] != '\0' && ft_strcontains(set, s1[from]))
-		from++;
-	to = ft_strlen(s1);
-	while (to > from && ft_strcontains(set, s1[to - 1]))
-		to--;
-	result = malloc(to - from + 1);
-	if (result == NULL)
-		return (NULL);
-	ft_memcpy(result, s1 + from, to - from);
-	result[to - from] = '\0';
-	return (result);
-}
-
-static int	ft_strcontains(char const *s, char c)
-{
+	char	*out;
+	size_t	start_i;
+	size_t	end_i;
 	size_t	i;
 
+	if (!s1 || !set)
+		return (NULL);
+	start_i = 0;
+	end_i = ft_strlen(s1);
+	while (s1[start_i] && ft_strchr(set, s1[start_i]))
+		start_i++;
+	while (end_i > start_i && ft_strchr(set, s1[end_i - 1]))
+		end_i--;
+	out = malloc(sizeof(char) * (end_i - start_i + 1));
+	if (!out)
+		return (NULL);
 	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
+	while (start_i < end_i)
+		out[i++] = s1[start_i++];
+	out[i] = '\0';
+	return (out);
 }
 
 /*
-#include <stdio.h>
-#include <ctype.h>
-#include <bsd/string.h>
-static void	printcs(char *str, int len);
-int	main(int argc, char **argv)
+int main(void)
 {
-	char	*result;
-	if (argc == 3)
-	{
-		result = ft_strtrim(argv[1], argv[2]);
-		printcs(result, strlen(result));
-	}
-	else
-		printf("Error: Wrong arg count!\n");
+	#include <stdio.h>
+
+	//Regular Case
+	char *test = "........Hello World.......";
+	printf("%s\n", test);
+	char *set = ".";
+	char *out = ft_strtrim(test, set);
+	printf("%s\n", out); free(out);
+
+
 	return (0);
-}
-
-static void	printc(char c)
-{
-	if (c == '\0')
-		printf("_");
-	else if (!isprint(c))
-		printf("?");
-	else
-		printf("%c", c);
-}
-
-static void	printcs(char *str, int len)
-{
-	int	i;
-
-	i = -3;
-	while (i < 0)
-		printc(str[i++]);
-	printf("|");
-	while (i < len + 1)
-		printc(str[i++]);
-	printf("|");
-	while (i < len + 4)
-		printc(str[i++]);
-	printf("\n");
 }
 */

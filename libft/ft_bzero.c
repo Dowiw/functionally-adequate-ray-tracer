@@ -3,64 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:22:13 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/07 16:26:12 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/13 19:09:49 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/13 19:09:50 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+//Set memory area to '\0' based on size n
 void	ft_bzero(void *s, size_t n)
 {
-	ft_memset(s, '\0', n);
-}
+	size_t			i;
+	unsigned char	*mem_area;
 
-/*
-#include <stdio.h>
-#include <ctype.h>
-#include <bsd/string.h>
-static void	printcs(char *str, int len);
-int	main(int argc, char **argv)
-{
-	size_t	len;
-
-	if (argc == 3)
+	i = 0;
+	mem_area = (unsigned char *)s;
+	while (i < n)
 	{
-		len = strlen(argv[1]);
-		printcs(argv[1], len);
-		ft_bzero(argv[1], atoi(argv[2]));
-		printcs(argv[1], len);
+		mem_area[i] = '\0';
+		i++;
 	}
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
 }
-
-static void	printc(char c)
-{
-	if (c == '\0')
-		printf("_");
-	else if (!isprint(c))
-		printf("?");
-	else
-		printf("%c", c);
-}
-
-static void	printcs(char *str, int len)
-{
-	int	i;
-
-	i = -3;
-	while (i < 0)
-		printc(str[i++]);
-	printf("|");
-	while (i < len + 1)
-		printc(str[i++]);
-	printf("|");
-	while (i < len + 4)
-		printc(str[i++]);
-	printf("\n");
-}
-*/

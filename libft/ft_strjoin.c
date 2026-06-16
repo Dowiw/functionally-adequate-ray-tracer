@@ -3,42 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 13:51:31 by sstark            #+#    #+#             */
-/*   Updated: 2025/10/21 14:12:01 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/19 16:05:22 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/19 16:05:23 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
+//Concatinates s1 (prefix) to s2 (suffix)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*result;
-	size_t	s1_len;
-	size_t	s2_len;
+	char	*out;
+	size_t	i;
+	size_t	j;
+	size_t	total_len;
 
-	if (s1 == NULL || s2 == NULL)
+	i = 0;
+	j = 0;
+	if (!s1 || !s2)
 		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	result = malloc(s1_len + s2_len + 1);
-	if (result == NULL)
+	total_len = ft_strlen(s1) + ft_strlen(s2);
+	out = malloc(sizeof(char) * (total_len + 1));
+	if (!out)
 		return (NULL);
-	ft_memcpy(result, s1, s1_len);
-	ft_memcpy(result + s1_len, s2, s2_len);
-	result[s1_len + s2_len] = '\0';
-	return (result);
+	while (s1[i])
+		out[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		out[j++] = s2[i++];
+	out[j] = '\0';
+	return (out);
 }
-
-/*
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	if (argc == 3)
-		printf("%s\n", ft_strjoin(argv[1], argv[2]));
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
-}
-*/

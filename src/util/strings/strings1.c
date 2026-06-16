@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include <stdlib.h>
+#include "libft/libft.h"
 
 /*
  * Returns true if the contents of 'str1' are equal to 'str2'.

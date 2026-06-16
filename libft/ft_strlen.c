@@ -3,37 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 15:59:41 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/07 16:59:34 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/12 22:50:04 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/12 22:50:06 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+//Returns length of string (char *)
+size_t	ft_strlen(const char *str)
 {
-	size_t	len;
+	size_t	i;
 
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
-
-/*
-#include <stdio.h>
-#include <bsd/string.h>
-int	main(int argc, char **argv)
-{
-	if (argc == 2)
-	{
-		printf("%zu\n", ft_strlen(argv[1]));
-		printf("%zu\n", strlen(argv[1]));
-	}
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
-}
-*/

@@ -3,32 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 17:06:57 by sstark            #+#    #+#             */
-/*   Updated: 2025/05/07 17:08:15 by sstark           ###   ########.fr       */
+/*   Created: 2025/05/16 10:50:23 by kmonjard          #+#    #+#             */
+/*   Updated: 2025/05/16 10:50:25 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+//Convert char c to uppercase: return c if not lower case letter
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
-		return (c + ('A' - 'a'));
+		return (c - ('a' - 'A'));
 	return (c);
 }
-
-/*
-#include <stdio.h>
-#include <ctype.h>
-int	main(int argc, char **argv)
-{
-	if (argc == 2)
-	{
-		printf("%c\n", ft_toupper(argv[1][0]));
-		printf("%c\n", toupper(argv[1][0]));
-	}
-	else
-		printf("Error: Wrong arg count!\n");
-	return (0);
-}
-*/
