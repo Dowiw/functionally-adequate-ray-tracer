@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:19:46 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:10:26 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/16 13:29:59 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static int	parse_color_params(int *color, char **params)
 
 	if (array_len((void **) params) != 3)
 		return (0);
-	if (!parse_int(&red, params[0]))
+	if (!parse_int_range(&red, params[0], 0, 255))
 		return (0);
-	if (!parse_int(&green, params[1]))
+	if (!parse_int_range(&green, params[1], 0, 255))
 		return (0);
-	if (!parse_int(&blue, params[2]))
+	if (!parse_int_range(&blue, params[2], 0, 255))
 		return (0);
 	*color = rgb(red, green, blue);
 	return (1);

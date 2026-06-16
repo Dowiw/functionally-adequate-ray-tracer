@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:17:25 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:09:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/16 13:33:24 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parse_ambience(t_scene *scene, char **params)
 {
 	if (array_len((void **) params) != 3)
 		return (0);
-	if (!parse_double(&scene->ambience.lighting, params[1]))
+	if (!parse_double_range(&scene->ambience.lighting, params[1], 0.0, 1.0))
 		return (0);
 	if (!parse_color(&scene->ambience.color, params[2]))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:37:50 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 21:32:52 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/16 13:44:21 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ int	parse_double(double *num, char *str)
 			return (0);
 	}
 	return (1);
+}
+
+/*
+ * Parses the given 'str' (see parse_double) and checks the result against the given range 'min' and 'max'.
+ */
+int parse_double_range(double *num, char *str, double min, double max)
+{
+	return (parse_double(num, str) && *num >= min && *num <= max);
 }
 
 static int parse_double_before_decimal(double *num, char *str, int *i, int sign)

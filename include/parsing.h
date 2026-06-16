@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:09 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:37:42 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/16 13:29:25 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ int	parse_color(int *color, char *str);
 
 int	parse_double(double *num, char *str);
 
+int parse_double_range(double *num, char *str, double min, double max);
+
 int	parse_int(int *num, char *str);
+
+int parse_int_range(int *num, char *str, int min, int max);
 
 int	parse_vec(t_vec *vec, char *str);
 

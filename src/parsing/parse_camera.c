@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:09:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/16 13:31:45 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	parse_camera(t_scene *scene, char **params)
 		return (0);
 	if (!parse_vec(&scene->camera.orientation, params[2]))
 		return (0);
-	if (!parse_double(&scene->camera.fov, params[3]))
+	if (!parse_double_range(&scene->camera.fov, params[3], 0, 180))
 		return (0);
 	return (1);
 }
