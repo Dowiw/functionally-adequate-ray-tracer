@@ -12,7 +12,7 @@
 
 NAME = libft.a
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I../includes
+CFLAGS = -Wall -Werror -Wextra -I../includes -I../includes/libft
 
 #Alt + Z to wrap a line for readability in VSC
 C_FILES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \

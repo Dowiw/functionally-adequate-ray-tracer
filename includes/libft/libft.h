@@ -14,7 +14,6 @@
 # define LIBFT_H
 
 # include <unistd.h> // write function and size_t
-# include "ft_printf.h"
 
 typedef struct s_list
 {

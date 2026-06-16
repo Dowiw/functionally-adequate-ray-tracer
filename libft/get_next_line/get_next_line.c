@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft/get_next_line.h"
 
 /*
 	Helper function to keep the left overs of line_buffer.

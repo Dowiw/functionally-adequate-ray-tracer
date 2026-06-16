@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft/get_next_line.h"
 
 char	*ft_read_file(int fd, char *line_buffer)
 {
