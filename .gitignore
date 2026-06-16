@@ -1,0 +1,8 @@
+# binaries
+*.o
+miniRT
+libft.a
+
+# directories
+mlx/
+build/
