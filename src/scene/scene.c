@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "minirt.h"
 #include "scene.h"
 #include "util/cylinders.h"
 #include "util/planes.h"

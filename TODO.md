@@ -1,5 +1,8 @@
 # miniRT - TODO
 
+> [!IMPORTANT]
+> **META RULE:** Always read and verify `notes.md` before implementing any new feature. It contains critical deviations from the book and project-specific traps (like MLX rendering rules, gimbal lock, and shadow acne).
+
 ## Repository Setup & Architecture
 - [x] **Makefile Creation**
   - [x] 1.1.1: Define compiler (`cc`) and mandatory flags (`-Wall -Wextra -Werror`).

@@ -19,4 +19,6 @@ int	test_color_sub(void);
 int	test_color_mult_scalar(void);
 int	test_color_mult(void);
 
+int	test_canvas(void);
+
 #endif

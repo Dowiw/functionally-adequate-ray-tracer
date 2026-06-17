@@ -30,6 +30,7 @@ HEADERS = minirt.h \
 SOURCE_DIR = src
 SOURCES = main.c \
 	graphics/init_mlx.c \
+	graphics/canvas.c \
 	tuples/tuple_compare.c \
 	tuples/tuple_utils.c \
 	tuples/tuple_operations.c \
@@ -56,7 +57,8 @@ SOURCES = main.c \
 TEST_DIR = tests
 TESTS = main.c \
 		test_tuples.c \
-		test_colors.c
+		test_colors.c \
+		test_canvas.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 

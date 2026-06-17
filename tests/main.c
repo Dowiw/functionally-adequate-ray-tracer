@@ -19,6 +19,7 @@ int	main(void)
 	t_test_suite	*suites = NULL;
 	t_test_suite	*tuple_suite;
 	t_test_suite	*color_suite;
+	t_test_suite	*canvas_suite;
 
 	tuple_suite = load_suite(&suites, "Tuples Suite");
 	// parser_suite->setup = suite_setup;
@@ -43,5 +44,7 @@ int	main(void)
 	load_test(color_suite, "Color Scalar Multiplication", &test_color_mult_scalar);
 	load_test(color_suite, "Color Multiplication (Hadamard)", &test_color_mult);
 
+	canvas_suite = load_suite(&suites, "Canvas Suite");
+	load_test(canvas_suite, "Canvas Initialization", &test_canvas);
 	return (launch_tests(&suites));
 }

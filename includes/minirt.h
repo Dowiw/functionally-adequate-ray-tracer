@@ -44,6 +44,17 @@ typedef struct s_tuple
 }	t_tuple;
 
 /**
+ * @brief Structure for a canvas.
+ * Allocates pixels in memory (width * height).
+ */
+typedef struct s_canvas
+{
+	int		width; // width of canvas
+	int		height; // height of canvas
+	t_tuple	*pixels; // 1D array of (width * height) representing colors
+}	t_canvas;
+
+/**
  * @brief Structure for mlx data
  */
 typedef struct s_mlx
@@ -65,7 +76,7 @@ typedef struct s_mlx
  */
 typedef struct s_data
 {
-	t_mlx	mlx;
+	t_mlx		mlx;
 }	t_data;
 
 /** ######################################################################### *
@@ -98,7 +109,13 @@ t_tuple	tuple_div(const t_tuple a, const double scalar);
 
 t_tuple	shur_prod(const t_tuple color_a, const t_tuple color_b);
 
+/** ######################################################################### *
+ *  GRAPHICS                                                                # *
+ *  ######################################################################### */
+
 int		init_mlx_lib(t_mlx *mlx);
 void	init_mlx(t_mlx *mlx);
+
+int	canvas_create(t_canvas *canvas, int width, int height);
 
 #endif
