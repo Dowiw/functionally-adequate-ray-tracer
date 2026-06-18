@@ -116,6 +116,9 @@ t_tuple	shur_prod(const t_tuple color_a, const t_tuple color_b);
 int		init_mlx_lib(t_mlx *mlx);
 void	init_mlx(t_mlx *mlx);
 
-int	canvas_create(t_canvas *canvas, int width, int height);
+int		canvas_create(t_canvas *canvas, int width, int height);
+void	write_pixel(t_canvas *canvas, int x, int y, t_tuple color);
+t_tuple	view_pixel(t_canvas *canvas, int x, int y);
+char	*canvas_to_ppm(t_canvas *canvas);
 
 #endif

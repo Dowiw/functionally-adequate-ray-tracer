@@ -1,7 +1,20 @@
 # miniRT - TODO
 
-> [!IMPORTANT]
-> **META RULE:** Always read and verify `notes.md` before implementing any new feature. It contains critical deviations from the book and project-specific traps (like MLX rendering rules, gimbal lock, and shadow acne).
+These are the available functions.
+> • open, close, read, write,
+printf, malloc, free, perror,
+strerror, exit.
+
+> • All functions of the math
+library. (Man page: man
+math.h or man 3 math. Don’t
+forget to compile with the
+-lm flag).
+
+> • All functions of the MinilibX
+library.
+
+> • gettimeofday()
 
 ## Repository Setup & Architecture
 - [x] **Makefile Creation**
@@ -13,11 +26,11 @@
 	- t_tuple is defined.
 
   - [ ] 1.2.2: Define Ray struct (origin, direction).
-  - [ ] 1.2.3: Define Color struct (r, g, b integers or floats).
+  - [x] 1.2.3: Define Color struct (r, g, b integers or floats).
   - [ ] 1.2.4: Define Camera struct (origin, orientation, FOV).
-  - [ ] 1.2.5: Define Light & Ambient structs.
-  - [ ] 1.2.6: Define Object struct (enum for type: SPHERE/PLANE/CYLINDER, and union/fields for specific properties).
-  - [ ] 1.2.7: Define Scene struct (holds camera, lights, and a linked list of Object).
+  - [x] 1.2.5: Define Light & Ambient structs.
+  - [x] 1.2.6: Define Object struct (enum for type: SPHERE/PLANE/CYLINDER, and union/fields for specific properties).
+  - [x] 1.2.7: Define Scene struct (holds camera, lights, and a linked list of Object).
 
 ## Parser (`.rt` files)
 - [ ] **File I/O & Validation**
@@ -40,17 +53,17 @@
 
 ## Mathematics Library
 - [ ] **Basic Tuple Operations**
-  - [ ] 3.1.1: Doubles comparison function
-  - [ ] 3.1.2: Tuples comparison function
-  - [ ] 3.1.3: Tuple addition
-  - [ ] 3.1.4: Tuple subtraction
-  - [ ] 3.1.5: Tuple scalar multiplication
-  - [ ] 3.1.6: Tuple scalar division
-  - [ ] 3.1.7: Tuple negation
-  - [ ] 3.1.8: Calculate magnitude
-  - [ ] 3.1.9: Calculate normalized vector
-  - [ ] 3.1.10: Calculate dot product
-  - [ ] 3.1.11: Calculate cross product
+  - [x] 3.1.1: Doubles comparison function
+  - [x] 3.1.2: Tuples comparison function
+  - [x] 3.1.3: Tuple addition
+  - [x] 3.1.4: Tuple subtraction
+  - [x] 3.1.5: Tuple scalar multiplication
+  - [x] 3.1.6: Tuple scalar division
+  - [x] 3.1.7: Tuple negation
+  - [x] 3.1.8: Calculate magnitude
+  - [x] 3.1.9: Calculate normalized vector
+  - [x] 3.1.10: Calculate dot product
+  - [x] 3.1.11: Calculate cross product
 - [ ] **Color Operations**
   - [ ] 3.2.1: hadamard_product (shur product)
 - [ ] **Matrix Operations**

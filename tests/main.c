@@ -46,5 +46,8 @@ int	main(void)
 
 	canvas_suite = load_suite(&suites, "Canvas Suite");
 	load_test(canvas_suite, "Canvas Initialization", &test_canvas);
+	load_test(canvas_suite, "Canvas Utilities", &test_canvas_place);
+	load_test(canvas_suite, "Canvas to PPM", &test_canvas_ppm);
+
 	return (launch_tests(&suites));
 }

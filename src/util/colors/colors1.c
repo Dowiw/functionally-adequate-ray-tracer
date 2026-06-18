@@ -17,7 +17,7 @@
  */
 int	rgb(int red, int green, int blue)
 {
-	return (((red & 0x000000FF) >> 16) + ((green & 0x000000FF) >> 8) + (blue & 0x000000FF));
+	return (((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF));
 }
 
 /*
