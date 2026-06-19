@@ -39,7 +39,16 @@ int	main(void)
 	matrices_suite = load_suite(&suites, "Matrices Suite");
 
 	load_test(matrices_suite, "Main Matrix Functionality", &test_matrix_values);
+	load_test(matrices_suite, "Matrix Identities", &test_matrix_identity);
 	load_test(matrices_suite, "Matrix Comparison", &test_matrix_compare);
+	load_test(matrices_suite, "Matrix Multiplication", &test_matrix_multiply);
+	load_test(matrices_suite, "Matrix Multiplication with Tuple", &test_matrix_multiply_tuple);
+	load_test(matrices_suite, "Matrix Transposition", &test_matrix_transpose);
+	load_test(matrices_suite, "Matrix Determinant", &test_matrix_determinant);
+	load_test(matrices_suite, "Matrix Submatrix", &test_matrix_submatrix);
+	load_test(matrices_suite, "Matrix Minor", &test_matrix_minor);
+	load_test(matrices_suite, "Matrix Cofactor", &test_matrix_cofactor);
+	load_test(matrices_suite, "Matrix Inversion", &test_matrix_inverse);
 
 	return (launch_tests(&suites));
 }
