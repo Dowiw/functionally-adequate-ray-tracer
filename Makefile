@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/06/19 09:03:39 by sstark           ###   ########.fr        #
+#    Updated: 2026/06/19 13:10:15 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,11 @@ SOURCES = main.c \
 	matrices/matrix_minor.c \
 	matrices/matrix_multiply_tuple.c \
 	matrices/matrix_multiply.c \
+	matrices/matrix_rotation.c \
+	matrices/matrix_scaling.c \
+	matrices/matrix_shearing.c \
 	matrices/matrix_submatrix.c \
+	matrices/matrix_translation.c \
 	matrices/matrix_transpose.c \
 	tuples/tuple_compare.c \
 	tuples/tuple_utils.c \
@@ -71,7 +75,8 @@ TESTS = main.c \
 	test_colors.c \
 	test_canvas.c \
 	test_matrices.c \
-	test_rays.c
+	test_transformations.c \
+	test_rays.c \
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 

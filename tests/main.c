@@ -22,6 +22,7 @@ int	main(void)
 	t_test_suite	*canvas_suite;
 	t_test_suite	*matrices_suite;
 	t_test_suite	*rays_suite;
+	t_test_suite	*transformations_suite;
 
 	tuple_suite = load_suite(&suites, "Tuples Suite");
 	// parser_suite->setup = suite_setup;
@@ -64,9 +65,16 @@ int	main(void)
 	load_test(matrices_suite, "Matrix Cofactor", &test_matrix_cofactor);
 	load_test(matrices_suite, "Matrix Inversion", &test_matrix_inverse);
 
+	transformations_suite = load_suite(&suites, "Transformations Suite");
+	load_test(transformations_suite, "Translation", &test_translation);
+	load_test(transformations_suite, "Scaling", &test_scaling);
+	load_test(transformations_suite, "Rotation", &test_rotation);
+	load_test(transformations_suite, "Shearing", &test_shearing);
+	load_test(transformations_suite, "Chained Transformations", &test_chaining);
+
 	rays_suite = load_suite(&suites, "Rays Suite");
 	load_test(rays_suite, "Basic Ray Functionality", &test_ray);
 	load_test(rays_suite, "Ray Position", &test_ray_pos);
-	
+
 	return (launch_tests(&suites));
 }

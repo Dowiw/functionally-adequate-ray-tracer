@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/19 08:58:53 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/19 13:05:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define INVALID_NEG -1.0
 # define INVALID_POS 2.0
 # define COLOR 3.0
+
+#define PI 3.14159265358979323846
 
 # ifndef WIN_W
 #  define WIN_W 1920
@@ -188,6 +190,16 @@ double	matrix4x4_cofactor(t_matrix4x4 matrix, int row, int column);
 t_matrix2x2	matrix2x2_inverse(t_matrix2x2 matrix);
 t_matrix3x3	matrix3x3_inverse(t_matrix3x3 matrix);
 t_matrix4x4	matrix4x4_inverse(t_matrix4x4 matrix);
+
+t_matrix4x4	matrix4x4_translation(double x, double y, double z);
+
+t_matrix4x4	matrix4x4_scaling(double x, double y, double z);
+
+t_matrix4x4	matrix4x4_rotation_x(double radians);
+t_matrix4x4	matrix4x4_rotation_y(double radians);
+t_matrix4x4	matrix4x4_rotation_z(double radians);
+
+t_matrix4x4	matrix4x4_shearing(double xy, double xz, double yx, double yz, double zx, double zy);
 
 /** ######################################################################### *
  *  RAYS                                                                    # *
