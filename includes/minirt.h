@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 20:26:30 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/19 08:58:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,9 @@ typedef struct s_matrix4x4 {
 	double	m[4][4];
 }	t_matrix4x4;
 
-# define MATRIX2X2_IDENTITY (t_matrix2x2){{ \
-	{1.0, 0.0}, \
-	{0.0, 1.0} \
-}}
-# define MATRIX3X3_IDENTITY (t_matrix3x3){{ \
-	{1.0, 0.0, 0.0}, \
-	{0.0, 1.0, 0.0}, \
-	{0.0, 0.0, 1.0} \
-}}
-# define MATRIX4X4_IDENTITY (t_matrix4x4){{ \
-	{1.0, 0.0, 0.0, 0.0}, \
-	{0.0, 1.0, 0.0, 0.0}, \
-	{0.0, 0.0, 1.0, 0.0}, \
-	{0.0, 0.0, 0.0, 1.0} \
-}}
+t_matrix2x2	matrix2x2_identity(void);
+t_matrix3x3	matrix3x3_identity(void);
+t_matrix4x4	matrix4x4_identity(void);
 
 int	matrix2x2_compare(t_matrix2x2 a, t_matrix2x2 b);
 int	matrix3x3_compare(t_matrix3x3 a, t_matrix3x3 b);

@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/06/16 19:25:58 by sstark           ###   ########.fr        #
+#    Updated: 2026/06/19 09:03:39 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SOURCES = main.c \
 	matrices/matrix_cofactor.c \
 	matrices/matrix_compare.c \
 	matrices/matrix_determinant.c \
+	matrices/matrix_identity.c \
 	matrices/matrix_inverse.c \
 	matrices/matrix_minor.c \
 	matrices/matrix_multiply_tuple.c \
