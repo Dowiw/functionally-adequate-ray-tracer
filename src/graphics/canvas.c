@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   canvas.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/16 11:48:41 by kmonjard          #+#    #+#             */
+/*   Updated: 2026/06/19 11:48:42 by kmonjard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft/libft.h"
 #include "minirt.h"
 #include <linux/limits.h>
-#include <math.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <sys/time.h>
@@ -59,20 +70,6 @@ t_tuple	view_pixel(t_canvas *canvas, int x, int y)
 	if (x >= 0 && x < canvas->width && y >= 0 && y < canvas->height)
 		return (canvas->pixels[y * canvas->width + x]);
 	return (empty);
-}
-
-static int	clamp_color(double color)
-{
-	double	c_d;
-	int		c;
-
-	c_d = round(color * 255);
-	c = (int)c_d;
-	if (c < 0)
-		return (0);
-	if (c > 255)
-		return (255);
-	return (c);
 }
 
 /**
