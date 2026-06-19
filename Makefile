@@ -90,7 +90,7 @@ BUILD_DIR = ./build
 OBJECT_FILES = $(SOURCES:%.c=$(BUILD_DIR)/src/%.o)
 TEST_OBJS = $(TESTS:%.c=$(BUILD_DIR)/tests/%.o)
 
-all: $(LIBFT) $(MLX_DIR)/libmlx.a $(NAME)
+all: $(NAME)
 
 $(MLX_DIR):
 	git clone $(MLX_REPO) $(MLX_DIR)
@@ -109,7 +109,7 @@ $(LIBUNIT):
 	@echo "[MAKE] libunit/framework"
 	@$(MAKE) -C libunit/framework > /dev/null
 
-$(NAME): $(OBJECT_FILES)
+$(NAME): $(LIBFT) $(MLX_DIR)/libmlx.a $(OBJECT_FILES)
 	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_LINKS) -o $(NAME)
 
 $(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c
