@@ -43,5 +43,6 @@ int	test_chaining(void);
 
 int	test_ray(void);
 int	test_ray_pos(void);
+int	test_ray_intersect(void);
 
 #endif

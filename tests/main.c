@@ -75,6 +75,7 @@ int	main(void)
 	rays_suite = load_suite(&suites, "Rays Suite");
 	load_test(rays_suite, "Basic Ray Functionality", &test_ray);
 	load_test(rays_suite, "Ray Position", &test_ray_pos);
+	load_test(rays_suite, "Ray Intersection", &test_ray_intersect);
 
 	return (launch_tests(&suites));
 }

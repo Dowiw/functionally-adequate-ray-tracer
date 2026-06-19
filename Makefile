@@ -64,7 +64,7 @@ SOURCES = main.c \
 	util/arrays/arrays1.c \
 	util/arrays/cylinders/cylinders1.c \
 	util/arrays/planes/planes1.c \
-	util/arrays/spheres/spheres1.c \
+	util/arrays/spheres/sphere_utils.c \
 	util/colors/colors_util.c \
 	util/colors/colors1.c \
 	util/strings/strings1.c \

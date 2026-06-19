@@ -62,6 +62,16 @@ typedef struct s_ray
 }	t_ray;
 
 /**
+ * @brief Structure for intersections.
+ * Contains the number of intersections and the times a ray intersects
+ */
+typedef struct s_intersect
+{
+	unsigned int	count; // the number of intersections
+	double			*times; // the time (t) that a ray intersects an object
+}	t_intersect;
+
+/**
  * @brief Structure for a canvas.
  * Allocates pixels in memory (width * height).
  */

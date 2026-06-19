@@ -13,13 +13,7 @@
 #ifndef SCENE_H
 # define SCENE_H
 
-typedef struct s_vec {
-	double	x;
-	double	y;
-	double	z;
-}	t_vec;
-
-typedef t_vec t_pos;
+# include "minirt.h"
 
 typedef struct s_ambience {
 	double	lighting;
@@ -27,32 +21,33 @@ typedef struct s_ambience {
 }	t_ambience;
 
 typedef struct s_camera {
-	t_pos	pos;
-	t_vec	orientation;
-	double	fov;
+	t_point		pos;
+	t_vector	orientation;
+	double		fov;
 }	t_camera;
 
 typedef struct s_light {
-	t_pos	pos;
+	t_point	pos;
 	double	brightness;
 	int		color;
 }	t_light;
 
 typedef struct s_sphere {
-	t_pos	center;
+	t_point	center;
+	double	radius;
 	double	diameter;
 	int		color;
 }	t_sphere;
 
 typedef struct s_plane {
-	t_pos	pos;
-	t_vec	vec;
+	t_point	pos;
+	t_vector	vec;
 	int		color;
 }	t_plane;
 
 typedef struct s_cylinder {
-	t_pos	center;
-	t_vec	vec;
+	t_point	center;
+	t_vector	vec;
 	double	diameter;
 	double	height;
 	int		color;
@@ -74,5 +69,7 @@ typedef struct s_scene {
 int		init_scene(t_scene *scene);
 
 void	destroy_scene(t_scene *scene);
+
+t_intersect	intersect(t_sphere s, t_ray r);
 
 #endif
