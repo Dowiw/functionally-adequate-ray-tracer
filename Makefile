@@ -1,14 +1,14 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kmonjard <kmonjard@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/06/10 00:14:17 by kmonjard         ###   ########.fr        #
+#    Updated: 2026/06/19 09:03:39 by sstark           ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 NAME = miniRT
 CC = cc
@@ -29,6 +29,16 @@ HEADERS = minirt.h \
 
 SOURCE_DIR = src
 SOURCES = main.c \
+	matrices/matrix_cofactor.c \
+	matrices/matrix_compare.c \
+	matrices/matrix_determinant.c \
+	matrices/matrix_identity.c \
+	matrices/matrix_inverse.c \
+	matrices/matrix_minor.c \
+	matrices/matrix_multiply_tuple.c \
+	matrices/matrix_multiply.c \
+	matrices/matrix_submatrix.c \
+	matrices/matrix_transpose.c \
 	tuples/tuple_compare.c \
 	tuples/tuple_utils.c \
 	tuples/tuple_operations.c \
@@ -53,7 +63,8 @@ SOURCES = main.c \
 
 TEST_DIR = tests
 TESTS = main.c \
-		test_tuples.c
+		test_tuples.c \
+		test_matrices.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 
@@ -62,7 +73,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 MLX_DIR = ./mlx
 MLX_REPO = https://github.com/42paris/minilibx-linux.git
-MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
+MLX_INCLUDE = -I$(MLX_DIR)
+MLX_LINKS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
 LIBUNIT = libunit/framework/libunit.a
 
@@ -93,12 +105,12 @@ $(LIBUNIT):
 	@$(MAKE) -C libunit/framework > /dev/null
 
 $(NAME): $(OBJECT_FILES)
-	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_LINKS) -o $(NAME)
 
 $(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@echo "[COMPILE]: $<"
-	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) $(MLX_INCLUDE)
 
 $(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c | $(LIBUNIT)
 	@mkdir -p $(dir $@)
