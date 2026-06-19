@@ -1,14 +1,14 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kmonjard <kmonjard@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/06/10 00:14:17 by kmonjard         ###   ########.fr        #
+#    Updated: 2026/06/19 09:03:39 by sstark           ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 NAME = miniRT
 CC = cc
@@ -31,6 +31,16 @@ SOURCE_DIR = src
 SOURCES = main.c \
 	graphics/init_mlx.c \
 	graphics/canvas.c \
+	matrices/matrix_cofactor.c \
+	matrices/matrix_compare.c \
+	matrices/matrix_determinant.c \
+	matrices/matrix_identity.c \
+	matrices/matrix_inverse.c \
+	matrices/matrix_minor.c \
+	matrices/matrix_multiply_tuple.c \
+	matrices/matrix_multiply.c \
+	matrices/matrix_submatrix.c \
+	matrices/matrix_transpose.c \
 	tuples/tuple_compare.c \
 	tuples/tuple_utils.c \
 	tuples/tuple_operations.c \
@@ -58,7 +68,8 @@ TEST_DIR = tests
 TESTS = main.c \
 		test_tuples.c \
 		test_colors.c \
-		test_canvas.c
+		test_canvas.c \
+		test_matrices.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 
