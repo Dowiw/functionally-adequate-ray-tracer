@@ -34,6 +34,8 @@ int	canvas_create(t_canvas *canvas, int width, int height)
 	if (!canvas->pixels)
 		return (0);
 	ft_bzero(canvas->pixels, width * height * sizeof(t_tuple));
+	for (int i = 0; i < width * height; i++)
+		canvas->pixels[i].w = COLOR;
 	return (1);
 }
 

@@ -21,6 +21,7 @@ int	main(void)
 	t_test_suite	*color_suite;
 	t_test_suite	*canvas_suite;
 	t_test_suite	*matrices_suite;
+	t_test_suite	*rays_suite;
 
 	tuple_suite = load_suite(&suites, "Tuples Suite");
 	// parser_suite->setup = suite_setup;
@@ -63,5 +64,9 @@ int	main(void)
 	load_test(matrices_suite, "Matrix Cofactor", &test_matrix_cofactor);
 	load_test(matrices_suite, "Matrix Inversion", &test_matrix_inverse);
 
+	rays_suite = load_suite(&suites, "Rays Suite");
+	load_test(rays_suite, "Basic Ray Functionality", &test_ray);
+	load_test(rays_suite, "Ray Position", &test_ray_pos);
+	
 	return (launch_tests(&suites));
 }

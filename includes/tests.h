@@ -35,4 +35,7 @@ int	test_matrix_minor(void);
 int	test_matrix_cofactor(void);
 int	test_matrix_inverse(void);
 
+int	test_ray(void);
+int	test_ray_pos(void);
+
 #endif

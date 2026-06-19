@@ -13,7 +13,7 @@
 NAME = miniRT
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I./$(HEADER_DIR)
+CFLAGS = -g -Wall -Wextra -Werror -I./$(HEADER_DIR)
 
 HEADER_DIR = includes
 HEADERS = minirt.h \
@@ -56,6 +56,7 @@ SOURCES = main.c \
 	parsing/parse_vec.c \
 	parsing/parsing.c \
 	scene/scene.c \
+	scene/rays/ray_utils.c \
 	util/arrays/arrays1.c \
 	util/arrays/cylinders/cylinders1.c \
 	util/arrays/planes/planes1.c \
@@ -66,10 +67,11 @@ SOURCES = main.c \
 
 TEST_DIR = tests
 TESTS = main.c \
-		test_tuples.c \
-		test_colors.c \
-		test_canvas.c \
-		test_matrices.c
+	test_tuples.c \
+	test_colors.c \
+	test_canvas.c \
+	test_matrices.c \
+	test_rays.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 

@@ -43,6 +43,22 @@ typedef struct s_tuple
 	double	w; // type, extra value
 }	t_tuple;
 
+typedef t_tuple t_point;
+
+typedef t_tuple t_vector;
+
+typedef t_tuple t_color;
+
+/**
+ * @brief Structure for rays.
+ * Contains origin and direction.
+ */
+typedef struct s_ray
+{
+	t_point		origin; // starting point of a ray
+	t_vector	direction; // where it points
+}	t_ray;
+
 /**
  * @brief Structure for a canvas.
  * Allocates pixels in memory (width * height).
@@ -78,12 +94,6 @@ typedef struct s_data
 {
 	t_mlx		mlx;
 }	t_data;
-
-typedef t_tuple t_point;
-
-typedef t_tuple t_vector;
-
-typedef t_tuple t_color;
 
 /** ######################################################################### *
  *  TUPLES                                                                  # *
@@ -178,5 +188,11 @@ double	matrix4x4_cofactor(t_matrix4x4 matrix, int row, int column);
 t_matrix2x2	matrix2x2_inverse(t_matrix2x2 matrix);
 t_matrix3x3	matrix3x3_inverse(t_matrix3x3 matrix);
 t_matrix4x4	matrix4x4_inverse(t_matrix4x4 matrix);
+
+/** ######################################################################### *
+ *  RAYS                                                                    # *
+ *  ######################################################################### */
+
+t_point	position(t_ray ray, double time);
 
 #endif

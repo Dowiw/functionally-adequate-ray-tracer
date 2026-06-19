@@ -68,7 +68,7 @@ t_tuple	cross_product(const t_tuple a, const t_tuple b)
 {
 	t_tuple	cross;
 
-	cross.x = (a.x * b.z - a.z * b.y);
+	cross.x = (a.y * b.z - a.z * b.y);
 	cross.y = (a.z * b.x - a.x * b.z);
 	cross.z = (a.x * b.y - a.y * b.x);
 	cross.w = VECTOR;
