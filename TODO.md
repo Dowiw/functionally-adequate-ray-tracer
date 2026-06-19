@@ -1,5 +1,21 @@
 # miniRT - TODO
 
+These are the available functions.
+> • open, close, read, write,
+printf, malloc, free, perror,
+strerror, exit.
+
+> • All functions of the math
+library. (Man page: man
+math.h or man 3 math. Don’t
+forget to compile with the
+-lm flag).
+
+> • All functions of the MinilibX
+library.
+
+> • gettimeofday()
+
 ## Repository Setup & Architecture
 - [x] **Makefile Creation**
   - [x] 1.1.1: Define compiler (`cc`) and mandatory flags (`-Wall -Wextra -Werror`).
@@ -10,11 +26,11 @@
 	- t_tuple is defined.
 
   - [ ] 1.2.2: Define Ray struct (origin, direction).
-  - [ ] 1.2.3: Define Color struct (r, g, b integers or floats).
+  - [x] 1.2.3: Define Color struct (r, g, b integers or floats).
   - [ ] 1.2.4: Define Camera struct (origin, orientation, FOV).
-  - [ ] 1.2.5: Define Light & Ambient structs.
-  - [ ] 1.2.6: Define Object struct (enum for type: SPHERE/PLANE/CYLINDER, and union/fields for specific properties).
-  - [ ] 1.2.7: Define Scene struct (holds camera, lights, and a linked list of Object).
+  - [x] 1.2.5: Define Light & Ambient structs.
+  - [x] 1.2.6: Define Object struct (enum for type: SPHERE/PLANE/CYLINDER, and union/fields for specific properties).
+  - [x] 1.2.7: Define Scene struct (holds camera, lights, and a linked list of Object).
 
 ## Parser (`.rt` files)
 - [ ] **File I/O & Validation**
@@ -36,8 +52,34 @@
   - [ ] 2.4.2: On any parsing failure, print `Error\n` followed by a specific message (e.g., "Error\nInvalid RGB range for Sphere").
 
 ## Mathematics Library
-- [ ] **Basic Vector Operations**
-  - [ ] 3.1.1: TODO
+- [ ] **Basic Tuple Operations**
+  - [x] 3.1.1: Doubles comparison function
+  - [x] 3.1.2: Tuples comparison function
+  - [x] 3.1.3: Tuple addition
+  - [x] 3.1.4: Tuple subtraction
+  - [x] 3.1.5: Tuple scalar multiplication
+  - [x] 3.1.6: Tuple scalar division
+  - [x] 3.1.7: Tuple negation
+  - [x] 3.1.8: Calculate magnitude
+  - [x] 3.1.9: Calculate normalized vector
+  - [x] 3.1.10: Calculate dot product
+  - [x] 3.1.11: Calculate cross product
+- [ ] **Color Operations**
+  - [ ] 3.2.1: hadamard_product (shur product)
+- [ ] **Matrix Operations**
+  - [ ] 3.3.1: Matrix creation and inspection (4x4, 3x3, 2x2)
+  - [ ] 3.3.2: Matrix equality comparison
+  - [ ] 3.3.3: Multiply two 4x4 matrices
+  - [ ] 3.3.4: Multiply a matrix by a tuple
+  - [ ] 3.3.5: Implement identity matrix (multiplication and transposition)
+  - [ ] 3.3.6: Transpose a matrix
+  - [ ] 3.3.7: Calculate the determinant of a 2x2 matrix
+  - [ ] 3.3.8: Extract submatrices (from 3x3 and 4x4)
+  - [ ] 3.3.9: Calculate minors
+  - [ ] 3.3.10: Calculate cofactors
+  - [ ] 3.3.11: Calculate determinants of 3x3 and 4x4 matrices
+  - [ ] 3.3.12: Test matrix invertibility
+  - [ ] 3.3.13: Matrix inversion (using cofactor expansion)
 
 ## Core Raytracing Engine
 - [ ] **Viewport Setup**

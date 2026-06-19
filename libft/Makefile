@@ -42,19 +42,19 @@ $(NAME): $(O_FILES)
 	@ar rcs $(NAME) $(O_FILES)
 
 bonus: $(O_FILES) $(O_BONUS)
-	@echo "Creating libft library..."
+	@echo "[ARCHIVE] Creating libft.a"
 	@ar rcs $(NAME) $(O_FILES) $(O_BONUS)
 
 %.o: %.c
-	@echo "Compiling $<..."
+	@echo "[COMPILE] $<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "Deleting object files in libft..."
+	@echo "[DELETE] Removing object files in libft"
 	@rm -f $(O_FILES) $(O_BONUS)
 
 fclean: clean
-	@echo "Deleting all binaries in libft..."
+	@echo "[DELETE] Removing all binaries in libft"
 	@rm -f $(NAME)
 
 re: fclean all

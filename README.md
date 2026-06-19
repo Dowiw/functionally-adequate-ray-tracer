@@ -45,5 +45,5 @@ Run the following command to generate/update the compilation database:
 ```bash
 make clean && bear -- make
 # Or simply:
-bear -- make re -o .configs/compile_commands.json
+bear -- make re --output .configs/compile_commands.json
 ```
