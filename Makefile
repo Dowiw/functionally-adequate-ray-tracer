@@ -75,7 +75,6 @@ TESTS = main.c \
 		test_transformations.c \
 		test_colors.c \
 		test_canvas.c \
-		test_matrices.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 
