@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 17:35:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 19:55:17 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/19 10:41:37 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	matrix_submatrix(double *result, double *matrix, int row, int column
 			{
 				if (c != column)
 				{
-					result[r2 * size + c2] = matrix[r * size + c];
+					result[r2 * (size - 1) + c2] = matrix[r * size + c];
 					c2++;
 				}
 				c++;
