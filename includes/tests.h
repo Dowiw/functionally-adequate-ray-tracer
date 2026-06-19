@@ -35,4 +35,10 @@ int	test_matrix_minor(void);
 int	test_matrix_cofactor(void);
 int	test_matrix_inverse(void);
 
+int	test_translation(void);
+int	test_scaling(void);
+int	test_rotation(void);
+int	test_shearing(void);
+int	test_chaining(void);
+
 #endif
