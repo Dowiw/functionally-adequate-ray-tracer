@@ -18,6 +18,8 @@ int	main(void)
 {
 	t_test_suite	*suites = NULL;
 	t_test_suite	*tuple_suite;
+	t_test_suite	*color_suite;
+	t_test_suite	*canvas_suite;
 	t_test_suite	*matrices_suite;
 	t_test_suite	*transformations_suite;
 
@@ -37,8 +39,19 @@ int	main(void)
 	load_test(tuple_suite, "Tuple Dot Product", &test_tuple_dot);
 	load_test(tuple_suite, "Tuple Cross Product", &test_tuple_cross);
 
-	matrices_suite = load_suite(&suites, "Matrices Suite");
+	color_suite = load_suite(&suites, "Colors Suite");
+	load_test(color_suite, "Color Initialization", &test_color);
+	load_test(color_suite, "Color Addition", &test_color_add);
+	load_test(color_suite, "Color Subtraction", &test_color_sub);
+	load_test(color_suite, "Color Scalar Multiplication", &test_color_mult_scalar);
+	load_test(color_suite, "Color Multiplication (Hadamard)", &test_color_mult);
 
+	canvas_suite = load_suite(&suites, "Canvas Suite");
+	load_test(canvas_suite, "Canvas Initialization", &test_canvas);
+	load_test(canvas_suite, "Canvas Utilities", &test_canvas_place);
+	load_test(canvas_suite, "Canvas to PPM", &test_canvas_ppm);
+
+	matrices_suite = load_suite(&suites, "Matrices Suite");
 	load_test(matrices_suite, "Main Matrix Functionality", &test_matrix_values);
 	load_test(matrices_suite, "Matrix Identities", &test_matrix_identity);
 	load_test(matrices_suite, "Matrix Comparison", &test_matrix_compare);

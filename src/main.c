@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "parsing.h"
 #include "scene.h"
+#include <stdio.h>
 
 static int	error(char *msg);
 

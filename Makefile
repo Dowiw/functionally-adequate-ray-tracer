@@ -29,6 +29,8 @@ HEADERS = minirt.h \
 
 SOURCE_DIR = src
 SOURCES = main.c \
+	graphics/init_mlx.c \
+	graphics/canvas.c \
 	matrices/matrix_cofactor.c \
 	matrices/matrix_compare.c \
 	matrices/matrix_determinant.c \
@@ -62,14 +64,18 @@ SOURCES = main.c \
 	util/arrays/cylinders/cylinders1.c \
 	util/arrays/planes/planes1.c \
 	util/arrays/spheres/spheres1.c \
+	util/colors/colors_util.c \
 	util/colors/colors1.c \
-	util/strings/strings1.c
+	util/strings/strings1.c \
 
 TEST_DIR = tests
 TESTS = main.c \
 		test_tuples.c \
 		test_matrices.c \
-		test_transformations.c
+		test_transformations.c \
+		test_colors.c \
+		test_canvas.c \
+		test_matrices.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 
@@ -90,7 +96,7 @@ BUILD_DIR = ./build
 OBJECT_FILES = $(SOURCES:%.c=$(BUILD_DIR)/src/%.o)
 TEST_OBJS = $(TESTS:%.c=$(BUILD_DIR)/tests/%.o)
 
-all: $(LIBFT) $(MLX_DIR)/libmlx.a $(NAME)
+all: $(NAME)
 
 $(MLX_DIR):
 	git clone $(MLX_REPO) $(MLX_DIR)
@@ -109,7 +115,7 @@ $(LIBUNIT):
 	@echo "[MAKE] libunit/framework"
 	@$(MAKE) -C libunit/framework > /dev/null
 
-$(NAME): $(OBJECT_FILES)
+$(NAME): $(LIBFT) $(MLX_DIR)/libmlx.a $(OBJECT_FILES)
 	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_LINKS) -o $(NAME)
 
 $(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c
@@ -120,11 +126,11 @@ $(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c
 $(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c | $(LIBUNIT)
 	@mkdir -p $(dir $@)
 	@echo "[COMPILE TEST]: $<"
-	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) -I libunit/framework/inc
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) -Ilibunit/framework/inc
 
-test: $(LIBFT) $(LIBUNIT) $(TEST_OBJS) $(OBJECT_FILES)
+test: $(LIBFT) $(LIBUNIT) $(TEST_OBJS) $(OBJECT_FILES) $(MLX_DIR)/libmlx.a
 	@echo "[LINK] test_bin"
-	@$(CC) $(CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)/src/main.o, $(OBJECT_FILES)) $(LIBFT) -I libunit/framework/inc -L libunit/framework -lunit -lm -o test_bin
+	@$(CC) $(CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)/src/main.o, $(OBJECT_FILES)) $(LIBFT) $(MLX_LINKS) -Ilibunit/framework/inc -Llibunit/framework -lunit -lm -o test_bin
 	@echo "--- RUNNING TESTS ---"
 	@./test_bin
 

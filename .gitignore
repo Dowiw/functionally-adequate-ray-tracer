@@ -8,12 +8,11 @@ test_bin
 notes.md
 .clangd
 .clang-format
-compile_commands.json
 
 # directories
 mlx/
 build/
 .cache/
-.vscode/
 .configs/
+.vscode/
 fun/

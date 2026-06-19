@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
-#define MINIRT_H
+# define MINIRT_H
 
 # ifndef UNIT_EPSILON
 #  define UNIT_EPSILON 0.00001
@@ -21,15 +21,65 @@
 # define POINT 1.0
 # define INVALID_NEG -1.0
 # define INVALID_POS 2.0
+# define COLOR 3.0
 
 #define PI 3.14159265358979323846
 
-typedef struct s_tuple {
-	double	x;
-	double	y;
-	double	z;
-	double	w;
+# ifndef WIN_W
+#  define WIN_W 1920
+# endif
+
+# ifndef WIN_H
+#  define WIN_H 1080
+# endif
+
+/**
+ * @brief Dynamic structure that represents a lot of things
+ * from coordinates to colors.
+ */
+typedef struct s_tuple
+{
+	double	x; // x-coordinate, red
+	double	y; // y-coordinate, green
+	double	z; // z-coordinate, blue
+	double	w; // type, extra value
 }	t_tuple;
+
+/**
+ * @brief Structure for a canvas.
+ * Allocates pixels in memory (width * height).
+ */
+typedef struct s_canvas
+{
+	int		width; // width of canvas
+	int		height; // height of canvas
+	t_tuple	*pixels; // 1D array of (width * height) representing colors
+}	t_canvas;
+
+/**
+ * @brief Structure for mlx data
+ */
+typedef struct s_mlx
+{
+	void	*mlx_ptr; // pointer to mlx lib that allocates a XWindow Display
+	void	*win_ptr; // pointer to window allocated
+	void	*img_ptr; // pointer to image buffer
+	char	*img_data; // pointer to same img but as characters
+	int		bpp; // bits per pixel
+	int		size_line; // size of each line of pixes
+	int		endian; // endian necessary for alignment
+}	t_mlx;
+
+/**
+ * @brief Data structure for fdf data
+ * 
+ * @param mlx mlx structure
+ * @param ...
+ */
+typedef struct s_data
+{
+	t_mlx		mlx;
+}	t_data;
 
 typedef t_tuple t_point;
 
@@ -60,6 +110,29 @@ t_tuple	tuples_sub(const t_tuple a, const t_tuple b);
 t_tuple	tuple_neg(const t_tuple a);
 t_tuple	tuple_mult(const t_tuple a, const double scalar);
 t_tuple	tuple_div(const t_tuple a, const double scalar);
+
+/** ######################################################################### *
+ *  COLORS                                                                  # *
+ *  ######################################################################### */
+
+t_tuple	shur_prod(const t_tuple color_a, const t_tuple color_b);
+int		clamp_color(double color);
+
+/** ######################################################################### *
+ *  GRAPHICS                                                                # *
+ *  ######################################################################### */
+
+int		init_mlx_lib(t_mlx *mlx);
+void	init_mlx(t_mlx *mlx);
+
+int		canvas_create(t_canvas *canvas, int width, int height);
+void	write_pixel(t_canvas *canvas, int x, int y, t_tuple color);
+t_tuple	view_pixel(t_canvas *canvas, int x, int y);
+char	*canvas_to_ppm(t_canvas *canvas);
+
+/** ######################################################################### *
+ *  MATRICES                                                                # *
+ *  ######################################################################### */
 
 typedef struct s_matrix2x2 {
 	double	m[2][2];
