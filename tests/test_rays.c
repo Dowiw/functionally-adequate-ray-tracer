@@ -90,3 +90,23 @@ int	test_ray_intersect(void)
 
 	return (0);
 }
+
+int	test_aggregating_intersections(void)
+{
+	t_sphere		s;
+	t_intersection	i1;
+	t_intersection	i2;
+	t_intersections	xs;
+
+	s = sphere_create();
+	i1 = intersection(1.0, &s);
+	i2 = intersection(2.0, &s);
+	xs = intersections(2, i1, i2);
+	UNIT_ASSERT_EQ(xs.count, 2);
+	UNIT_ASSERT_FEQ(xs.list[0].t, 1.0);
+	UNIT_ASSERT_FEQ(xs.list[1].t, 2.0);
+	UNIT_ASSERT_EQ(xs.list[0].obj, &s);
+	UNIT_ASSERT_EQ(xs.list[1].obj, &s);
+	free(xs.list);
+	return (0);
+}

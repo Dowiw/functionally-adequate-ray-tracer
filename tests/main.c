@@ -76,6 +76,7 @@ int	main(void)
 	load_test(rays_suite, "Basic Ray Functionality", &test_ray);
 	load_test(rays_suite, "Ray Position", &test_ray_pos);
 	load_test(rays_suite, "Ray Intersection", &test_ray_intersect);
+	load_test(rays_suite, "Aggregating Intersections", &test_aggregating_intersections);
 
 	return (launch_tests(&suites));
 }

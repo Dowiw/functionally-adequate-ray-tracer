@@ -14,7 +14,7 @@
 #include "scene.h"
 #include <math.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdarg.h>
 
 /**
  * @brief Calculate the position of a ray based on time
@@ -30,8 +30,8 @@ t_point	position(t_ray ray, double time)
 
 /**
  * @brief Find the intersections of a ray to a sphere.
+ * Most explanations can be found in `./NOTES.md`
  *
- * 
  * @param s 
  * @param r 
  * @return t_intersect 
@@ -66,4 +66,51 @@ t_intersect	intersect(t_sphere s, t_ray r)
 		}
 	}
 	return (intersection);
+}
+
+/**
+ * @brief Create a single intersection structure.
+ * 
+ * @param t distance parameter
+ * @param obj pointer to the sphere hit
+ * @return t_intersection the single intersection structure
+ */
+t_intersection	intersection(double t, struct s_sphere *obj)
+{
+	t_intersection	i;
+
+	i.t = t;
+	i.obj = obj;
+	return (i);
+}
+
+/**
+ * @brief Aggregate multiple intersections into a single collection structure.
+ * 
+ * @param count the number of intersections to aggregate
+ * @param ... the intersection structures to aggregate
+ * @return t_intersections the collection containing the aggregated intersections
+ */
+t_intersections	intersections(unsigned int count, ...)
+{
+	va_list			args;
+	t_intersections	xs;
+	unsigned int	i;
+
+	xs.count = count;
+	xs.list = malloc(sizeof(t_intersection) * count);
+	if (!xs.list)
+	{
+		xs.count = 0;
+		return (xs);
+	}
+	va_start(args, count);
+	i = 0;
+	while (i < count)
+	{
+		xs.list[i] = va_arg(args, t_intersection);
+		i++;
+	}
+	va_end(args);
+	return (xs);
 }
