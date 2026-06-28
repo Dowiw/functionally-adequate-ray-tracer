@@ -12,7 +12,6 @@
 
 #include "minirt.h"
 #include "scene.h"
-
 #include <float.h>
 #include <limits.h>
 #include <math.h>
@@ -149,3 +148,5 @@ t_intersection	hit(t_intersections *intersections)
 	}
 	return (inter);
 }
+
+

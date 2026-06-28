@@ -41,11 +41,10 @@ int test_ray_pos(void) {
 	return 0;
 }
 
-int	test_ray_intersect(void)
-{
-	t_sphere	s = sphere_create();
-	t_ray		r;
-	t_intersections	xs;
+int test_ray_intersect(void) {
+	t_sphere s = sphere_create();
+	t_ray r;
+	t_intersections xs;
 
 	// Scenario 0: A ray intersects a sphere at two points
 	r.origin = (t_point){0, 0, -5, POINT};
@@ -54,7 +53,7 @@ int	test_ray_intersect(void)
 	UNIT_ASSERT_EQ(xs.count, 2);
 	UNIT_ASSERT_FEQ(xs.list[0].t, 4.0);
 	UNIT_ASSERT_FEQ(xs.list[1].t, 6.0);
-	
+
 	// Scenario 1: A ray intersects a sphere at a tangent
 	r.origin = (t_point){0, 1, -5, POINT};
 	r.direction = (t_vector){0, 0, 1, VECTOR};
@@ -92,12 +91,11 @@ int	test_ray_intersect(void)
 	return (0);
 }
 
-int	test_aggregating_intersections(void)
-{
-	t_sphere		s;
-	t_intersection	i1;
-	t_intersection	i2;
-	t_intersections	xs;
+int test_aggregating_intersections(void) {
+	t_sphere s;
+	t_intersection i1;
+	t_intersection i2;
+	t_intersections xs;
 
 	s = sphere_create();
 	i1 = intersection(1.0, &s);
@@ -110,10 +108,7 @@ int	test_aggregating_intersections(void)
 	UNIT_ASSERT_EQ(xs.list[1].obj, &s);
 	free(xs.list);
 
-	t_ray r = { 
-		.origin = {0, 0, -5, POINT}, 
-		.direction = {0, 0, 1, VECTOR}
-	};
+	t_ray r = {.origin = {0, 0, -5, POINT}, .direction = {0, 0, 1, VECTOR}};
 	t_sphere s1 = sphere_create();
 	t_intersections xS = intersect(&s1, r);
 	UNIT_ASSERT_EQ(xS.count, 2);
@@ -123,13 +118,12 @@ int	test_aggregating_intersections(void)
 	return (0);
 }
 
-int test_hit(void)
-{
-	t_sphere	s;
-	t_intersection	i1;
-	t_intersection	i2;
-	t_intersections	xS;
-	t_intersection	i;
+int test_hit(void) {
+	t_sphere s;
+	t_intersection i1;
+	t_intersection i2;
+	t_intersections xS;
+	t_intersection i;
 
 	s = sphere_create();
 	i1 = intersection(1.0, &s);
@@ -156,9 +150,9 @@ int test_hit(void)
 	UNIT_ASSERT_EQ(NULL, i.obj);
 	UNIT_ASSERT_FEQ(0.0, i.t);
 
-	t_intersection	i3;
-	t_intersection	i4;
-	
+	t_intersection i3;
+	t_intersection i4;
+
 	i1 = intersection(5.0, &s);
 	i2 = intersection(7.0, &s);
 	i3 = intersection(-3.0, &s);
@@ -168,6 +162,43 @@ int test_hit(void)
 
 	UNIT_ASSERT_EQ(i4.obj, i.obj);
 	UNIT_ASSERT_FEQ(i4.t, i.t);
+
+	return (0);
+}
+
+int	test_ray_transform(void)
+{
+	t_ray		r1;
+	t_ray		r2;
+	t_ray		t1;
+	t_ray		t2;
+	t_matrix4x4	m1;
+	t_matrix4x4	m2;
+	t_point		expected_origin1 = {4, 6, 8, POINT};
+	t_vector	expected_direction1 = {0, 1, 0, VECTOR};
+	t_point		expected_origin2 = {2, 6, 12, POINT};
+	t_vector	expected_direction2 = {0, 3, 0, VECTOR};
+
+	r1 = (t_ray){
+		.origin = {1, 2, 3, POINT},
+		.direction = {0, 1, 0, VECTOR}
+	};
+
+	m1 = matrix4x4_translation(3, 4, 5);
+	t1 = transform(r1, m1);
+
+	UNIT_ASSERT_EQ(compare_tuples(&(t1.origin), &expected_origin1), 0);
+	UNIT_ASSERT_EQ(compare_tuples(&(t1.direction), &expected_direction1), 0);
+
+	r2 = (t_ray){
+		.origin = {1, 2, 3, POINT},
+		.direction = {0, 1, 0, VECTOR}
+	};
+	m2 = matrix4x4_scaling(2, 3, 4);
+	t2 = transform(r2, m2);
+
+	UNIT_ASSERT_EQ(compare_tuples(&(t2.origin), &expected_origin2), 0);
+	UNIT_ASSERT_EQ(compare_tuples(&(t2.direction), &expected_direction2), 0);
 
 	return (0);
 }

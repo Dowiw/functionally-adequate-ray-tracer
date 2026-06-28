@@ -240,5 +240,6 @@ t_point	position(t_ray ray, double time);
 t_intersection	intersection(double t, struct s_sphere *obj);
 t_intersections	intersections(unsigned int count, ...);
 t_intersection	hit(t_intersections *intersections);
+t_ray			transform(t_ray r, t_matrix4x4 m);
 
 #endif

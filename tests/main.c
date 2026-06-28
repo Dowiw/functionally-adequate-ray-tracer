@@ -78,7 +78,7 @@ int	main(void)
 	load_test(rays_suite, "Ray Intersection", &test_ray_intersect);
 	load_test(rays_suite, "Aggregating Intersections", &test_aggregating_intersections);
 	load_test(rays_suite, "Hit Detection", &test_hit);
+	load_test(rays_suite, "Ray Transformation", &test_ray_transform);
 
-	
 	return (launch_tests(&suites));
 }

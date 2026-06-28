@@ -61,6 +61,7 @@ SOURCES = main.c \
 	parsing/parsing.c \
 	scene/scene.c \
 	scene/rays/ray_utils.c \
+	scene/rays/ray_transform.c \
 	util/arrays/arrays1.c \
 	util/arrays/cylinders/cylinders1.c \
 	util/arrays/planes/planes1.c \
