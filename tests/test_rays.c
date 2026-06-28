@@ -1,9 +1,11 @@
+#include "../includes/scene.h"
+#include "../includes/util/spheres.h"
 #include "libunit_assert.h"
 #include "minirt.h"
 #include "scene.h"
 #include "util/spheres.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int test_ray(void) {
 	t_ray r;
@@ -117,6 +119,55 @@ int	test_aggregating_intersections(void)
 	UNIT_ASSERT_EQ(xS.count, 2);
 	UNIT_ASSERT_EQ(xS.list[0].obj, &s1);
 	UNIT_ASSERT_EQ(xS.list[1].obj, &s1);
+
+	return (0);
+}
+
+int test_hit(void)
+{
+	t_sphere	s;
+	t_intersection	i1;
+	t_intersection	i2;
+	t_intersections	xS;
+	t_intersection	i;
+
+	s = sphere_create();
+	i1 = intersection(1.0, &s);
+	i2 = intersection(2.0, &s);
+	xS = intersections(2, i1, i2);
+	i = hit(&xS);
+
+	UNIT_ASSERT_EQ(i1.obj, i.obj);
+	UNIT_ASSERT_FEQ(i1.t, i.t);
+
+	i1 = intersection(-1.0, &s);
+	i2 = intersection(1.0, &s);
+	xS = intersections(2, i1, i2);
+	i = hit(&xS);
+
+	UNIT_ASSERT_EQ(i2.obj, i.obj);
+	UNIT_ASSERT_FEQ(i2.t, i.t);
+
+	i1 = intersection(-2.0, &s);
+	i2 = intersection(-1.0, &s);
+	xS = intersections(2, i1, i2);
+	i = hit(&xS);
+
+	UNIT_ASSERT_EQ(NULL, i.obj);
+	UNIT_ASSERT_FEQ(0.0, i.t);
+
+	t_intersection	i3;
+	t_intersection	i4;
+	
+	i1 = intersection(5.0, &s);
+	i2 = intersection(7.0, &s);
+	i3 = intersection(-3.0, &s);
+	i4 = intersection(2.0, &s);
+	xS = intersections(4, i1, i2, i3, i4);
+	i = hit(&xS);
+
+	UNIT_ASSERT_EQ(i4.obj, i.obj);
+	UNIT_ASSERT_FEQ(i4.t, i.t);
 
 	return (0);
 }

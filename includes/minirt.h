@@ -84,8 +84,7 @@ typedef struct s_intersection
 }	t_intersection;
 
 /**
- * @brief 
- * 
+ * @brief Struct that contains a list of t_intersection
  */
 typedef struct s_intersections
 {
@@ -240,5 +239,6 @@ t_matrix4x4	matrix4x4_shearing(double xy, double xz, double yx, double yz, doubl
 t_point	position(t_ray ray, double time);
 t_intersection	intersection(double t, struct s_sphere *obj);
 t_intersections	intersections(unsigned int count, ...);
+t_intersection	hit(t_intersections *intersections);
 
 #endif

@@ -45,5 +45,6 @@ int	test_ray(void);
 int	test_ray_pos(void);
 int	test_ray_intersect(void);
 int	test_aggregating_intersections(void);
+int	test_hit(void);
 
 #endif

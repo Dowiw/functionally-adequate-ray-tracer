@@ -12,9 +12,12 @@
 
 #include "minirt.h"
 #include "scene.h"
+
+#include <float.h>
+#include <limits.h>
 #include <math.h>
-#include <stdlib.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 /**
  * @brief Calculate the position of a ray based on time
@@ -115,4 +118,34 @@ t_intersections	intersect(struct s_sphere *s, t_ray r)
 		}
 	}
 	return (intersections);
+}
+
+/**
+ * @brief
+ *
+ * @return
+ */
+t_intersection	hit(t_intersections *intersections)
+{
+	double			t;
+	unsigned int	i;
+	t_intersection	inter;
+
+	i = 0;
+	t = DBL_MAX;
+	inter.t = 0.0;
+	inter.obj = NULL;
+	while (i < intersections->count)
+	{
+		if (intersections->list[i].t < 0.0)
+			i++;
+		else if (intersections->list[i].t < t)
+		{
+			inter = intersections->list[i];
+			t = inter.t;
+		}
+		else
+			i++;
+	}
+	return (inter);
 }
