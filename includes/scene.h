@@ -70,6 +70,6 @@ int		init_scene(t_scene *scene);
 
 void	destroy_scene(t_scene *scene);
 
-t_intersect	intersect(t_sphere s, t_ray r);
+t_intersections	intersect(t_sphere *s, t_ray r);
 
 #endif

@@ -20,14 +20,14 @@ library.
 - [x] **Makefile Creation**
   - [x] 1.1.1: Define compiler (`cc`) and mandatory flags (`-Wall -Wextra -Werror`).
   - [x] 1.1.2: Add library flags for Math (`-lm`) and MLX (e.g., `-lmlx -lXext -lX11` for Linux or framework flags for macOS).
-  - [ ] 1.1.3: Implement `all`, `clean`, `fclean`, `re`, and `bonus` optionally.
+  - [X] 1.1.3: Implement `all`, `clean`, `fclean`, `re`, and `bonus` optionally.
 - [x] **Core Data Structures (Headers)**
   - [x] 1.2.1: Define 3D vector struct (x, y, z floats/doubles).
 	- t_tuple is defined.
 
-  - [ ] 1.2.2: Define Ray struct (origin, direction).
+  - [X] 1.2.2: Define Ray struct (origin, direction).
   - [x] 1.2.3: Define Color struct (r, g, b integers or floats).
-  - [ ] 1.2.4: Define Camera struct (origin, orientation, FOV).
+  - [X] 1.2.4: Define Camera struct (origin, orientation, FOV).
   - [x] 1.2.5: Define Light & Ambient structs.
   - [x] 1.2.6: Define Object struct (enum for type: SPHERE/PLANE/CYLINDER, and union/fields for specific properties).
   - [x] 1.2.7: Define Scene struct (holds camera, lights, and a linked list of Object).
@@ -52,7 +52,7 @@ library.
   - [ ] 2.4.2: On any parsing failure, print `Error\n` followed by a specific message (e.g., "Error\nInvalid RGB range for Sphere").
 
 ## Mathematics Library
-- [ ] **Basic Tuple Operations**
+- [X] **Basic Tuple Operations**
   - [x] 3.1.1: Doubles comparison function
   - [x] 3.1.2: Tuples comparison function
   - [x] 3.1.3: Tuple addition
@@ -64,22 +64,22 @@ library.
   - [x] 3.1.9: Calculate normalized vector
   - [x] 3.1.10: Calculate dot product
   - [x] 3.1.11: Calculate cross product
-- [ ] **Color Operations**
-  - [ ] 3.2.1: hadamard_product (shur product)
-- [ ] **Matrix Operations**
-  - [ ] 3.3.1: Matrix creation and inspection (4x4, 3x3, 2x2)
-  - [ ] 3.3.2: Matrix equality comparison
-  - [ ] 3.3.3: Multiply two 4x4 matrices
-  - [ ] 3.3.4: Multiply a matrix by a tuple
-  - [ ] 3.3.5: Implement identity matrix (multiplication and transposition)
-  - [ ] 3.3.6: Transpose a matrix
-  - [ ] 3.3.7: Calculate the determinant of a 2x2 matrix
-  - [ ] 3.3.8: Extract submatrices (from 3x3 and 4x4)
-  - [ ] 3.3.9: Calculate minors
-  - [ ] 3.3.10: Calculate cofactors
-  - [ ] 3.3.11: Calculate determinants of 3x3 and 4x4 matrices
-  - [ ] 3.3.12: Test matrix invertibility
-  - [ ] 3.3.13: Matrix inversion (using cofactor expansion)
+- [X] **Color Operations**
+  - [X] 3.2.1: hadamard_product (shur product)
+- [X] **Matrix Operations**
+  - [X] 3.3.1: Matrix creation and inspection (4x4, 3x3, 2x2)
+  - [X] 3.3.2: Matrix equality comparison
+  - [X] 3.3.3: Multiply two 4x4 matrices
+  - [X] 3.3.4: Multiply a matrix by a tuple
+  - [X] 3.3.5: Implement identity matrix (multiplication and transposition)
+  - [X] 3.3.6: Transpose a matrix
+  - [X] 3.3.7: Calculate the determinant of a 2x2 matrix
+  - [X] 3.3.8: Extract submatrices (from 3x3 and 4x4)
+  - [X] 3.3.9: Calculate minors
+  - [X] 3.3.10: Calculate cofactors
+  - [X] 3.3.11: Calculate determinants of 3x3 and 4x4 matrices
+  - [X] 3.3.12: Test matrix invertibility
+  - [X] 3.3.13: Matrix inversion (using cofactor expansion)
 
 ## Core Raytracing Engine
 - [ ] **Viewport Setup**

@@ -43,50 +43,49 @@ int	test_ray_intersect(void)
 {
 	t_sphere	s = sphere_create();
 	t_ray		r;
-	t_intersect	xs;
+	t_intersections	xs;
 
 	// Scenario 0: A ray intersects a sphere at two points
 	r.origin = (t_point){0, 0, -5, POINT};
 	r.direction = (t_vector){0, 0, 1, VECTOR};
-	xs = intersect(s, r);
+	xs = intersect(&s, r);
 	UNIT_ASSERT_EQ(xs.count, 2);
-	UNIT_ASSERT_FEQ(xs.times[0], 4.0);
-	UNIT_ASSERT_FEQ(xs.times[1], 6.0);
+	UNIT_ASSERT_FEQ(xs.list[0].t, 4.0);
+	UNIT_ASSERT_FEQ(xs.list[1].t, 6.0);
 	
 	// Scenario 1: A ray intersects a sphere at a tangent
 	r.origin = (t_point){0, 1, -5, POINT};
 	r.direction = (t_vector){0, 0, 1, VECTOR};
-	xs = intersect(s, r);
+	xs = intersect(&s, r);
 	UNIT_ASSERT_EQ(xs.count, 2);
-	UNIT_ASSERT_FEQ(xs.times[0], 5.0);
-	UNIT_ASSERT_FEQ(xs.times[1], 5.0);
-	free(xs.times);
+	UNIT_ASSERT_FEQ(xs.list[0].t, 5.0);
+	UNIT_ASSERT_FEQ(xs.list[1].t, 5.0);
+	free(xs.list);
 
 	// Scenario 2: A ray misses a sphere
 	r.origin = (t_point){0, 2, -5, POINT};
 	r.direction = (t_vector){0, 0, 1, VECTOR};
-	xs = intersect(s, r);
+	xs = intersect(&s, r);
 	UNIT_ASSERT_EQ(xs.count, 0);
-	UNIT_ASSERT_EQ(xs.times, NULL);
-	free(xs.times);
+	UNIT_ASSERT_EQ(xs.list, NULL);
 
 	// Scenario 3: A ray originates inside a sphere
 	r.origin = (t_point){0, 0, 0, POINT};
 	r.direction = (t_vector){0, 0, 1, VECTOR};
-	xs = intersect(s, r);
+	xs = intersect(&s, r);
 	UNIT_ASSERT_EQ(xs.count, 2);
-	UNIT_ASSERT_FEQ(xs.times[0], -1.0);
-	UNIT_ASSERT_FEQ(xs.times[1], 1.0);
-	free(xs.times);
+	UNIT_ASSERT_FEQ(xs.list[0].t, -1.0);
+	UNIT_ASSERT_FEQ(xs.list[1].t, 1.0);
+	free(xs.list);
 
 	// Scenario 4: A sphere is behind a ray
 	r.origin = (t_point){0, 0, 5, POINT};
 	r.direction = (t_vector){0, 0, 1, VECTOR};
-	xs = intersect(s, r);
+	xs = intersect(&s, r);
 	UNIT_ASSERT_EQ(xs.count, 2);
-	UNIT_ASSERT_FEQ(xs.times[0], -6.0);
-	UNIT_ASSERT_FEQ(xs.times[1], -4.0);
-	free(xs.times);
+	UNIT_ASSERT_FEQ(xs.list[0].t, -6.0);
+	UNIT_ASSERT_FEQ(xs.list[1].t, -4.0);
+	free(xs.list);
 
 	return (0);
 }
@@ -108,5 +107,16 @@ int	test_aggregating_intersections(void)
 	UNIT_ASSERT_EQ(xs.list[0].obj, &s);
 	UNIT_ASSERT_EQ(xs.list[1].obj, &s);
 	free(xs.list);
+
+	t_ray r = { 
+		.origin = {0, 0, -5, POINT}, 
+		.direction = {0, 0, 1, VECTOR}
+	};
+	t_sphere s1 = sphere_create();
+	t_intersections xS = intersect(&s1, r);
+	UNIT_ASSERT_EQ(xS.count, 2);
+	UNIT_ASSERT_EQ(xS.list[0].obj, &s1);
+	UNIT_ASSERT_EQ(xS.list[1].obj, &s1);
+
 	return (0);
 }

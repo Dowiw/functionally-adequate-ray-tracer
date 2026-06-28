@@ -29,51 +29,11 @@ t_point	position(t_ray ray, double time)
 }
 
 /**
- * @brief Find the intersections of a ray to a sphere.
- * Most explanations can be found in `./NOTES.md`
- *
- * @param s 
- * @param r 
- * @return t_intersect 
- */
-t_intersect	intersect(t_sphere s, t_ray r)
-{
-	t_intersect	intersection;
-	t_tuple		sphere_to_ray;
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
-
-	sphere_to_ray = tuples_sub(r.origin, s.center);
-	a = dot_product(r.direction, r.direction);
-	b = 2 * dot_product(r.direction, sphere_to_ray);
-	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
-	discriminant = pow(b, 2.0) - 4 * a * c;
-	if (discriminant < 0)
-	{
-		intersection.count = 0;
-		intersection.times = NULL;
-	}
-	else
-	{
-		intersection.count = 2;
-		intersection.times = malloc(sizeof(double) * 2);
-		if (intersection.times)
-		{
-			intersection.times[0] = (-b - sqrt(discriminant)) / (2 * a);
-			intersection.times[1] = (-b + sqrt(discriminant)) / (2 * a);
-		}
-	}
-	return (intersection);
-}
-
-/**
- * @brief Create a single intersection structure.
+ * @brief Assign time and obj to an intersection struct
  * 
- * @param t distance parameter
- * @param obj pointer to the sphere hit
- * @return t_intersection the single intersection structure
+ * @param t time
+ * @param obj obj
+ * @return t_intersection the struct
  */
 t_intersection	intersection(double t, struct s_sphere *obj)
 {
@@ -113,4 +73,46 @@ t_intersections	intersections(unsigned int count, ...)
 	}
 	va_end(args);
 	return (xs);
+}
+
+/**
+ * @brief Find the intersections of a ray to a sphere.
+ * Most explanations can be found in `./NOTES.md`
+ *
+ * @param s sphere
+ * @param r ray
+ * @return t_intersections
+ */
+t_intersections	intersect(struct s_sphere *s, t_ray r)
+{
+	t_intersections	intersections;
+	t_tuple			sphere_to_ray;
+	double			a;
+	double			b;
+	double			c;
+	double			discriminant;
+
+	sphere_to_ray = tuples_sub(r.origin, (*s).center);
+	a = dot_product(r.direction, r.direction);
+	b = 2 * dot_product(r.direction, sphere_to_ray);
+	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
+	discriminant = pow(b, 2.0) - 4 * a * c;
+	if (discriminant < 0)
+	{
+		intersections.count = 0;
+		intersections.list = NULL;
+	}
+	else
+	{
+		intersections.count = 2;
+		intersections.list = malloc(sizeof(t_intersection) * 2);
+		if (intersections.list)
+		{
+			intersections.list[0].t = (-b - sqrt(discriminant)) / (2 * a);
+			intersections.list[0].obj = s;
+			intersections.list[1].t = (-b + sqrt(discriminant)) / (2 * a);
+			intersections.list[1].obj = s;
+		}
+	}
+	return (intersections);
 }
