@@ -93,10 +93,12 @@ t_intersections	intersect(struct s_sphere *s, t_ray r)
 	double			b;
 	double			c;
 	double			discriminant;
+	t_ray			local_ray;
 
-	sphere_to_ray = tuples_sub(r.origin, (*s).center);
-	a = dot_product(r.direction, r.direction);
-	b = 2 * dot_product(r.direction, sphere_to_ray);
+	local_ray = transform(r, matrix4x4_inverse(s->transform));
+	sphere_to_ray = tuples_sub(local_ray.origin, (*s).center);
+	a = dot_product(local_ray.direction, local_ray.direction);
+	b = 2 * dot_product(local_ray.direction, sphere_to_ray);
 	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
 	discriminant = pow(b, 2.0) - 4 * a * c;
 	if (discriminant < 0)

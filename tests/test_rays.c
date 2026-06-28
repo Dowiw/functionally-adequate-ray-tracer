@@ -202,3 +202,44 @@ int	test_ray_transform(void)
 
 	return (0);
 }
+
+int	test_sphere_ray_transform(void)
+{
+	t_sphere		s;
+	t_matrix4x4		identity;
+	t_matrix4x4		translation;
+	t_ray			r;
+	t_intersections	xs;
+
+	s = sphere_create();
+	identity = matrix4x4_identity();
+	UNIT_ASSERT_EQ(matrix4x4_compare(s.transform, identity), 0);
+
+	translation = matrix4x4_translation(2, 3, 4);
+	set_transform(&s, translation);
+	UNIT_ASSERT_EQ(matrix4x4_compare(s.transform, translation), 0);
+
+	r = (t_ray){
+		.origin = {0, 0, -5, POINT},
+		.direction = {0, 0, 1, VECTOR}
+	};
+	s = sphere_create();
+	set_transform(&s, matrix4x4_scaling(2, 2, 2));
+	xs = intersect(&s, r);
+	UNIT_ASSERT_EQ(xs.count, 2);
+	UNIT_ASSERT_FEQ(xs.list[0].t, 3.0);
+	UNIT_ASSERT_FEQ(xs.list[1].t, 7.0);
+	free(xs.list);
+
+	r = (t_ray){
+		.origin = {0, 0, -5, POINT},
+		.direction = {0, 0, 1, VECTOR}
+	};
+	s = sphere_create();
+	set_transform(&s, matrix4x4_translation(5, 0, 0));
+	xs = intersect(&s, r);
+	UNIT_ASSERT_EQ(xs.count, 0);
+	free(xs.list);
+
+	return (0);
+}

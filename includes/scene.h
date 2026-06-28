@@ -33,10 +33,11 @@ typedef struct s_light {
 }	t_light;
 
 typedef struct s_sphere {
-	t_point	center;
-	double	radius;
-	double	diameter;
-	int		color;
+	t_point		center;
+	t_matrix4x4	transform;
+	double		radius;
+	double		diameter;
+	int			color;
 }	t_sphere;
 
 typedef struct s_plane {
@@ -71,5 +72,6 @@ int		init_scene(t_scene *scene);
 void	destroy_scene(t_scene *scene);
 
 t_intersections	intersect(t_sphere *s, t_ray r);
+void			set_transform(t_sphere *s, t_matrix4x4 t);
 
 #endif

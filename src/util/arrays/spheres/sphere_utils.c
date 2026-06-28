@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minirt.h"
 #include "scene.h"
 #include "util/arrays.h"
 
@@ -18,6 +19,7 @@ t_sphere	sphere_create(void)
 	t_sphere	sphere;
 
 	sphere.center = (t_point){0, 0, 0, POINT};
+	sphere.transform = matrix4x4_identity();
 	sphere.radius = 1.0;
 	sphere.diameter = 0;
 	sphere.color = 0;
