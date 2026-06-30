@@ -23,6 +23,7 @@ int	main(void)
 	t_test_suite	*matrices_suite;
 	t_test_suite	*rays_suite;
 	t_test_suite	*transformations_suite;
+	t_test_suite	*light_shading_suite;
 
 	tuple_suite = load_suite(&suites, "Tuples Suite");
 	// parser_suite->setup = suite_setup;
@@ -80,6 +81,9 @@ int	main(void)
 	load_test(rays_suite, "Hit Detection", &test_hit);
 	load_test(rays_suite, "Ray Transformation", &test_ray_transform);
 	load_test(rays_suite, "Sphere Ray Transformation", &test_sphere_ray_transform);
+
+	light_shading_suite = load_suite(&suites, "Light and Shading Suite");
+	load_test(light_shading_suite, "Sphere Normalization", &test_sphere_normals);
 
 	return (launch_tests(&suites));
 }

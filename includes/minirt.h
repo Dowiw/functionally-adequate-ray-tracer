@@ -137,6 +137,11 @@ typedef struct s_data
 int		compare_doubles(const double a, const double b);
 int		compare_tuples(const t_tuple *a, const t_tuple *b);
 
+// tuple_constructs.c
+
+t_point		point(double x, double y, double z);
+t_vector	vector(double x, double y, double z);
+
 // tuple_utils.c
 
 double	calc_mag(const t_tuple a);

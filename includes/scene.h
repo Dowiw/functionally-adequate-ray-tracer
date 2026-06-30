@@ -73,5 +73,6 @@ void	destroy_scene(t_scene *scene);
 
 t_intersections	intersect(t_sphere *s, t_ray r);
 void			set_transform(t_sphere *s, t_matrix4x4 t);
+t_vector	normal_at(t_sphere *s, t_point p);
 
 #endif

@@ -49,4 +49,6 @@ int	test_hit(void);
 int	test_ray_transform(void);
 int	test_sphere_ray_transform(void);
 
+int	test_sphere_normals(void);
+
 #endif
