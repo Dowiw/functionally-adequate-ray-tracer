@@ -35,3 +35,18 @@ t_vector	normal_at(t_sphere *s, t_point p)
 	world_normal.w = VECTOR;
 	return (calc_norm(world_normal));
 }
+
+/**
+ * @brief Reflect the vector passed based on the normal given
+ *
+ * @param v vector
+ * @param n normal vector
+ * @return t_vector reflected vector
+ */
+t_vector	reflect(t_vector v, t_vector n)
+{
+	t_vector	r;
+
+	r = tuples_sub(v, tuple_mult(tuple_mult(n, 2), dot_product(v, n)));
+	return (r);
+}

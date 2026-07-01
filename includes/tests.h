@@ -51,5 +51,6 @@ int	test_sphere_ray_transform(void);
 
 int	test_sphere_normals(void);
 int	test_sphere_normal_transform(void);
+int	test_vector_reflection(void);
 
 #endif
