@@ -39,7 +39,7 @@ t_matrix4x4	matrix4x4_rotation_y(double radians)
 {
 	return ((t_matrix4x4){{
 		{cos(radians), 0.0, sin(radians), 0.0},
-		{0.0, 0.0, 0.0, 0.0},
+		{0.0, 1.0, 0.0, 0.0},
 		{-sin(radians), 0.0, cos(radians), 0.0},
 		{0.0, 0.0, 0.0, 1.0}
 	}});
@@ -56,7 +56,7 @@ t_matrix4x4	matrix4x4_rotation_z(double radians)
 	return ((t_matrix4x4){{
 		{cos(radians), -sin(radians), 0.0, 0.0},
 		{sin(radians), cos(radians), 0.0, 0.0},
-		{0.0, 0.0, 0.0, 0.0},
+		{0.0, 0.0, 1.0, 0.0},
 		{0.0, 0.0, 0.0, 1.0}
 	}});
 }
