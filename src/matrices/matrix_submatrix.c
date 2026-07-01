@@ -12,56 +12,59 @@
 
 #include "minirt.h"
 
-static void	matrix_submatrix(double *result, double *matrix, int row, int column, int size);
+static void	matrix_submatrix(double *res, double *mat, int *info);
 
 /*
- * Returns a new 2x2 submatrix of the given 'matrix' with the given 'row' and 'column' removed.
+ * Returns a new 2x2 submatrix of the given 'matrix' with the given 'row'
+ * and 'column' removed.
  */
 t_matrix2x2	matrix3x3_submatrix(t_matrix3x3 matrix, int row, int column)
 {
 	t_matrix2x2	result;
+	int			info[3];
 
-	matrix_submatrix(&result.m[0][0], &matrix.m[0][0], row, column, 3);
+	info[0] = row;
+	info[1] = column;
+	info[2] = 3;
+	matrix_submatrix(&result.m[0][0], &matrix.m[0][0], info);
 	return (result);
 }
 
 /*
- * Returns a new 3x3 submatrix of the given 'matrix' with the given 'row' and 'column' removed.
+ * Returns a new 3x3 submatrix of the given 'matrix' with the given 'row'
+ * and 'column' removed.
  */
 t_matrix3x3	matrix4x4_submatrix(t_matrix4x4 matrix, int row, int column)
 {
 	t_matrix3x3	result;
+	int			info[3];
 
-	matrix_submatrix(&result.m[0][0], &matrix.m[0][0], row, column, 4);
+	info[0] = row;
+	info[1] = column;
+	info[2] = 4;
+	matrix_submatrix(&result.m[0][0], &matrix.m[0][0], info);
 	return (result);
 }
 
-static void	matrix_submatrix(double *result, double *matrix, int row, int column, int size)
+static void	matrix_submatrix(double *res, double *mat, int *info)
 {
 	int	r;
 	int	c;
-	int	r2;
-	int	c2;
 
-	r = 0;
-	r2 = 0;
-	while (r < size)
+	r = -1;
+	while (++r < info[2])
 	{
-		if (r != row)
+		if (r != info[0])
 		{
-			c = 0;
-			c2 = 0;
-			while (c < size)
+			c = -1;
+			while (++c < info[2])
 			{
-				if (c != column)
+				if (c != info[1])
 				{
-					result[r2 * (size - 1) + c2] = matrix[r * size + c];
-					c2++;
+					res[(r - (r > info[0])) * (info[2] - 1)
+						+ (c - (c > info[1]))] = mat[r * info[2] + c];
 				}
-				c++;
 			}
-			r2++;
 		}
-		r++;
 	}
 }

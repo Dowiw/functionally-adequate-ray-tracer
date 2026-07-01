@@ -22,7 +22,7 @@
  * @param scene
  * @return returns 0 on fail, 1 on success
  */
-int		init_scene(t_scene *scene)
+int	init_scene(t_scene *scene)
 {
 	scene->cylinders = cylinders_create();
 	scene->planes = planes_create();
@@ -30,7 +30,16 @@ int		init_scene(t_scene *scene)
 	scene->has_ambience = 0;
 	scene->has_camera = 0;
 	scene->has_light = 0;
-	return (scene->cylinders != NULL && scene->planes != NULL && scene->spheres != NULL);
+	if (scene->cylinders == NULL || scene->planes == NULL
+		|| scene->spheres == NULL)
+	{
+		destroy_scene(scene);
+		scene->cylinders = NULL;
+		scene->planes = NULL;
+		scene->spheres = NULL;
+		return (0);
+	}
+	return (1);
 }
 
 /**

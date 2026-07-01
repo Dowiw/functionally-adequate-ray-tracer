@@ -39,3 +39,15 @@ void	set_transform(t_sphere *s, t_matrix4x4 t)
 {
 	s->transform = t;
 }
+
+/**
+ * @brief Calculate the position of a ray based on time
+ * 
+ * @param ray ray struct
+ * @param time time value
+ * @return t_point position of ray after time
+ */
+t_point	position(t_ray ray, double time)
+{
+	return (tuples_add(ray.origin, tuple_mult(ray.direction, time)));
+}

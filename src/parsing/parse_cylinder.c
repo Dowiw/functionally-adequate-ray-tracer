@@ -21,7 +21,8 @@ static int	parse_cylinder_error(t_cylinder *cylinder);
 /**
  * Parses the given 'params' and adds it to the scenes cylinders.
  * The expected format looks like this:
- *   cy <center> <vector> <diameter> <height> <color> (for example: cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255)
+ *   cy <center> <vector> <diameter> <height> <color>
+ *   (for example: cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255)
  * Returns true if the parsing was succesful.
  */
 int	parse_cylinder(t_scene *scene, char **params)

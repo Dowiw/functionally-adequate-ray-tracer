@@ -240,8 +240,7 @@ t_matrix4x4			matrix4x4_rotation_x(double radians);
 t_matrix4x4			matrix4x4_rotation_y(double radians);
 t_matrix4x4			matrix4x4_rotation_z(double radians);
 
-t_matrix4x4			matrix4x4_shearing(double xy, double xz, double yx,
-						double yz, double zx, double zy);
+t_matrix4x4			matrix4x4_shearing(double *params);
 
 /** ######################################################################### *
  *  RAYS                                                                    # *

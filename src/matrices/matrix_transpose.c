@@ -12,7 +12,8 @@
 
 #include "minirt.h"
 
-static void	matrix_transpose(double *result, double *matrix, int rows, int columns);
+static void	matrix_transpose(double *result, double *matrix, int rows,
+				int columns);
 
 /*
  * Returns the transposed version of the given 'matrix'.
@@ -53,7 +54,8 @@ t_matrix4x4	matrix4x4_transpose(t_matrix4x4 matrix)
 	return (result);
 }
 
-static void	matrix_transpose(double *result, double *matrix, int rows, int columns)
+static void	matrix_transpose(double *result, double *matrix, int rows,
+				int columns)
 {
 	int	r;
 	int	c;
