@@ -87,5 +87,9 @@ int	main(void)
 		&test_sphere_normal_transform);
 	load_test(light_shading_suite, "Vector Reflection",
 		&test_vector_reflection);
+	load_test(light_shading_suite, "Light Struct",
+		&test_light_struct);
+	load_test(light_shading_suite, "Sphere Material",
+		&test_sphere_material);
 	return (launch_tests(&suites));
 }

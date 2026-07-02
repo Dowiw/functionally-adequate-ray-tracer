@@ -141,6 +141,7 @@ int					compare_tuples(const t_tuple *a, const t_tuple *b);
 
 t_point				point(double x, double y, double z);
 t_vector			vector(double x, double y, double z);
+t_color				color(double x, double y, double z);
 
 // tuple_utils.c
 

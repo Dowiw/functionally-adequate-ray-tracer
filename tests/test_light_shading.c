@@ -66,3 +66,54 @@ int	test_vector_reflection(void)
 	UNIT_ASSERT_EQ(compare_tuples(&e1, &r1), 0);
 	return (0);
 }
+
+int	test_light_struct(void)
+{
+	t_color	intensity;
+	t_point	pos;
+	t_light	l;
+
+	intensity = color(1, 1, 1);
+	pos = point(0, 0, 0);
+	l.pos = pos;
+	l.intensity = intensity;
+	UNIT_ASSERT_EQ(compare_tuples(&l.pos, &pos), 0);
+	UNIT_ASSERT_EQ(compare_tuples(&l.intensity, &intensity), 0);
+	return (0);
+}
+
+int	compare_materials(const t_material *a, const t_material *b)
+{
+	if (compare_tuples(&a->color, &b->color) != 0)
+		return (1);
+	if (compare_doubles(a->ambient, b->ambient) != 0)
+		return (1);
+	if (compare_doubles(a->diffuse, b->diffuse) != 0)
+		return (1);
+	if (compare_doubles(a->specular, b->specular) != 0)
+		return (1);
+	if (compare_doubles(a->shininess, b->shininess) != 0)
+		return (1);
+	return (0);
+}
+
+int	test_sphere_material(void)
+{
+	t_material	m;
+	t_color		c;
+	t_sphere	s;
+
+	c = (t_color){.x = 1, .y = 1, .z = 1, .w = COLOR};
+	m = material();
+	UNIT_ASSERT_EQ(compare_tuples(&m.color, &c), 0);
+	UNIT_ASSERT_FEQ(m.ambient, 0.1);
+	UNIT_ASSERT_FEQ(m.diffuse, 0.9);
+	UNIT_ASSERT_FEQ(m.specular, 0.9);
+	UNIT_ASSERT_FEQ(m.shininess, 200.0);
+	s = sphere_create();
+	UNIT_ASSERT_EQ(compare_materials(&s.material, &m), 0);
+	m.ambient = 1.0;
+	s.material = m;
+	UNIT_ASSERT_FEQ(s.material.ambient, m.ambient);
+	return (0);
+}
