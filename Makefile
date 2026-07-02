@@ -68,8 +68,10 @@ SOURCES = main.c \
 	util/arrays/planes/planes1.c \
 	util/arrays/spheres/sphere_utils.c \
 	util/arrays/spheres/sphere_normal.c \
+	util/colors/colors_grayscale.c \
 	util/colors/colors_util.c \
 	util/colors/colors1.c \
+	util/lighting/lighting.c \
 	util/materials/materials.c \
 	util/strings/strings1.c 
 

@@ -162,8 +162,14 @@ t_tuple				tuple_div(const t_tuple a, const double scalar);
  *  COLORS                                                                  # *
  *  ######################################################################### */
 
+// colors_util.c
+
 t_tuple				shur_prod(const t_tuple color_a, const t_tuple color_b);
 int					clamp_color(double color);
+
+// colors_grayscale.c
+
+t_color				color_black(void);
 
 /** ######################################################################### *
  *  GRAPHICS                                                                # *

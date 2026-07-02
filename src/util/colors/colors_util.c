@@ -16,7 +16,7 @@
 /**
  * @brief Calculates the blending of two colors to form a new color
  * NOTE: Assumes the tuples are colors
- * 
+ *
  * @param color_a
  * @param color_b
  * @return resulting blended color
@@ -34,7 +34,7 @@ t_color	shur_prod(const t_color color_a, const t_color color_b)
 
 /**
  * @brief Clamps the double color into an integer
- * 
+ *
  * @param color color value
  * @return int color integer
  */

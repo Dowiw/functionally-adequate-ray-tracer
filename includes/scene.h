@@ -91,4 +91,9 @@ void			set_transform(t_sphere *s, t_matrix4x4 t);
 t_vector		normal_at(t_sphere *s, t_point p);
 t_material		material(void);
 
+t_light			light(t_point p, t_color c);
+
+t_color			lighting(t_material m, t_light l, t_point pos, t_vector eye,
+					t_vector norm);
+
 #endif
