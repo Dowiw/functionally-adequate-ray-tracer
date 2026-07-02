@@ -70,7 +70,8 @@ SOURCES = main.c \
 	util/arrays/spheres/sphere_normal.c \
 	util/colors/colors_util.c \
 	util/colors/colors1.c \
-	util/strings/strings1.c \
+	util/materials/materials.c \
+	util/strings/strings1.c 
 
 TEST_DIR = tests
 TESTS = main.c \
@@ -156,3 +157,13 @@ re: fclean all
 
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./$(NAME)
+
+bear:
+	@make clean
+	bear -- $(MAKE) all
+	bear --append -- $(MAKE) test
+	@mkdir -p .configs
+	mv compile_commands.json .configs/
+
+.PHONY: all clean fclean re test valgrind bear
+
