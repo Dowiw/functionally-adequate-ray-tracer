@@ -13,6 +13,7 @@
 #include "parsing.h"
 #include "scene.h"
 #include "util/arrays.h"
+#include "util/colors.h"
 
 /**
  * Parses the given 'params' to the given 'scene's light.
@@ -22,15 +23,22 @@
  */
 int	parse_light(t_scene *scene, char **params)
 {
+	double	brightness;
+	int		rgb_color;
+	t_color	intensity_color;
+
 	if (scene->has_light)
 		return (0);
 	if (array_len((void **) params) != 4)
 		return (0);
 	if (!parse_vec(&scene->light.pos, params[1]))
 		return (0);
-	if (!parse_double_range(&scene->light.brightness, params[2], 0.0, 1.0))
+	if (!parse_double_range(&brightness, params[2], 0.0, 1.0))
 		return (0);
-	if (!parse_color(&scene->light.color, params[3]))
+	if (!parse_color(&rgb_color, params[3]))
 		return (0);
+	intensity_color = color((double)red(rgb_color) / 255.0,
+			(double)green(rgb_color) / 255.0, (double)blue(rgb_color) / 255.0);
+	scene->light.intensity = tuple_mult(intensity_color, brightness);
 	return (1);
 }

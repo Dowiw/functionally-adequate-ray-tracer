@@ -104,3 +104,37 @@ The discriminant determines the number of intersection points:
 3. **$\Delta > 0$ (Positive)**:
    The ray intersects the sphere at two distinct points:
    $$t_1 = \frac{-b - \sqrt{\Delta}}{2a}, \quad t_2 = \frac{-b + \sqrt{\Delta}}{2a}$$
+
+---
+
+# Transforming Coordinates and Normals
+
+## 1. Object Space vs. World Space
+
+* **Object (Local) Space**: The canonical space where a 3D shape is defined at its simplest form. E.g., a sphere is centered at local $(0,0,0)$ with a radius of $1.0$.
+* **World Space**: The global scene space where the camera, lights, and final geometry reside.
+
+To bridge the two spaces, each object stores a **Transformation Matrix** ($M$):
+$$P_{\text{world}} = M \cdot P_{\text{local}}$$
+
+## 2. Ray-Object Intersection (World to Object Space)
+
+Rather than transforming simple shape geometries (like spheres) into complex world-space shapes (like skewed ellipsoids) to calculate intersections, we transform the ray into the object's local space:
+$$P_{\text{object}} = M^{-1} \cdot P_{\text{world}}$$
+
+This allows the intersection code in `intersect` to always run against a simple unit sphere centered at $(0, 0, 0)$.
+
+## 3. Surface Normals (Object to World Space)
+
+When calculating shading, we need the surface normal in **World Space**. However, we calculate it in **Object Space** first.
+
+We cannot use the standard transformation matrix $M$ to move the normal to world space because scaling and shearing distort the perpendicular angle of normal vectors. Instead, we use the **transpose of the inverse** of the object's transformation matrix:
+
+$$N_{\text{world}} = (M^{-1})^T \cdot N_{\text{object}}$$
+
+### The 5-Step Normal Calculation Recipe in `normal_at`:
+1. **Inverse-Transform the Point**: Multiply the world point $P_{\text{world}}$ by $M^{-1}$ to get $P_{\text{object}}$.
+2. **Compute Local Normal**: Subtract the local sphere center $(0,0,0)$ from $P_{\text{object}}$.
+3. **Transpose-Inverse-Transform the Normal**: Multiply $N_{\text{object}}$ by $(M^{-1})^T$ to get $N_{\text{world}}$.
+4. **Fix Vector Representation**: Force the $w$ component of the resulting tuple to `VECTOR` ($0.0$) to discard translation.
+5. **Normalize**: Normalize the final vector to unit length.

@@ -14,7 +14,7 @@
 
 /**
  * @brief Point constructor
- * 
+ *
  * @param x x
  * @param y y
  * @param z z
@@ -33,7 +33,7 @@ t_point	point(double x, double y, double z)
 
 /**
  * @brief Vector constructor
- * 
+ *
  * @param x x
  * @param y y
  * @param z z
@@ -48,4 +48,23 @@ t_vector	vector(double x, double y, double z)
 	v.z = z;
 	v.w = VECTOR;
 	return (v);
+}
+
+/**
+ * @brief Color constructor
+ *
+ * @param x x
+ * @param y y
+ * @param z z
+ * @return t_color color
+ */
+t_color	color(double x, double y, double z)
+{
+	t_color	c;
+
+	c.x = x;
+	c.y = y;
+	c.z = z;
+	c.w = COLOR;
+	return (c);
 }

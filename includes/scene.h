@@ -15,46 +15,61 @@
 
 # include "minirt.h"
 
-typedef struct s_ambience {
-	double	lighting;
-	int		color;
-}	t_ambience;
+typedef struct s_material
+{
+	t_color		color;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+}				t_material;
 
-typedef struct s_camera {
+typedef struct s_ambience
+{
+	double		lighting;
+	int			color;
+}				t_ambience;
+
+typedef struct s_camera
+{
 	t_point		pos;
 	t_vector	orientation;
 	double		fov;
-}	t_camera;
+}				t_camera;
 
-typedef struct s_light {
-	t_point	pos;
-	double	brightness;
-	int		color;
-}	t_light;
+typedef struct s_light
+{
+	t_point		pos;
+	t_color		intensity;
+}				t_light;
 
-typedef struct s_sphere {
+typedef struct s_sphere
+{
 	t_point		center;
+	t_material	material;
 	t_matrix4x4	transform;
 	double		radius;
 	double		diameter;
+}				t_sphere;
+
+typedef struct s_plane
+{
+	t_point		pos;
+	t_vector	vec;
 	int			color;
-}	t_sphere;
+}				t_plane;
 
-typedef struct s_plane {
-	t_point	pos;
+typedef struct s_cylinder
+{
+	t_point		center;
 	t_vector	vec;
-	int		color;
-}	t_plane;
+	double		diameter;
+	double		height;
+	int			color;
+}				t_cylinder;
 
-typedef struct s_cylinder {
-	t_point	center;
-	t_vector	vec;
-	double	diameter;
-	double	height;
-	int		color;
-}	t_cylinder;
-
-typedef struct s_scene {
+typedef struct s_scene
+{
 	t_ambience	ambience;
 	t_camera	camera;
 	t_light		light;
@@ -65,14 +80,20 @@ typedef struct s_scene {
 	int			has_ambience;
 	int			has_camera;
 	int			has_light;
-}	t_scene;
+}				t_scene;
 
-int		init_scene(t_scene *scene);
+int				init_scene(t_scene *scene);
 
-void	destroy_scene(t_scene *scene);
+void			destroy_scene(t_scene *scene);
 
 t_intersections	intersect(t_sphere *s, t_ray r);
 void			set_transform(t_sphere *s, t_matrix4x4 t);
-t_vector	normal_at(t_sphere *s, t_point p);
+t_vector		normal_at(t_sphere *s, t_point p);
+t_material		material(void);
+
+t_light			light(t_point p, t_color c);
+
+t_color			lighting(t_material m, t_light l, t_point pos, t_vector eye,
+					t_vector norm);
 
 #endif

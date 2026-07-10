@@ -13,7 +13,8 @@
 #include "minirt.h"
 
 /*
- * Returns the determinant of the 2x2 submatrix created by removing the given 'row' and 'column' from the given 'matrix'.
+ * Returns the determinant of the 2x2 submatrix created by removing the
+ * given 'row' and 'column' from the given 'matrix'.
  * See matrix3x3_submatrix and matrix2x2_determinant.
  */
 double	matrix3x3_minor(t_matrix3x3 matrix, int row, int column)
@@ -22,7 +23,8 @@ double	matrix3x3_minor(t_matrix3x3 matrix, int row, int column)
 }
 
 /*
- * Returns the determinant of the 3x3 submatrix created by removing the given 'row' and 'column' from the given 'matrix'.
+ * Returns the determinant of the 3x3 submatrix created by removing the
+ * given 'row' and 'column' from the given 'matrix'.
  * See matrix4x4_submatrix and matrix3x3_determinant.
  */
 double	matrix4x4_minor(t_matrix4x4 matrix, int row, int column)

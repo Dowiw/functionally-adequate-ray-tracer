@@ -12,9 +12,10 @@
 
 #include "libft/libft.h"
 
-static int parse_double_before_decimal(double *num, char *str, int *i, int sign);
-
-static int parse_double_after_decimal(double *num, char *str, int *i, int sign);
+static int	parse_double_before_decimal(double *num, char *str, int *i,
+				int sign);
+static int	parse_double_after_decimal(double *num, char *str, int *i,
+				int sign);
 
 /*
  * Parses the given string 'str' as a double.
@@ -48,14 +49,16 @@ int	parse_double(double *num, char *str)
 }
 
 /*
- * Parses the given 'str' (see parse_double) and checks the result against the given range 'min' and 'max'.
+ * Parses the given 'str' (see parse_double) and checks the result against the
+ * given range 'min' and 'max'.
  */
-int parse_double_range(double *num, char *str, double min, double max)
+int	parse_double_range(double *num, char *str, double min, double max)
 {
 	return (parse_double(num, str) && *num >= min && *num <= max);
 }
 
-static int parse_double_before_decimal(double *num, char *str, int *i, int sign)
+static int	parse_double_before_decimal(double *num, char *str, int *i,
+				int sign)
 {
 	*num = 0.0;
 	if (!ft_isdigit(str[*i]))
@@ -70,7 +73,8 @@ static int parse_double_before_decimal(double *num, char *str, int *i, int sign)
 	return (1);
 }
 
-static int parse_double_after_decimal(double *num, char *str, int *i, int sign)
+static int	parse_double_after_decimal(double *num, char *str, int *i,
+				int sign)
 {
 	long	divisor;
 
@@ -81,11 +85,9 @@ static int parse_double_after_decimal(double *num, char *str, int *i, int sign)
 	{
 		if (!ft_isdigit(str[*i]))
 			return (0);
-		*num = *num + (double) ((str[*i] - '0') * sign) / divisor;
+		*num = *num + (double)((str[*i] - '0') * sign) / divisor;
 		divisor *= 10;
 		*i += 1;
 	}
 	return (1);
 }
-
-

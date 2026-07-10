@@ -159,8 +159,14 @@ int	test_shearing(void)
 	t_tuple		point;
 	t_tuple		expected;
 	t_tuple		result;
+	double		p1[6] = {1.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+	double		p2[6] = {0.0, 1.0, 0.0, 0.0, 0.0, 0.0};
+	double		p3[6] = {0.0, 0.0, 1.0, 0.0, 0.0, 0.0};
+	double		p4[6] = {0.0, 0.0, 0.0, 1.0, 0.0, 0.0};
+	double		p5[6] = {0.0, 0.0, 0.0, 0.0, 1.0, 0.0};
+	double		p6[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
 
-	transform = matrix4x4_shearing(1.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+	transform = matrix4x4_shearing(p1);
 	point = (t_tuple){2.0, 3.0, 4.0, POINT};
 	expected = (t_tuple){5.0, 3.0, 4.0, POINT};
 
@@ -168,7 +174,7 @@ int	test_shearing(void)
 
 	UNIT_ASSERT_EQ(compare_tuples(&expected, &result), 0);
 
-	transform = matrix4x4_shearing(0.0, 1.0, 0.0, 0.0, 0.0, 0.0);
+	transform = matrix4x4_shearing(p2);
 	point = (t_tuple){2.0, 3.0, 4.0, POINT};
 	expected = (t_tuple){6.0, 3.0, 4.0, POINT};
 
@@ -176,7 +182,7 @@ int	test_shearing(void)
 
 	UNIT_ASSERT_EQ(compare_tuples(&expected, &result), 0);
 
-	transform = matrix4x4_shearing(0.0, 0.0, 1.0, 0.0, 0.0, 0.0);
+	transform = matrix4x4_shearing(p3);
 	point = (t_tuple){2.0, 3.0, 4.0, POINT};
 	expected = (t_tuple){2.0, 5.0, 4.0, POINT};
 
@@ -184,7 +190,7 @@ int	test_shearing(void)
 
 	UNIT_ASSERT_EQ(compare_tuples(&expected, &result), 0);
 
-	transform = matrix4x4_shearing(0.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+	transform = matrix4x4_shearing(p4);
 	point = (t_tuple){2.0, 3.0, 4.0, POINT};
 	expected = (t_tuple){2.0, 7.0, 4.0, POINT};
 
@@ -192,7 +198,7 @@ int	test_shearing(void)
 
 	UNIT_ASSERT_EQ(compare_tuples(&expected, &result), 0);
 
-	transform = matrix4x4_shearing(0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	transform = matrix4x4_shearing(p5);
 	point = (t_tuple){2.0, 3.0, 4.0, POINT};
 	expected = (t_tuple){2.0, 3.0, 6.0, POINT};
 
@@ -200,7 +206,7 @@ int	test_shearing(void)
 
 	UNIT_ASSERT_EQ(compare_tuples(&expected, &result), 0);
 
-	transform = matrix4x4_shearing(0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
+	transform = matrix4x4_shearing(p6);
 	point = (t_tuple){2.0, 3.0, 4.0, POINT};
 	expected = (t_tuple){2.0, 3.0, 7.0, POINT};
 

@@ -12,27 +12,18 @@
 
 #include "minirt.h"
 #include "scene.h"
-#include <float.h>
 #include <limits.h>
 #include <math.h>
 #include <stdarg.h>
 #include <stdlib.h>
 
-/**
- * @brief Calculate the position of a ray based on time
- * 
- * @param ray ray struct
- * @param time time value
- * @return t_point position of ray after time
- */
-t_point	position(t_ray ray, double time)
-{
-	return (tuples_add(ray.origin, tuple_mult(ray.direction, time)));
-}
+#ifndef DBL_MAX
+# define DBL_MAX 1.7976931348623157e+308
+#endif
 
 /**
  * @brief Assign time and obj to an intersection struct
- * 
+ *
  * @param t time
  * @param obj obj
  * @return t_intersection the struct
@@ -48,10 +39,12 @@ t_intersection	intersection(double t, struct s_sphere *obj)
 
 /**
  * @brief Aggregate multiple intersections into a single collection structure.
- * 
+ *
  * @param count the number of intersections to aggregate
  * @param ... the intersection structures to aggregate
- * @return t_intersections the collection containing the aggregated intersections
+
+ * @return t_intersections the collection containing the
+ * aggregated intersections
  */
 t_intersections	intersections(unsigned int count, ...)
 {
@@ -78,6 +71,33 @@ t_intersections	intersections(unsigned int count, ...)
 }
 
 /**
+ * @brief Assign the variables of the intersection struct.
+ * This is where interects in time is assigned for a sphere.
+ *
+ * @param xs the struct
+ * @param abc the a, b, c variables for the dot dot_product
+ * @param dis
+ * @param s sphere struct
+ *
+ * @return returns NULL if malloc fail
+ */
+static void	set_roots(t_intersections *xs, double *abc, double dis,
+		struct s_sphere *s)
+{
+	xs->count = 2;
+	xs->list = malloc(sizeof(t_intersection) * 2);
+	if (!xs->list)
+	{
+		xs->count = 0;
+		return ;
+	}
+	xs->list[0].t = (-abc[1] - sqrt(dis)) / (2 * abc[0]);
+	xs->list[0].obj = s;
+	xs->list[1].t = (-abc[1] + sqrt(dis)) / (2 * abc[0]);
+	xs->list[1].obj = s;
+}
+
+/**
  * @brief Find the intersections of a ray to a sphere.
  * Most explanations can be found in `./NOTES.md`
  *
@@ -87,44 +107,32 @@ t_intersections	intersections(unsigned int count, ...)
  */
 t_intersections	intersect(struct s_sphere *s, t_ray r)
 {
-	t_intersections	intersections;
-	t_tuple			sphere_to_ray;
-	double			a;
-	double			b;
-	double			c;
-	double			discriminant;
+	t_intersections	xs;
+	t_tuple			s_to_r;
+	double			abc[2];
+	double			dis;
 	t_ray			local_ray;
 
 	local_ray = transform(r, matrix4x4_inverse(s->transform));
-	sphere_to_ray = tuples_sub(local_ray.origin, (*s).center);
-	a = dot_product(local_ray.direction, local_ray.direction);
-	b = 2 * dot_product(local_ray.direction, sphere_to_ray);
-	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
-	discriminant = pow(b, 2.0) - 4 * a * c;
-	if (discriminant < 0)
+	s_to_r = tuples_sub(local_ray.origin, s->center);
+	abc[0] = dot_product(local_ray.direction, local_ray.direction);
+	abc[1] = 2 * dot_product(local_ray.direction, s_to_r);
+	dis = abc[1] * abc[1] - 4 * abc[0] * (dot_product(s_to_r, s_to_r) - 1);
+	if (dis < 0)
 	{
-		intersections.count = 0;
-		intersections.list = NULL;
+		xs.count = 0;
+		xs.list = NULL;
 	}
 	else
-	{
-		intersections.count = 2;
-		intersections.list = malloc(sizeof(t_intersection) * 2);
-		if (intersections.list)
-		{
-			intersections.list[0].t = (-b - sqrt(discriminant)) / (2 * a);
-			intersections.list[0].obj = s;
-			intersections.list[1].t = (-b + sqrt(discriminant)) / (2 * a);
-			intersections.list[1].obj = s;
-		}
-	}
-	return (intersections);
+		set_roots(&xs, abc, dis, s);
+	return (xs);
 }
 
 /**
- * @brief
+ * @brief Find the lowest possible positive value and assign it as the hit
+ * for a sphere.
  *
- * @return
+ * @return the intersection that has that hit
  */
 t_intersection	hit(t_intersections *intersections)
 {
@@ -150,5 +158,3 @@ t_intersection	hit(t_intersections *intersections)
 	}
 	return (inter);
 }
-
-

@@ -21,7 +21,8 @@ static int	parse_plane_error(t_plane *plane);
 /**
  * Parses the given 'params' and adds it to the scenes planes.
  * The expected format looks like this:
- *   pl <pos> <vector> <color> (for example: pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225)
+ *   pl <pos> <vector> <color>
+ *   (for example: pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225)
  * Returns true if the parsing was succesful.
  */
 int	parse_plane(t_scene *scene, char **params)

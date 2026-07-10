@@ -54,7 +54,8 @@ int	string_endswith(char *str, char *suffix)
 /*
  * Checks if 'str' ends in 'suffix' (see string_endswith):
  * If it does:
- *  Creates and returns a new string with the characters of 'str' but with 'suffix' removed.
+ *  Creates and returns a new string with the characters of 'str' but with
+ *  'suffix' removed.
  *  The given 'str' is freed and should be replaced with the returned result.
  * If it does not:
  *  The given 'str' is returned.

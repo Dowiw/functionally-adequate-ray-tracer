@@ -20,10 +20,12 @@ t_matrix2x2	matrix2x2_inverse(t_matrix2x2 matrix)
 
 /*
  * Returns the inverse of the given 'matrix'.
- * The inverse is a matrix with each element being set to the cofactor of its position in the given 'matrix',
- * divided by the determinant and then transposed.
- * If the determinant of the given 'matrix' is 0, this function returns the matrix without changes,
- * however this case should be checked seperately by each call site if applicable.
+ * The inverse is a matrix with each element being set to the cofactor of its
+ * position in the given 'matrix', divided by the determinant and then
+ * transposed.
+ * If the determinant of the given 'matrix' is 0, this function returns the
+ * matrix without changes, however this case should be checked seperately
+ * by each call site if applicable.
  */
 t_matrix3x3	matrix3x3_inverse(t_matrix3x3 matrix)
 {
@@ -51,10 +53,12 @@ t_matrix3x3	matrix3x3_inverse(t_matrix3x3 matrix)
 
 /*
  * Returns the inverse of the given 'matrix'.
- * The inverse is a matrix with each element being set to the cofactor of its position in the given 'matrix',
- * divided by the determinant and then transposed.
- * If the determinant of the given 'matrix' is 0, this function returns the matrix without changes,
- * however this case should be checked seperately by each call site if applicable.
+ * The inverse is a matrix with each element being set to the cofactor of its
+ * position in the given 'matrix', divided by the determinant and then
+ * transposed.
+ * If the determinant of the given 'matrix' is 0, this function returns the
+ * matrix without changes, however this case should be checked seperately
+ * by each call site if applicable.
  */
 t_matrix4x4	matrix4x4_inverse(t_matrix4x4 matrix)
 {

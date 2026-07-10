@@ -13,7 +13,8 @@
 #include "minirt.h"
 
 /**
- * @brief Returns a scaling matrix that scales a point or vector by 'x', 'y' and 'z'.
+ * @brief Returns a scaling matrix that scales a point or vector by
+ * 'x', 'y' and 'z'.
  *
  * @param x
  * @param y
@@ -22,10 +23,11 @@
  */
 t_matrix4x4	matrix4x4_scaling(double x, double y, double z)
 {
-	return ((t_matrix4x4){{
-		{x, 0.0, 0.0, 0.0},
-		{0.0, y, 0.0, 0.0},
-		{0.0, 0.0, z, 0.0},
-		{0.0, 0.0, 0.0, 1.0}
-	}});
+	t_matrix4x4	result;
+
+	result = matrix4x4_identity();
+	result.m[0][0] = x;
+	result.m[1][1] = y;
+	result.m[2][2] = z;
+	return (result);
 }

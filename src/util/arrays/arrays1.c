@@ -30,9 +30,11 @@ void	**array_create(void)
 }
 
 /*
- * Creates and returns a NULL-terminated array with the elements of 'array' and adding 'elem' to the end.
+ * Creates and returns a NULL-terminated array with the elements of 'array'
+ * and adding 'elem' to the end.
  * The given 'array' is freed and should be replaced with the returned result.
- * Returns NULL and frees 'array' (and all its elements) and 'elem' in any of the following cases:
+ * Returns NULL and frees 'array' (and all its elements) and 'elem' in any
+ * of the following cases:
  *  - 'array' or 'elem' is NULL
  *  - allocation failure
  */

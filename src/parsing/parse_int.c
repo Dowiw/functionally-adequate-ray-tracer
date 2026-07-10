@@ -51,9 +51,10 @@ int	parse_int(int *num, char *str)
 }
 
 /*
- * Parses the given 'str' (see parse_int) and checks the result against the given range 'min' and 'max'.
+ * Parses the given 'str' (see parse_int) and checks the result against the
+ * given range 'min' and 'max'.
  */
-int parse_int_range(int *num, char *str, int min, int max)
+int	parse_int_range(int *num, char *str, int min, int max)
 {
 	return (parse_int(num, str) && *num >= min && *num <= max);
 }
