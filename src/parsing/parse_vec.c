@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+#include "minirt.h"
 #include "parsing.h"
-#include "scene.h"
 #include "util/arrays.h"
 
-static int	parse_vec_params(t_vec *vec, char **params);
+static int	parse_vec_params(t_vector *vec, char **params);
 
 /*
  * Parses the given vector string 'str' in the following format:
@@ -23,7 +23,7 @@ static int	parse_vec_params(t_vec *vec, char **params);
  * The result is stored in the 'vec' pointer.
  * Returns true if the parsing was successful.
  */
-int	parse_vec(t_vec *vec, char *str)
+int	parse_vec(t_vector *vec, char *str)
 {
 	int		result;
 	char	**params;
@@ -38,7 +38,7 @@ int	parse_vec(t_vec *vec, char *str)
 	return (result);
 }
 
-static int	parse_vec_params(t_vec *vec, char **params)
+static int	parse_vec_params(t_vector *vec, char **params)
 {
 	if (array_len((void **) params) != 3)
 		return (0);

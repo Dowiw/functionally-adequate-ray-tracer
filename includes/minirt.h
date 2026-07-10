@@ -13,6 +13,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+struct s_sphere;
+
 # ifndef UNIT_EPSILON
 #  define UNIT_EPSILON 0.00001
 # endif
@@ -44,6 +46,51 @@ typedef struct s_tuple
 	double	z; // z-coordinate, blue
 	double	w; // type, extra value
 }	t_tuple;
+
+typedef t_tuple t_point;
+
+typedef t_tuple t_vector;
+
+typedef t_tuple t_color;
+
+/**
+ * @brief Structure for rays.
+ * Contains origin and direction.
+ */
+typedef struct s_ray
+{
+	t_point		origin; // starting point of a ray
+	t_vector	direction; // where it points
+}	t_ray;
+
+/**
+ * @brief Structure for intersections.
+ * Contains the number of intersections and the times a ray intersects
+ */
+typedef struct s_intersect
+{
+	unsigned int	count; // the number of intersections
+	double			*times; // the time (t) that a ray intersects an object
+}	t_intersect;
+
+/**
+ * @brief 
+ * 
+ */
+typedef struct s_intersection
+{
+	double			t;
+	struct s_sphere	*obj;
+}	t_intersection;
+
+/**
+ * @brief Struct that contains a list of t_intersection
+ */
+typedef struct s_intersections
+{
+	t_intersection	*list;
+	unsigned int	count;
+}	t_intersections;
 
 /**
  * @brief Structure for a canvas.
@@ -81,12 +128,6 @@ typedef struct s_data
 	t_mlx		mlx;
 }	t_data;
 
-typedef t_tuple t_point;
-
-typedef t_tuple t_vector;
-
-typedef t_tuple t_color;
-
 /** ######################################################################### *
  *  TUPLES                                                                  # *
  *  ######################################################################### */
@@ -95,6 +136,11 @@ typedef t_tuple t_color;
 
 int		compare_doubles(const double a, const double b);
 int		compare_tuples(const t_tuple *a, const t_tuple *b);
+
+// tuple_constructs.c
+
+t_point		point(double x, double y, double z);
+t_vector	vector(double x, double y, double z);
 
 // tuple_utils.c
 
@@ -190,5 +236,15 @@ t_matrix4x4	matrix4x4_rotation_y(double radians);
 t_matrix4x4	matrix4x4_rotation_z(double radians);
 
 t_matrix4x4	matrix4x4_shearing(double xy, double xz, double yx, double yz, double zx, double zy);
+
+/** ######################################################################### *
+ *  RAYS                                                                    # *
+ *  ######################################################################### */
+
+t_point	position(t_ray ray, double time);
+t_intersection	intersection(double t, struct s_sphere *obj);
+t_intersections	intersections(unsigned int count, ...);
+t_intersection	hit(t_intersections *intersections);
+t_ray			transform(t_ray r, t_matrix4x4 m);
 
 #endif

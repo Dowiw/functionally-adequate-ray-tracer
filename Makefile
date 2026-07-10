@@ -13,7 +13,7 @@
 NAME = miniRT
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I./$(HEADER_DIR)
+CFLAGS = -g -Wall -Wextra -Werror -I./$(HEADER_DIR)
 
 HEADER_DIR = includes
 HEADERS = minirt.h \
@@ -48,6 +48,7 @@ SOURCES = main.c \
 	tuples/tuple_compare.c \
 	tuples/tuple_utils.c \
 	tuples/tuple_operations.c \
+	tuples/tuple_constructs.c \
 	parsing/parse_ambience.c \
 	parsing/parse_camera.c \
 	parsing/parse_color.c \
@@ -60,21 +61,26 @@ SOURCES = main.c \
 	parsing/parse_vec.c \
 	parsing/parsing.c \
 	scene/scene.c \
+	scene/rays/ray_utils.c \
+	scene/rays/ray_transform.c \
 	util/arrays/arrays1.c \
 	util/arrays/cylinders/cylinders1.c \
 	util/arrays/planes/planes1.c \
-	util/arrays/spheres/spheres1.c \
+	util/arrays/spheres/sphere_utils.c \
+	util/arrays/spheres/sphere_normal.c \
 	util/colors/colors_util.c \
 	util/colors/colors1.c \
 	util/strings/strings1.c \
 
 TEST_DIR = tests
 TESTS = main.c \
-		test_tuples.c \
-		test_matrices.c \
-		test_transformations.c \
-		test_colors.c \
-		test_canvas.c \
+	test_tuples.c \
+	test_colors.c \
+	test_canvas.c \
+	test_matrices.c \
+	test_transformations.c \
+	test_rays.c \
+	test_light_shading.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 

@@ -254,7 +254,7 @@ int	test_tuple_cross(void)
 	t_tuple c1 = {-1, 2, -1, 0};
 	t_tuple c2 = {1, -2, 1, 0};
 
-	UNIT_ASSERT(compare_tuples(&ab, &c1));
-	UNIT_ASSERT(compare_tuples(&ba, &c2));
+	UNIT_ASSERT_EQ(compare_tuples(&ab, &c1), 0);
+	UNIT_ASSERT_EQ(compare_tuples(&ba, &c2), 0);
 	return (0);
 }

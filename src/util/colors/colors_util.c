@@ -21,9 +21,9 @@
  * @param color_b
  * @return resulting blended color
  */
-t_tuple	shur_prod(const t_tuple color_a, const t_tuple color_b)
+t_color	shur_prod(const t_color color_a, const t_color color_b)
 {
-	t_tuple	prod;
+	t_color	prod;
 
 	prod.x = color_a.x * color_b.x;
 	prod.y = color_a.y * color_b.y;

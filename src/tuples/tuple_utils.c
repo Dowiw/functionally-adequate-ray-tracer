@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tuple_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/15 00:44:27 by kmonjard          #+#    #+#             */
+/*   Updated: 2026/06/19 13:10:55 by kmonjard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 #include <math.h>
 
@@ -68,7 +80,7 @@ t_tuple	cross_product(const t_tuple a, const t_tuple b)
 {
 	t_tuple	cross;
 
-	cross.x = (a.x * b.z - a.z * b.y);
+	cross.x = (a.y * b.z - a.z * b.y);
 	cross.y = (a.z * b.x - a.x * b.z);
 	cross.z = (a.x * b.y - a.y * b.x);
 	cross.w = VECTOR;

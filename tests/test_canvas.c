@@ -22,7 +22,7 @@ int	test_canvas(void)
 	{
 		for (int j = 0; j < w; j++)
 		{
-			UNIT_ASSERT(compare_tuples(&black, &c.pixels[i * w + j]));
+			UNIT_ASSERT_EQ(compare_tuples(&black, &c.pixels[i * w + j]), 0);
 		}
 	}
 	free(c.pixels);
@@ -40,8 +40,8 @@ int	test_canvas_place(void)
 	if (!canvas_create(&c, w, h))
 		return (1);
 	write_pixel(&c, 2, 3, red);
-	t_tuple		color = view_pixel(&c, w, h);
-	UNIT_ASSERT(compare_tuples(&red, &color));
+	t_tuple		color = view_pixel(&c, 2, 3);
+	UNIT_ASSERT_EQ(compare_tuples(&red, &color), 0);
 	free(c.pixels);
 
 	return (0);

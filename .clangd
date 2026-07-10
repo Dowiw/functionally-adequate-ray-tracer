@@ -1,0 +1,12 @@
+CompileFlags:
+  CompilationDatabase: .configs
+  Add: ["-Ilibunit/framework/inc", "-Iincludes"]
+
+Documentation:
+  CommentFormat: Doxygen
+
+---
+If:
+  PathExclude: [libft/.*, mlx/.*, libunit/.*, fun/.*, build/.*]
+Diagnostics:
+  Suppress: "*"

@@ -16,8 +16,8 @@
 #include <unistd.h>
 
 /**
- * - Initialize the mlx struct (not confused for mlx_init)
- * - sets 0 for ints, NULL for pointers
+ * @brief Initialize the mlx struct (not confused for mlx_init)
+ * sets 0 for ints, NULL for pointers
  */
 void	init_mlx(t_mlx *mlx)
 {
@@ -31,8 +31,8 @@ void	init_mlx(t_mlx *mlx)
 }
 
 /**
- * - Extension of init_mlx_lib to put image data
- * - Frees things if NULL is returned
+ * @brief Extension of init_mlx_lib to put image data.
+ * Frees things if NULL is returned
  */
 static int	put_img_data(t_mlx *mlx, int *bpp, int *size_line, int *endian)
 {
@@ -50,9 +50,9 @@ static int	put_img_data(t_mlx *mlx, int *bpp, int *size_line, int *endian)
 }
 
 /**
- * - Initializes the library into the struct
- * - Also attaches the used event hooks to the window
- * - NOTE: data is only for key events
+ * @brief Initializes the library into the struct.
+ * TODO: Also attaches the used event hooks to the window
+ * NOTE: data is only for key events
  */
 int	init_mlx_lib(t_mlx *mlx)
 {

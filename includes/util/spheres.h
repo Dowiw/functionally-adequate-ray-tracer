@@ -15,6 +15,8 @@
 
 # include "scene.h"
 
+t_sphere	sphere_create(void);
+
 t_sphere	**spheres_create(void);
 
 t_sphere	**spheres_add(t_sphere **array, t_sphere *sphere);

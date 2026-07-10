@@ -1,17 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spheres1.c                                         :+:      :+:    :+:   */
+/*   sphere_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 21:43:35 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:09:32 by sstark           ###   ########.fr       */
+/*   Updated: 2026/06/19 22:09:32 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minirt.h"
 #include "scene.h"
 #include "util/arrays.h"
+
+t_sphere	sphere_create(void)
+{
+	t_sphere	sphere;
+
+	sphere.center = (t_point){0, 0, 0, POINT};
+	sphere.transform = matrix4x4_identity();
+	sphere.radius = 1.0;
+	sphere.diameter = 0;
+	sphere.color = 0;
+	return (sphere);
+}
 
 t_sphere	**spheres_create(void)
 {

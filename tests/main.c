@@ -21,7 +21,9 @@ int	main(void)
 	t_test_suite	*color_suite;
 	t_test_suite	*canvas_suite;
 	t_test_suite	*matrices_suite;
+	t_test_suite	*rays_suite;
 	t_test_suite	*transformations_suite;
+	t_test_suite	*light_shading_suite;
 
 	tuple_suite = load_suite(&suites, "Tuples Suite");
 	// parser_suite->setup = suite_setup;
@@ -65,12 +67,23 @@ int	main(void)
 	load_test(matrices_suite, "Matrix Inversion", &test_matrix_inverse);
 
 	transformations_suite = load_suite(&suites, "Transformations Suite");
-
 	load_test(transformations_suite, "Translation", &test_translation);
 	load_test(transformations_suite, "Scaling", &test_scaling);
 	load_test(transformations_suite, "Rotation", &test_rotation);
 	load_test(transformations_suite, "Shearing", &test_shearing);
 	load_test(transformations_suite, "Chained Transformations", &test_chaining);
+
+	rays_suite = load_suite(&suites, "Rays Suite");
+	load_test(rays_suite, "Basic Ray Functionality", &test_ray);
+	load_test(rays_suite, "Ray Position", &test_ray_pos);
+	load_test(rays_suite, "Ray Intersection", &test_ray_intersect);
+	load_test(rays_suite, "Aggregating Intersections", &test_aggregating_intersections);
+	load_test(rays_suite, "Hit Detection", &test_hit);
+	load_test(rays_suite, "Ray Transformation", &test_ray_transform);
+	load_test(rays_suite, "Sphere Ray Transformation", &test_sphere_ray_transform);
+
+	light_shading_suite = load_suite(&suites, "Light and Shading Suite");
+	load_test(light_shading_suite, "Sphere Normalization", &test_sphere_normals);
 
 	return (launch_tests(&suites));
 }

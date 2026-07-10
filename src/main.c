@@ -18,7 +18,7 @@ static int	error(char *msg);
 
 int	main(int argc, char **argv)
 {
-	t_scene		scene;
+	t_scene	scene;
 
 	if (argc != 2)
 		return (error("Wrong arg count"));

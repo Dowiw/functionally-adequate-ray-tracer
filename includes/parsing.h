@@ -13,6 +13,7 @@
 #ifndef PARSING_H
 # define PARSING_H
 
+#include "minirt.h"
 # include "scene.h"
 
 int	parse_scene(t_scene *scene, char *file);
@@ -33,7 +34,7 @@ int	parse_int(int *num, char *str);
 
 int parse_int_range(int *num, char *str, int min, int max);
 
-int	parse_vec(t_vec *vec, char *str);
+int	parse_vec(t_vector *vec, char *str);
 
 int	parse_cylinder(t_scene *scene, char **params);
 
