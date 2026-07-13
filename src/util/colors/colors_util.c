@@ -15,6 +15,7 @@
 
 /**
  * @brief Calculates the blending of two colors to form a new color
+ * using the hadamard product.
  * NOTE: Assumes the tuples are colors
  *
  * @param color_a

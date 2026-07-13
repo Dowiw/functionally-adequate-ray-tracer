@@ -35,6 +35,17 @@ t_light	light(t_point p, t_color c)
  * A big idea of this is basically:
  * Final Color = Ambient + Diffuse + Specular
  *
+ * 1. Effective color is used to calculate the absorption/reflective
+ * level of a surface material
+ * 2. Calculating the light vector using the position of the light and
+ * the position of the surface. And then normalize that to a unit of one so
+ * that we are able to extract the direction only.
+ * 3. Then we retrieve the ambient baseline for the object's material so that
+ * we can calclate the baseline visibility of the object without any light.
+ * 4. Finding the dotproduct of the norm and the light vector gives us the
+ * angle between the light ray and the surface normal. Meaning, if the ray
+ * is on an angle that is parallel it goes to the < 0, if not then
+ *
  * TODO: Fix the 5 variable problem for norm
  *
  * @param m material
