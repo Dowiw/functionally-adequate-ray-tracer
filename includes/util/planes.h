@@ -19,7 +19,7 @@ t_plane	**planes_create(void);
 
 t_plane	**planes_add(t_plane **array, t_plane *plane);
 
-int	planes_len(t_plane **array);
+int		planes_len(t_plane **array);
 
 void	free_planes(t_plane **array);
 

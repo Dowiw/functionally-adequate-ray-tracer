@@ -32,6 +32,9 @@ t_light	light(t_point p, t_color c)
 
 /**
  * @brief Calculate color based on information.
+ * A big idea of this is basically:
+ * Final Color = Ambient + Diffuse + Specular
+ *
  * TODO: Fix the 5 variable problem for norm
  *
  * @param m material
