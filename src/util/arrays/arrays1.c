@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 16:33:04 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:11:27 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/04 10:59:33 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,25 @@ void	**array_add(void **array, void *elem)
 	result[size + 1] = NULL;
 	free(array);
 	return (result);
+}
+
+void	**array_add_all(void **array, void **elems)
+{
+	int	i;
+
+	if (array == NULL || elems == NULL)
+	{
+		free_array(array);
+		free_array(elems);
+		return (NULL);
+	}
+	i = 0;
+	while (elems[i] != NULL)
+	{
+		array = array_add(array, elems[i]);
+		i++;
+	}
+	return (array);
 }
 
 /*

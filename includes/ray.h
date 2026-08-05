@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   planes.h                                           :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/15 22:03:58 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/04 10:41:35 by sstark           ###   ########.fr       */
+/*   Created: 2026/08/04 11:32:13 by sstark            #+#    #+#             */
+/*   Updated: 2026/08/05 15:30:21 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLANES_H
-# define PLANES_H
+#ifndef RAY_H
+# define RAY_H
 
+# include "minirt.h"
 # include "scene.h"
 
-t_plane	**planes_create(void);
-
-t_plane	**planes_add(t_plane **array, t_plane *plane);
-
-int		planes_len(t_plane **array);
-
-void	free_planes(t_plane **array);
+t_intersection	*create_intersection(enum object_type type, void *object, double t);
+t_intersection	**intersect_sphere(t_sphere *sphere, t_ray ray);
+t_intersection	**intersect_scene(t_scene *scene, t_ray ray);
+t_intersection	*intersect_hit(t_intersection **intersections);
 
 #endif

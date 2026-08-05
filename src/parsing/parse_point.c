@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   planes.h                                           :+:      :+:    :+:   */
+/*   parse_point.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/15 22:03:58 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/04 10:41:35 by sstark           ###   ########.fr       */
+/*   Created: 2026/08/05 14:12:08 by sstark            #+#    #+#             */
+/*   Updated: 2026/08/05 14:17:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLANES_H
-# define PLANES_H
+#include "minirt.h"
+#include "parsing.h"
 
-# include "scene.h"
-
-t_plane	**planes_create(void);
-
-t_plane	**planes_add(t_plane **array, t_plane *plane);
-
-int		planes_len(t_plane **array);
-
-void	free_planes(t_plane **array);
-
-#endif
+int	parse_point(t_point *point, char *str)
+{
+	if (!parse_tuple(point, str))
+		return (0);
+	point->w = POINT;
+	return (1);
+}

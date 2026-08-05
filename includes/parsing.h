@@ -6,14 +6,14 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:09 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 13:29:25 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 14:16:11 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-#include "minirt.h"
+# include "minirt.h"
 # include "scene.h"
 
 int	parse_scene(t_scene *scene, char *file);
@@ -34,7 +34,11 @@ int	parse_int(int *num, char *str);
 
 int parse_int_range(int *num, char *str, int min, int max);
 
-int	parse_vec(t_vector *vec, char *str);
+int	parse_point(t_point *point, char *str);
+
+int	parse_vector(t_vector *vector, char *str);
+
+int	parse_tuple(t_tuple *tuple, char *str);
 
 int	parse_cylinder(t_scene *scene, char **params);
 

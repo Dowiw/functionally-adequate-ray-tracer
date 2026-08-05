@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:19:46 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 14:09:51 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 14:16:48 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	parse_light(t_scene *scene, char **params)
 		return (0);
 	if (array_len((void **) params) != 4)
 		return (0);
-	if (!parse_vec(&scene->light.pos, params[1]))
+	if (!parse_point(&scene->light.pos, params[1]))
 		return (0);
 	if (!parse_double_range(&brightness, params[2], 0.0, 1.0))
 		return (0);
@@ -40,5 +40,6 @@ int	parse_light(t_scene *scene, char **params)
 	intensity_color = color((double)red(rgb_color) / 255.0,
 			(double)green(rgb_color) / 255.0, (double)blue(rgb_color) / 255.0);
 	scene->light.intensity = tuple_mult(intensity_color, brightness);
+	scene->has_light = 1;
 	return (1);
 }

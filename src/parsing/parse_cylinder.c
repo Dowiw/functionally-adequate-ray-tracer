@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:19:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:30:21 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 14:16:40 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,17 @@ int	parse_cylinder(t_scene *scene, char **params)
 	cylinder = malloc(sizeof(t_cylinder));
 	if (cylinder == NULL)
 		return (0);
-	if (!parse_vec(&cylinder->center, params[1]))
+	if (!parse_point(&cylinder->center, params[1]))
 		return (parse_cylinder_error(cylinder));
-	if (!parse_vec(&cylinder->vec, params[2]))
+	if (!parse_vector(&cylinder->vec, params[2]))
 		return (parse_cylinder_error(cylinder));
 	if (!parse_double(&cylinder->diameter, params[3]))
 		return (parse_cylinder_error(cylinder));
 	if (!parse_double(&cylinder->height, params[4]))
 		return (parse_cylinder_error(cylinder));
-	if (!parse_color(&cylinder->color, params[5]))
-		return (parse_cylinder_error(cylinder));
+	// TODO
+	// if (!parse_color(&cylinder->color, params[5]))
+	// 	return (parse_cylinder_error(cylinder));
 	scene->cylinders = cylinders_add(scene->cylinders, cylinder);
 	if (scene->cylinders == NULL)
 		return (0);

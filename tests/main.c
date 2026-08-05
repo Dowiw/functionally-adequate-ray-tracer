@@ -24,6 +24,7 @@ int	main(void)
 	t_test_suite	*rays_suite;
 	t_test_suite	*transformations_suite;
 	t_test_suite	*light_shading_suite;
+	t_test_suite	*rendering_suite;
 
 	suites = NULL;
 	tuple_suite = load_suite(&suites, "Tuples Suite");
@@ -90,5 +91,11 @@ int	main(void)
 	load_test(light_shading_suite, "Light Struct", &test_light_struct);
 	load_test(light_shading_suite, "Sphere Material", &test_sphere_material);
 	load_test(light_shading_suite, "Sphere Lighiting", &test_sphere_lighting);
+	rendering_suite = load_suite(&suites, "Rendering Suite");
+	load_test(rendering_suite, "Default Scene", &test_default_scene);
+	load_test(rendering_suite, "Intersect Scene", &test_intersect_scene);
+	load_test(rendering_suite, "Prepare Computations", &test_prepare_computations);
+	load_test(rendering_suite, "Shade Hit", &test_shade_hit);
+
 	return (launch_tests(&suites));
 }
