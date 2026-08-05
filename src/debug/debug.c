@@ -6,13 +6,11 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 14:39:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 14:45:22 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 17:48:12 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "minirt.h"
-#include "scene.h"
+#include "debug.h"
 
 void	print_tuple(t_tuple tuple)
 {
@@ -199,4 +197,21 @@ void	print_intersections(t_intersection **intersections)
 	}
 
 	printf("]\n");
+}
+
+void	print_comps(t_comps comps)
+{
+	printf("{\n");
+
+	printf("t: %f\n", comps.t);
+	printf("obj: ?\n");
+	printf("point: ");
+	print_tuple_ln(comps.point);
+	printf("eyev: ");
+	print_tuple_ln(comps.eyev);
+	printf("normalv: ");
+	print_tuple_ln(comps.normalv);
+	printf("inside: %d\n", comps.inside);
+
+	printf("}\n");
 }

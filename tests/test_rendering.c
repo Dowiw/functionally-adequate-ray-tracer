@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 15:43:19 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 17:18:09 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 18:27:52 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,18 +139,11 @@ int	test_shade_hit(void)
 		return (1);
 	ray = (t_ray){point(0.0, 0.0, -5.0), vector(0.0, 0.0, 1.0)};
 	sphere = scene.spheres[0];
-	hit = create_intersection(SPHERE, &sphere, 4.0);
+	hit = create_intersection(SPHERE, sphere, 4.0);
 	comps = prepare_computations(ray, hit);
 	c = shade_hit(&scene, comps);
 
 	expected = color(0.38066, 0.47583, 0.2855);
-
-	#include <stdio.h>
-	#include "debug.h"
-	printf("Expected: ");
-	print_tuple_ln(expected);
-	printf("Got: ");
-	print_tuple_ln(c);
 
 	UNIT_ASSERT_EQ(compare_tuples(&c, &expected), 0);
 	destroy_scene(&scene);
@@ -161,7 +154,7 @@ int	test_shade_hit(void)
 	scene.light = (t_light){point(0.0, 0.25, 0.0), color(1.0, 1.0, 1.0)};
 	ray = (t_ray){point(0.0, 0.0, 0.0), vector(0.0, 0.0, 1.0)};
 	sphere = scene.spheres[1];
-	hit = create_intersection(SPHERE, &sphere, 0.5);
+	hit = create_intersection(SPHERE, sphere, 0.5);
 	comps = prepare_computations(ray, hit);
 	c = shade_hit(&scene, comps);
 

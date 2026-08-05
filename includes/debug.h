@@ -6,14 +6,16 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 15:00:26 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 14:45:20 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 17:47:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEBUG_H
 # define DEBUG_H
 
+# include <stdio.h>
 # include "minirt.h"
+# include "rendering.h"
 # include "scene.h"
 
 void	print_tuple(t_tuple tuple);
@@ -41,5 +43,7 @@ void	print_ray(t_ray ray);
 void	print_ray_ln(t_ray ray);
 
 void	print_intersections(t_intersection **intersections);
+
+void	print_comps(t_comps comps);
 
 #endif
