@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 10:37:30 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 16:02:03 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 19:15:21 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_intersection	**intersect_sphere(t_sphere *sphere, t_ray ray)
 
 	result = intersections_create();
 	local_ray = transform(ray, matrix4x4_inverse(sphere->transform));
-	sphere_to_ray = tuples_sub(local_ray.origin, sphere->center);
+	sphere_to_ray = tuples_sub(local_ray.origin, point(0.0, 0.0, 0.0));
 	abc[0] = dot_product(local_ray.direction, local_ray.direction);
 	abc[1] = 2 * dot_product(local_ray.direction, sphere_to_ray);
 	abc[2] = dot_product(sphere_to_ray, sphere_to_ray) - 1;
