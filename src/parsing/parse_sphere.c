@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:57 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 18:51:21 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:47:01 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "util/spheres.h"
 #include "util/colors.h"
 
-static int	finish_sphere(t_sphere *sphere);
+static void	finish_sphere(t_sphere *sphere);
 
 static int	parse_sphere_error(t_sphere *sphere);
 
@@ -42,23 +42,18 @@ int	parse_sphere(t_scene *scene, char **params)
 		return (parse_sphere_error(sphere));
 	if (!parse_color(&sphere->color, params[3]))
 		return (parse_sphere_error(sphere));
-	if (!finish_sphere(sphere))
-		return (parse_sphere_error(sphere));
+	finish_sphere(sphere);
 	scene->spheres = spheres_add(scene->spheres, sphere);
 	if (scene->spheres == NULL)
 		return (0);
 	return (1);
 }
 
-static int	finish_sphere(t_sphere *sphere)
+static void	finish_sphere(t_sphere *sphere)
 {
-	sphere->transform = matrix4x4_identity();
-	// sphere->transform = matrix4x4_multiply(sphere->transform, matrix4x4_translation(sphere->center.x, sphere->center.y, sphere->center.z));
-	// TODO: rotation?
 	sphere->transform = matrix4x4_scaling(sphere->diameter, sphere->diameter, sphere->diameter);
 	sphere->material = material();
 	sphere->material.color = color(red(sphere->color) / 255.0, green(sphere->color) / 255.0, blue(sphere->color) / 255.0);
-	return (1);
 }
 
 static int	parse_sphere_error(t_sphere *sphere)

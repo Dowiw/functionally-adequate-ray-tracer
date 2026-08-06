@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/05 16:37:02 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/06 15:38:08 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SOURCES = main.c \
 	rays/ray_transform.c \
 	rendering/computations.c \
 	rendering/rendering.c \
+	scene/camera.c \
 	scene/scene.c \
 	util/arrays/arrays1.c \
 	util/arrays/arrays2.c \

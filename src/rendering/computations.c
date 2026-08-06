@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:26:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:07:55 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:45:44 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,21 @@
 
 t_ray	ray_for_pixel(t_camera camera, int x, int y)
 {
-	double	x_offset = (x + 0.5) * camera.pixel_size;
-	double	y_offset = (y + 0.5) * camera.pixel_size;
+	double	x_offset;
+	double	y_offset;
+	double	world_x;
+	double	world_y;
+	t_tuple	pixel;
+	t_tuple	origin;
+	t_tuple	direction;
 
-	double	world_x = camera.half_width - x_offset;
-	double	world_y = camera.half_height - y_offset;
-
-	t_tuple pixel = matrix4x4_multiply_tuple(matrix4x4_inverse(camera.transform), point(world_x, world_y, -1.0));
-	t_tuple origin = matrix4x4_multiply_tuple(matrix4x4_inverse(camera.transform), point(0.0, 0.0, 0.0));
-	t_tuple direction = calc_norm(tuples_sub(pixel, origin));
-
+	x_offset = (x + 0.5) * camera.pixel_size;
+	y_offset = (y + 0.5) * camera.pixel_size;
+	world_x = camera.half_width - x_offset;
+	world_y = camera.half_height - y_offset;
+	pixel = matrix4x4_multiply_tuple(matrix4x4_inverse(camera.transform), point(world_x, world_y, -1.0));
+	origin = matrix4x4_multiply_tuple(matrix4x4_inverse(camera.transform), point(0.0, 0.0, 0.0));
+	direction = calc_norm(tuples_sub(pixel, origin));
 	return ((t_ray){origin, direction});
 }
 
@@ -62,6 +67,5 @@ t_color	color_at(t_scene *scene, t_ray ray)
 	if (hit == NULL)
 		return (color_black());
 	comps = prepare_computations(ray, hit);
-	// if (1) return (((t_sphere *) comps.obj.object)->material.color);
 	return (shade_hit(scene, comps));
 }

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 14:39:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 18:33:55 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:32:24 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void	print_camera(t_camera camera)
 
 	printf("transform: ");
 	print_matrix4x4_ln(camera.transform);
+
+	printf("field_of_view: %f\n", camera.field_of_view);
 
 	printf("width: %d\n", camera.width);
 	printf("height: %d\n", camera.height);

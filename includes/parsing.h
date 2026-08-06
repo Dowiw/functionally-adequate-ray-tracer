@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:09 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 13:44:09 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:38:29 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	parse_scene(t_scene *scene, char *file);
 int	parse_ambience(t_scene *scene, char **params);
 
 int	parse_camera(t_scene *scene, char **params);
-
-int	finish_camera(t_camera *camera, int width, int height);
 
 int	parse_light(t_scene *scene, char **params);
 
