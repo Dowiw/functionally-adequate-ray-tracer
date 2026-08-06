@@ -96,6 +96,11 @@ int	main(void)
 	load_test(rendering_suite, "Intersect Scene", &test_intersect_scene);
 	load_test(rendering_suite, "Prepare Computations", &test_prepare_computations);
 	load_test(rendering_suite, "Shade Hit", &test_shade_hit);
+	load_test(rendering_suite, "Color At", &test_color_at);
+	load_test(rendering_suite, "View Transform", &test_view_transform);
+	load_test(rendering_suite, "Camera", &test_camera);
+	load_test(rendering_suite, "Ray For Pixel", &test_ray_for_pixel);
+	load_test(rendering_suite, "Render Scene", &test_render_scene);
 
 	return (launch_tests(&suites));
 }

@@ -6,11 +6,12 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:15:24 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 16:49:21 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 13:52:00 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "parsing.h"
 #include "scene.h"
 #include "util/cylinders.h"
 #include "util/planes.h"
@@ -92,4 +93,22 @@ void	destroy_scene(t_scene *scene)
 	free_cylinders(scene->cylinders);
 	free_planes(scene->planes);
 	free_spheres(scene->spheres);
+}
+
+/**
+ * @brief Initializes a new camera with the given parameters
+ *
+ * @param width
+ * @param height
+ * @param fov
+ * @return t_camera
+ */
+t_camera	create_camera(int width, int height, double fov)
+{
+	t_camera	result;
+
+	// TODO: set pos and orientation, currently they are still unused in finish_camera
+	result.fov = fov;
+	finish_camera(&result, width, height);
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:26:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 17:28:06 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:07:55 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,15 @@ t_color shade_hit(t_scene *scene, t_comps comps)
 	return (lighting(((t_sphere *) comps.obj.object)->material, scene->light, comps.point, comps.eyev, comps.normalv));
 }
 
-t_color	color_at(t_scene *scene, int x, int y)
+t_color	color_at(t_scene *scene, t_ray ray)
 {
-	t_ray			ray;
 	t_intersection	*hit;
 	t_comps			comps;
 
-	ray = ray_for_pixel(scene->camera, x, y);
 	hit = intersect_hit(intersect_scene(scene, ray));
 	if (hit == NULL)
 		return (color_black());
 	comps = prepare_computations(ray, hit);
+	// if (1) return (((t_sphere *) comps.obj.object)->material.color);
 	return (shade_hit(scene, comps));
 }

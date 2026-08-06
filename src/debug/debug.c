@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 14:39:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 17:48:12 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 18:33:55 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,15 @@ void	print_ambience(t_ambience ambience)
 
 void	print_light(t_light light)
 {
-	(void) light;
-	printf("?\n");
+	printf("{\n");
+
+	printf("pos: ");
+	print_tuple_ln(light.pos);
+
+	printf("intensity: ");
+	print_tuple_ln(light.intensity);
+
+	printf("}\n");
 }
 
 void	print_scene(t_scene *scene)

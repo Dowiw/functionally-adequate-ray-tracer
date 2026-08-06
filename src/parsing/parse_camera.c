@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 17:32:45 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:06:00 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "parsing.h"
 #include "scene.h"
 #include "util/arrays.h"
-
-int	finish_camera(t_camera *camera, int width, int height);
 
 /**
  * Parses the given 'params' to the given 'scene's camera.
@@ -45,11 +43,12 @@ int	parse_camera(t_scene *scene, char **params)
 int	finish_camera(t_camera *camera, int width, int height)
 {
 	// TODO: apply camera position and orientation
-	camera->transform = view_transform(point(0.0, 0.0, 0.0), point(0.0, 0.0, -1.0), vector(0.0, 1.0, 0.0));
+	// camera->transform = view_transform(point(50.0, 50.0, 0.0), point(50.0, 50.0, 1.0), vector(0.0, 1.0, 0.0));
+	camera->transform = matrix4x4_identity();
 	camera->width = width;
 	camera->height = height;
 	camera->half_view = tan(camera->fov / 2.0);
-	camera->aspect_ratio = (double) height / width;
+	camera->aspect_ratio = ((double) width) / height;
 	if (camera->aspect_ratio >= 1.0)
 	{
 		camera->half_width = camera->half_view;
@@ -60,6 +59,6 @@ int	finish_camera(t_camera *camera, int width, int height)
 		camera->half_width = camera->half_view * camera->aspect_ratio;
 		camera->half_height = camera->half_view;
 	}
-	camera->pixel_size = (camera->half_width * 2.0) / height;
+	camera->pixel_size = (camera->half_width * 2.0) / width;
 	return (1);
 }

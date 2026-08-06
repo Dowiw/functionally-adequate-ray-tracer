@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 15:49:14 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/04 15:59:35 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 19:21:57 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_matrix4x4	view_transform(t_point from, t_point to, t_vector up)
 	t_tuple		left;
 	t_tuple		true_up;
 
-	forward = tuples_sub(to, from);
+	forward = calc_norm(tuples_sub(to, from));
 	left = cross_product(forward, calc_norm(up));
 	true_up = cross_product(left, forward);
 	return (matrix4x4_multiply(view_orientation(forward, true_up, left), matrix4x4_translation(-from.x, -from.y, -from.z)));

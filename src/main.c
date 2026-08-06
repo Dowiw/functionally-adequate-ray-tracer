@@ -6,11 +6,12 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:35:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 14:29:34 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:05:22 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "debug.h"
 #include "parsing.h"
 #include "rendering.h"
 #include "scene.h"
@@ -33,7 +34,9 @@ int	main(int argc, char **argv)
 		destroy_scene(&scene);
 		return (error("Failed to create canvas"));
 	}
+	print_scene(&scene);
 	render_scene(&canvas, &scene);
+	canvas_to_ppm(&canvas);
 	destroy_scene(&scene);
 	return (0);
 }

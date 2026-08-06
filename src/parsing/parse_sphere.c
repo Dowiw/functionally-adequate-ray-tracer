@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:57 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 14:24:12 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 18:51:21 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,6 @@ static int	finish_sphere(t_sphere *sphere)
 	sphere->transform = matrix4x4_scaling(sphere->diameter, sphere->diameter, sphere->diameter);
 	sphere->material = material();
 	sphere->material.color = color(red(sphere->color) / 255.0, green(sphere->color) / 255.0, blue(sphere->color) / 255.0);
-	sphere->material.ambient = 0.0;
-	sphere->material.diffuse = 0.0;
-	sphere->material.specular = 0.0;
-	sphere->material.shininess = 0.0;
 	return (1);
 }
 

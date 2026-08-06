@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 14:57:24 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 19:38:32 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 # define PI 3.14159265358979323846
 
 # ifndef WIN_W
-#  define WIN_W 192
+#  define WIN_W 1920
 # endif
 
 # ifndef WIN_H
-#  define WIN_H 108
+#  define WIN_H 1080
 # endif
 
 /**

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 17:32:47 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 13:53:14 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_scene
 int				init_scene(t_scene *scene);
 int				default_scene(t_scene *scene);
 void			destroy_scene(t_scene *scene);
+t_camera		create_camera(int width, int height, double fov);
 
 void			set_transform(t_sphere *s, t_matrix4x4 t);
 t_vector		normal_at(t_sphere *s, t_point p);

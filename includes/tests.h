@@ -60,5 +60,10 @@ int	test_prepare_computations(void);
 int	test_shade_hit(void);
 int	test_default_scene(void);
 int	test_intersect_scene(void);
+int	test_color_at(void);
+int	test_view_transform(void);
+int	test_camera(void);
+int	test_ray_for_pixel(void);
+int	test_render_scene(void);
 
 #endif
