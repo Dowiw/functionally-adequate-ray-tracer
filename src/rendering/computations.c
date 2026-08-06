@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:26:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:45:44 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:55:50 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 #include "rendering.h"
 #include "scene.h"
 
+/**
+ * @brief Returns a ray that starts at the camera and passes through the given pixel on the canvas.
+ *
+ * @param camera
+ * @param x
+ * @param y
+ * @return t_ray
+ */
 t_ray	ray_for_pixel(t_camera camera, int x, int y)
 {
 	double	x_offset;
@@ -37,6 +45,13 @@ t_ray	ray_for_pixel(t_camera camera, int x, int y)
 }
 
 // TODO: handle different object types
+/**
+ * @brief Precomputes a few values and stores them in the returned t_comps for ease of use.
+ *
+ * @param ray
+ * @param hit
+ * @return t_comps
+ */
 t_comps	prepare_computations(t_ray ray, t_intersection *hit)
 {
 	t_comps	result;
@@ -53,11 +68,26 @@ t_comps	prepare_computations(t_ray ray, t_intersection *hit)
 }
 
 // TODO: handle different object types
+/**
+ * @brief Calculates the color at the intersection represented by the given comps.
+ *
+ * @param scene
+ * @param comps
+ * @return t_color
+ */
 t_color shade_hit(t_scene *scene, t_comps comps)
 {
 	return (lighting(((t_sphere *) comps.obj.object)->material, scene->light, comps.point, comps.eyev, comps.normalv));
 }
 
+/**
+ * @brief Calculates the color at the intersection of the given ray in the scene.
+ *        Returns black if the ray doesn't intersect with any objects.
+ *
+ * @param scene
+ * @param ray
+ * @return t_color
+ */
 t_color	color_at(t_scene *scene, t_ray ray)
 {
 	t_intersection	*hit;

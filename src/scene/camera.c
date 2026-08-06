@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 15:19:02 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:41:15 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:56:52 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,4 @@ void		init_camera(t_camera *camera)
 		camera->half_height = camera->half_view;
 	}
 	camera->pixel_size = (camera->half_width * 2.0) / camera->width;
-}
-
-void		finish_camera(t_camera *camera, int width, int height)
-{
-	camera->width = width;
-	camera->height = height;
-	camera->field_of_view = camera->fov * PI / 180.0;
-	// TODO
-	// camera->transform = view_transform(camera->pos, ?, ?);
-	camera->transform = matrix4x4_identity();
-	init_camera(camera);
 }

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:25:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:00:47 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:56:34 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 #include "rendering.h"
 #include "scene.h"
 
+/**
+ * @brief Renders the given scene onto the given canvas (who could've guessed?)
+ *
+ * @param canvas
+ * @param scene
+ */
 void	render_scene(t_canvas *canvas, t_scene *scene)
 {
 	int		x;

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 10:37:30 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 14:51:18 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 16:02:03 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 #include "scene.h"
 #include "util/intersections.h"
 
+/**
+ * @brief Allocates and initializes an intersection
+ *
+ * @param type
+ * @param object
+ * @param t
+ * @return t_intersection*
+ */
 t_intersection	*create_intersection(enum object_type type, void *object, double t)
 {
 	t_intersection	*result;
@@ -28,6 +36,13 @@ t_intersection	*create_intersection(enum object_type type, void *object, double 
 	return (result);
 }
 
+/**
+ * @brief Calculates where the ray intersects the sphere and returns an array of intersections
+ *
+ * @param sphere
+ * @param ray
+ * @return t_intersection**
+ */
 t_intersection	**intersect_sphere(t_sphere *sphere, t_ray ray)
 {
 	t_intersection	**result;
@@ -60,6 +75,13 @@ t_intersection	**intersect_sphere(t_sphere *sphere, t_ray ray)
 // 	return (NULL);
 // }
 
+/**
+ * @brief Calculates where the ray intersects any objects in the scene and returns an array of intersections
+ *
+ * @param sphere
+ * @param ray
+ * @return t_intersection**
+ */
 t_intersection	**intersect_scene(t_scene *scene, t_ray ray)
 {
 	t_intersection	**result;
@@ -88,6 +110,12 @@ t_intersection	**intersect_scene(t_scene *scene, t_ray ray)
 	return (result);
 }
 
+/**
+ * @brief Returns the closest intersection, ignoring any that are behind the rays origin (and thus have a negative time)
+ *
+ * @param intersections
+ * @return t_intersection*
+ */
 t_intersection	*intersect_hit(t_intersection **intersections)
 {
 	t_intersection	*hit;

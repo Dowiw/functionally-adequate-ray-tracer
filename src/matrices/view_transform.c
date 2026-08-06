@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 15:49:14 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 19:21:57 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 16:05:26 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 static t_matrix4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left);
 
+/**
+ * @brief Returns the view transformation matrix for the camera.
+ *        The cameras origin is at 'from', looking towards 'to', with 'up' specifying the cameras tilt.
+ *
+ * @param from
+ * @param to
+ * @param up
+ * @return t_matrix4x4
+ */
 t_matrix4x4	view_transform(t_point from, t_point to, t_vector up)
 {
 	t_tuple		forward;
