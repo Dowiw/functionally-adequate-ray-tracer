@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:37:30 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 18:13:09 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void			destroy_scene(t_scene *scene);
 
 t_camera		create_camera(int width, int height, double fov);
 void			init_camera(t_camera *camera);
-void			finish_camera(t_camera *camera, int width, int height);
 
 void			set_transform(t_sphere *s, t_matrix4x4 t);
 t_vector		normal_at(t_sphere *s, t_point p);
