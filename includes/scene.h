@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 13:52:43 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 18:13:09 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ typedef struct s_camera
 	t_point		pos;
 	t_vector	orientation;
 	double		fov;
+
+	t_matrix4x4	transform;
+	double		field_of_view;
+
+	int			width;
+	int			height;
+
+	double		half_view;
+	double		aspect_ratio;
+	double		half_width;
+	double		half_height;
+	double		pixel_size;
 }				t_camera;
 
 typedef struct s_light
@@ -46,17 +58,18 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_point		center;
-	t_material	material;
-	t_matrix4x4	transform;
-	double		radius;
+	int			color;
 	double		diameter;
+
+	t_matrix4x4	transform;
+	t_material	material;
 }				t_sphere;
 
 typedef struct s_plane
 {
 	t_point		pos;
 	t_vector	vec;
-	int			color;
+	t_material	material;
 }				t_plane;
 
 typedef struct s_cylinder
@@ -65,7 +78,7 @@ typedef struct s_cylinder
 	t_vector	vec;
 	double		diameter;
 	double		height;
-	int			color;
+	t_material	material;
 }				t_cylinder;
 
 typedef struct s_scene
@@ -83,10 +96,12 @@ typedef struct s_scene
 }				t_scene;
 
 int				init_scene(t_scene *scene);
-
+int				default_scene(t_scene *scene);
 void			destroy_scene(t_scene *scene);
 
-t_intersections	intersect(t_sphere *s, t_ray r);
+t_camera		create_camera(int width, int height, double fov);
+void			init_camera(t_camera *camera);
+
 void			set_transform(t_sphere *s, t_matrix4x4 t);
 t_vector		normal_at(t_sphere *s, t_point p);
 t_material		material(void);

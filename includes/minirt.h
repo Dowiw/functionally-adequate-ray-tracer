@@ -6,14 +6,12 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/19 13:05:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 19:38:32 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
-
-struct s_sphere;
 
 # ifndef UNIT_EPSILON
 #  define UNIT_EPSILON 0.00001
@@ -63,34 +61,25 @@ typedef struct s_ray
 	t_vector direction; // where it points
 }					t_ray;
 
-/**
- * @brief Structure for intersections.
- * Contains the number of intersections and the times a ray intersects
- */
-typedef struct s_intersect
-{
-	unsigned int count; // the number of intersections
-	double *times;      // the time (t) that a ray intersects an object
-}					t_intersect;
+enum object_type {
+	SPHERE,
+	PLANE,
+	CYLINDER
+};
+
+typedef struct s_object {
+	enum object_type	type;
+	void				*object;
+}					t_object;
 
 /**
  * @brief
- *
  */
 typedef struct s_intersection
 {
-	double			t;
-	struct s_sphere	*obj;
+	double		t;
+	t_object	obj;
 }					t_intersection;
-
-/**
- * @brief Struct that contains a list of t_intersection
- */
-typedef struct s_intersections
-{
-	t_intersection	*list;
-	unsigned int	count;
-}					t_intersections;
 
 /**
  * @brief Structure for a canvas.
@@ -249,14 +238,13 @@ t_matrix4x4			matrix4x4_rotation_z(double radians);
 
 t_matrix4x4			matrix4x4_shearing(double *params);
 
+t_matrix4x4			view_transform(t_point from, t_point to, t_vector up);
+
 /** ######################################################################### *
  *  RAYS                                                                    # *
  *  ######################################################################### */
 
 t_point				position(t_ray ray, double time);
-t_intersection		intersection(double t, struct s_sphere *obj);
-t_intersections		intersections(unsigned int count, ...);
-t_intersection		hit(t_intersections *intersections);
 t_ray				transform(t_ray r, t_matrix4x4 m);
 
 /** ######################################################################### *

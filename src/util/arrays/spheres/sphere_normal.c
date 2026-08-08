@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_normal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 13:08:28 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/06/29 13:08:28 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/06 19:15:05 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vector	normal_at(t_sphere *s, t_point p)
 
 	inv = matrix4x4_inverse(s->transform);
 	local_point = matrix4x4_multiply_tuple(inv, p);
-	local_normal = tuples_sub(local_point, s->center);
+	local_normal = tuples_sub(local_point, point(0.0, 0.0, 0.0));
 	world_normal = matrix4x4_multiply_tuple(matrix4x4_transpose(inv),
 			local_normal);
 	world_normal.w = VECTOR;

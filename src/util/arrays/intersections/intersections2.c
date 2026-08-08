@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   planes.h                                           :+:      :+:    :+:   */
+/*   intersections2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/15 22:03:58 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/04 10:41:35 by sstark           ###   ########.fr       */
+/*   Created: 2026/08/04 11:08:38 by sstark            #+#    #+#             */
+/*   Updated: 2026/08/05 14:52:49 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLANES_H
-# define PLANES_H
+#include "scene.h"
+#include "util/arrays.h"
 
-# include "scene.h"
+int		intersections_compare(t_intersection *a, t_intersection *b)
+{
+	if (a->t > b->t)
+		return (1);
+	if (a->t < b->t)
+		return (-1);
+	return (0);
+}
 
-t_plane	**planes_create(void);
-
-t_plane	**planes_add(t_plane **array, t_plane *plane);
-
-int		planes_len(t_plane **array);
-
-void	free_planes(t_plane **array);
-
-#endif
+void	intersections_sort(t_intersection **array)
+{
+	#include <stdio.h>
+	arrays_sort((void **) array, (int (*)(void *, void *)) &intersections_compare);
+}

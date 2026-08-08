@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   planes.h                                           :+:      :+:    :+:   */
+/*   parse_vector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/15 22:03:58 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/04 10:41:35 by sstark           ###   ########.fr       */
+/*   Created: 2026/08/05 14:13:32 by sstark            #+#    #+#             */
+/*   Updated: 2026/08/05 14:17:56 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLANES_H
-# define PLANES_H
+#include "minirt.h"
+#include "parsing.h"
 
-# include "scene.h"
-
-t_plane	**planes_create(void);
-
-t_plane	**planes_add(t_plane **array, t_plane *plane);
-
-int		planes_len(t_plane **array);
-
-void	free_planes(t_plane **array);
-
-#endif
+int	parse_vector(t_vector *vector, char *str)
+{
+	if (!parse_tuple(vector, str))
+		return (0);
+	vector->w = VECTOR;
+	return (1);
+}

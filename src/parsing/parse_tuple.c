@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_vec.c                                        :+:      :+:    :+:   */
+/*   parse_tuple.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:19:42 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:09:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 14:14:43 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "parsing.h"
 #include "util/arrays.h"
 
-static int	parse_vec_params(t_vector *vec, char **params);
+static int	parse_tuple_params(t_tuple *vec, char **params);
 
 /*
  * Parses the given vector string 'str' in the following format:
@@ -23,7 +23,7 @@ static int	parse_vec_params(t_vector *vec, char **params);
  * The result is stored in the 'vec' pointer.
  * Returns true if the parsing was successful.
  */
-int	parse_vec(t_vector *vec, char *str)
+int	parse_tuple(t_tuple *tuple, char *str)
 {
 	int		result;
 	char	**params;
@@ -33,20 +33,21 @@ int	parse_vec(t_vector *vec, char *str)
 	params = ft_split(str, ',');
 	if (params == NULL)
 		return (0);
-	result = parse_vec_params(vec, params);
+	result = parse_tuple_params(tuple, params);
 	free_array((void **) params);
 	return (result);
 }
 
-static int	parse_vec_params(t_vector *vec, char **params)
+static int	parse_tuple_params(t_tuple *tuple, char **params)
 {
 	if (array_len((void **) params) != 3)
 		return (0);
-	if (!parse_double(&vec->x, params[0]))
+	if (!parse_double(&tuple->x, params[0]))
 		return (0);
-	if (!parse_double(&vec->y, params[1]))
+	if (!parse_double(&tuple->y, params[1]))
 		return (0);
-	if (!parse_double(&vec->z, params[2]))
+	if (!parse_double(&tuple->z, params[2]))
 		return (0);
+	tuple->w = INVALID_NEG;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:49 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:31:50 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/05 14:17:00 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ int	parse_plane(t_scene *scene, char **params)
 	plane = malloc(sizeof(t_plane));
 	if (plane == NULL)
 		return (0);
-	if (!parse_vec(&plane->pos, params[1]))
+	if (!parse_point(&plane->pos, params[1]))
 		return (parse_plane_error(plane));
-	if (!parse_vec(&plane->vec, params[2]))
+	if (!parse_vector(&plane->vec, params[2]))
 		return (parse_plane_error(plane));
-	if (!parse_color(&plane->color, params[3]))
-		return (parse_plane_error(plane));
+	// TODO
+	// if (!parse_color(&plane->color, params[3]))
+	// 	return (parse_plane_error(plane));
 	scene->planes = planes_add(scene->planes, plane);
 	if (scene->planes == NULL)
 		return (0);
