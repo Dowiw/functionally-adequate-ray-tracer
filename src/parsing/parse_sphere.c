@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:57 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 19:15:38 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/09 15:51:49 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static void	finish_sphere(t_sphere *sphere);
 
-static int	parse_sphere_error(t_sphere *sphere);
+static int	parse_sphere_error(t_scene *scene, t_sphere *sphere, char *error);
 
 /**
  * Parses the given 'params' and adds it to the scenes spheres.
@@ -32,20 +32,20 @@ int	parse_sphere(t_scene *scene, char **params)
 	t_sphere	*sphere;
 
 	if (array_len((void **) params) != 4)
-		return (0);
+		return (parse_error(scene, "Bad format, expected sp <center> <diameter> <color>"));
 	sphere = malloc(sizeof(t_sphere));
 	if (sphere == NULL)
-		return (0);
-	if (!parse_point(&sphere->center, params[1]))
-		return (parse_sphere_error(sphere));
-	if (!parse_double(&sphere->diameter, params[2]))
-		return (parse_sphere_error(sphere));
-	if (!parse_color(&sphere->color, params[3]))
-		return (parse_sphere_error(sphere));
+		return (parse_error(scene, "Allocation Failure"));
+	if (!parse_point(scene, &sphere->center, params[1]))
+		return (parse_sphere_error(scene, sphere, "Failed to parse center"));
+	if (!parse_double(scene, &sphere->diameter, params[2]))
+		return (parse_sphere_error(scene, sphere, "Failed to parse diameter"));
+	if (!parse_color(scene, &sphere->color, params[3]))
+		return (parse_sphere_error(scene, sphere, "Failed to parse color"));
 	finish_sphere(sphere);
 	scene->spheres = spheres_add(scene->spheres, sphere);
 	if (scene->spheres == NULL)
-		return (0);
+		return (parse_error(scene, "Allocation Failure"));
 	return (1);
 }
 
@@ -57,8 +57,8 @@ static void	finish_sphere(t_sphere *sphere)
 	sphere->material.color = color(red(sphere->color) / 255.0, green(sphere->color) / 255.0, blue(sphere->color) / 255.0);
 }
 
-static int	parse_sphere_error(t_sphere *sphere)
+static int	parse_sphere_error(t_scene *scene, t_sphere *sphere, char *error)
 {
 	free(sphere);
-	return (0);
+	return (parse_error(scene, error));
 }

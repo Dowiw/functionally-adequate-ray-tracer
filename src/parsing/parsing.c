@@ -6,11 +6,13 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:17 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 14:13:34 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/09 17:34:00 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <fcntl.h>
+#include <string.h>
 #include <unistd.h>
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
@@ -19,12 +21,15 @@
 #include "util/arrays.h"
 #include "util/strings.h"
 
-static int	parse_line(t_scene *scene, char *line);
+static int	parse_scene_line(t_scene *scene, char *line);
+
+static int	parse_scene_fd(t_scene *scene, int fd);
+
+static int	error(t_scene *scene, char *msg);
 
 // TODO:
 //  - enforce ranges where the subject requires
 //   - partially done, still needs to be implemented for vectors
-//  - consider moving error printing down the parsing chain to get more details
 
 /*
  * Parses the given .rt 'file' to the 'scene' pointer.
@@ -32,32 +37,49 @@ static int	parse_line(t_scene *scene, char *line);
 */
 int	parse_scene(t_scene *scene, char *file)
 {
-	int		fd;
-	char	*line;
+	int	result;
+	int	fd;
 
 	if (!string_endswith(file, ".rt"))
-		return (0);
+		return (error(scene, "Requires a .rt file"));
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		return (error(scene, strerror(errno)));
+	result = parse_scene_fd(scene, fd);
+	close(fd);
+	if (!result)
+		return (error(scene, "Failed to parse scene"));
+	return (1);
+}
+
+static int	parse_scene_fd(t_scene *scene, int fd)
+{
+	char	*line;
+
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		line = string_remove_suffix(line, "\n");
-		if (!parse_line(scene, line))
+		if (line == NULL)
+			return (parse_error(scene, "Allocation Failure"));
+		if (!parse_scene_line(scene, line))
 		{
-			free(line);
-			close(fd);
+			scene->error_line = line;
 			return (0);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	close(fd);
-	return (scene->has_ambience && scene->has_camera && scene->has_light);
+	if (!scene->has_ambience)
+		return (parse_error(scene, "Missing ambience declaration"));
+	if (!scene->has_camera)
+		return (parse_error(scene, "Missing camera declaration"));
+	if (!scene->has_light)
+		return (parse_error(scene, "Missing light declaration"));
+	return (1);
 }
 
-static int	parse_line(t_scene *scene, char *line)
+static int	parse_scene_line(t_scene *scene, char *line)
 {
 	int		result;
 	char	**params;
@@ -65,8 +87,7 @@ static int	parse_line(t_scene *scene, char *line)
 
 	params = ft_split(line, ' ');
 	if (params == NULL)
-		return (0);
-	result = 0;
+		return (parse_error(scene, "Allocation Failure"));
 	id = params[0];
 	if (id == NULL)
 		result = 1;
@@ -82,6 +103,37 @@ static int	parse_line(t_scene *scene, char *line)
 		result = parse_plane(scene, params);
 	else if (string_equals(id, "cy"))
 		result = parse_cylinder(scene, params);
+	else
+		result = parse_error(scene, "Unrecognized identifier");
 	free_array((void **) params);
 	return (result);
+}
+
+static int	error(t_scene *scene, char *msg)
+{
+	int	i;
+
+	ft_putstr_fd2("Error\n", STDERR_FILENO);
+	ft_putstr_fd2(msg, STDERR_FILENO);
+	ft_putstr_fd2("\n", STDERR_FILENO);
+	if (scene->error_line != NULL)
+	{
+		ft_putstr_fd2("Error at line: ", STDERR_FILENO);
+		ft_putstr_fd2(scene->error_line, STDERR_FILENO);
+		ft_putstr_fd2("\n", STDERR_FILENO);
+		free(scene->error_line);
+		scene->error_line = NULL;
+	}
+	i = 0;
+	while (scene->error[i] != NULL)
+	{
+		ft_putstr_fd2(" > ", STDERR_FILENO);
+		ft_putstr_fd2(scene->error[i], STDERR_FILENO);
+		if (scene->error[i + 1] != NULL)
+			ft_putstr_fd2(":", STDERR_FILENO);
+		ft_putstr_fd2("\n", STDERR_FILENO);
+		i++;
+	}
+	ft_bzero(scene->error, ERROR_STACK_SIZE + 1);
+	return (0);
 }

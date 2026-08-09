@@ -6,11 +6,12 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:37:50 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 13:44:21 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/09 15:41:42 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+#include "parsing.h"
 
 static int	parse_double_before_decimal(double *num, char *str, int *i,
 				int sign);
@@ -26,7 +27,7 @@ static int	parse_double_after_decimal(double *num, char *str, int *i,
  * The result is stored in the 'num' pointer.
  * Returns true if the parsing was successful.
  */
-int	parse_double(double *num, char *str)
+int	parse_double(t_scene *scene, double *num, char *str)
 {
 	int	i;
 	int	sign;
@@ -38,12 +39,12 @@ int	parse_double(double *num, char *str)
 	if (str[i] == '+' || str[i] == '-')
 		i++;
 	if (!parse_double_before_decimal(num, str, &i, sign))
-		return (0);
+		return (parse_error(scene, "Not a valid number"));
 	if (str[i] == '.')
 	{
 		i++;
 		if (!parse_double_after_decimal(num, str, &i, sign))
-			return (0);
+			return (parse_error(scene, "Not a valid number"));
 	}
 	return (1);
 }
@@ -52,9 +53,15 @@ int	parse_double(double *num, char *str)
  * Parses the given 'str' (see parse_double) and checks the result against the
  * given range 'min' and 'max'.
  */
-int	parse_double_range(double *num, char *str, double min, double max)
+int	parse_double_range(t_scene *scene, double *num, char *str, double min, double max)
 {
-	return (parse_double(num, str) && *num >= min && *num <= max);
+	if (!parse_double(scene, num, str))
+		return (0);
+	if (*num < min)
+		return (parse_error(scene, "Number is too small"));
+	if (*num > max)
+		return (parse_error(scene, "Number is too big"));
+	return (1);
 }
 
 static int	parse_double_before_decimal(double *num, char *str, int *i,

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 18:13:09 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/09 17:06:27 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define SCENE_H
 
 # include "minirt.h"
+
+# define ERROR_STACK_SIZE 10
 
 typedef struct s_material
 {
@@ -93,6 +95,9 @@ typedef struct s_scene
 	int			has_ambience;
 	int			has_camera;
 	int			has_light;
+
+	char		*error[ERROR_STACK_SIZE + 1];
+	char		*error_line;
 }				t_scene;
 
 int				init_scene(t_scene *scene);

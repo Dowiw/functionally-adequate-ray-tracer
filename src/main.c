@@ -6,12 +6,12 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:35:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:05:22 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/09 17:24:22 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "debug.h"
+#include "libft/libft.h"
 #include "parsing.h"
 #include "rendering.h"
 #include "scene.h"
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	if (!init_scene(&scene))
 		return (error("Failed to initialize scene"));
 	if (!parse_scene(&scene, argv[1]))
-		return (error("Failed to parse scene"));
+		return (0);
 	if (!canvas_create(&canvas, scene.camera.width, scene.camera.height))
 	{
 		destroy_scene(&scene);
@@ -43,7 +43,8 @@ int	main(int argc, char **argv)
 
 static int	error(char *msg)
 {
-	printf("Error\n");
-	printf("%s\n", msg);
+	ft_putstr_fd2("Error\n", STDERR_FILENO);
+	ft_putstr_fd2(msg, STDERR_FILENO);
+	ft_putstr_fd2("\n", STDERR_FILENO);
 	return (1);
 }
