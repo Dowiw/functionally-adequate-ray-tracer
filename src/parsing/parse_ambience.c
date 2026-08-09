@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:17:25 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 13:53:47 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/04 11:53:44 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	parse_ambience(t_scene *scene, char **params)
 		return (0);
 	if (!parse_color(&scene->ambience.color, params[2]))
 		return (0);
+	scene->has_ambience = 1;
 	return (1);
 }

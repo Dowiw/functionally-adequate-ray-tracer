@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:57 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:32:23 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 19:15:38 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "util/arrays.h"
 #include "util/spheres.h"
 #include "util/colors.h"
+
+static void	finish_sphere(t_sphere *sphere);
 
 static int	parse_sphere_error(t_sphere *sphere);
 
@@ -28,26 +30,31 @@ static int	parse_sphere_error(t_sphere *sphere);
 int	parse_sphere(t_scene *scene, char **params)
 {
 	t_sphere	*sphere;
-	int			rgb_color;
 
 	if (array_len((void **) params) != 4)
 		return (0);
 	sphere = malloc(sizeof(t_sphere));
 	if (sphere == NULL)
 		return (0);
-	sphere->material = material();
-	if (!parse_vec(&sphere->center, params[1]))
+	if (!parse_point(&sphere->center, params[1]))
 		return (parse_sphere_error(sphere));
 	if (!parse_double(&sphere->diameter, params[2]))
 		return (parse_sphere_error(sphere));
-	if (!parse_color(&rgb_color, params[3]))
+	if (!parse_color(&sphere->color, params[3]))
 		return (parse_sphere_error(sphere));
-	sphere->material.color = color((double)red(rgb_color) / 255.0,
-			(double)green(rgb_color) / 255.0, (double)blue(rgb_color) / 255.0);
+	finish_sphere(sphere);
 	scene->spheres = spheres_add(scene->spheres, sphere);
 	if (scene->spheres == NULL)
 		return (0);
 	return (1);
+}
+
+static void	finish_sphere(t_sphere *sphere)
+{
+	sphere->transform = matrix4x4_translation(sphere->center.x, sphere->center.y, sphere->center.z);
+	sphere->transform = matrix4x4_multiply(sphere->transform, matrix4x4_scaling(sphere->diameter, sphere->diameter, sphere->diameter));
+	sphere->material = material();
+	sphere->material.color = color(red(sphere->color) / 255.0, green(sphere->color) / 255.0, blue(sphere->color) / 255.0);
 }
 
 static int	parse_sphere_error(t_sphere *sphere)

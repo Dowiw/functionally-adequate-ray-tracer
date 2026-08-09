@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/06/19 13:10:15 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/06 15:38:08 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,11 @@ CFLAGS = -g -Wall -Wextra -Werror -I./$(HEADER_DIR)
 
 HEADER_DIR = includes
 HEADERS = minirt.h \
+	debug.h \
 	libft.h \
 	parsing.h \
+	ray.h \
+	rendering.h \
 	scene.h \
 	util/arrays.h \
 	util/colors.h \
@@ -29,6 +32,7 @@ HEADERS = minirt.h \
 
 SOURCE_DIR = src
 SOURCES = main.c \
+	debug/debug.c \
 	graphics/init_mlx.c \
 	graphics/canvas.c \
 	matrices/matrix_cofactor.c \
@@ -45,6 +49,7 @@ SOURCES = main.c \
 	matrices/matrix_submatrix.c \
 	matrices/matrix_translation.c \
 	matrices/matrix_transpose.c \
+	matrices/view_transform.c \
 	tuples/tuple_compare.c \
 	tuples/tuple_utils.c \
 	tuples/tuple_operations.c \
@@ -57,14 +62,22 @@ SOURCES = main.c \
 	parsing/parse_int.c \
 	parsing/parse_light.c \
 	parsing/parse_plane.c \
+	parsing/parse_point.c \
 	parsing/parse_sphere.c \
-	parsing/parse_vec.c \
+	parsing/parse_tuple.c \
+	parsing/parse_vector.c \
 	parsing/parsing.c \
+	rays/intersections.c \
+	rays/ray_transform.c \
+	rendering/computations.c \
+	rendering/rendering.c \
+	scene/camera.c \
 	scene/scene.c \
-	scene/rays/ray_utils.c \
-	scene/rays/ray_transform.c \
 	util/arrays/arrays1.c \
+	util/arrays/arrays2.c \
 	util/arrays/cylinders/cylinders1.c \
+	util/arrays/intersections/intersections1.c \
+	util/arrays/intersections/intersections2.c \
 	util/arrays/planes/planes1.c \
 	util/arrays/spheres/sphere_utils.c \
 	util/arrays/spheres/sphere_normal.c \
@@ -73,7 +86,7 @@ SOURCES = main.c \
 	util/colors/colors1.c \
 	util/lighting/lighting.c \
 	util/materials/materials.c \
-	util/strings/strings1.c 
+	util/strings/strings1.c
 
 TEST_DIR = tests
 TESTS = main.c \
@@ -83,7 +96,8 @@ TESTS = main.c \
 	test_matrices.c \
 	test_transformations.c \
 	test_rays.c \
-	test_light_shading.c
+	test_light_shading.c \
+	test_rendering.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 
@@ -118,8 +132,6 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR) bonus
 
 $(LIBUNIT):
-	@echo "[GIT] pulling libunit submodule update"
-	@git submodule update --init --recursive
 	@echo "[MAKE] libunit/framework"
 	@$(MAKE) -C libunit/framework > /dev/null
 

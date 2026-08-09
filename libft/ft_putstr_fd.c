@@ -13,7 +13,7 @@
 #include "libft.h"
 
 //Write string (*s) to file descriptor
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd2(char *s, int fd)
 {
 	size_t	i;
 

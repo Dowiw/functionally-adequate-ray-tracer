@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:09 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 13:29:25 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/06 15:38:29 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ int	parse_int(int *num, char *str);
 
 int	parse_int_range(int *num, char *str, int min, int max);
 
-int	parse_vec(t_vector *vec, char *str);
+int	parse_point(t_point *point, char *str);
+
+int	parse_vector(t_vector *vector, char *str);
+
+int	parse_tuple(t_tuple *tuple, char *str);
 
 int	parse_cylinder(t_scene *scene, char **params);
 

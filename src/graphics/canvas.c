@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 11:48:41 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/06/19 11:48:42 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/04 12:56:50 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ static void	write_ppm_pixels(t_canvas *canvas, int fd)
 		while (x < canvas->width)
 		{
 			pixel = view_pixel(canvas, x, y);
-			ft_putnbr_fd(clamp_color(pixel.x), fd);
+			ft_putnbr_fd2(clamp_color(pixel.x), fd);
 			ft_putchar_fd(' ', fd);
-			ft_putnbr_fd(clamp_color(pixel.y), fd);
+			ft_putnbr_fd2(clamp_color(pixel.y), fd);
 			ft_putchar_fd(' ', fd);
-			ft_putnbr_fd(clamp_color(pixel.z), fd);
+			ft_putnbr_fd2(clamp_color(pixel.z), fd);
 			if (x < canvas->width - 1)
 				ft_putchar_fd(' ', fd);
 			x++;
@@ -127,11 +127,11 @@ char	*canvas_to_ppm(t_canvas *canvas)
 	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (NULL);
-	ft_putstr_fd("P3\n", fd);
-	ft_putnbr_fd(canvas->width, fd);
+	ft_putstr_fd2("P3\n", fd);
+	ft_putnbr_fd2(canvas->width, fd);
 	ft_putchar_fd(' ', fd);
-	ft_putnbr_fd(canvas->height, fd);
-	ft_putstr_fd("\n255\n", fd);
+	ft_putnbr_fd2(canvas->height, fd);
+	ft_putstr_fd2("\n255\n", fd);
 	write_ppm_pixels(canvas, fd);
 	close(fd);
 	return (ft_strdup(filename));
