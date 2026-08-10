@@ -183,7 +183,7 @@ char				*canvas_to_ppm(t_canvas *canvas);
  *  MATRICES                                                                # *
  *  ######################################################################### */
 
- typedef struct s_matrix2x2
+typedef struct s_matrix2x2
 {
 	double			m[2][2];
 }				t_matrix2x2;
@@ -259,6 +259,6 @@ t_ray	ray(t_point origin, t_vector direction);
  *  SPHERES                                                                 # *
  *  ######################################################################### */
 
- t_vector			reflect(t_vector v, t_vector n);
+t_vector			reflect(t_vector v, t_vector n);
 
 #endif
