@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:42:38 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 18:46:23 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/10 17:05:39 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_comps {
 	double		t;
 	t_object	obj;
 	t_point		point;
+	t_point		over_point;
 	t_vector	eyev;
 	t_vector	normalv;
 	int			inside;

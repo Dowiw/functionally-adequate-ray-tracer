@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 18:13:09 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/10 17:05:39 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_sphere
 	t_point		center;
 	int			color;
 	double		diameter;
-
 	t_matrix4x4	transform;
 	t_material	material;
 }				t_sphere;
@@ -81,14 +80,28 @@ typedef struct s_cylinder
 	t_material	material;
 }				t_cylinder;
 
+/**
+ * @brief Scene structure for all the positioning and stuff.
+ *
+ * Before adding an object using its respective add function,
+ * you have to allocate it outside that function. i.e.
+ *
+ * ```C
+ * t_scene w;
+ * init_scene(&w);
+ * t_sphere *s1 = malloc(sizeof(t_sphere));
+ * *s1 = sphere_create();
+ * w.spheres = spheres_add(w.spheres, s1)
+ * ```
+ */
 typedef struct s_scene
 {
-	t_ambience	ambience;
-	t_camera	camera;
-	t_light		light;
-	t_sphere	**spheres;
-	t_plane		**planes;
-	t_cylinder	**cylinders;
+	t_ambience	ambience;		// ambient lighting
+	t_camera	camera;			// scene camera
+	t_light		light;			// point light
+	t_sphere	**spheres;		// allocated sphere list
+	t_plane		**planes;		// allocated plane list
+	t_cylinder	**cylinders;	// allocated cylinder list
 
 	int			has_ambience;
 	int			has_camera;
@@ -103,12 +116,26 @@ t_camera		create_camera(int width, int height, double fov);
 void			init_camera(t_camera *camera);
 
 void			set_transform(t_sphere *s, t_matrix4x4 t);
+
+/** ######################################################################### *
+ *  SPHERES                                                                 # *
+ *  ######################################################################### */
+
 t_vector		normal_at(t_sphere *s, t_point p);
 t_material		material(void);
 
-t_light			light(t_point p, t_color c);
+/** ######################################################################### *
+ *  LIGHTING                                                                # *
+ *  ######################################################################### */
 
+t_light			light(t_point p, t_color c);
 t_color			lighting(t_material m, t_light l, t_point pos, t_vector eye,
-					t_vector norm);
+					t_vector norm, int in_shadow);
+
+/** ######################################################################### *
+ *  SHADOWS                                                                 # *
+ *  ######################################################################### */
+
+int	is_shadowed(t_scene w, t_point p);
 
 #endif

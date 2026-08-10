@@ -57,19 +57,21 @@ int	test_intersect_scene(void)
 {
 	t_scene			scene;
 	t_ray			ray;
-	t_intersection	**intersections;
+	t_intersections	intersections;
 
 	if (!default_scene(&scene))
 		return (1);
 	ray = (t_ray){point(0.0, 0.0, -5.0), vector(0.0, 0.0, 1.0)};
 	intersections = intersect_scene(&scene, ray);
 
-	UNIT_ASSERT_EQ(intersections_len(intersections), 4);
-	UNIT_ASSERT_FEQ(intersections[0]->t, 4);
-	UNIT_ASSERT_FEQ(intersections[1]->t, 4.5);
-	UNIT_ASSERT_FEQ(intersections[2]->t, 5.5);
-	UNIT_ASSERT_FEQ(intersections[3]->t, 6.0);
+	UNIT_ASSERT_EQ(intersections.count, 4);
+	UNIT_ASSERT_FEQ(intersections.list[0]->t, 4);
+	UNIT_ASSERT_FEQ(intersections.list[1]->t, 4.5);
+	UNIT_ASSERT_FEQ(intersections.list[2]->t, 5.5);
+	UNIT_ASSERT_FEQ(intersections.list[3]->t, 6.0);
 
+	free_intersections(intersections);
+	destroy_scene(&scene);
 	return (0);
 }
 

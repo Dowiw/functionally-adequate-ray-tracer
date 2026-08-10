@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersections2.c                                   :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/04 11:08:38 by sstark            #+#    #+#             */
+/*   Created: 2026/07/15 13:39:49 by kmonjard          #+#    #+#             */
 /*   Updated: 2026/08/10 17:06:23 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include "scene.h"
-#include "util/arrays.h"
+#include "minirt.h"
 
-int		intersections_compare(t_intersection *a, t_intersection *b)
+/**
+ * @brief Ray constructor
+ * 
+ * @param origin
+ * @param direction
+ * @return the resulting struct
+ */
+t_ray	ray(t_point origin, t_vector direction)
 {
-	if (a->t > b->t)
-		return (1);
-	if (a->t < b->t)
-		return (-1);
-	return (0);
-}
+	t_ray	r;
 
-void	intersections_sort(t_intersections *xs)
-{
-	if (xs != NULL && xs->list != NULL)
-		arrays_sort((void **) xs->list, (int (*)(void *, void *)) &intersections_compare);
+	r.origin = origin;
+	r.direction = direction;
+	return (r);
 }

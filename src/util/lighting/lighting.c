@@ -6,7 +6,7 @@
 /*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/02 13:39:41 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/07/02 13:40:02 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/10 17:06:23 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ t_light	light(t_point p, t_color c)
  * @param pos position of eye
  * @param eye vector of eye
  * @param norm vector of surface normal
+ * @param in_shadow boolean for shadow
  * @return t_color the color found
  */
 t_color	lighting(t_material m, t_light l, t_point pos, t_vector eye,
-		t_vector norm)
+		t_vector norm, int in_shadow)
 {
 	t_color		effective;
 	t_color		ambient;
@@ -72,6 +73,11 @@ t_color	lighting(t_material m, t_light l, t_point pos, t_vector eye,
 	effective = shur_prod(m.color, l.intensity);
 	light_v = (t_vector)calc_norm(tuples_sub(l.pos, pos));
 	ambient = tuple_mult(effective, m.ambient);
+	if (in_shadow)
+	{
+		ambient.w = COLOR;
+		return (ambient);
+	}
 	light_dot_norm = dot_product(light_v, norm);
 	if (light_dot_norm < 0)
 	{

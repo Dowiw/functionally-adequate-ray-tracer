@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 19:38:32 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/10 17:05:39 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,26 @@ typedef struct s_ray
 	t_vector	direction;	// where it points
 }				t_ray;
 
-enum object_type {
+enum	e_object_type
+{
 	SPHERE,
 	PLANE,
 	CYLINDER
 };
 
-typedef struct s_object {
-	enum object_type	type;
+typedef struct s_object
+{
+	enum e_object_type	type;
 	void				*object;
 }					t_object;
 
 /**
- * @brief
+ * @brief Struct for an intersection.
  */
 typedef struct s_intersection
 {
-	double		t;
-	t_object	obj;
+	double		t;		// time
+	t_object	obj;	// the object
 }					t_intersection;
 
 /**
@@ -87,8 +89,8 @@ typedef struct s_intersection
  */
 typedef struct s_intersections
 {
-	t_intersection	*list;
-	unsigned int	count;
+	t_intersection	**list;
+	int				count;
 }				t_intersections;
 
 /**
@@ -118,9 +120,6 @@ typedef struct s_mlx
 
 /**
  * @brief Data structure for fdf data
- *
- * @param mlx mlx structure
- * @param ...
  */
 typedef struct s_data
 {
@@ -173,7 +172,7 @@ t_color				color_black(void);
 /** ######################################################################### *
  *  GRAPHICS                                                                # *
  *  ######################################################################### */
-
+//
 int					init_mlx_lib(t_mlx *mlx);
 void				init_mlx(t_mlx *mlx);
 
@@ -185,7 +184,7 @@ char				*canvas_to_ppm(t_canvas *canvas);
 /** ######################################################################### *
  *  MATRICES                                                                # *
  *  ######################################################################### */
-
+//
 typedef struct s_matrix2x2
 {
 	double			m[2][2];
@@ -254,13 +253,14 @@ t_matrix4x4			view_transform(t_point from, t_point to, t_vector up);
  *  RAYS                                                                    # *
  *  ######################################################################### */
 
-t_point				position(t_ray ray, double time);
+ t_point				position(t_ray ray, double time);
 t_ray				transform(t_ray r, t_matrix4x4 m);
+t_ray	ray(t_point origin, t_vector direction);
 
 /** ######################################################################### *
  *  SPHERES                                                                 # *
  *  ######################################################################### */
 
-t_vector			reflect(t_vector v, t_vector n);
+ t_vector			reflect(t_vector v, t_vector n);
 
 #endif
