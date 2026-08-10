@@ -81,5 +81,6 @@ int	test_render_scene(void);
 int	test_shadow_surface(void);
 int	test_shadow_is_shadowed(void);
 int	test_shadow_shade(void);
+int	test_shadow_point_offsets(void);
 
 #endif

@@ -83,7 +83,7 @@ int	test_shadow_shade(void)
 
 int	test_shadow_point_offsets(void)
 {
-	t_ray		r = ray(point(0, 0, -5), vector(0, 0, -1));
+	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_sphere	shape = sphere_create();
 	shape.transform = matrix4x4_translation(0, 0, 1);
 

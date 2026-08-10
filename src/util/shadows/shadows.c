@@ -17,7 +17,13 @@
 #include "util/intersections.h"
 
 /**
- * @brief Calculate whether the point is shadowed based on the scene
+ * @brief Calculate whether the point is shadowed based on the scene.
+ *
+ * It first calculates the vector and distance from point p to the light.
+ * Then it casts a ray from that p to the light because we have the normal.
+ * Then then it checks if there is an object as the ray goes to the light by
+ * ensuring that it does not go over the distance between the point and the
+ * light pos.
  * 
  * @param w scene
  * @param p point

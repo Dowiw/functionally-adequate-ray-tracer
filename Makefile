@@ -18,14 +18,14 @@ CFLAGS = -g -Wall -Wextra -Werror -I./$(HEADER_DIR)
 HEADER_DIR = includes
 HEADERS = minirt.h \
 	debug.h \
-	libft.h \
+	libft/libft.h \
 	parsing.h \
 	ray.h \
 	rendering.h \
 	scene.h \
 	util/arrays.h \
 	util/colors.h \
-	util/cylinders \
+	util/cylinders.h \
 	util/planes.h \
 	util/spheres.h \
 	util/strings.h \

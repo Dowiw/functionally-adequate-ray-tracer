@@ -106,5 +106,7 @@ int	main(void)
 	load_test(shadow_suite, "Lighting when Surface in Shadow", &test_shadow_surface);
 	load_test(shadow_suite, "Testing is_shadowed() function", &test_shadow_is_shadowed);
 	load_test(shadow_suite, "Testing updated shade_hit() function for shadows", &test_shadow_shade);
+	load_test(shadow_suite, "Testing over_point update to t_comps", &test_shadow_point_offsets);
+
 	return (launch_tests(&suites));
 }
