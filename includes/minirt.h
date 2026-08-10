@@ -170,7 +170,7 @@ t_color				color_black(void);
 /** ######################################################################### *
  *  GRAPHICS                                                                # *
  *  ######################################################################### */
-//
+
 int					init_mlx_lib(t_mlx *mlx);
 void				init_mlx(t_mlx *mlx);
 
@@ -182,8 +182,8 @@ char				*canvas_to_ppm(t_canvas *canvas);
 /** ######################################################################### *
  *  MATRICES                                                                # *
  *  ######################################################################### */
-//
-typedef struct s_matrix2x2
+
+ typedef struct s_matrix2x2
 {
 	double			m[2][2];
 }				t_matrix2x2;
@@ -251,7 +251,7 @@ t_matrix4x4			view_transform(t_point from, t_point to, t_vector up);
  *  RAYS                                                                    # *
  *  ######################################################################### */
 
- t_point				position(t_ray ray, double time);
+t_point				position(t_ray ray, double time);
 t_ray				transform(t_ray r, t_matrix4x4 m);
 t_ray	ray(t_point origin, t_vector direction);
 
