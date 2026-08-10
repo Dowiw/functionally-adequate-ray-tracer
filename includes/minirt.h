@@ -13,8 +13,6 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-struct			s_sphere;
-
 # ifndef UNIT_EPSILON
 #  define UNIT_EPSILON 0.00001
 # endif
