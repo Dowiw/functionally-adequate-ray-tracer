@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:35:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 17:24:22 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/11 12:50:51 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	main(int argc, char **argv)
 
 static int	error(char *msg)
 {
-	ft_putstr_fd2("Error\n", STDERR_FILENO);
-	ft_putstr_fd2(msg, STDERR_FILENO);
-	ft_putstr_fd2("\n", STDERR_FILENO);
+	ft_putstr_fd("Error\n", STDERR_FILENO);
+	ft_putstr_fd(msg, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 	return (1);
 }

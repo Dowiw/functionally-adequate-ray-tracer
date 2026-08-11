@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:17 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 17:34:00 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/11 12:52:18 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,25 +113,25 @@ static int	error(t_scene *scene, char *msg)
 {
 	int	i;
 
-	ft_putstr_fd2("Error\n", STDERR_FILENO);
-	ft_putstr_fd2(msg, STDERR_FILENO);
-	ft_putstr_fd2("\n", STDERR_FILENO);
+	ft_putstr_fd("Error\n", STDERR_FILENO);
+	ft_putstr_fd(msg, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 	if (scene->error_line != NULL)
 	{
-		ft_putstr_fd2("Error at line: ", STDERR_FILENO);
-		ft_putstr_fd2(scene->error_line, STDERR_FILENO);
-		ft_putstr_fd2("\n", STDERR_FILENO);
+		ft_putstr_fd("Error at line: ", STDERR_FILENO);
+		ft_putstr_fd(scene->error_line, STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
 		free(scene->error_line);
 		scene->error_line = NULL;
 	}
 	i = 0;
 	while (scene->error[i] != NULL)
 	{
-		ft_putstr_fd2(" > ", STDERR_FILENO);
-		ft_putstr_fd2(scene->error[i], STDERR_FILENO);
+		ft_putstr_fd(" > ", STDERR_FILENO);
+		ft_putstr_fd(scene->error[i], STDERR_FILENO);
 		if (scene->error[i + 1] != NULL)
-			ft_putstr_fd2(":", STDERR_FILENO);
-		ft_putstr_fd2("\n", STDERR_FILENO);
+			ft_putstr_fd(":", STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
 		i++;
 	}
 	ft_bzero(scene->error, ERROR_STACK_SIZE + 1);
