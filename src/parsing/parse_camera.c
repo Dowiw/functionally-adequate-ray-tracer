@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 15:34:32 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/11 13:00:40 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ static void	finish_camera(t_camera *camera, int width, int height);
  * Parses the given 'params' to the given 'scene's camera.
  * The expected format looks like this:
  *   C <pos> <orientation> <fov> (for example: C -50.0,0,20 0,0,1 70)
+ * The orientation vector is as follows:
+ *   <roll>,<yaw>,<pitch>
+ *
  * Returns true if the parsing was succesful.
  */
 int	parse_camera(t_scene *scene, char **params)
@@ -45,14 +48,10 @@ static void	finish_camera(t_camera *camera, int width, int height)
 	camera->width = width;
 	camera->height = height;
 	camera->field_of_view = camera->fov * PI / 180.0;
-	// TODO
-	// camera->orientation.w = POINT;
-	// camera->transform = matrix4x4_multiply(camera->transform, view_transform(point(0.0, 0.0, 0.0), camera->orientation, point(0.0, 1.0, 0.0)));
 	camera->transform = matrix4x4_translation(camera->pos.x, camera->pos.y, camera->pos.z);
 	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_x(camera->orientation.x * PI));
 	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_y(camera->orientation.y * PI));
 	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_z(camera->orientation.z * PI));
-	// camera->transform = matrix4x4_identity();
-	// camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_y(0.25 * PI));
+	camera->transform = matrix4x4_inverse(camera->transform);
 	init_camera(camera);
 }

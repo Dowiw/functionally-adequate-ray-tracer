@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:57 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 15:51:49 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/11 13:03:18 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	parse_sphere(t_scene *scene, char **params)
 static void	finish_sphere(t_sphere *sphere)
 {
 	sphere->transform = matrix4x4_translation(sphere->center.x, sphere->center.y, sphere->center.z);
-	sphere->transform = matrix4x4_multiply(sphere->transform, matrix4x4_scaling(sphere->diameter, sphere->diameter, sphere->diameter));
+	sphere->transform = matrix4x4_multiply(sphere->transform, matrix4x4_scaling(sphere->diameter / 2.0, sphere->diameter / 2.0, sphere->diameter / 2.0));
 	sphere->material = material();
 	sphere->material.color = color(red(sphere->color) / 255.0, green(sphere->color) / 255.0, blue(sphere->color) / 255.0);
 }
