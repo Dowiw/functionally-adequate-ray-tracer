@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 10:37:30 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 19:15:21 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/10 17:06:23 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 /**
  * @brief Allocates and initializes an intersection
  *
- * @param type
- * @param object
- * @param t
+ * @param the type of object to be intersected
+ * @param the object
+ * @param time
  * @return t_intersection*
  */
-t_intersection	*create_intersection(enum object_type type, void *object, double t)
+t_intersection	*create_intersection(enum e_object_type type, void *object, double t)
 {
 	t_intersection	*result;
 
@@ -43,9 +43,9 @@ t_intersection	*create_intersection(enum object_type type, void *object, double 
  * @param ray
  * @return t_intersection**
  */
-t_intersection	**intersect_sphere(t_sphere *sphere, t_ray ray)
+t_intersections	intersect_sphere(t_sphere *sphere, t_ray ray)
 {
-	t_intersection	**result;
+	t_intersections	result;
 	t_ray			local_ray;
 	t_tuple			sphere_to_ray;
 	double			abc[3];
@@ -65,48 +65,57 @@ t_intersection	**intersect_sphere(t_sphere *sphere, t_ray ray)
 	return (result);
 }
 
-// t_intersection	**intersect_plane(t_plane *plane, t_ray ray)
+// t_intersections	intersect_plane(t_plane *plane, t_ray ray)
 // {
-// 	return (NULL);
+// 	return (intersections_create());
 // }
 
-// t_intersection	**intersect_cylinder(t_cylinder *cylinder, t_ray ray)
+// t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 // {
-// 	return (NULL);
+// 	return (intersections_create());
 // }
 
 /**
  * @brief Calculates where the ray intersects any objects in the scene and returns an array of intersections
  *
- * @param sphere
+ * @param scene
  * @param ray
- * @return t_intersection**
+ * @return t_intersections
  */
-t_intersection	**intersect_scene(t_scene *scene, t_ray ray)
+t_intersections	intersect_scene(t_scene *scene, t_ray ray)
 {
-	t_intersection	**result;
+	t_intersections	result;
 	int				i;
 
 	result = intersections_create();
-	i = 0;
-	while (scene->spheres[i] != NULL)
+	if (scene->spheres != NULL)
 	{
-		result = intersections_add_all(result, intersect_sphere(scene->spheres[i], ray));
-		i++;
+		i = 0;
+		while (scene->spheres[i] != NULL)
+		{
+			result = intersections_add_all(result, intersect_sphere(scene->spheres[i], ray));
+			i++;
+		}
 	}
-	// i = 0;
-	// while (scene->planes[i] != NULL)
+	// if (scene->planes != NULL)
 	// {
-	// 	result = intersections_add_all(result, intersect_plane(scene->planes[i], ray));
-	// 	i++;
+	// 	i = 0;
+	// 	while (scene->planes[i] != NULL)
+	// 	{
+	// 		result = intersections_add_all(result, intersect_plane(scene->planes[i], ray));
+	// 		i++;
+	// 	}
 	// }
-	// i = 0;
-	// while (scene->cylinders[i] != NULL)
+	// if (scene->cylinders != NULL)
 	// {
-	// 	result = intersections_add_all(result, intersect_cylinder(scene->cylinders[i], ray));
-	// 	i++;
+	// 	i = 0;
+	// 	while (scene->cylinders[i] != NULL)
+	// 	{
+	// 		result = intersections_add_all(result, intersect_cylinder(scene->cylinders[i], ray));
+	// 		i++;
+	// 	}
 	// }
-	intersections_sort(result);
+	intersections_sort(&result);
 	return (result);
 }
 
@@ -116,17 +125,19 @@ t_intersection	**intersect_scene(t_scene *scene, t_ray ray)
  * @param intersections
  * @return t_intersection*
  */
-t_intersection	*intersect_hit(t_intersection **intersections)
+t_intersection	*intersect_hit(t_intersections intersections)
 {
 	t_intersection	*hit;
 	int				i;
 
 	hit = NULL;
+	if (intersections.list == NULL)
+		return (NULL);
 	i = 0;
-	while (intersections[i] != NULL)
+	while (intersections.list[i] != NULL)
 	{
-		if (intersections[i]->t >= 0.0 && (hit == NULL || (intersections[i]->t < hit->t)))
-			hit = intersections[i];
+		if (intersections.list[i]->t >= 0.0 && (hit == NULL || (intersections.list[i]->t < hit->t)))
+			hit = intersections.list[i];
 		i++;
 	}
 	return (hit);

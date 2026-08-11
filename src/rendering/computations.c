@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:26:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:55:50 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/10 17:06:23 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 #include "ray.h"
 #include "rendering.h"
 #include "scene.h"
+#include "util/intersections.h"
 
 /**
- * @brief Returns a ray that starts at the camera and passes through the given pixel on the canvas.
+ * @brief Returns a ray that starts at the camera and passes through 
+ * the given pixel on the canvas.
  *
  * @param camera
  * @param x
@@ -64,6 +66,7 @@ t_comps	prepare_computations(t_ray ray, t_intersection *hit)
 	result.inside = dot_product(result.normalv, result.eyev) < 0.0;
 	if (result.inside)
 		result.normalv = tuple_neg(result.normalv);
+	result.over_point = tuples_add(result.point, tuple_mult(result.normalv, UNIT_EPSILON));
 	return (result);
 }
 
@@ -77,7 +80,16 @@ t_comps	prepare_computations(t_ray ray, t_intersection *hit)
  */
 t_color shade_hit(t_scene *scene, t_comps comps)
 {
-	return (lighting(((t_sphere *) comps.obj.object)->material, scene->light, comps.point, comps.eyev, comps.normalv));
+	int	shadowed;
+
+	shadowed = is_shadowed(*scene, comps.over_point);
+	return (lighting(((t_sphere *) comps.obj.object)->material,
+			scene->light,
+			comps.point,
+			comps.eyev,
+			comps.normalv,
+			shadowed)
+	);
 }
 
 /**
@@ -90,12 +102,20 @@ t_color shade_hit(t_scene *scene, t_comps comps)
  */
 t_color	color_at(t_scene *scene, t_ray ray)
 {
+	t_intersections	xs;
 	t_intersection	*hit;
 	t_comps			comps;
+	t_color			res;
 
-	hit = intersect_hit(intersect_scene(scene, ray));
+	xs = intersect_scene(scene, ray);
+	hit = intersect_hit(xs);
 	if (hit == NULL)
+	{
+		free_intersections(xs);
 		return (color_black());
+	}
 	comps = prepare_computations(ray, hit);
-	return (shade_hit(scene, comps));
+	res = shade_hit(scene, comps);
+	free_intersections(xs);
+	return (res);
 }

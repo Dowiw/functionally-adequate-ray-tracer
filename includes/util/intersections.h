@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 10:41:54 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/04 11:18:21 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/10 17:05:39 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 # include "scene.h"
 
-t_intersection	**intersections_create(void);
+t_intersections	intersections_create(void);
 
-t_intersection	**intersections_add(t_intersection **array, t_intersection *intersections);
+t_intersections	intersections_add(t_intersections xs, t_intersection *intersection);
 
-t_intersection	**intersections_add_all(t_intersection **array, t_intersection **intersections);
+t_intersections	intersections_add_all(t_intersections xs, t_intersections to_add);
 
-int				intersections_len(t_intersection **array);
+int				intersections_len(t_intersections xs);
 
-void			free_intersections(t_intersection **array);
+void			free_intersections(t_intersections xs);
 
 int				intersections_compare(t_intersection *a, t_intersection *b);
 
-void			intersections_sort(t_intersection **array);
+void			intersections_sort(t_intersections *xs);
 
 #endif

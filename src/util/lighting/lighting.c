@@ -6,7 +6,7 @@
 /*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/02 13:39:41 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/07/02 13:40:02 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/10 17:06:23 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ t_light	light(t_point p, t_color c)
 
 /**
  * @brief Calculate color based on information.
+ * A big idea of this is basically:
+ * Final Color = Ambient + Diffuse + Specular
+ *
+ * 1. Effective color is used to calculate the absorption/reflective
+ * level of a surface material
+ * 2. Calculating the light vector using the position of the light and
+ * the position of the surface. And then normalize that to a unit of one so
+ * that we are able to extract the direction only.
+ * 3. Then we retrieve the ambient baseline for the object's material so that
+ * we can calclate the baseline visibility of the object without any light.
+ * 4. Finding the dotproduct of the norm and the light vector gives us the
+ * angle between the light ray and the surface normal. Meaning, if the ray
+ * is on an angle that is parallel it goes to the < 0, if not then
+ *
  * TODO: Fix the 5 variable problem for norm
  *
  * @param m material
@@ -39,10 +53,11 @@ t_light	light(t_point p, t_color c)
  * @param pos position of eye
  * @param eye vector of eye
  * @param norm vector of surface normal
+ * @param in_shadow boolean for shadow
  * @return t_color the color found
  */
 t_color	lighting(t_material m, t_light l, t_point pos, t_vector eye,
-		t_vector norm)
+		t_vector norm, int in_shadow)
 {
 	t_color		effective;
 	t_color		ambient;
@@ -58,6 +73,11 @@ t_color	lighting(t_material m, t_light l, t_point pos, t_vector eye,
 	effective = shur_prod(m.color, l.intensity);
 	light_v = (t_vector)calc_norm(tuples_sub(l.pos, pos));
 	ambient = tuple_mult(effective, m.ambient);
+	if (in_shadow)
+	{
+		ambient.w = COLOR;
+		return (ambient);
+	}
 	light_dot_norm = dot_product(light_v, norm);
 	if (light_dot_norm < 0)
 	{

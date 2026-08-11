@@ -133,35 +133,35 @@ int	test_sphere_lighting(void)
 	eyev = vector(0, 0, -1);
 	normalv = vector(0, 0, -1);
 	light_p = light(point(0, 0, -10), color(1, 1, 1));
-	res = lighting(m, light_p, pos, eyev, normalv);
+	res = lighting(m, light_p, pos, eyev, normalv, 0);
 	expected_res = color(1.9, 1.9, 1.9);
 	UNIT_ASSERT_EQ(compare_tuples(&res, &expected_res), 0);
 	//
 	eyev = vector(0, sqrt(2) / 2, sqrt(2) / 2);
 	normalv = vector(0, 0, -1);
 	light_p = light(point(0, 0, -10), color(1, 1, 1));
-	res = lighting(m, light_p, pos, eyev, normalv);
+	res = lighting(m, light_p, pos, eyev, normalv, 0);
 	expected_res = color(1, 1, 1);
 	UNIT_ASSERT_EQ(compare_tuples(&res, &expected_res), 0);
 	//
 	eyev = vector(0, 0, -1);
 	normalv = vector(0, 0, -1);
 	light_p = light(point(0, 10, -10), color(1, 1, 1));
-	res = lighting(m, light_p, pos, eyev, normalv);
+	res = lighting(m, light_p, pos, eyev, normalv, 0);
 	expected_res = color(0.7364, 0.7364, 0.7364);
 	UNIT_ASSERT_EQ(compare_tuples(&res, &expected_res), 0);
 	//
 	eyev = vector(0, -(sqrt(2) / 2), -(sqrt(2) / 2));
 	normalv = vector(0, 0, -1);
 	light_p = light(point(0, 10, -10), color(1, 1, 1));
-	res = lighting(m, light_p, pos, eyev, normalv);
+	res = lighting(m, light_p, pos, eyev, normalv, 0);
 	expected_res = color(1.6364, 1.6364, 1.6364);
 	UNIT_ASSERT_EQ(compare_tuples(&res, &expected_res), 0);
 	//
 	eyev = vector(0, 0, -1);
 	normalv = vector(0, 0, -1);
 	light_p = light(point(0, 0, 10), color(1, 1, 1));
-	res = lighting(m, light_p, pos, eyev, normalv);
+	res = lighting(m, light_p, pos, eyev, normalv, 0);
 	expected_res = color(0.1, 0.1, 0.1);
 	UNIT_ASSERT_EQ(compare_tuples(&res, &expected_res), 0);
 	return (0);

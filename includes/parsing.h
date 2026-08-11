@@ -28,11 +28,11 @@ int	parse_color(int *color, char *str);
 
 int	parse_double(double *num, char *str);
 
-int parse_double_range(double *num, char *str, double min, double max);
+int	parse_double_range(double *num, char *str, double min, double max);
 
 int	parse_int(int *num, char *str);
 
-int parse_int_range(int *num, char *str, int min, int max);
+int	parse_int_range(int *num, char *str, int min, int max);
 
 int	parse_point(t_point *point, char *str);
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tests.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/15 00:44:27 by kmonjard          #+#    #+#             */
+/*   Updated: 2026/08/10 17:05:39 by kmonjard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TESTS_H
 # define TESTS_H
 
@@ -65,5 +77,10 @@ int	test_view_transform(void);
 int	test_camera(void);
 int	test_ray_for_pixel(void);
 int	test_render_scene(void);
+
+int	test_shadow_surface(void);
+int	test_shadow_is_shadowed(void);
+int	test_shadow_shade(void);
+int	test_shadow_point_offsets(void);
 
 #endif
