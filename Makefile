@@ -18,14 +18,14 @@ CFLAGS = -g -Wall -Wextra -Werror -I./$(HEADER_DIR)
 HEADER_DIR = includes
 HEADERS = minirt.h \
 	debug.h \
-	libft.h \
+	libft/libft.h \
 	parsing.h \
 	ray.h \
 	rendering.h \
 	scene.h \
 	util/arrays.h \
 	util/colors.h \
-	util/cylinders \
+	util/cylinders.h \
 	util/planes.h \
 	util/spheres.h \
 	util/strings.h \
@@ -70,6 +70,7 @@ SOURCES = main.c \
 	parsing/parsing.c \
 	rays/intersections.c \
 	rays/ray_transform.c \
+	rays/ray.c \
 	rendering/computations.c \
 	rendering/rendering.c \
 	scene/camera.c \
@@ -87,7 +88,8 @@ SOURCES = main.c \
 	util/colors/colors1.c \
 	util/lighting/lighting.c \
 	util/materials/materials.c \
-	util/strings/strings1.c
+	util/strings/strings1.c \
+	util/shadows/shadows.c 
 
 TEST_DIR = tests
 TESTS = main.c \
@@ -98,7 +100,8 @@ TESTS = main.c \
 	test_transformations.c \
 	test_rays.c \
 	test_light_shading.c \
-	test_rendering.c
+	test_rendering.c \
+	test_shadows.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 
@@ -139,12 +142,12 @@ $(LIBUNIT):
 $(NAME): $(LIBFT) $(MLX_DIR)/libmlx.a $(OBJECT_FILES)
 	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_LINKS) -o $(NAME)
 
-$(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c
+$(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c $(HEADER_FILES)
 	@mkdir -p $(dir $@)
 	@echo "[COMPILE]: $<"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) $(MLX_INCLUDE)
 
-$(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c | $(LIBUNIT)
+$(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c $(HEADER_FILES) | $(LIBUNIT)
 	@mkdir -p $(dir $@)
 	@echo "[COMPILE TEST]: $<"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) -Ilibunit/framework/inc

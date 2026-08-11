@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 19:38:32 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/10 17:05:39 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,15 @@
  */
 typedef struct s_tuple
 {
-	double x; // x-coordinate, red
-	double y; // y-coordinate, green
-	double z; // z-coordinate, blue
-	double w; // type, extra value
-}					t_tuple;
+	double	x;	// x-coordinate, red
+	double	y;	// y-coordinate, green
+	double	z;	// z-coordinate, blue
+	double	w;	// type, extra value
+}				t_tuple;
 
-typedef t_tuple		t_point;
-
-typedef t_tuple		t_vector;
-
-typedef t_tuple		t_color;
+typedef t_tuple	t_point;
+typedef t_tuple	t_vector;
+typedef t_tuple	t_color;
 
 /**
  * @brief Structure for rays.
@@ -57,29 +55,41 @@ typedef t_tuple		t_color;
  */
 typedef struct s_ray
 {
-	t_point origin;     // starting point of a ray
-	t_vector direction; // where it points
-}					t_ray;
+	t_point		origin;		// starting point of a ray
+	t_vector	direction;	// where it points
+}				t_ray;
 
-enum object_type {
+enum	e_object_type
+{
 	SPHERE,
 	PLANE,
 	CYLINDER
 };
 
-typedef struct s_object {
-	enum object_type	type;
+typedef struct s_object
+{
+	enum e_object_type	type;
 	void				*object;
 }					t_object;
 
 /**
- * @brief
+ * @brief Struct for an intersection.
  */
 typedef struct s_intersection
 {
-	double		t;
-	t_object	obj;
+	double		t;		// time
+	t_object	obj;	// the object
 }					t_intersection;
+
+/**
+ * @brief Struct for all intersections.
+ * Contains a list of t_intersection and the amount.
+ */
+typedef struct s_intersections
+{
+	t_intersection	**list;
+	int				count;
+}				t_intersections;
 
 /**
  * @brief Structure for a canvas.
@@ -87,35 +97,32 @@ typedef struct s_intersection
  */
 typedef struct s_canvas
 {
-	int width;       // width of canvas
-	int height;      // height of canvas
-	t_tuple *pixels; // 1D array of (width * height) representing colors
-}					t_canvas;
+	int		width;		// width of canvas
+	int		height;		// height of canvas
+	t_tuple	*pixels;	// 1D array of (width * height) representing colors
+}				t_canvas;
 
 /**
  * @brief Structure for mlx data
  */
 typedef struct s_mlx
 {
-	void *mlx_ptr;  // pointer to mlx lib that allocates a XWindow Display
-	void *win_ptr;  // pointer to window allocated
-	void *img_ptr;  // pointer to image buffer
-	char *img_data; // pointer to same img but as characters
-	int bpp;        // bits per pixel
-	int size_line;  // size of each line of pixes
-	int endian;     // endian necessary for alignment
-}					t_mlx;
+	void	*mlx_ptr;	// pointer to mlx lib that allocates a XWindow Display
+	void	*win_ptr;	// pointer to window allocated
+	void	*img_ptr;	// pointer to image buffer
+	char	*img_data;	// pointer to same img but as characters
+	int		bpp;		// bits per pixel
+	int		size_line;	// size of each line of pixes
+	int		endian;		// endian necessary for alignment
+}				t_mlx;
 
 /**
  * @brief Data structure for fdf data
- *
- * @param mlx mlx structure
- * @param ...
  */
 typedef struct s_data
 {
-	t_mlx			mlx;
-}					t_data;
+	t_mlx	mlx;
+}				t_data;
 
 /** ######################################################################### *
  *  TUPLES                                                                  # *
@@ -179,17 +186,17 @@ char				*canvas_to_ppm(t_canvas *canvas);
 typedef struct s_matrix2x2
 {
 	double			m[2][2];
-}					t_matrix2x2;
+}				t_matrix2x2;
 
 typedef struct s_matrix3x3
 {
 	double			m[3][3];
-}					t_matrix3x3;
+}				t_matrix3x3;
 
 typedef struct s_matrix4x4
 {
 	double			m[4][4];
-}					t_matrix4x4;
+}				t_matrix4x4;
 
 t_matrix2x2			matrix2x2_identity(void);
 t_matrix3x3			matrix3x3_identity(void);
@@ -246,6 +253,7 @@ t_matrix4x4			view_transform(t_point from, t_point to, t_vector up);
 
 t_point				position(t_ray ray, double time);
 t_ray				transform(t_ray r, t_matrix4x4 m);
+t_ray	ray(t_point origin, t_vector direction);
 
 /** ######################################################################### *
  *  SPHERES                                                                 # *

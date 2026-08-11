@@ -25,6 +25,7 @@ int	main(void)
 	t_test_suite	*transformations_suite;
 	t_test_suite	*light_shading_suite;
 	t_test_suite	*rendering_suite;
+	t_test_suite	*shadow_suite;
 
 	suites = NULL;
 	tuple_suite = load_suite(&suites, "Tuples Suite");
@@ -101,6 +102,11 @@ int	main(void)
 	load_test(rendering_suite, "Camera", &test_camera);
 	load_test(rendering_suite, "Ray For Pixel", &test_ray_for_pixel);
 	load_test(rendering_suite, "Render Scene", &test_render_scene);
+	shadow_suite = load_suite(&suites, "Shadows Suite");
+	load_test(shadow_suite, "Lighting when Surface in Shadow", &test_shadow_surface);
+	load_test(shadow_suite, "Testing is_shadowed() function", &test_shadow_is_shadowed);
+	load_test(shadow_suite, "Testing updated shade_hit() function for shadows", &test_shadow_shade);
+	load_test(shadow_suite, "Testing over_point update to t_comps", &test_shadow_point_offsets);
 
 	return (launch_tests(&suites));
 }

@@ -13,7 +13,7 @@
 #include "libft.h"
 
 //Write number (n) into fd recursively
-void	ft_putnbr_fd2(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	char	one_digit;
 
@@ -29,8 +29,8 @@ void	ft_putnbr_fd2(int n, int fd)
 	}
 	if (n > 9)
 	{
-		ft_putnbr_fd2(n / 10, fd);
-		ft_putnbr_fd2(n % 10, fd);
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
 	}
 	if (n >= 0 && n <= 9)
 	{
