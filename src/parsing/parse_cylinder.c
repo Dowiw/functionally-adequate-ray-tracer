@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:19:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 14:16:40 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/09 15:48:03 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "util/arrays.h"
 #include "util/cylinders.h"
 
-static int	parse_cylinder_error(t_cylinder *cylinder);
+static int	parse_cylinder_error(t_scene *scene, t_cylinder *cylinder, char *error);
 
 /**
  * Parses the given 'params' and adds it to the scenes cylinders.
@@ -30,29 +30,29 @@ int	parse_cylinder(t_scene *scene, char **params)
 	t_cylinder	*cylinder;
 
 	if (array_len((void **) params) != 6)
-		return (0);
+		return (parse_error(scene, "Bad format, expected cy <center> <vector> <diameter> <height> <color>"));
 	cylinder = malloc(sizeof(t_cylinder));
 	if (cylinder == NULL)
-		return (0);
-	if (!parse_point(&cylinder->center, params[1]))
-		return (parse_cylinder_error(cylinder));
-	if (!parse_vector(&cylinder->vec, params[2]))
-		return (parse_cylinder_error(cylinder));
-	if (!parse_double(&cylinder->diameter, params[3]))
-		return (parse_cylinder_error(cylinder));
-	if (!parse_double(&cylinder->height, params[4]))
-		return (parse_cylinder_error(cylinder));
+		return (parse_error(scene, "Allocation Failure"));
+	if (!parse_point(scene, &cylinder->center, params[1]))
+		return (parse_cylinder_error(scene, cylinder, "Failed to parse center"));
+	if (!parse_vector(scene, &cylinder->vec, params[2]))
+		return (parse_cylinder_error(scene, cylinder, "Failed to parse vector"));
+	if (!parse_double(scene, &cylinder->diameter, params[3]))
+		return (parse_cylinder_error(scene, cylinder, "Failed to parse diameter"));
+	if (!parse_double(scene, &cylinder->height, params[4]))
+		return (parse_cylinder_error(scene, cylinder, "Failed to parse height"));
 	// TODO
 	// if (!parse_color(&cylinder->color, params[5]))
 	// 	return (parse_cylinder_error(cylinder));
 	scene->cylinders = cylinders_add(scene->cylinders, cylinder);
 	if (scene->cylinders == NULL)
-		return (0);
+		return (parse_error(scene, "Allocation Failure"));
 	return (1);
 }
 
-static int	parse_cylinder_error(t_cylinder *cylinder)
+static int	parse_cylinder_error(t_scene *scene, t_cylinder *cylinder, char *error)
 {
 	free(cylinder);
-	return (0);
+	return (parse_error(scene, error));
 }

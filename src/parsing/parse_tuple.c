@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:19:42 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/05 14:14:43 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/09 15:55:51 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "parsing.h"
 #include "util/arrays.h"
 
-static int	parse_tuple_params(t_tuple *vec, char **params);
+static int	parse_tuple_params(t_scene *scene, t_tuple *vec, char **params);
 
 /*
  * Parses the given vector string 'str' in the following format:
@@ -23,7 +23,7 @@ static int	parse_tuple_params(t_tuple *vec, char **params);
  * The result is stored in the 'vec' pointer.
  * Returns true if the parsing was successful.
  */
-int	parse_tuple(t_tuple *tuple, char *str)
+int	parse_tuple(t_scene *scene, t_tuple *tuple, char *str)
 {
 	int		result;
 	char	**params;
@@ -32,22 +32,22 @@ int	parse_tuple(t_tuple *tuple, char *str)
 		return (0);
 	params = ft_split(str, ',');
 	if (params == NULL)
-		return (0);
-	result = parse_tuple_params(tuple, params);
+		return (parse_error(scene, "Allocation Failure"));
+	result = parse_tuple_params(scene, tuple, params);
 	free_array((void **) params);
 	return (result);
 }
 
-static int	parse_tuple_params(t_tuple *tuple, char **params)
+static int	parse_tuple_params(t_scene *scene, t_tuple *tuple, char **params)
 {
 	if (array_len((void **) params) != 3)
-		return (0);
-	if (!parse_double(&tuple->x, params[0]))
-		return (0);
-	if (!parse_double(&tuple->y, params[1]))
-		return (0);
-	if (!parse_double(&tuple->z, params[2]))
-		return (0);
+		return (parse_error(scene, "Bad format, expected <x>,<y>,<z>"));
+	if (!parse_double(scene, &tuple->x, params[0]))
+		return (parse_error(scene, "Failed to parse x component"));
+	if (!parse_double(scene, &tuple->y, params[1]))
+		return (parse_error(scene, "Failed to parse y component"));
+	if (!parse_double(scene, &tuple->z, params[2]))
+		return (parse_error(scene, "Failed to parse z component"));
 	tuple->w = INVALID_NEG;
 	return (1);
 }

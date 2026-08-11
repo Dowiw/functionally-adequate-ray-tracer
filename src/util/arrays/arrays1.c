@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 16:33:04 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/04 10:59:33 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/11 14:59:00 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	**array_add_all(void **array, void **elems)
 		array = array_add(array, elems[i]);
 		i++;
 	}
+	free(elems);
 	return (array);
 }
 

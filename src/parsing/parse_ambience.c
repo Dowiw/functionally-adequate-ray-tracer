@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:17:25 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/04 11:53:44 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/09 15:34:17 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 int	parse_ambience(t_scene *scene, char **params)
 {
 	if (scene->has_ambience)
-		return (0);
+		return (parse_error(scene, "Ambience is already declared"));
 	if (array_len((void **) params) != 3)
-		return (0);
-	if (!parse_double_range(&scene->ambience.lighting, params[1], 0.0, 1.0))
-		return (0);
-	if (!parse_color(&scene->ambience.color, params[2]))
-		return (0);
+		return (parse_error(scene, "Bad format, expected C <pos> <orientation> <fov>"));
+	if (!parse_double_range(scene, &scene->ambience.lighting, params[1], 0.0, 1.0))
+		return (parse_error(scene, "Failed to parse lighting"));
+	if (!parse_color(scene, &scene->ambience.color, params[2]))
+		return (parse_error(scene, "Failed to parse color"));
 	scene->has_ambience = 1;
 	return (1);
 }

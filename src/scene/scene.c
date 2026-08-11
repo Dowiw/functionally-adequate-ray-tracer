@@ -6,11 +6,12 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:15:24 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:19:34 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/09 17:06:41 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft/libft.h"
 #include "parsing.h"
 #include "scene.h"
 #include "util/cylinders.h"
@@ -31,6 +32,8 @@ int	init_scene(t_scene *scene)
 	scene->has_ambience = 0;
 	scene->has_camera = 0;
 	scene->has_light = 0;
+	ft_bzero(scene->error, ERROR_STACK_SIZE + 1);
+	scene->error_line = NULL;
 	if (scene->cylinders == NULL || scene->planes == NULL
 		|| scene->spheres == NULL)
 	{
