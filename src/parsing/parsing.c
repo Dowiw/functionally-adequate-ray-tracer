@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:17 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/11 12:52:18 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/12 13:55:00 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	parse_scene_line(t_scene *scene, char *line);
 
 static int	parse_scene_fd(t_scene *scene, int fd);
 
+// static void	finish_parsing(t_scene *scene);
+
 static int	error(t_scene *scene, char *msg);
 
 // TODO:
@@ -40,6 +42,8 @@ int	parse_scene(t_scene *scene, char *file)
 	int	result;
 	int	fd;
 
+	if (!init_scene(scene))
+		return (error(scene, "Failed to initialize scene"));
 	if (!string_endswith(file, ".rt"))
 		return (error(scene, "Requires a .rt file"));
 	fd = open(file, O_RDONLY);
@@ -108,6 +112,31 @@ static int	parse_scene_line(t_scene *scene, char *line)
 	free_array((void **) params);
 	return (result);
 }
+
+// TODO: what about ambience.color?
+// static void	finish_parsing(t_scene *scene)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (scene->spheres[i] != NULL)
+// 	{
+// 		scene->spheres[i]->material.ambient = scene->ambience.lighting;
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (scene->planes[i] != NULL)
+// 	{
+// 		scene->planes[i]->material.ambient = scene->ambience.lighting;
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (scene->cylinders[i] != NULL)
+// 	{
+// 		scene->cylinders[i]->material.ambient = scene->ambience.lighting;
+// 		i++;
+// 	}
+// }
 
 static int	error(t_scene *scene, char *msg)
 {
