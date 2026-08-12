@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:25:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 14:29:33 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/12 18:11:37 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 static void	render_pixel(t_data *data);
 
-static int	put_frame(t_mlx mlx);
+static void	put_frame(t_mlx mlx);
 
 /**
  * @brief Renders the given scene onto the given canvas (who could've guessed?)
@@ -59,8 +59,7 @@ void	render_init(t_iter *iter)
 	iter->first = 1;
 	iter->x = 0;
 	iter->y = 0;
-	iter->pixels_per_frame = 50;
-	iter->pixels_this_frame = 0;
+	iter->pixels = 0;
 }
 
 /**
@@ -78,8 +77,8 @@ int		render_frame(t_data *data)
 
 	iter = &data->iter;
 	if (iter->res == 0)
-		return (0);
-	iter->pixels_this_frame = 0;
+		exit (0);
+	iter->pixels = 0;
 	while (iter->res > 0)
 	{
 		while (iter->x < WIN_W)
@@ -88,8 +87,8 @@ int		render_frame(t_data *data)
 			{
 				render_pixel(data);
 				iter->y += iter->res;
-				if (iter->pixels_this_frame >= iter->pixels_per_frame)
-					return (put_frame(data->mlx));
+				if (iter->pixels >= PIXELS_PER_FRAME)
+					return (0);
 			}
 			iter->x += iter->res;
 			iter->y = 0;
@@ -97,8 +96,10 @@ int		render_frame(t_data *data)
 		iter->x = 0;
 		iter->res = iter->res / 2;
 		iter->first = 0;
+		put_frame(data->mlx);
+		return (0);
 	}
-	return (put_frame(data->mlx));
+	return (0);
 }
 
 /**
@@ -120,7 +121,7 @@ static void	render_pixel(t_data *data)
 	color = color_at(&data->scene, ray);
 	color_rgb = rgb(clamp_color(color.x), clamp_color(color.y), clamp_color(color.z));
 	fill_pixel(&data->mlx, iter->res, iter->x, iter->y, color_rgb);
-	iter->pixels_this_frame++;
+	iter->pixels++;
 }
 
 /**
@@ -129,8 +130,7 @@ static void	render_pixel(t_data *data)
  * @param mlx
  * @return int
  */
-static int	put_frame(t_mlx mlx)
+static void	put_frame(t_mlx mlx)
 {
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
-	return (0);
 }

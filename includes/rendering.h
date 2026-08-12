@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:42:38 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 14:08:12 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/12 18:02:45 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ typedef struct s_iter {
 	int		first;
 	int		x;
 	int		y;
-	int		pixels_this_frame;
-	int		pixels_per_frame;
+	int		pixels;
 }	t_iter;
 
 void	render_scene(t_canvas *canvas, t_scene *scene);
