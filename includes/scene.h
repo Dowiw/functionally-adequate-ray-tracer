@@ -71,6 +71,7 @@ typedef struct s_plane
 	t_point		pos;
 	t_vector	vec;
 	t_material	material;
+	t_matrix4x4	transform;
 }				t_plane;
 
 typedef struct s_cylinder
@@ -80,6 +81,7 @@ typedef struct s_cylinder
 	double		diameter;
 	double		height;
 	t_material	material;
+	t_matrix4x4	transform;
 }				t_cylinder;
 
 /**
@@ -120,13 +122,13 @@ void			destroy_scene(t_scene *scene);
 t_camera		create_camera(int width, int height, double fov);
 void			init_camera(t_camera *camera);
 
-void			set_transform(t_sphere *s, t_matrix4x4 t);
+void			set_transform(t_object *obj, t_matrix4x4 t);
 
 /** ######################################################################### *
  *  SPHERES                                                                 # *
  *  ######################################################################### */
 
-t_vector		normal_at(t_sphere *s, t_point p);
+t_vector		normal_at(t_object *obj, t_point p);
 t_material		material(void);
 
 /** ######################################################################### *

@@ -6,17 +6,19 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:49 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 15:48:57 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/12 15:55:14 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "parsing.h"
 #include "scene.h"
 #include "util/arrays.h"
+#include "util/colors.h"
 #include "util/planes.h"
+#include <stdlib.h>
 
-static int	parse_plane_error(t_scene *scene, t_plane *plane, char *error);
+static void finish_plane(t_plane *plane, int rgb_color);
+static int parse_plane_error(t_scene *scene, t_plane *plane, char *error);
 
 /**
  * Parses the given 'params' and adds it to the scenes planes.
@@ -25,12 +27,14 @@ static int	parse_plane_error(t_scene *scene, t_plane *plane, char *error);
  *   (for example: pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225)
  * Returns true if the parsing was succesful.
  */
-int	parse_plane(t_scene *scene, char **params)
+int parse_plane(t_scene *scene, char **params)
 {
-	t_plane	*plane;
+	t_plane *plane;
+	int rgb_color;
 
-	if (array_len((void **) params) != 4)
-		return (parse_error(scene, "Bad format, expected pl <pos> <vector> <color>"));
+	if (array_len((void **)params) != 4)
+		return (parse_error(scene,
+							"Bad format, expected pl <pos> <vector> <color>"));
 	plane = malloc(sizeof(t_plane));
 	if (plane == NULL)
 		return (parse_error(scene, "Allocation Failure"));
@@ -38,16 +42,26 @@ int	parse_plane(t_scene *scene, char **params)
 		return (parse_plane_error(scene, plane, "Failed to parse position"));
 	if (!parse_vector(scene, &plane->vec, params[2]))
 		return (parse_plane_error(scene, plane, "Failed to parse vector"));
-	// TODO
-	// if (!parse_color(&plane->color, params[3]))
-	// 	return (parse_plane_error(plane));
+	if (!parse_color(scene, &rgb_color, params[3]))
+		return (parse_plane_error(scene, plane, "Failed to parse color"));
+	finish_plane(plane, rgb_color);
 	scene->planes = planes_add(scene->planes, plane);
 	if (scene->planes == NULL)
 		return (parse_error(scene, "Allocation Failure"));
 	return (1);
 }
 
-static int	parse_plane_error(t_scene *scene, t_plane *plane, char *error)
+static void finish_plane(t_plane *plane, int rgb_color)
+{
+	plane->transform =
+		matrix4x4_translation(plane->pos.x, plane->pos.y, plane->pos.z);
+	plane->material = material();
+	plane->material.color =
+		color(red(rgb_color) / 255.0, green(rgb_color) / 255.0,
+			  blue(rgb_color) / 255.0);
+}
+
+static int parse_plane_error(t_scene *scene, t_plane *plane, char *error)
 {
 	free(plane);
 	return (parse_error(scene, error));

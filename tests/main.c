@@ -26,6 +26,7 @@ int	main(void)
 	t_test_suite	*light_shading_suite;
 	t_test_suite	*rendering_suite;
 	t_test_suite	*shadow_suite;
+	t_test_suite	*planes_suite;
 
 	suites = NULL;
 	tuple_suite = load_suite(&suites, "Tuples Suite");
@@ -107,6 +108,11 @@ int	main(void)
 	load_test(shadow_suite, "Testing is_shadowed() function", &test_shadow_is_shadowed);
 	load_test(shadow_suite, "Testing updated shade_hit() function for shadows", &test_shadow_shade);
 	load_test(shadow_suite, "Testing over_point update to t_comps", &test_shadow_point_offsets);
+	planes_suite = load_suite(&suites, "Planes Suite");
+	load_test(planes_suite, "Plane Default Attributes", &test_planes_default);
+	load_test(planes_suite, "Plane Transformed Normal (i.e. updated normal_at()", &test_planes_updated_normal);
+	load_test(planes_suite, "Planes and Rays without Intersections", &test_planes_no_intersections);
+	load_test(planes_suite, "Planes and Rays with Intersections", &test_planes_intersections);
 
 	return (launch_tests(&suites));
 }

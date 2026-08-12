@@ -6,7 +6,7 @@
 /*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/28 23:45:39 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/06/28 23:47:19 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/12 15:55:14 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,21 @@ t_ray	transform(t_ray r, t_matrix4x4 m)
 }
 
 /**
- * @brief Set the transform object
+ * @brief Set the transform of an object.
  * 
- * @param s 
- * @param t 
+ * @param obj
+ * @param t
  */
-void	set_transform(t_sphere *s, t_matrix4x4 t)
+void	set_transform(t_object *obj, t_matrix4x4 t)
 {
-	s->transform = t;
+	if (!obj || !obj->object)
+		return ;
+	if (obj->type == SPHERE)
+		((t_sphere *)obj->object)->transform = t;
+	else if (obj->type == CYLINDER)
+		((t_cylinder *)obj->object)->transform = t;
+	else if (obj->type == PLANE)
+		((t_plane *)obj->object)->transform = t;
 }
 
 /**
