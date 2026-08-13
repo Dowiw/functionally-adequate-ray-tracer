@@ -63,3 +63,19 @@ int test_cylinders_intersections(void)
 
 	return (0);
 }
+
+int	test_cylinders_normal(void)
+{
+	t_cylinder	c = cylinder_create();
+	t_point		p[4] = {{1, 0, 0, POINT}, {0, 5, -1, POINT}, {0, -2, 1, POINT}, {-1, 1, 0, POINT}};
+	t_vector	expected_normal[4] = {{1, 0, 0, VECTOR}, {0, 0, -1, VECTOR}, {0, 0, 1, VECTOR}, {-1, 0, 0, VECTOR}};
+	t_object	obj = (t_object){CYLINDER, &c};
+	t_vector	res;
+
+	for (int i = 0; i < 4; i++)
+	{
+		res = normal_at(&obj, p[i]);
+		UNIT_ASSERT_EQ(compare_tuples(&res, &(expected_normal[i])), 0);
+	}
+	return (0);
+}

@@ -117,5 +117,6 @@ int	main(void)
 	cylinders_suite = load_suite(&suites, "Cylinders Suite");
 	load_test(cylinders_suite, "Cylinders and Rays with Intersections", &test_cylinders_intersections);
 	load_test(cylinders_suite, "Cylinders and Rays without Intersections", &test_cylinders_no_intersections);
+	load_test(cylinders_suite, "Cylinder Transformed Normal", &test_cylinders_normal);
 	return (launch_tests(&suites));
 }

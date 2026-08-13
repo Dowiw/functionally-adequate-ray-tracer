@@ -30,6 +30,8 @@ static t_vector	local_normal_at(t_object *obj, t_point local_point)
 		return (tuples_sub(local_point, point(0.0, 0.0, 0.0)));
 	else if (obj->type == PLANE)
 		return (vector(0.0, 1.0, 0.0));
+	else if (obj->type == CYLINDER)
+		return (vector(local_point.x, 0, local_point.z));
 	return (vector(0.0, 0.0, 0.0));
 }
 
