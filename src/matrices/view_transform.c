@@ -16,7 +16,8 @@ static t_matrix4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left);
 
 /**
  * @brief Returns the view transformation matrix for the camera.
- *        The cameras origin is at 'from', looking towards 'to', with 'up' specifying the cameras tilt.
+ * The cameras origin is at 'from', looking towards 'to',
+ * with 'up' specifying the cameras tilt.
  *
  * @param from
  * @param to

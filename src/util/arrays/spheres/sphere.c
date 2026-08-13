@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere_utils.c                                     :+:      :+:    :+:   */
+/*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 21:43:35 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/04 16:36:02 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/12 15:55:15 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ t_sphere	sphere_create(void)
 	return (sphere);
 }
 
+/**
+ * @brief Creates an empty sphere array
+ * 
+ * @return t_sphere** empty
+ */
 t_sphere	**spheres_create(void)
 {
 	return ((t_sphere **)array_create());

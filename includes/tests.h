@@ -83,4 +83,10 @@ int	test_shadow_is_shadowed(void);
 int	test_shadow_shade(void);
 int	test_shadow_point_offsets(void);
 
+int	test_planes_default(void);
+int	test_planes_updated_normal(void);
+int	test_planes_constant_size(void);
+int	test_planes_intersections(void);
+int	test_planes_no_intersections(void);
+
 #endif

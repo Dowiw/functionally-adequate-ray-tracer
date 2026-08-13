@@ -17,6 +17,8 @@
 
 t_plane	**planes_create(void);
 
+t_plane	plane_create(void);
+
 t_plane	**planes_add(t_plane **array, t_plane *plane);
 
 int		planes_len(t_plane **array);

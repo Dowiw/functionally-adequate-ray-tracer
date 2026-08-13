@@ -6,6 +6,8 @@
 #include "util/spheres.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "ray.h"
+#include "util/intersections.h"
 
 int test_ray(void) {
 	t_ray r;
@@ -41,8 +43,6 @@ int test_ray_pos(void) {
 	return 0;
 }
 
-#include "ray.h"
-#include "util/intersections.h"
 int test_ray_intersect(void) {
 	t_sphere s = sphere_create();
 	t_ray r;
@@ -229,17 +229,19 @@ int	test_ray_transform(void)
 int	test_sphere_ray_transform(void)
 {
 	t_sphere		s;
+	t_object		obj;
 	t_matrix4x4		identity;
 	t_matrix4x4		translation;
 	t_ray			r;
 	t_intersections	xs;
 
 	s = sphere_create();
+	obj = (t_object){SPHERE, &s};
 	identity = matrix4x4_identity();
 	UNIT_ASSERT_EQ(matrix4x4_compare(s.transform, identity), 0);
 
 	translation = matrix4x4_translation(2, 3, 4);
-	set_transform(&s, translation);
+	set_transform(&obj, translation);
 	UNIT_ASSERT_EQ(matrix4x4_compare(s.transform, translation), 0);
 
 	r = (t_ray){
@@ -247,7 +249,8 @@ int	test_sphere_ray_transform(void)
 		.direction = {0, 0, 1, VECTOR}
 	};
 	s = sphere_create();
-	set_transform(&s, matrix4x4_scaling(2, 2, 2));
+	obj = (t_object){SPHERE, &s};
+	set_transform(&obj, matrix4x4_scaling(2, 2, 2));
 	xs = intersect_sphere(&s, r);
 	UNIT_ASSERT_EQ(intersections_len(xs), 2);
 	UNIT_ASSERT_FEQ(xs.list[0]->t, 3.0);
@@ -259,7 +262,8 @@ int	test_sphere_ray_transform(void)
 		.direction = {0, 0, 1, VECTOR}
 	};
 	s = sphere_create();
-	set_transform(&s, matrix4x4_translation(5, 0, 0));
+	obj = (t_object){SPHERE, &s};
+	set_transform(&obj, matrix4x4_translation(5, 0, 0));
 	xs = intersect_sphere(&s, r);
 	UNIT_ASSERT_EQ(intersections_len(xs), 0);
 	free_intersections(xs);

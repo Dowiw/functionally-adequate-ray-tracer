@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:26:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/10 17:06:23 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/12 15:55:15 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_comps	prepare_computations(t_ray ray, t_intersection *hit)
 	result.obj = hit->obj;
 	result.point = position(ray, hit->t);
 	result.eyev = tuple_neg(ray.direction);
-	result.normalv = normal_at((t_sphere *) result.obj.object, result.point);
+	result.normalv = normal_at(&result.obj, result.point);
 	result.inside = dot_product(result.normalv, result.eyev) < 0.0;
 	if (result.inside)
 		result.normalv = tuple_neg(result.normalv);
@@ -70,7 +70,17 @@ t_comps	prepare_computations(t_ray ray, t_intersection *hit)
 	return (result);
 }
 
-// TODO: handle different object types
+static t_material	get_material(t_object obj)
+{
+	if (obj.type == SPHERE)
+		return (((t_sphere *)obj.object)->material);
+	else if (obj.type == PLANE)
+		return (((t_plane *)obj.object)->material);
+	else if (obj.type == CYLINDER)
+		return (((t_cylinder *)obj.object)->material);
+	return (material());
+}
+
 /**
  * @brief Calculates the color at the intersection represented by the given comps.
  *
@@ -78,18 +88,19 @@ t_comps	prepare_computations(t_ray ray, t_intersection *hit)
  * @param comps
  * @return t_color
  */
-t_color shade_hit(t_scene *scene, t_comps comps)
+t_color	shade_hit(t_scene *scene, t_comps comps)
 {
-	int	shadowed;
+	int			shadowed;
+	t_material	mat;
 
+	mat = get_material(comps.obj);
 	shadowed = is_shadowed(*scene, comps.over_point);
-	return (lighting(((t_sphere *) comps.obj.object)->material,
+	return (lighting(mat,
 			scene->light,
 			comps.point,
 			comps.eyev,
 			comps.normalv,
-			shadowed)
-	);
+			shadowed));
 }
 
 /**

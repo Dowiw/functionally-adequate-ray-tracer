@@ -6,10 +6,11 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/11 13:00:40 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/12 15:55:14 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "minirt.h"
 #include "parsing.h"
 #include "scene.h"
@@ -45,13 +46,17 @@ int	parse_camera(t_scene *scene, char **params)
 
 static void	finish_camera(t_camera *camera, int width, int height)
 {
+	t_point		to;
+	t_vector	up;
+
 	camera->width = width;
 	camera->height = height;
 	camera->field_of_view = camera->fov * PI / 180.0;
-	camera->transform = matrix4x4_translation(camera->pos.x, camera->pos.y, camera->pos.z);
-	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_x(camera->orientation.x * PI));
-	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_y(camera->orientation.y * PI));
-	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_z(camera->orientation.z * PI));
-	camera->transform = matrix4x4_inverse(camera->transform);
+	to = tuples_add(camera->pos, camera->orientation);
+	if (fabs(camera->orientation.x) < UNIT_EPSILON && fabs(camera->orientation.z) < UNIT_EPSILON)
+		up = vector(0.0, 0.0, 1.0);
+	else
+		up = vector(0.0, 1.0, 0.0);
+	camera->transform = view_transform(camera->pos, to, up);
 	init_camera(camera);
 }

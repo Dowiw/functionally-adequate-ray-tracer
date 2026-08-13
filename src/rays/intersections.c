@@ -6,12 +6,13 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 10:37:30 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/10 17:06:23 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/12 15:55:14 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <stdlib.h>
+#include "minirt.h"
 #include "scene.h"
 #include "util/intersections.h"
 
@@ -37,7 +38,8 @@ t_intersection	*create_intersection(enum e_object_type type, void *object, doubl
 }
 
 /**
- * @brief Calculates where the ray intersects the sphere and returns an array of intersections
+ * @brief Calculates whether the ray intersects the sphere
+ * and returns an array of intersections
  *
  * @param sphere
  * @param ray
@@ -65,10 +67,27 @@ t_intersections	intersect_sphere(t_sphere *sphere, t_ray ray)
 	return (result);
 }
 
-// t_intersections	intersect_plane(t_plane *plane, t_ray ray)
-// {
-// 	return (intersections_create());
-// }
+/**
+ * @brief Calculates whether the ray intersects a plane.
+ * 
+ * @param plane 
+ * @param ray 
+ * @return t_intersections 
+ */
+t_intersections	intersect_plane(t_plane *plane, t_ray ray)
+{
+	t_intersections	result;
+	t_ray			local_r;
+	double			t;
+
+	result = intersections_create();
+	local_r = transform(ray, matrix4x4_inverse(plane->transform));
+	if (fabs(local_r.direction.y) < UNIT_EPSILON)
+		return (result);
+	t = -local_r.origin.y / local_r.direction.y;
+	result = intersections_add(result, create_intersection(PLANE, plane, t));
+	return (result);
+}
 
 // t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 // {
@@ -97,15 +116,15 @@ t_intersections	intersect_scene(t_scene *scene, t_ray ray)
 			i++;
 		}
 	}
-	// if (scene->planes != NULL)
-	// {
-	// 	i = 0;
-	// 	while (scene->planes[i] != NULL)
-	// 	{
-	// 		result = intersections_add_all(result, intersect_plane(scene->planes[i], ray));
-	// 		i++;
-	// 	}
-	// }
+	if (scene->planes != NULL)
+	{
+		i = 0;
+		while (scene->planes[i] != NULL)
+		{
+			result = intersections_add_all(result, intersect_plane(scene->planes[i], ray));
+			i++;
+		}
+	}
 	// if (scene->cylinders != NULL)
 	// {
 	// 	i = 0;

@@ -69,6 +69,7 @@ SOURCES = main.c \
 	parsing/parse_vector.c \
 	parsing/parsing.c \
 	rays/intersections.c \
+	rays/intersect.c \
 	rays/ray_transform.c \
 	rays/ray.c \
 	rendering/computations.c \
@@ -80,9 +81,9 @@ SOURCES = main.c \
 	util/arrays/cylinders/cylinders1.c \
 	util/arrays/intersections/intersections1.c \
 	util/arrays/intersections/intersections2.c \
-	util/arrays/planes/planes1.c \
-	util/arrays/spheres/sphere_utils.c \
-	util/arrays/spheres/sphere_normal.c \
+	util/arrays/objects/normal.c \
+	util/arrays/planes/planes.c \
+	util/arrays/spheres/sphere.c \
 	util/colors/colors_grayscale.c \
 	util/colors/colors_util.c \
 	util/colors/colors1.c \
@@ -101,7 +102,8 @@ TESTS = main.c \
 	test_rays.c \
 	test_light_shading.c \
 	test_rendering.c \
-	test_shadows.c
+	test_shadows.c \
+	test_planes.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 
