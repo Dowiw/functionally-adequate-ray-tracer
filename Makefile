@@ -104,7 +104,8 @@ TESTS = main.c \
 	test_light_shading.c \
 	test_rendering.c \
 	test_shadows.c \
-	test_planes.c
+	test_planes.c \
+	test_cylinders.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 

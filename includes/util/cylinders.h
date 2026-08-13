@@ -17,6 +17,8 @@
 
 t_cylinder	**cylinders_create(void);
 
+t_cylinder	cylinder_create(void);
+
 t_cylinder	**cylinders_add(t_cylinder **array, t_cylinder *cylinder);
 
 int			cylinders_len(t_cylinder **array);

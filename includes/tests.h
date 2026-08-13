@@ -89,4 +89,8 @@ int	test_planes_constant_size(void);
 int	test_planes_intersections(void);
 int	test_planes_no_intersections(void);
 
+int test_cylinders_no_intersections(void);
+int test_cylinders_intersections(void);
+
+
 #endif

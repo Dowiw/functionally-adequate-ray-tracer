@@ -27,6 +27,7 @@ int	main(void)
 	t_test_suite	*rendering_suite;
 	t_test_suite	*shadow_suite;
 	t_test_suite	*planes_suite;
+	t_test_suite	*cylinders_suite;
 
 	suites = NULL;
 	tuple_suite = load_suite(&suites, "Tuples Suite");
@@ -113,6 +114,8 @@ int	main(void)
 	load_test(planes_suite, "Plane Transformed Normal (i.e. updated normal_at()", &test_planes_updated_normal);
 	load_test(planes_suite, "Planes and Rays without Intersections", &test_planes_no_intersections);
 	load_test(planes_suite, "Planes and Rays with Intersections", &test_planes_intersections);
-
+	cylinders_suite = load_suite(&suites, "Cylinders Suite");
+	load_test(cylinders_suite, "Cylinders and Rays with Intersections", &test_cylinders_intersections);
+	load_test(cylinders_suite, "Cylinders and Rays without Intersections", &test_cylinders_no_intersections);
 	return (launch_tests(&suites));
 }

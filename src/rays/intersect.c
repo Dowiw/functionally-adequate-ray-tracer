@@ -31,7 +31,7 @@ t_intersections	intersect(t_object *obj, t_ray ray)
 		return (intersect_sphere((t_sphere *)obj->object, ray));
 	else if (obj->type == PLANE)
 		return (intersect_plane((t_plane *)obj->object, ray));
-	// else if (obj->type == CYLINDER)
-	// 	return (intersect_cylinder((t_cylinder *)obj->object, ray));
+	else if (obj->type == CYLINDER)
+		return (intersect_cylinder((t_cylinder *)obj->object, ray));
 	return (intersections_create());
 }

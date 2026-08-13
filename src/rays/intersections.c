@@ -89,10 +89,31 @@ t_intersections	intersect_plane(t_plane *plane, t_ray ray)
 	return (result);
 }
 
-// t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
-// {
-// 	return (intersections_create());
-// }
+/**
+ * @brief Calculates whether a ray intersects a cylinder.
+ * 
+ * @param cylinder
+ * @param ray
+ * @return t_intersections
+ */
+t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
+{
+	double		a;
+	double		b;
+	double		c;
+	double		disc;
+	t_intersections	xs;
+
+	a = pow(ray.direction.x, 2.0) + pow(ray.direction.z, 2.0);
+	if (a < UNIT_EPSILON)
+		return (intersections_create());
+	b = (2 * ray.origin.x * ray.direction.x) + (2 * ray.origin.z * ray.direction.z);
+	c = pow(ray.origin.x, 2.0) + pow(ray.origin.z, 2.0) - 1;
+	disc = pow(b, 2.0) - (4 * a * c);
+	if (disc < 0)
+		return (intersections_create());
+	return (intersections_add(xs, create_intersection(CYLINDER, cylinder, 1)));
+}
 
 /**
  * @brief Calculates where the ray intersects any objects in the scene and returns an array of intersections
@@ -125,15 +146,15 @@ t_intersections	intersect_scene(t_scene *scene, t_ray ray)
 			i++;
 		}
 	}
-	// if (scene->cylinders != NULL)
-	// {
-	// 	i = 0;
-	// 	while (scene->cylinders[i] != NULL)
-	// 	{
-	// 		result = intersections_add_all(result, intersect_cylinder(scene->cylinders[i], ray));
-	// 		i++;
-	// 	}
-	// }
+	if (scene->cylinders != NULL)
+	{
+		i = 0;
+		while (scene->cylinders[i] != NULL)
+		{
+			result = intersections_add_all(result, intersect_cylinder(scene->cylinders[i], ray));
+			i++;
+		}
+	}
 	intersections_sort(&result);
 	return (result);
 }
