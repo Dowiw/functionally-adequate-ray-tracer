@@ -36,7 +36,7 @@ t_plane	plane_create(void)
 
 /**
  * @brief Initialize the planes array.
- * array = NULL and count = 0.
+ * array[0] = NULL and count = 0.
  * 
  * @return t_plane** planes array
  */
