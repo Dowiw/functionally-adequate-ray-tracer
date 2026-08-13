@@ -13,6 +13,7 @@
 #include "minirt.h"
 #include "scene.h"
 #include "util/arrays.h"
+#include <math.h>
 
 /**
  * @brief Default cylinder.
@@ -28,6 +29,8 @@ t_cylinder	cylinder_create(void)
 	c.transform = matrix4x4_identity();
 	c.diameter = 2.0;
 	c.material = material();
+	c.min = -INFINITY;
+	c.max = INFINITY;
 	c.height = 0.0;
 	return (c);
 }

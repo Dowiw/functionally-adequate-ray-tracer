@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include "minirt.h"
 #include "scene.h"
+#include "libft/libft.h"
 #include "util/intersections.h"
 
 /**
@@ -104,6 +105,8 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 	double		disc;
 	double		t0;
 	double		t1;
+	double		y0;
+	double		y1;
 	t_intersections	xs;
 
 	a = pow(ray.direction.x, 2.0) + pow(ray.direction.z, 2.0);
@@ -116,9 +119,15 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 		return (intersections_create());
 	t0 = (-b - sqrt(disc)) / (2 * a);
 	t1 = (-b + sqrt(disc)) / (2 * a);
+	if (t0 > t1)
+		ft_swap(&t0, &t1);
 	xs = intersections_create();
-	xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t0));
-	xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t1));
+	y0 = ray.origin.y + t0 * ray.direction.y;
+	if (cylinder->min < y0 && y0 < cylinder->max)
+		xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t0));
+	y1 = ray.origin.y + t1 * ray.direction.y;
+	if (cylinder->min < y1 && y1 < cylinder->max)
+		xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t1));
 	return (xs);
 }
 

@@ -118,5 +118,7 @@ int	main(void)
 	load_test(cylinders_suite, "Cylinders and Rays with Intersections", &test_cylinders_intersections);
 	load_test(cylinders_suite, "Cylinders and Rays without Intersections", &test_cylinders_no_intersections);
 	load_test(cylinders_suite, "Cylinder Transformed Normal", &test_cylinders_normal);
+	load_test(cylinders_suite, "Cylinders Min-Max Defaults", &test_cylinders_min_max);
+	load_test(cylinders_suite, "Cylinders Truncated Ends", &test_cylinders_truncated);
 	return (launch_tests(&suites));
 }

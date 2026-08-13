@@ -92,5 +92,7 @@ int	test_planes_no_intersections(void);
 int	test_cylinders_no_intersections(void);
 int	test_cylinders_intersections(void);
 int	test_cylinders_normal(void);
+int	test_cylinders_min_max(void);
+int	test_cylinders_truncated(void);
 
 #endif

@@ -80,6 +80,8 @@ typedef struct s_cylinder
 	t_vector	vec;
 	double		diameter;
 	double		height;
+	double		min;
+	double		max;
 	t_material	material;
 	t_matrix4x4	transform;
 }				t_cylinder;

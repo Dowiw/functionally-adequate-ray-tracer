@@ -4,6 +4,7 @@
 #include "ray.h"
 #include "scene.h"
 #include "util/cylinders.h"
+#include <math.h>
 
 int test_cylinders_no_intersections(void)
 {
@@ -76,6 +77,50 @@ int	test_cylinders_normal(void)
 	{
 		res = normal_at(&obj, p[i]);
 		UNIT_ASSERT_EQ(compare_tuples(&res, &(expected_normal[i])), 0);
+	}
+	return (0);
+}
+
+int	test_cylinders_min_max(void)
+{
+	t_cylinder	c = cylinder_create();
+
+	/**
+	 * apparently, comparing INFINITE to INFINITE using the UNIT_ASSERT_FEQ
+	 * macro results in a NaN because of how the compiler subtracts these values
+	 * if the flag -ffast-math, it becomes simplified to (a - a), which would make it pass
+	 * 
+	 * just note that INFINITE, like NaN, is not a float or a double, maybe it is? seems weird
+	 */
+	UNIT_ASSERT_EQ(c.max, INFINITY);
+	UNIT_ASSERT_EQ(c.min, -INFINITY);
+
+	return (0);
+}
+
+int	test_cylinders_truncated(void)
+{
+	t_cylinder	c = cylinder_create();
+	c.min = 1.0;
+	c.max = 2.0;
+
+	t_point		point[6] = {{0, 1.5, 0, POINT}, {0, 3, -5, POINT}, {0, 0, -5, POINT},
+		{0, 2, -5, POINT}, {0, 1, -5, POINT}, {0, 1.5, -2, POINT}};
+	t_vector	dir[6] = {{0.1, 1, 0, VECTOR}, {0, 0, 1, VECTOR}, {0, 0, 1, VECTOR},
+		{0, 0, 1, VECTOR}, {0, 0, 1, VECTOR}, {0, 0, 1, VECTOR}};
+	int			count[6] = {0, 0, 0, 0, 0, 2};
+
+	t_vector		d;
+	t_ray			r;
+	t_object		o = (t_object){CYLINDER, &c};
+	t_intersections	xs;
+
+	for (int i = 0; i < 6; i++)
+	{
+		d = calc_norm(dir[i]);
+		r = ray(point[i], d);
+		xs = intersect(&o, r);
+		UNIT_ASSERT_EQ(xs.count, count[i]);
 	}
 	return (0);
 }
