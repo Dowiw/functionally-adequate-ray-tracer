@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/09 17:12:51 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/12 14:32:06 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ HEADERS = minirt.h \
 SOURCE_DIR = src
 SOURCES = main.c \
 	debug/debug.c \
-	graphics/init_mlx.c \
 	graphics/canvas.c \
+	graphics/mlx.c \
 	matrices/matrix_cofactor.c \
 	matrices/matrix_compare.c \
 	matrices/matrix_determinant.c \
@@ -73,6 +73,7 @@ SOURCES = main.c \
 	rays/ray_transform.c \
 	rays/ray.c \
 	rendering/computations.c \
+	rendering/drawing.c \
 	rendering/rendering.c \
 	scene/camera.c \
 	scene/scene.c \
@@ -90,7 +91,7 @@ SOURCES = main.c \
 	util/lighting/lighting.c \
 	util/materials/materials.c \
 	util/strings/strings1.c \
-	util/shadows/shadows.c 
+	util/shadows/shadows.c
 
 TEST_DIR = tests
 TESTS = main.c \

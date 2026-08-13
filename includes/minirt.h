@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/10 17:05:39 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/12 18:10:35 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@
 # ifndef WIN_H
 #  define WIN_H 1080
 # endif
+
+# define PIXELS_PER_FRAME 1000
+
+# define KEY_ESC 65307
+
+struct s_data;
 
 /**
  * @brief Dynamic structure that represents a lot of things
@@ -116,14 +122,6 @@ typedef struct s_mlx
 	int		endian;		// endian necessary for alignment
 }				t_mlx;
 
-/**
- * @brief Data structure for fdf data
- */
-typedef struct s_data
-{
-	t_mlx	mlx;
-}				t_data;
-
 /** ######################################################################### *
  *  TUPLES                                                                  # *
  *  ######################################################################### */
@@ -171,8 +169,11 @@ t_color				color_black(void);
  *  GRAPHICS                                                                # *
  *  ######################################################################### */
 
-int					init_mlx_lib(t_mlx *mlx);
+int					init_mlx_lib(t_mlx *mlx, struct s_data *data);
 void				init_mlx(t_mlx *mlx);
+int					on_key(int keycode, void *param);
+int					on_close(void *param);
+int					destroy_mlx(t_mlx *mlx);
 
 int					canvas_create(t_canvas *canvas, int width, int height);
 void				write_pixel(t_canvas *canvas, int x, int y, t_tuple color);
