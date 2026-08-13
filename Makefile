@@ -79,7 +79,7 @@ SOURCES = main.c \
 	scene/scene.c \
 	util/arrays/arrays1.c \
 	util/arrays/arrays2.c \
-	util/arrays/cylinders/cylinders1.c \
+	util/arrays/cylinders/cylinders.c \
 	util/arrays/intersections/intersections1.c \
 	util/arrays/intersections/intersections2.c \
 	util/arrays/objects/normal.c \

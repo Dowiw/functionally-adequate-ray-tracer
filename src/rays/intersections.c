@@ -102,6 +102,8 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 	double		b;
 	double		c;
 	double		disc;
+	double		t0;
+	double		t1;
 	t_intersections	xs;
 
 	a = pow(ray.direction.x, 2.0) + pow(ray.direction.z, 2.0);
@@ -112,7 +114,12 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 	disc = pow(b, 2.0) - (4 * a * c);
 	if (disc < 0)
 		return (intersections_create());
-	return (intersections_add(xs, create_intersection(CYLINDER, cylinder, 1)));
+	t0 = (-b - sqrt(disc)) / (2 * a);
+	t1 = (-b + sqrt(disc)) / (2 * a);
+	xs = intersections_create();
+	xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t0));
+	xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t1));
+	return (xs);
 }
 
 /**
