@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 11:48:41 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/14 19:06:44 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/14 19:12:43 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ int		on_key_press(int keycode, void *param)
 	if (keycode == KEY_W)
 		move(data, vector(0.0, 0.0, -0.5));
 	if (keycode == KEY_A)
-		move(data, vector(-0.5, 0.0, 0.0));
+		move(data, vector(0.5, 0.0, 0.0));
 	if (keycode == KEY_S)
 		move(data, vector(0.0, 0.0, 0.5));
 	if (keycode == KEY_D)
-		move(data, vector(0.5, 0.0, 0.0));
+		move(data, vector(-0.5, 0.0, 0.0));
 	if (keycode == KEY_UP)
 		rotate_vertical(data, 0.05);
 	if (keycode == KEY_LEFT)
