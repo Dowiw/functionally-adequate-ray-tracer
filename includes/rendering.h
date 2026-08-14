@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:42:38 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 18:02:45 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/14 20:03:40 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	render_scene(t_canvas *canvas, t_scene *scene);
 
 void	render_init(t_iter *iter);
 
-int		render_frame(struct s_data *data);
+int		render_loop(struct s_data *data);
+
+void	render_frame(struct s_data *data);
 
 t_ray	ray_for_pixel(t_camera camera, int x, int y);
 

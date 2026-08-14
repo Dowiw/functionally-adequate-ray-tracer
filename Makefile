@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/14 19:05:44 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/14 20:01:34 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ CFLAGS = -g -Wall -Wextra -Werror -I./$(HEADER_DIR)
 HEADER_DIR = includes
 HEADERS = minirt.h \
 	debug.h \
+	input.h \
 	libft/libft.h \
 	parsing.h \
 	ray.h \
@@ -34,8 +35,9 @@ SOURCE_DIR = src
 SOURCES = main.c \
 	debug/debug.c \
 	graphics/canvas.c \
-	graphics/controls.c \
 	graphics/mlx.c \
+	input/controls.c \
+	input/input.c \
 	matrices/matrix_cofactor.c \
 	matrices/matrix_compare.c \
 	matrices/matrix_determinant.c \

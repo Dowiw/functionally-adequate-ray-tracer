@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:35:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 14:11:15 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/14 19:45:43 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char **argv)
 		destroy_mlx(&data.mlx);
 		return (error("Failed to initialize mlx"));
 	}
+	ft_bzero(&data.input, sizeof(t_input));
 	render_init(&data.iter);
 	mlx_loop(data.mlx.mlx_ptr);
 	destroy_scene(&data.scene);

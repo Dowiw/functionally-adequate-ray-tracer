@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 19:04:39 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/14 20:20:08 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 #  define WIN_H 540
 # endif
 
-# define PIXELS_PER_FRAME 10000
+# define PIXELS_PER_FRAME 1000
 
 # define KEY_ESC 65307
 # define KEY_UP 65362

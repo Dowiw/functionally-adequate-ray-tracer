@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 11:48:41 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/14 19:12:43 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/14 20:19:48 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,52 +52,65 @@ int		init_mlx_lib(t_mlx *mlx, t_data *data)
 	mlx_hook(mlx->win_ptr, 2, 1L << 0, on_key_press, data);
 	mlx_hook(mlx->win_ptr, 3, 1L << 1, on_key_release, data);
 	mlx_hook(mlx->win_ptr, 17, 0, on_close, data);
-	mlx_loop_hook(mlx->mlx_ptr, &render_frame, data);
+	mlx_loop_hook(mlx->mlx_ptr, &render_loop, data);
 	return (1);
 }
 
-
-/**
- * @brief Handles key inputs, calls on_close if keycode is KEY_ESC.
- *
- * @param keycode
- * @param param
- * @return int
- */
 int		on_key_press(int keycode, void *param)
 {
-	t_data	*data;
+	t_input	*input;
 
-	data = (t_data *) param;
+	input = &((t_data *) param)->input;
 	if (keycode == KEY_ESC)
 		on_close(param);
 	if (keycode == KEY_SPACE)
-		move(data, vector(0.0, 0.5, 0.0));
-	if (keycode == KEY_Z)
-		move(data, vector(0.0, -0.5, 0.0));
+		input->key_space = 1;
+	if (keycode == KEY_SHIFT)
+		input->key_shift = 1;
 	if (keycode == KEY_W)
-		move(data, vector(0.0, 0.0, -0.5));
+		input->key_w = 1;
 	if (keycode == KEY_A)
-		move(data, vector(0.5, 0.0, 0.0));
+		input->key_a = 1;
 	if (keycode == KEY_S)
-		move(data, vector(0.0, 0.0, 0.5));
+		input->key_s = 1;
 	if (keycode == KEY_D)
-		move(data, vector(-0.5, 0.0, 0.0));
+		input->key_d = 1;
 	if (keycode == KEY_UP)
-		rotate_vertical(data, 0.05);
+		input->key_up = 1;
 	if (keycode == KEY_LEFT)
-		rotate_horizontal(data, -0.05);
+		input->key_left = 1;
 	if (keycode == KEY_DOWN)
-		rotate_vertical(data, -0.05);
+		input->key_down = 1;
 	if (keycode == KEY_RIGHT)
-		rotate_horizontal(data, 0.05);
+		input->key_right = 1;
 	return (0);
 }
 
 int		on_key_release(int keycode, void *params)
 {
-	(void) keycode;
-	(void) params;
+	t_input	*input;
+
+	input = &((t_data *) params)->input;
+	if (keycode == KEY_SPACE)
+		input->key_space = 0;
+	if (keycode == KEY_SHIFT)
+		input->key_shift = 0;
+	if (keycode == KEY_W)
+		input->key_w = 0;
+	if (keycode == KEY_A)
+		input->key_a = 0;
+	if (keycode == KEY_S)
+		input->key_s = 0;
+	if (keycode == KEY_D)
+		input->key_d = 0;
+	if (keycode == KEY_UP)
+		input->key_up = 0;
+	if (keycode == KEY_LEFT)
+		input->key_left = 0;
+	if (keycode == KEY_DOWN)
+		input->key_down = 0;
+	if (keycode == KEY_RIGHT)
+		input->key_right = 0;
 	return (0);
 }
 
