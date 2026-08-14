@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 15:55:14 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/14 18:58:29 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,15 @@ static void	finish_camera(t_camera *camera, int width, int height)
 	else
 		up = vector(0.0, 1.0, 0.0);
 	camera->transform = view_transform(camera->pos, to, up);
+	if (camera->orientation.z != 0.0)
+		camera->horizontal = PI + atan(camera->orientation.x / camera->orientation.z);
+	else
+		camera->horizontal = PI + PI / 2.0;
+	if (camera->orientation.x != 0.0 || camera->orientation.z != 0.0)
+		camera->vertical = atan(camera->orientation.y / sqrt(camera->orientation.x * camera->orientation.x + camera->orientation.z * camera->orientation.z));
+	else if (camera->orientation.y > 0.0)
+		camera->vertical = PI * 0.5;
+	else
+		camera->vertical = -(PI * 0.5);
 	init_camera(camera);
 }

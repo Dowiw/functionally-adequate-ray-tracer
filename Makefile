@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/12 14:32:06 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/14 19:05:44 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SOURCE_DIR = src
 SOURCES = main.c \
 	debug/debug.c \
 	graphics/canvas.c \
+	graphics/controls.c \
 	graphics/mlx.c \
 	matrices/matrix_cofactor.c \
 	matrices/matrix_compare.c \

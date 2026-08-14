@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:25:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 18:11:37 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/13 19:41:55 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		render_frame(t_data *data)
 
 	iter = &data->iter;
 	if (iter->res == 0)
-		exit (0);
+		return (0);
 	iter->pixels = 0;
 	while (iter->res > 0)
 	{
@@ -87,7 +87,7 @@ int		render_frame(t_data *data)
 			{
 				render_pixel(data);
 				iter->y += iter->res;
-				if (iter->pixels >= PIXELS_PER_FRAME)
+				if (!iter->first && iter->pixels >= PIXELS_PER_FRAME)
 					return (0);
 			}
 			iter->x += iter->res;

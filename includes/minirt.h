@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 18:10:35 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/14 19:04:39 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,27 @@
 # define PI 3.14159265358979323846
 
 # ifndef WIN_W
-#  define WIN_W 1920
+#  define WIN_W 960
 # endif
 
 # ifndef WIN_H
-#  define WIN_H 1080
+#  define WIN_H 540
 # endif
 
-# define PIXELS_PER_FRAME 1000
+# define PIXELS_PER_FRAME 10000
 
 # define KEY_ESC 65307
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_SHIFT 65505
+# define KEY_SPACE 32
+# define KEY_Z 122
 
 struct s_data;
 
@@ -171,9 +182,14 @@ t_color				color_black(void);
 
 int					init_mlx_lib(t_mlx *mlx, struct s_data *data);
 void				init_mlx(t_mlx *mlx);
-int					on_key(int keycode, void *param);
+int					on_key_press(int keycode, void *param);
+int					on_key_release(int keycode, void *param);
 int					on_close(void *param);
 int					destroy_mlx(t_mlx *mlx);
+
+void				move(struct s_data *data, t_vector vec);
+void				rotate_horizontal(struct s_data *data, double radians);
+void				rotate_vertical(struct s_data *data, double radians);
 
 int					canvas_create(t_canvas *canvas, int width, int height);
 void				write_pixel(t_canvas *canvas, int x, int y, t_tuple color);
