@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:25:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 18:11:37 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/14 20:22:13 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <mlx.h>
 #include "data.h"
 #include "debug.h"
+#include "input.h"
 #include "minirt.h"
 #include "ray.h"
 #include "rendering.h"
@@ -62,6 +63,13 @@ void	render_init(t_iter *iter)
 	iter->pixels = 0;
 }
 
+int		render_loop(t_data *data)
+{
+	tick_input(data);
+	render_frame(data);
+	return (0);
+}
+
 /**
  * @brief Renders the amount of new pixels specified in data.iter.pixels_per_frame.
  *        The mlx window is updated at the end of the frame.
@@ -71,13 +79,11 @@ void	render_init(t_iter *iter)
  * @return int
  */
 	#include <stdlib.h>
-int		render_frame(t_data *data)
+void	render_frame(t_data *data)
 {
 	t_iter	*iter;
 
 	iter = &data->iter;
-	if (iter->res == 0)
-		exit (0);
 	iter->pixels = 0;
 	while (iter->res > 0)
 	{
@@ -87,8 +93,8 @@ int		render_frame(t_data *data)
 			{
 				render_pixel(data);
 				iter->y += iter->res;
-				if (iter->pixels >= PIXELS_PER_FRAME)
-					return (0);
+				if (!iter->first && iter->pixels >= PIXELS_PER_FRAME)
+					return ;
 			}
 			iter->x += iter->res;
 			iter->y = 0;
@@ -97,9 +103,9 @@ int		render_frame(t_data *data)
 		iter->res = iter->res / 2;
 		iter->first = 0;
 		put_frame(data->mlx);
-		return (0);
+		return ;
 	}
-	return (0);
+	return ;
 }
 
 /**
@@ -133,4 +139,5 @@ static void	render_pixel(t_data *data)
 static void	put_frame(t_mlx mlx)
 {
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
+	mlx_do_sync(mlx.mlx_ptr);
 }

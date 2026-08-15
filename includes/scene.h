@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 17:06:27 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/14 17:59:13 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct s_camera
 	t_point		pos;
 	t_vector	orientation;
 	double		fov;
+
+	double		horizontal;
+	double		vertical;
 
 	t_matrix4x4	transform;
 	double		field_of_view;

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 15:49:14 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 16:05:26 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/14 18:53:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static t_matrix4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left)
 	result.m[2][0] = -forward.x;
 	result.m[2][1] = -forward.y;
 	result.m[2][2] = -forward.z;
+	result.m[2][3] = 0.0;
 	result.m[3][0] = 0.0;
 	result.m[3][1] = 0.0;
 	result.m[3][2] = 0.0;
