@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 14:32:03 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/16 16:02:10 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/16 17:01:49 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static t_matrix4x4	get_inverse_transform(t_object *obj)
 static t_vector	local_normal_at(t_object *obj, t_point local_point)
 {
 	if (obj->type == SPHERE)
-		return (tuples_sub(local_point, point(0.0, 0.0, 0.0)));
+		return ((t_tuple){local_point.x, local_point.y, local_point.z, VECTOR});
 	else if (obj->type == PLANE)
-		return (vector(0.0, 1.0, 0.0));
-	return (vector(0.0, 0.0, 0.0));
+		return ((t_tuple){0.0, 1.0, 0.0, VECTOR});
+	return ((t_tuple){0.0, 0.0, 0.0, VECTOR});
 }
 
 /**
