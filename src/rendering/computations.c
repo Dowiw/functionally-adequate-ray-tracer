@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:26:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 15:55:15 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/16 16:00:13 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ t_ray	ray_for_pixel(t_camera camera, int x, int y)
 	y_offset = (y + 0.5) * camera.pixel_size;
 	world_x = camera.half_width - x_offset;
 	world_y = camera.half_height - y_offset;
-	pixel = matrix4x4_multiply_tuple(matrix4x4_inverse(camera.transform), point(world_x, world_y, -1.0));
-	origin = matrix4x4_multiply_tuple(matrix4x4_inverse(camera.transform), point(0.0, 0.0, 0.0));
+	pixel = matrix4x4_multiply_tuple(camera.inverse, point(world_x, world_y, -1.0));
+	origin = matrix4x4_multiply_tuple(camera.inverse, point(0.0, 0.0, 0.0));
 	direction = calc_norm(tuples_sub(pixel, origin));
 	return ((t_ray){origin, direction});
 }

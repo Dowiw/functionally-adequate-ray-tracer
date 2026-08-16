@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 14:32:03 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/12 15:55:15 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/16 16:02:10 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "scene.h"
 
-static t_matrix4x4	get_transform(t_object *obj)
+static t_matrix4x4	get_inverse_transform(t_object *obj)
 {
 	if (obj->type == SPHERE)
-		return (((t_sphere *)obj->object)->transform);
+		return (((t_sphere *)obj->object)->inverse);
 	else if (obj->type == PLANE)
-		return (((t_plane *)obj->object)->transform);
+		return (((t_plane *)obj->object)->inverse);
 	else if (obj->type == CYLINDER)
-		return (((t_cylinder *)obj->object)->transform);
+		return (((t_cylinder *)obj->object)->inverse);
 	return (matrix4x4_identity());
 }
 
@@ -49,7 +49,7 @@ t_vector	normal_at(t_object *obj, t_point p)
 
 	if (!obj || !obj->object)
 		return (vector(0.0, 0.0, 0.0));
-	inv = matrix4x4_inverse(get_transform(obj));
+	inv = get_inverse_transform(obj);
 	local_point = matrix4x4_multiply_tuple(inv, p);
 	local_normal = local_normal_at(obj, local_point);
 	world_normal = matrix4x4_multiply_tuple(matrix4x4_transpose(inv),

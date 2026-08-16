@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main4.c                                            :+:      :+:    :+:   */
+/*   main4-5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 14:31:04 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:04:27 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/16 15:59:29 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(void)
 
 	floor = sphere_create();
 	floor.transform = matrix4x4_scaling(10.0, 0.01, 10.0);
+	floor.inverse = matrix4x4_inverse(floor.transform);
 	floor.material = material();
 	floor.material.color = color(1.0, 0.9, 0.9);
 	floor.material.specular = 0.0;
@@ -40,6 +41,7 @@ int	main(void)
 	left_wall.transform = matrix4x4_multiply(left_wall.transform, matrix4x4_rotation_y(-PI / 4.0));
 	left_wall.transform = matrix4x4_multiply(left_wall.transform, matrix4x4_rotation_x(PI / 2.0));
 	left_wall.transform = matrix4x4_multiply(left_wall.transform, matrix4x4_scaling(10.0, 0.01, 10.0));
+	left_wall.inverse = matrix4x4_inverse(left_wall.transform);
 	left_wall.material = floor.material;
 
 	right_wall = sphere_create();
@@ -47,10 +49,12 @@ int	main(void)
 	right_wall.transform = matrix4x4_multiply(right_wall.transform, matrix4x4_rotation_y(PI / 4.0));
 	right_wall.transform = matrix4x4_multiply(right_wall.transform, matrix4x4_rotation_x(PI / 2.0));
 	right_wall.transform = matrix4x4_multiply(right_wall.transform, matrix4x4_scaling(10.0, 0.01, 10.0));
+	right_wall.inverse = matrix4x4_inverse(right_wall.transform);
 	right_wall.material = floor.material;
 
 	middle = sphere_create();
 	middle.transform = matrix4x4_translation(-0.5, 1.0, 0.5);
+	middle.inverse = matrix4x4_inverse(middle.transform);
 	middle.material = material();
 	middle.material.color = color(0.1, 1.0, 0.5);
 	middle.material.diffuse = 0.7;
@@ -59,6 +63,7 @@ int	main(void)
 	right = sphere_create();
 	right.transform = matrix4x4_translation(1.5, 0.5, -0.5);
 	right.transform = matrix4x4_multiply(right.transform, matrix4x4_scaling(0.5, 0.5, 0.5));
+	right.inverse = matrix4x4_inverse(right.transform);
 	right.material = material();
 	right.material.color = color(0.5, 1.0, 0.1);
 	right.material.diffuse = 0.7;
@@ -67,6 +72,7 @@ int	main(void)
 	left = sphere_create();
 	left.transform = matrix4x4_translation(-1.5, 0.33, -0.75);
 	left.transform = matrix4x4_multiply(left.transform, matrix4x4_scaling(0.33, 0.33, 0.33));
+	left.inverse = matrix4x4_inverse(left.transform);
 	left.material = material();
 	left.material.color = color(1.0, 0.8, 0.1);
 	left.material.diffuse = 0.7;
@@ -83,6 +89,7 @@ int	main(void)
 
 	scene.camera = create_camera(1000, 500, PI / 3);
 	scene.camera.transform = view_transform(point(0.0, 1.5, -5.0), point(0.0, 1.0, 0.0), vector(0.0, 1.0, 0.0));
+	scene.camera.inverse = matrix4x4_inverse(scene.camera.transform);
 
 	if (!canvas_create(&canvas, scene.camera.width, scene.camera.height))
 		return (1);

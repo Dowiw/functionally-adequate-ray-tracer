@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 15:19:02 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:56:52 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/16 15:57:27 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void		init_camera(t_camera *camera)
 		camera->half_height = camera->half_view;
 	}
 	camera->pixel_size = (camera->half_width * 2.0) / camera->width;
+	camera->inverse = matrix4x4_inverse(camera->transform);
 }

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 17:59:13 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/16 15:51:59 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_camera
 	double		vertical;
 
 	t_matrix4x4	transform;
+	t_matrix4x4	inverse;
 	double		field_of_view;
 
 	int			width;
@@ -66,6 +67,7 @@ typedef struct s_sphere
 	int			color;
 	double		diameter;
 	t_matrix4x4	transform;
+	t_matrix4x4	inverse;
 	t_material	material;
 }				t_sphere;
 
@@ -75,6 +77,7 @@ typedef struct s_plane
 	t_vector	vec;
 	t_material	material;
 	t_matrix4x4	transform;
+	t_matrix4x4	inverse;
 }				t_plane;
 
 typedef struct s_cylinder
@@ -85,6 +88,7 @@ typedef struct s_cylinder
 	double		height;
 	t_material	material;
 	t_matrix4x4	transform;
+	t_matrix4x4	inverse;
 }				t_cylinder;
 
 /**

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 10:37:30 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 15:55:14 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/16 16:00:59 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_intersections	intersect_sphere(t_sphere *sphere, t_ray ray)
 	double			discriminant;
 
 	result = intersections_create();
-	local_ray = transform(ray, matrix4x4_inverse(sphere->transform));
+	local_ray = transform(ray, sphere->inverse);
 	sphere_to_ray = tuples_sub(local_ray.origin, point(0.0, 0.0, 0.0));
 	abc[0] = dot_product(local_ray.direction, local_ray.direction);
 	abc[1] = 2 * dot_product(local_ray.direction, sphere_to_ray);
@@ -81,7 +81,7 @@ t_intersections	intersect_plane(t_plane *plane, t_ray ray)
 	double			t;
 
 	result = intersections_create();
-	local_r = transform(ray, matrix4x4_inverse(plane->transform));
+	local_r = transform(ray, plane->inverse);
 	if (fabs(local_r.direction.y) < UNIT_EPSILON)
 		return (result);
 	t = -local_r.origin.y / local_r.direction.y;
