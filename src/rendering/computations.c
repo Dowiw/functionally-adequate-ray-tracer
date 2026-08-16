@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:26:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/16 16:00:13 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/16 16:21:02 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,20 +113,14 @@ t_color	shade_hit(t_scene *scene, t_comps comps)
  */
 t_color	color_at(t_scene *scene, t_ray ray)
 {
-	t_intersections	xs;
-	t_intersection	*hit;
+	t_intersection	hit;
 	t_comps			comps;
 	t_color			res;
 
-	xs = intersect_scene(scene, ray);
-	hit = intersect_hit(xs);
-	if (hit == NULL)
-	{
-		free_intersections(xs);
+	hit = intersect_scene_and_hit(scene, ray);
+	if (hit.t < 0.0)
 		return (color_black());
-	}
-	comps = prepare_computations(ray, hit);
+	comps = prepare_computations(ray, &hit);
 	res = shade_hit(scene, comps);
-	free_intersections(xs);
 	return (res);
 }

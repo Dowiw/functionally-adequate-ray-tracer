@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/14 20:01:34 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/16 16:23:12 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,10 @@ SOURCES = main.c \
 	parsing/parse_tuple.c \
 	parsing/parse_vector.c \
 	parsing/parsing.c \
+	rays/fast/intersect_fast.c \
+	rays/fast/intersect_cylinder_fast.c \
+	rays/fast/intersect_plane_fast.c \
+	rays/fast/intersect_sphere_fast.c \
 	rays/intersections.c \
 	rays/intersect.c \
 	rays/ray_transform.c \
