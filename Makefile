@@ -6,14 +6,14 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/16 16:23:12 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/16 17:16:08 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 CC = cc
 
-CFLAGS = -g -Wall -Wextra -Werror -I./$(HEADER_DIR)
+CFLAGS = -g -Wall -Wextra -Werror -I./$(HEADER_DIR) -O2
 
 HEADER_DIR = includes
 HEADERS = minirt.h \
