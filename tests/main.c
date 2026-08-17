@@ -27,6 +27,8 @@ int	main(void)
 	t_test_suite	*rendering_suite;
 	t_test_suite	*shadow_suite;
 	t_test_suite	*planes_suite;
+	t_test_suite	*cylinders_suite;
+	t_test_suite	*cones_suite;
 
 	suites = NULL;
 	tuple_suite = load_suite(&suites, "Tuples Suite");
@@ -113,6 +115,18 @@ int	main(void)
 	load_test(planes_suite, "Plane Transformed Normal (i.e. updated normal_at()", &test_planes_updated_normal);
 	load_test(planes_suite, "Planes and Rays without Intersections", &test_planes_no_intersections);
 	load_test(planes_suite, "Planes and Rays with Intersections", &test_planes_intersections);
-
+	cylinders_suite = load_suite(&suites, "Cylinders Suite");
+	load_test(cylinders_suite, "Cylinders and Rays with Intersections", &test_cylinders_intersections);
+	load_test(cylinders_suite, "Cylinders and Rays without Intersections", &test_cylinders_no_intersections);
+	load_test(cylinders_suite, "Cylinder Transformed Normal", &test_cylinders_normal);
+	load_test(cylinders_suite, "Cylinders Min-Max Defaults", &test_cylinders_min_max);
+	load_test(cylinders_suite, "Cylinders Truncated Ends", &test_cylinders_truncated);
+	load_test(cylinders_suite, "Cylinders Closed Cap Intersections", &test_cylinders_closed);
+	load_test(cylinders_suite, "Cylinders End Cap Normals", &test_cylinders_cap_normals);
+	cones_suite = load_suite(&suites, "Cones Suite");
+	load_test(cones_suite, "Cone Ray Intersections", &test_cones_intersections);
+	load_test(cones_suite, "Cone Parallel Ray Intersection", &test_cones_parallel_intersection);
+	load_test(cones_suite, "Cone End Cap Intersections", &test_cones_end_caps);
+	load_test(cones_suite, "Cone Normal Vector", &test_cones_normal);
 	return (launch_tests(&suites));
 }

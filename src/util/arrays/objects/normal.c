@@ -12,6 +12,7 @@
 
 #include "minirt.h"
 #include "scene.h"
+#include <math.h>
 
 static t_matrix4x4	get_transform(t_object *obj)
 {
@@ -21,15 +22,45 @@ static t_matrix4x4	get_transform(t_object *obj)
 		return (((t_plane *)obj->object)->transform);
 	else if (obj->type == CYLINDER)
 		return (((t_cylinder *)obj->object)->transform);
+	else if (obj->type == CONE)
+		return (((t_cone *)obj->object)->transform);
 	return (matrix4x4_identity());
 }
 
 static t_vector	local_normal_at(t_object *obj, t_point local_point)
 {
+	double		dist;
+	t_cylinder	*cyl;
+	t_cone		*cone;
+	double		y_val;
+
 	if (obj->type == SPHERE)
 		return (tuples_sub(local_point, point(0.0, 0.0, 0.0)));
 	else if (obj->type == PLANE)
 		return (vector(0.0, 1.0, 0.0));
+	else if (obj->type == CYLINDER)
+	{
+		cyl = (t_cylinder *)obj->object;
+		dist = pow(local_point.x, 2) + pow(local_point.z, 2);
+		if (dist < 1 && local_point.y >= cyl->max - UNIT_EPSILON)
+			return (vector(0.0, 1.0, 0.0));
+		else if (dist < 1 && local_point.y <= cyl->min + UNIT_EPSILON)
+			return (vector(0.0, -1.0, 0.0));
+		return (vector(local_point.x, 0.0, local_point.z));
+	}
+	else if (obj->type == CONE)
+	{
+		cone = (t_cone *)obj->object;
+		dist = pow(local_point.x, 2) + pow(local_point.z, 2);
+		if (dist < pow(cone->max, 2) && local_point.y >= cone->max - UNIT_EPSILON)
+			return (vector(0.0, 1.0, 0.0));
+		else if (dist < pow(cone->min, 2) && local_point.y <= cone->min + UNIT_EPSILON)
+			return (vector(0.0, -1.0, 0.0));
+		y_val = sqrt(dist);
+		if (local_point.y > 0)
+			y_val = -y_val;
+		return (vector(local_point.x, y_val, local_point.z));
+	}
 	return (vector(0.0, 0.0, 0.0));
 }
 
@@ -55,6 +86,8 @@ t_vector	normal_at(t_object *obj, t_point p)
 	world_normal = matrix4x4_multiply_tuple(matrix4x4_transpose(inv),
 			local_normal);
 	world_normal.w = VECTOR;
+	if (calc_mag(world_normal) < UNIT_EPSILON)
+		return (vector(0.0, 0.0, 0.0));
 	return (calc_norm(world_normal));
 }
 

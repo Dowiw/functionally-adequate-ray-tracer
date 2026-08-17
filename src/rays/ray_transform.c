@@ -45,6 +45,8 @@ void	set_transform(t_object *obj, t_matrix4x4 t)
 		((t_cylinder *)obj->object)->transform = t;
 	else if (obj->type == PLANE)
 		((t_plane *)obj->object)->transform = t;
+	else if (obj->type == CONE)
+		((t_cone *)obj->object)->transform = t;
 }
 
 /**

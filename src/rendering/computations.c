@@ -78,6 +78,8 @@ static t_material	get_material(t_object obj)
 		return (((t_plane *)obj.object)->material);
 	else if (obj.type == CYLINDER)
 		return (((t_cylinder *)obj.object)->material);
+	else if (obj.type == CONE)
+		return (((t_cone *)obj.object)->material);
 	return (material());
 }
 
