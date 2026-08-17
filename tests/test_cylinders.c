@@ -168,3 +168,40 @@ int	test_cylinders_closed(void)
 	return (0);
 }
 
+int	test_cylinders_cap_normals(void)
+{
+	t_cylinder	cyl = cylinder_create();
+
+	cyl.min = 1;
+	cyl.max = 2;
+	cyl.closed = 1;
+
+	t_point	points[6] = {
+		{0, 1, 0, POINT},
+		{0.5, 1, 0, POINT},
+		{0, 1, 0.5, POINT},
+		{0, 2, 0, POINT},
+		{0.5, 2, 0, POINT},
+		{0, 2, 0.5, POINT}
+	};
+
+	t_vector	expected_normals[6] = {
+		{0, -1, 0, VECTOR},
+		{0, -1, 0, VECTOR},
+		{0, -1, 0, VECTOR},
+		{0, 1, 0, VECTOR},
+		{0, 1, 0, VECTOR},
+		{0, 1, 0, VECTOR}
+	};
+
+	t_object	obj = {CYLINDER, &cyl};
+	t_vector	res;
+
+	for (int i = 0; i < 6; i++)
+	{
+		res = normal_at(&obj, points[i]);
+		UNIT_ASSERT_EQ(compare_tuples(&res, &(expected_normals[i])), 0);
+	}
+	return (0);
+}
+

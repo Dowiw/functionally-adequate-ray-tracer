@@ -95,5 +95,6 @@ int	test_cylinders_normal(void);
 int	test_cylinders_min_max(void);
 int	test_cylinders_truncated(void);
 int	test_cylinders_closed(void);
+int	test_cylinders_cap_normals(void);
 
 #endif

@@ -12,6 +12,7 @@
 
 #include "minirt.h"
 #include "scene.h"
+#include <math.h>
 
 static t_matrix4x4	get_transform(t_object *obj)
 {
@@ -26,12 +27,23 @@ static t_matrix4x4	get_transform(t_object *obj)
 
 static t_vector	local_normal_at(t_object *obj, t_point local_point)
 {
+	double		dist;
+	t_cylinder	*cyl;
+
 	if (obj->type == SPHERE)
 		return (tuples_sub(local_point, point(0.0, 0.0, 0.0)));
 	else if (obj->type == PLANE)
 		return (vector(0.0, 1.0, 0.0));
 	else if (obj->type == CYLINDER)
-		return (vector(local_point.x, 0, local_point.z));
+	{
+		cyl = (t_cylinder *)obj->object;
+		dist = pow(local_point.x, 2) + pow(local_point.z, 2);
+		if (dist < 1 && local_point.y >= cyl->max - UNIT_EPSILON)
+			return (vector(0.0, 1.0, 0.0));
+		else if (dist < 1 && local_point.y <= cyl->min + UNIT_EPSILON)
+			return (vector(0.0, -1.0, 0.0));
+		return (vector(local_point.x, 0.0, local_point.z));
+	}
 	return (vector(0.0, 0.0, 0.0));
 }
 
