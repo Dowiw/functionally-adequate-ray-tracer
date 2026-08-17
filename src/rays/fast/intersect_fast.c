@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:13:25 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/16 16:28:25 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/17 19:31:35 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ t_intersection	intersect_scene_and_hit(t_scene *scene, t_ray ray)
 	while (scene->cylinders[i] != NULL)
 	{
 		intersect_cylinder_fast(scene->cylinders[i], ray, &result);
+		i++;
+	}
+	i = 0;
+	while (scene->cones[i] != NULL)
+	{
+		intersect_cone_fast(scene->cones[i], ray, &result);
 		i++;
 	}
 	return (result);

@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/16 17:16:08 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/17 19:32:07 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ SOURCES = main.c \
 	parsing/parse_vector.c \
 	parsing/parsing.c \
 	rays/fast/intersect_fast.c \
+	rays/fast/intersect_cone_fast.c \
 	rays/fast/intersect_cylinder_fast.c \
 	rays/fast/intersect_plane_fast.c \
 	rays/fast/intersect_sphere_fast.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cones.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 13:30:00 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/17 13:30:00 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/17 18:51:39 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_cone	cone_create(void)
 	c.center = (t_point){0, 0, 0, POINT};
 	c.vec = vector(0, 1, 0);
 	c.transform = matrix4x4_identity();
+	c.inverse = matrix4x4_identity();
 	c.diameter = 2.0;
 	c.material = material();
 	c.min = -INFINITY;

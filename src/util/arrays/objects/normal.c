@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 14:32:03 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/16 17:01:49 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/17 18:53:47 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_matrix4x4	get_inverse_transform(t_object *obj)
 	else if (obj->type == CYLINDER)
 		return (((t_cylinder *)obj->object)->inverse);
 	else if (obj->type == CONE)
-		return (matrix4x4_inverse(((t_cone *)obj->object)->transform));
+		return (((t_cone *)obj->object)->inverse);
 	return (matrix4x4_identity());
 }
 

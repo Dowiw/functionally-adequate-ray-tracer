@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/28 23:45:39 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/16 15:53:03 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/17 18:52:26 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ void	set_transform(t_object *obj, t_matrix4x4 t)
 		((t_plane *)obj->object)->inverse = matrix4x4_inverse(t);
 	}
 	else if (obj->type == CONE)
+	{
 		((t_cone *)obj->object)->transform = t;
+		((t_cone *)obj->object)->inverse = matrix4x4_inverse(t);
+	}
 }
 
 /**

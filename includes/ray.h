@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 11:32:13 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/16 16:24:33 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/17 19:31:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_intersections	intersect_scene(t_scene *scene, t_ray ray);
 t_intersection	*intersect_hit(t_intersections intersections);
 
 t_intersection	intersect_scene_and_hit(t_scene *scene, t_ray ray);
+void			intersect_cone_fast(t_cone *cone, t_ray ray, t_intersection *hit);
 void			intersect_cylinder_fast(t_cylinder *cylinder, t_ray ray, t_intersection *hit);
 void			intersect_plane_fast(t_plane *plane, t_ray ray, t_intersection *hit);
 void			intersect_sphere_fast(t_sphere *sphere, t_ray ray, t_intersection *hit);

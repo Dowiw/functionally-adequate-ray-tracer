@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/17 10:51:45 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/17 18:46:56 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_cone
 	int			closed;
 	t_material	material;
 	t_matrix4x4	transform;
+	t_matrix4x4	inverse;
 }				t_cone;
 
 /**
