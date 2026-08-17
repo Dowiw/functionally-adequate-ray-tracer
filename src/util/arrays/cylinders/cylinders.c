@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinders1.c                                       :+:      :+:    :+:   */
+/*   cylinders.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/15 21:42:54 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 22:09:58 by sstark           ###   ########.fr       */
+/*   Created: 2026/06/09 19:43:27 by kmonjard          #+#    #+#             */
+/*   Updated: 2026/08/17 10:51:04 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_cylinder	cylinder_create(void)
 	c.material = material();
 	c.min = -INFINITY;
 	c.max = INFINITY;
+	c.closed = 0;
 	c.height = 0.0;
 	return (c);
 }

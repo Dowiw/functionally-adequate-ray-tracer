@@ -124,3 +124,47 @@ int	test_cylinders_truncated(void)
 	}
 	return (0);
 }
+
+int	test_cylinders_closed(void)
+{
+	t_cylinder	cyl = cylinder_create();
+
+	UNIT_ASSERT_EQ(cyl.closed, 0);
+
+	cyl.min = 1;
+	cyl.max = 2;
+	cyl.closed = 1;
+
+	t_point	points[5] = {
+		{0, 3, 0, POINT},
+		{0, 3, -2, POINT},
+		{0, 4, -2, POINT},
+		{0, 0, -2, POINT},
+		{0, -1, -2, POINT}
+	};
+
+	t_vector	directions[5] = {
+		{0, -1, 0, VECTOR},
+		{0, -1, 2, VECTOR},
+		{0, -1, 1, VECTOR},
+		{0, 1, 2, VECTOR},
+		{0, 1, 1, VECTOR}
+	};
+
+	int	counts[5] = {2, 2, 2, 2, 2};
+
+	t_intersections	xs;
+	t_ray			r;
+	t_object		obj = {CYLINDER, &cyl};
+
+	for (int i = 0; i < 5; i++)
+	{
+		directions[i] = calc_norm(directions[i]);
+		r = ray(points[i], directions[i]);
+		xs = intersect(&obj, r);
+		UNIT_ASSERT_EQ(xs.count, counts[i]);
+	}
+
+	return (0);
+}
+

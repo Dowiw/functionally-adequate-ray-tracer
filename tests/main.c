@@ -120,5 +120,6 @@ int	main(void)
 	load_test(cylinders_suite, "Cylinder Transformed Normal", &test_cylinders_normal);
 	load_test(cylinders_suite, "Cylinders Min-Max Defaults", &test_cylinders_min_max);
 	load_test(cylinders_suite, "Cylinders Truncated Ends", &test_cylinders_truncated);
+	load_test(cylinders_suite, "Cylinders Closed Cap Intersections", &test_cylinders_closed);
 	return (launch_tests(&suites));
 }

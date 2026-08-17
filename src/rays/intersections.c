@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 10:37:30 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 15:55:14 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/17 10:51:04 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "scene.h"
 #include "libft/libft.h"
 #include "util/intersections.h"
+#include "util/cylinders.h"
 
 /**
  * @brief Allocates and initializes an intersection
@@ -111,7 +112,11 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 
 	a = pow(ray.direction.x, 2.0) + pow(ray.direction.z, 2.0);
 	if (a < UNIT_EPSILON)
-		return (intersections_create());
+	{
+		xs = intersections_create();
+		intersect_caps(cylinder, ray, &xs);
+		return (xs);
+	}
 	b = (2 * ray.origin.x * ray.direction.x) + (2 * ray.origin.z * ray.direction.z);
 	c = pow(ray.origin.x, 2.0) + pow(ray.origin.z, 2.0) - 1;
 	disc = pow(b, 2.0) - (4 * a * c);
@@ -128,6 +133,7 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 	y1 = ray.origin.y + t1 * ray.direction.y;
 	if (cylinder->min < y1 && y1 < cylinder->max)
 		xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t1));
+	intersect_caps(cylinder, ray, &xs);
 	return (xs);
 }
 

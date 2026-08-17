@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 17:59:13 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/17 10:51:45 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_cylinder
 	double		height;
 	double		min;
 	double		max;
+	int			closed;
 	t_material	material;
 	t_matrix4x4	transform;
 }				t_cylinder;

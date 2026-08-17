@@ -6,7 +6,7 @@
 /*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 00:44:27 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/10 17:05:39 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/17 10:51:45 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int	test_cylinders_intersections(void);
 int	test_cylinders_normal(void);
 int	test_cylinders_min_max(void);
 int	test_cylinders_truncated(void);
+int	test_cylinders_closed(void);
 
 #endif
