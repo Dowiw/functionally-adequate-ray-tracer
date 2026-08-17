@@ -97,4 +97,9 @@ int	test_cylinders_truncated(void);
 int	test_cylinders_closed(void);
 int	test_cylinders_cap_normals(void);
 
+int	test_cones_intersections(void);
+int	test_cones_parallel_intersection(void);
+int	test_cones_end_caps(void);
+int	test_cones_normal(void);
+
 #endif

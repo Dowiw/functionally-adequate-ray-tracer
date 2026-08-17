@@ -28,6 +28,7 @@ int	main(void)
 	t_test_suite	*shadow_suite;
 	t_test_suite	*planes_suite;
 	t_test_suite	*cylinders_suite;
+	t_test_suite	*cones_suite;
 
 	suites = NULL;
 	tuple_suite = load_suite(&suites, "Tuples Suite");
@@ -122,5 +123,10 @@ int	main(void)
 	load_test(cylinders_suite, "Cylinders Truncated Ends", &test_cylinders_truncated);
 	load_test(cylinders_suite, "Cylinders Closed Cap Intersections", &test_cylinders_closed);
 	load_test(cylinders_suite, "Cylinders End Cap Normals", &test_cylinders_cap_normals);
+	cones_suite = load_suite(&suites, "Cones Suite");
+	load_test(cones_suite, "Cone Ray Intersections", &test_cones_intersections);
+	load_test(cones_suite, "Cone Parallel Ray Intersection", &test_cones_parallel_intersection);
+	load_test(cones_suite, "Cone End Cap Intersections", &test_cones_end_caps);
+	load_test(cones_suite, "Cone Normal Vector", &test_cones_normal);
 	return (launch_tests(&suites));
 }

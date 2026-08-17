@@ -21,6 +21,7 @@ t_intersections	intersect(t_object *obj, t_ray r);
 t_intersections	intersect_sphere(t_sphere *sphere, t_ray ray);
 t_intersections	intersect_plane(t_plane *plane, t_ray ray);
 t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray);
+t_intersections	intersect_cone(t_cone *cone, t_ray ray);
 t_intersections	intersect_scene(t_scene *scene, t_ray ray);
 t_intersection	*intersect_hit(t_intersections intersections);
 

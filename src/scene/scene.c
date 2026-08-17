@@ -17,6 +17,7 @@
 #include "util/cylinders.h"
 #include "util/planes.h"
 #include "util/spheres.h"
+#include "util/cones.h"
 
 /**
  * @brief Initialize a scene structure
@@ -29,13 +30,14 @@ int	init_scene(t_scene *scene)
 	scene->cylinders = cylinders_create();
 	scene->planes = planes_create();
 	scene->spheres = spheres_create();
+	scene->cones = cones_create();
 	scene->has_ambience = 0;
 	scene->has_camera = 0;
 	scene->has_light = 0;
 	ft_bzero(scene->error, ERROR_STACK_SIZE + 1);
 	scene->error_line = NULL;
 	if (scene->cylinders == NULL || scene->planes == NULL
-		|| scene->spheres == NULL)
+		|| scene->spheres == NULL || scene->cones == NULL)
 	{
 		destroy_scene(scene);
 		return (0);
@@ -90,7 +92,9 @@ void	destroy_scene(t_scene *scene)
 	free_cylinders(scene->cylinders);
 	free_planes(scene->planes);
 	free_spheres(scene->spheres);
+	free_cones(scene->cones);
 	scene->cylinders = NULL;
 	scene->planes = NULL;
 	scene->spheres = NULL;
+	scene->cones = NULL;
 }

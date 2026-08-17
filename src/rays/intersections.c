@@ -17,6 +17,7 @@
 #include "libft/libft.h"
 #include "util/intersections.h"
 #include "util/cylinders.h"
+#include "util/cones.h"
 
 /**
  * @brief Allocates and initializes an intersection
@@ -138,6 +139,63 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 }
 
 /**
+ * @brief Calculates whether a ray intersects a cone.
+ * 
+ * @param cone
+ * @param ray
+ * @return t_intersections
+ */
+t_intersections	intersect_cone(t_cone *cone, t_ray ray)
+{
+	double			abc[3];
+	double			disc;
+	double			t[2];
+	double			y[2];
+	t_intersections	xs;
+
+	abc[0] = pow(ray.direction.x, 2.0) - pow(ray.direction.y, 2.0)
+		+ pow(ray.direction.z, 2.0);
+	abc[1] = (2 * ray.origin.x * ray.direction.x)
+		- (2 * ray.origin.y * ray.direction.y)
+		+ (2 * ray.origin.z * ray.direction.z);
+	abc[2] = pow(ray.origin.x, 2.0) - pow(ray.origin.y, 2.0)
+		+ pow(ray.origin.z, 2.0);
+	xs = intersections_create();
+	if (fabs(abc[0]) < UNIT_EPSILON)
+	{
+		if (fabs(abc[1]) < UNIT_EPSILON)
+		{
+			intersect_caps_cone(cone, ray, &xs);
+			return (xs);
+		}
+		t[0] = -abc[2] / (2 * abc[1]);
+		y[0] = ray.origin.y + t[0] * ray.direction.y;
+		if (cone->min < y[0] && y[0] < cone->max)
+			xs = intersections_add(xs, create_intersection(CONE, cone, t[0]));
+		intersect_caps_cone(cone, ray, &xs);
+		return (xs);
+	}
+	disc = pow(abc[1], 2.0) - (4 * abc[0] * abc[2]);
+	if (disc < 0)
+	{
+		intersect_caps_cone(cone, ray, &xs);
+		return (xs);
+	}
+	t[0] = (-abc[1] - sqrt(disc)) / (2 * abc[0]);
+	t[1] = (-abc[1] + sqrt(disc)) / (2 * abc[0]);
+	if (t[0] > t[1])
+		ft_swap(&t[0], &t[1]);
+	y[0] = ray.origin.y + t[0] * ray.direction.y;
+	if (cone->min < y[0] && y[0] < cone->max)
+		xs = intersections_add(xs, create_intersection(CONE, cone, t[0]));
+	y[1] = ray.origin.y + t[1] * ray.direction.y;
+	if (cone->min < y[1] && y[1] < cone->max)
+		xs = intersections_add(xs, create_intersection(CONE, cone, t[1]));
+	intersect_caps_cone(cone, ray, &xs);
+	return (xs);
+}
+
+/**
  * @brief Calculates where the ray intersects any objects in the scene and returns an array of intersections
  *
  * @param scene
@@ -174,6 +232,15 @@ t_intersections	intersect_scene(t_scene *scene, t_ray ray)
 		while (scene->cylinders[i] != NULL)
 		{
 			result = intersections_add_all(result, intersect_cylinder(scene->cylinders[i], ray));
+			i++;
+		}
+	}
+	if (scene->cones != NULL)
+	{
+		i = 0;
+		while (scene->cones[i] != NULL)
+		{
+			result = intersections_add_all(result, intersect_cone(scene->cones[i], ray));
 			i++;
 		}
 	}

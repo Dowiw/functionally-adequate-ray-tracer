@@ -26,6 +26,7 @@ HEADERS = minirt.h \
 	scene.h \
 	util/arrays.h \
 	util/colors.h \
+	util/cones.h \
 	util/cylinders.h \
 	util/planes.h \
 	util/spheres.h \
@@ -82,6 +83,8 @@ SOURCES = main.c \
 	scene/scene.c \
 	util/arrays/arrays1.c \
 	util/arrays/arrays2.c \
+	util/arrays/cones/cones.c \
+	util/arrays/cones/cone_utils.c \
 	util/arrays/cylinders/cylinders.c \
 	util/arrays/cylinders/cylinder_utils.c \
 	util/arrays/intersections/intersections1.c \
@@ -109,7 +112,8 @@ TESTS = main.c \
 	test_rendering.c \
 	test_shadows.c \
 	test_planes.c \
-	test_cylinders.c
+	test_cylinders.c \
+	test_cones.c
 
 TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
 
