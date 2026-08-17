@@ -26,7 +26,7 @@ C_FILES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	 printf/ft_printf.c printf/ft_putchar.c printf/ft_puthex_low.c \
 	 printf/ft_putint_u.c printf/ft_putptr.c printf/ft_putstr.c \
 	 printf/ft_putint.c printf/ft_puthex_up.c ft_strtol.c ft_isspace.c \
-	 ft_strncpy.c ft_strcmp.c
+	 ft_strncpy.c ft_strcmp.c ft_swap.c
 
 BONUS_FILES = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstadd_back_bonus.c \
 	 ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstdelone_bonus.c \

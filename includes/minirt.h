@@ -80,7 +80,8 @@ enum	e_object_type
 {
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	CONE
 };
 
 typedef struct s_object

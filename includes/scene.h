@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/16 15:51:59 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/17 10:51:45 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,26 @@ typedef struct s_cylinder
 	t_vector	vec;
 	double		diameter;
 	double		height;
+	double		min;
+	double		max;
+	int			closed;
 	t_material	material;
 	t_matrix4x4	transform;
 	t_matrix4x4	inverse;
 }				t_cylinder;
+
+typedef struct s_cone
+{
+	t_point		center;
+	t_vector	vec;
+	double		diameter;
+	double		height;
+	double		min;
+	double		max;
+	int			closed;
+	t_material	material;
+	t_matrix4x4	transform;
+}				t_cone;
 
 /**
  * @brief Scene structure for all the positioning and stuff.
@@ -113,6 +129,7 @@ typedef struct s_scene
 	t_sphere	**spheres;		// allocated sphere list
 	t_plane		**planes;		// allocated plane list
 	t_cylinder	**cylinders;	// allocated cylinder list
+	t_cone		**cones;		// allocated cone list
 
 	int			has_ambience;
 	int			has_camera;
