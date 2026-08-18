@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:19:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 15:48:03 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 15:54:15 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 #include "parsing.h"
 #include "scene.h"
 #include "util/arrays.h"
+#include "util/colors.h"
 #include "util/cylinders.h"
+
+static void	finish_cylinder(t_cylinder *cylinder, int rgb_color);
 
 static int	parse_cylinder_error(t_scene *scene, t_cylinder *cylinder, char *error);
 
@@ -28,6 +31,7 @@ static int	parse_cylinder_error(t_scene *scene, t_cylinder *cylinder, char *erro
 int	parse_cylinder(t_scene *scene, char **params)
 {
 	t_cylinder	*cylinder;
+	int			rgb_color;
 
 	if (array_len((void **) params) != 6)
 		return (parse_error(scene, "Bad format, expected cy <center> <vector> <diameter> <height> <color>"));
@@ -42,13 +46,25 @@ int	parse_cylinder(t_scene *scene, char **params)
 		return (parse_cylinder_error(scene, cylinder, "Failed to parse diameter"));
 	if (!parse_double(scene, &cylinder->height, params[4]))
 		return (parse_cylinder_error(scene, cylinder, "Failed to parse height"));
-	// TODO
-	// if (!parse_color(&cylinder->color, params[5]))
-	// 	return (parse_cylinder_error(cylinder));
+	if (!parse_color(scene, &rgb_color, params[5]))
+		return (parse_cylinder_error(scene, cylinder, "Failed to parse color"));
+	finish_cylinder(cylinder, rgb_color);
 	scene->cylinders = cylinders_add(scene->cylinders, cylinder);
 	if (scene->cylinders == NULL)
 		return (parse_error(scene, "Allocation Failure"));
 	return (1);
+}
+
+static void	finish_cylinder(t_cylinder *cylinder, int rgb_color)
+{
+	cylinder->transform = matrix4x4_translation(cylinder->center.x, cylinder->center.y, cylinder->center.z);
+	cylinder->transform = matrix4x4_multiply(cylinder->transform, matrix4x4_rotation(cylinder->vec));
+	cylinder->transform = matrix4x4_multiply(cylinder->transform, matrix4x4_scaling(cylinder->diameter / 2.0, cylinder->height, cylinder->diameter / 2.0));
+	cylinder->min = -0.5;
+	cylinder->max = 0.5;
+	cylinder->closed = 1;
+	cylinder->material = material();
+	cylinder->material.color = color(red(rgb_color) / 255.0, green(rgb_color) / 255.0, blue(rgb_color) / 255.0);
 }
 
 static int	parse_cylinder_error(t_scene *scene, t_cylinder *cylinder, char *error)

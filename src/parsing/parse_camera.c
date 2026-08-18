@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 18:58:29 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 16:02:07 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	parse_camera(t_scene *scene, char **params)
 		return (parse_error(scene, "Bad format, expected C <pos> <orientation> <fov>"));
 	if (!parse_point(scene, &scene->camera.pos, params[1]))
 		return (parse_error(scene, "Failed to parse position"));
-	if (!parse_vector(scene, &scene->camera.orientation, params[2]))
+	if (!parse_direction(scene, &scene->camera.orientation, params[2]))
 		return (parse_error(scene, "Failed to parse orientation"));
 	if (!parse_double_range(scene, &scene->camera.fov, params[3], 0, 500))
 		return (parse_error(scene, "Failed to parse fov"));
@@ -46,27 +46,29 @@ int	parse_camera(t_scene *scene, char **params)
 
 static void	finish_camera(t_camera *camera, int width, int height)
 {
-	t_point		to;
-	t_vector	up;
-
 	camera->width = width;
 	camera->height = height;
 	camera->field_of_view = camera->fov * PI / 180.0;
-	to = tuples_add(camera->pos, camera->orientation);
-	if (fabs(camera->orientation.x) < UNIT_EPSILON && fabs(camera->orientation.z) < UNIT_EPSILON)
-		up = vector(0.0, 0.0, 1.0);
+	if (camera->orientation.z == 0.0)
+	{
+		if (camera->orientation.x > 0.0)
+			camera->horizontal = PI * 1.5;
+		else
+			camera->horizontal = PI * 0.5;
+	}
+	else if (camera->orientation.z > 0.0)
+		camera->horizontal = PI * 1.0 + atan(camera->orientation.x / camera->orientation.z);
 	else
-		up = vector(0.0, 1.0, 0.0);
-	camera->transform = view_transform(camera->pos, to, up);
-	if (camera->orientation.z != 0.0)
-		camera->horizontal = PI + atan(camera->orientation.x / camera->orientation.z);
-	else
-		camera->horizontal = PI + PI / 2.0;
+		camera->horizontal = PI * 0.0 + atan(camera->orientation.x / camera->orientation.z);
 	if (camera->orientation.x != 0.0 || camera->orientation.z != 0.0)
 		camera->vertical = atan(camera->orientation.y / sqrt(camera->orientation.x * camera->orientation.x + camera->orientation.z * camera->orientation.z));
 	else if (camera->orientation.y > 0.0)
 		camera->vertical = PI * 0.5;
 	else
-		camera->vertical = -(PI * 0.5);
+		camera->vertical = PI * -0.5;
+	camera->transform = matrix4x4_translation(camera->pos.x, camera->pos.y, camera->pos.z);
+	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_y(camera->horizontal));
+	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_x(camera->vertical));
+	camera->transform = matrix4x4_inverse(camera->transform);
 	init_camera(camera);
 }

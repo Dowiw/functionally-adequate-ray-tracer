@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 12:38:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/19 13:32:44 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 15:49:19 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,38 @@ t_matrix4x4	matrix4x4_rotation_z(double radians)
 	m.m[1][0] = sin(radians);
 	m.m[1][1] = cos(radians);
 	return (m);
+}
+
+/**
+ * @brief Returns a rotation matrix relative to vector(0.0, 1.0, 0.0)
+ *
+ * @param direction
+ * @return t_matrix4x4
+ */
+t_matrix4x4 matrix4x4_rotation(t_vector direction)
+{
+	double	horizontal;
+	double	vertical;
+
+	if (calc_mag(direction) == 0.0)
+		return (matrix4x4_identity());
+	direction = calc_norm(direction);
+	if (direction.z == 0.0)
+	{
+		if (direction.x > 0.0)
+			horizontal = PI * 0.5;
+		else
+			horizontal = PI * 1.5;
+	}
+	else if (direction.z > 0.0)
+		horizontal = PI * 0.0 + atan(direction.x / direction.z);
+	else
+		horizontal = PI * 1.0 + atan(direction.x / direction.z);
+	if (direction.y == 0.0)
+		vertical = PI * 0.5;
+	else if (direction.y > 0.0)
+		vertical = PI * 0.0 + atan(sqrt(direction.x * direction.x + direction.z * direction.z) / direction.y);
+	else
+		vertical = PI * 1.0 + atan(sqrt(direction.x * direction.x + direction.z * direction.z) / direction.y);
+	return (matrix4x4_multiply(matrix4x4_rotation_y(horizontal), matrix4x4_rotation_x(vertical)));
 }
