@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:23:36 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/17 19:29:48 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/18 14:25:05 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,59 @@
 #include "scene.h"
 #include "util/intersections.h"
 
-// TODO
+static inline double	pow2(double d)
+{
+	return (d * d);
+}
+static inline int		check_cap_fast(t_ray r, double t)
+{
+	double	x;
+	double	z;
+
+	x = r.origin.x + t * r.direction.x;
+	z = r.origin.z + t * r.direction.z;
+	return (pow2(x) + pow2(z) <= 1);
+}
+
+static inline void		intersect_caps_fast(t_cylinder *cyl, t_ray r, t_intersection *hit)
+{
+	double	t;
+
+	if (!cyl->closed || fabs(r.direction.y) < UNIT_EPSILON)
+		return ;
+	t = (cyl->min - r.origin.y) / r.direction.y;
+	if (check_cap_fast(r, t) && t >= 0.0 && (hit->t == -1.0 || t < hit->t))
+		*hit = (t_intersection){t, (t_object){CYLINDER, cyl}};
+	t = (cyl->max - r.origin.y) / r.direction.y;
+	if (check_cap_fast(r, t) && t >= 0.0 && (hit->t == -1.0 || t < hit->t))
+		*hit = (t_intersection){t, (t_object){CYLINDER, cyl}};
+}
+
 void	intersect_cylinder_fast(t_cylinder *cylinder, t_ray ray, t_intersection *hit)
 {
-	t_intersections	xs;
-	int				i;
-	double			time;
+	double		abc[3];
+	double		disc;
+	double		t;
+	double		y;
 
-	xs = intersect_cylinder(cylinder, ray);
-	i = 0;
-	while (i < xs.count)
+	abc[0] = pow2(ray.direction.x) + pow2(ray.direction.z);
+	if (abc[0] < UNIT_EPSILON)
 	{
-		time = xs.list[i]->t;
-		if (time >= 0.0 && (hit->t == -1.0 || time < hit->t))
-			*hit = *xs.list[i];
-		i++;
+		intersect_caps_fast(cylinder, ray, hit);
+		return ;
 	}
-	free_intersections(xs);
+	abc[1] = (2 * ray.origin.x * ray.direction.x) + (2 * ray.origin.z * ray.direction.z);
+	abc[2] = pow2(ray.origin.x) + pow2(ray.origin.z) - 1;
+	disc = pow2(abc[1]) - (4 * abc[0] * abc[2]);
+	if (disc < 0)
+		return ;
+	t = (-abc[1] - sqrt(disc)) / (2 * abc[0]);
+	y = ray.origin.y + t * ray.direction.y;
+	if (cylinder->min < y && y < cylinder->max && t >= 0.0 && (hit->t == -1.0 || t < hit->t))
+		*hit = (t_intersection){t, (t_object){CYLINDER, cylinder}};
+	t = (-abc[1] + sqrt(disc)) / (2 * abc[0]);
+	y = ray.origin.y + t * ray.direction.y;
+	if (cylinder->min < y && y < cylinder->max && t >= 0.0 && (hit->t == -1.0 || t < hit->t))
+		*hit = (t_intersection){t, (t_object){CYLINDER, cylinder}};
+	intersect_caps_fast(cylinder, ray, hit);
 }
