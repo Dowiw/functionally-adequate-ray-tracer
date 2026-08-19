@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_cones.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 13:30:00 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/17 13:30:00 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/17 18:54:38 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	test_cones_normal(void)
 	};
 	t_vector	expected_normal[3] = {
 		{0, 0, 0, VECTOR},
-		{1, -M_SQRT2, 1, VECTOR},
+		{1, -sqrt(2.0), 1, VECTOR},
 		{-1, 1, 0, VECTOR}
 	};
 	t_object	obj = (t_object){CONE, &c};

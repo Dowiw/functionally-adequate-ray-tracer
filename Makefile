@@ -13,7 +13,7 @@
 NAME = miniRT
 CC = cc
 
-CFLAGS = -g -Wall -Wextra -Werror -I./$(HEADER_DIR)
+CFLAGS = -g -Wall -Wextra -Werror -I./$(HEADER_DIR) -O2
 
 HEADER_DIR = includes
 HEADERS = minirt.h \
@@ -74,6 +74,11 @@ SOURCES = main.c \
 	parsing/parse_tuple.c \
 	parsing/parse_vector.c \
 	parsing/parsing.c \
+	rays/fast/intersect_fast.c \
+	rays/fast/intersect_cone_fast.c \
+	rays/fast/intersect_cylinder_fast.c \
+	rays/fast/intersect_plane_fast.c \
+	rays/fast/intersect_sphere_fast.c \
 	rays/intersections.c \
 	rays/intersect.c \
 	rays/ray_transform.c \

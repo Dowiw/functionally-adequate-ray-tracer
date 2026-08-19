@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:26:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 15:55:15 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/16 17:00:10 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ t_ray	ray_for_pixel(t_camera camera, int x, int y)
 	y_offset = (y + 0.5) * camera.pixel_size;
 	world_x = camera.half_width - x_offset;
 	world_y = camera.half_height - y_offset;
-	pixel = matrix4x4_multiply_tuple(matrix4x4_inverse(camera.transform), point(world_x, world_y, -1.0));
-	origin = matrix4x4_multiply_tuple(matrix4x4_inverse(camera.transform), point(0.0, 0.0, 0.0));
+	pixel = matrix4x4_multiply_tuple(camera.inverse, (t_tuple){world_x, world_y, -1.0, POINT});
+	origin = matrix4x4_multiply_tuple(camera.inverse, (t_tuple){0.0, 0.0, 0.0, POINT});
 	direction = calc_norm(tuples_sub(pixel, origin));
 	return ((t_ray){origin, direction});
 }
@@ -115,20 +115,14 @@ t_color	shade_hit(t_scene *scene, t_comps comps)
  */
 t_color	color_at(t_scene *scene, t_ray ray)
 {
-	t_intersections	xs;
-	t_intersection	*hit;
+	t_intersection	hit;
 	t_comps			comps;
 	t_color			res;
 
-	xs = intersect_scene(scene, ray);
-	hit = intersect_hit(xs);
-	if (hit == NULL)
-	{
-		free_intersections(xs);
+	hit = intersect_scene_and_hit(scene, ray);
+	if (hit.t < 0.0)
 		return (color_black());
-	}
-	comps = prepare_computations(ray, hit);
+	comps = prepare_computations(ray, &hit);
 	res = shade_hit(scene, comps);
-	free_intersections(xs);
 	return (res);
 }

@@ -66,6 +66,7 @@ int	test_shadow_shade(void)
 		return (1);
 	*s2 = sphere_create();
 	s2->transform = matrix4x4_translation(0, 0, 10);
+	s2->inverse = matrix4x4_inverse(s2->transform);
 	w.spheres = spheres_add(w.spheres, s2);
 
 	t_ray r = ray(point(0, 0, 5), vector(0, 0, 1));
@@ -86,6 +87,7 @@ int	test_shadow_point_offsets(void)
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_sphere	shape = sphere_create();
 	shape.transform = matrix4x4_translation(0, 0, 1);
+	shape.inverse = matrix4x4_inverse(shape.transform);
 
 	t_intersection *i = create_intersection(SPHERE, &shape, 5.0);
 

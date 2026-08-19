@@ -55,6 +55,7 @@ static void finish_plane(t_plane *plane, int rgb_color)
 {
 	plane->transform = matrix4x4_translation(plane->pos.x, plane->pos.y, plane->pos.z);
 	plane->transform = matrix4x4_multiply(plane->transform, matrix4x4_rotation(plane->vec));
+	plane->inverse = matrix4x4_inverse(plane->transform);
 	plane->material = material();
 	plane->material.color =
 		color(red(rgb_color) / 255.0, green(rgb_color) / 255.0,

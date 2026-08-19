@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 15:43:19 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 16:07:13 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/16 15:58:20 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,6 +310,7 @@ int	test_ray_for_pixel(void)
 
 	camera = create_camera(201, 101, PI / 2.0);
 	camera.transform = matrix4x4_multiply(matrix4x4_rotation_y(PI / 4.0), matrix4x4_translation(0.0, -2.0, 5.0));
+	camera.inverse = matrix4x4_inverse(camera.transform);
 	ray = ray_for_pixel(camera, 100, 50);
 
 	origin = point(0.0, 2.0, -5.0);
@@ -336,6 +337,7 @@ int	test_render_scene(void)
 	to = point(0.0, 0.0, 0.0);
 	up = vector(0.0, 1.0, 0.0);
 	scene.camera.transform = view_transform(from, to, up);
+	scene.camera.inverse = matrix4x4_inverse(scene.camera.transform);
 	if (!canvas_create(&canvas, scene.camera.width, scene.camera.height))
 		return (1);
 
