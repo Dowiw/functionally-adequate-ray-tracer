@@ -12,6 +12,7 @@
 
 #include "minirt.h"
 #include "scene.h"
+#include "util/colors.h"
 #include <math.h>
 
 /**
@@ -57,10 +58,11 @@ t_light	light(t_point p, t_color c)
  * @return t_color the color found
  */
 t_color	lighting(t_material m, t_light l, t_point pos, t_vector eye,
-		t_vector norm, int in_shadow)
+		t_vector norm, int in_shadow, t_ambience g)
 {
 	t_color		effective;
 	t_color		ambient;
+	t_color		amb_c;
 	t_color		diffuse;
 	t_color		specular;
 	t_vector	light_v;
@@ -72,7 +74,13 @@ t_color	lighting(t_material m, t_light l, t_point pos, t_vector eye,
 
 	effective = shur_prod(m.color, l.intensity);
 	light_v = (t_vector)calc_norm(tuples_sub(l.pos, pos));
-	ambient = tuple_mult(effective, m.ambient);
+	if (g.lighting == 0.0 && g.color == 0)
+		ambient = tuple_mult(effective, m.ambient);
+	else
+	{
+		amb_c = color(red(g.color) / 255.0, green(g.color) / 255.0, blue(g.color) / 255.0);
+		ambient = shur_prod(m.color, tuple_mult(amb_c, m.ambient * g.lighting));
+	}
 	if (in_shadow)
 	{
 		ambient.w = COLOR;

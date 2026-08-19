@@ -3,6 +3,7 @@
 #include "minirt.h"
 #include "rendering.h"
 #include "scene.h"
+#include "util/colors.h"
 #include "util/spheres.h"
 #include "ray.h"
 #include <stdlib.h>
@@ -15,7 +16,9 @@ int test_shadow_surface(void)
 	t_material m = material();
 	t_point	p = point(0, 0, 0);
 
-	t_color	test = lighting(m, light_p, p, eye_v, normal_v, 1);
+	t_ambience	def = {1.0, rgb(255, 255, 255)};
+
+	t_color	test = lighting(m, light_p, p, eye_v, normal_v, 1, def);
 
 	t_color	b = color(0.1, 0.1, 0.1);
 	UNIT_ASSERT_EQ(compare_tuples(&test, &b), 0);

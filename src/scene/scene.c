@@ -31,6 +31,7 @@ int	init_scene(t_scene *scene)
 	scene->planes = planes_create();
 	scene->spheres = spheres_create();
 	scene->cones = cones_create();
+	scene->ambience = (t_ambience){0.0, 0};
 	scene->has_ambience = 0;
 	scene->has_camera = 0;
 	scene->has_light = 0;
