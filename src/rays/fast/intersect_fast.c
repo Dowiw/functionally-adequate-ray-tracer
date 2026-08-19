@@ -6,14 +6,14 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:13:25 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/17 19:31:35 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:40:05 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include <stdlib.h>
+#include <stddef.h>
+#include "minirt.h"
 #include "ray.h"
-#include "scene.h"
 #include "util/intersections.h"
 
 t_intersection	intersect_scene_and_hit(t_scene *scene, t_ray ray)

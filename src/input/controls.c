@@ -6,17 +6,17 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 18:59:54 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 19:49:30 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:34:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <math.h>
-#include "data.h"
-#include "debug.h"
+#include "graphics.h"
+#include "libft/libft.h"
 #include "minirt.h"
 #include "rendering.h"
-#include "libft/libft.h"
+#include "scene.h"
+#include "types.h"
 
 static void	update(t_data *data);
 

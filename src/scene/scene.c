@@ -6,12 +6,13 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:15:24 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/16 16:08:00 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:42:12 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft/libft.h"
+#include "minirt.h"
 #include "parsing.h"
 #include "scene.h"
 #include "util/cylinders.h"

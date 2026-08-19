@@ -6,11 +6,12 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:19:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 16:19:23 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:37:23 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "minirt.h"
 #include "parsing.h"
 #include "scene.h"
 #include "util/arrays.h"

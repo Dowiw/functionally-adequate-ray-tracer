@@ -6,43 +6,22 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:42:38 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 20:03:40 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:25:07 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDERER_H
-# define RENDERER_H
+#ifndef RENDERING_H
+# define RENDERING_H
 
-# include "minirt.h"
-# include "scene.h"
-
-struct s_data;
-
-typedef struct s_comps {
-	double		t;
-	t_object	obj;
-	t_point		point;
-	t_point		over_point;
-	t_vector	eyev;
-	t_vector	normalv;
-	int			inside;
-}	t_comps;
-
-typedef struct s_iter {
-	int		res;
-	int		first;
-	int		x;
-	int		y;
-	int		pixels;
-}	t_iter;
+# include "types.h"
 
 void	render_scene(t_canvas *canvas, t_scene *scene);
 
 void	render_init(t_iter *iter);
 
-int		render_loop(struct s_data *data);
+int		render_loop(t_data *data);
 
-void	render_frame(struct s_data *data);
+void	render_frame(t_data *data);
 
 t_ray	ray_for_pixel(t_camera camera, int x, int y);
 

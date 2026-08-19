@@ -6,14 +6,12 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 18:53:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:07:21 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:09:44 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include <stdlib.h>
-#include "ray.h"
-#include "scene.h"
+#include "minirt.h"
 #include "util/intersections.h"
 
 static inline double	pow2(double d)

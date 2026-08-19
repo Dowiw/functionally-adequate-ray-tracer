@@ -6,14 +6,17 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 11:48:41 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/14 20:19:48 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:33:31 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include <stdlib.h>
-#include "data.h"
-#include "minirt.h"
-#include "mlx.h"
+#include "graphics.h"
+#include "input.h"
+#include "rendering.h"
+#include "scene.h"
+#include "types.h"
 
 /**
  * @brief Initialize the mlx struct (not confused for mlx_init)

@@ -6,11 +6,11 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:57:36 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 12:58:49 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:41:01 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data.h"
+#include "graphics.h"
 #include "minirt.h"
 
 void	set_pixel(t_mlx *mlx, int x, int y, int color)

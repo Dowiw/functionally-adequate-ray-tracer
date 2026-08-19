@@ -6,15 +6,14 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 11:32:13 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/17 19:31:53 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:25:37 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 # define RAY_H
 
-# include "minirt.h"
-# include "scene.h"
+# include "types.h"
 
 t_intersection	*create_intersection(enum e_object_type type, void *object, double t);
 t_intersections	intersect(t_object *obj, t_ray r);

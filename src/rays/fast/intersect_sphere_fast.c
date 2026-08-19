@@ -6,13 +6,12 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:13:28 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/16 17:05:34 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:40:40 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include <stdlib.h>
-#include "scene.h"
+#include "minirt.h"
 #include "util/intersections.h"
 
 static inline t_tuple	inline_matrix4x4_multiply_tuple(t_matrix4x4 a, t_tuple b)

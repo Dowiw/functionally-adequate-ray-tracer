@@ -6,12 +6,14 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 15:49:07 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:33:57 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
+# include "types.h"
 
 # ifndef UNIT_EPSILON
 #  define UNIT_EPSILON 0.00001
@@ -25,114 +27,8 @@
 
 # define PI 3.14159265358979323846
 
-# ifndef WIN_W
-#  define WIN_W 960
-# endif
-
-# ifndef WIN_H
-#  define WIN_H 540
-# endif
-
 # define PIXELS_PER_FRAME 1000
 
-# define KEY_ESC 65307
-# define KEY_UP 65362
-# define KEY_DOWN 65364
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_SHIFT 65505
-# define KEY_SPACE 32
-# define KEY_Z 122
-
-struct s_data;
-
-/**
- * @brief Dynamic structure that represents a lot of things
- * from coordinates to colors.
- */
-typedef struct s_tuple
-{
-	double	x;	// x-coordinate, red
-	double	y;	// y-coordinate, green
-	double	z;	// z-coordinate, blue
-	double	w;	// type, extra value
-}				t_tuple;
-
-typedef t_tuple	t_point;
-typedef t_tuple	t_vector;
-typedef t_tuple	t_color;
-
-/**
- * @brief Structure for rays.
- * Contains origin and direction.
- */
-typedef struct s_ray
-{
-	t_point		origin;		// starting point of a ray
-	t_vector	direction;	// where it points
-}				t_ray;
-
-enum	e_object_type
-{
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	CONE
-};
-
-typedef struct s_object
-{
-	enum e_object_type	type;
-	void				*object;
-}					t_object;
-
-/**
- * @brief Struct for an intersection.
- */
-typedef struct s_intersection
-{
-	double		t;		// time
-	t_object	obj;	// the object
-}					t_intersection;
-
-/**
- * @brief Struct for all intersections.
- * Contains a list of t_intersection and the amount.
- */
-typedef struct s_intersections
-{
-	t_intersection	**list;
-	int				count;
-}				t_intersections;
-
-/**
- * @brief Structure for a canvas.
- * Allocates pixels in memory (width * height).
- */
-typedef struct s_canvas
-{
-	int		width;		// width of canvas
-	int		height;		// height of canvas
-	t_tuple	*pixels;	// 1D array of (width * height) representing colors
-}				t_canvas;
-
-/**
- * @brief Structure for mlx data
- */
-typedef struct s_mlx
-{
-	void	*mlx_ptr;	// pointer to mlx lib that allocates a XWindow Display
-	void	*win_ptr;	// pointer to window allocated
-	void	*img_ptr;	// pointer to image buffer
-	char	*img_data;	// pointer to same img but as characters
-	int		bpp;		// bits per pixel
-	int		size_line;	// size of each line of pixes
-	int		endian;		// endian necessary for alignment
-}				t_mlx;
 
 /** ######################################################################### *
  *  TUPLES                                                                  # *
@@ -181,40 +77,10 @@ t_color				color_black(void);
  *  GRAPHICS                                                                # *
  *  ######################################################################### */
 
-int					init_mlx_lib(t_mlx *mlx, struct s_data *data);
-void				init_mlx(t_mlx *mlx);
-int					on_key_press(int keycode, void *param);
-int					on_key_release(int keycode, void *param);
-int					on_close(void *param);
-int					destroy_mlx(t_mlx *mlx);
-
-void				move(struct s_data *data, t_vector vec);
-void				rotate_horizontal(struct s_data *data, double radians);
-void				rotate_vertical(struct s_data *data, double radians);
-
-int					canvas_create(t_canvas *canvas, int width, int height);
-void				write_pixel(t_canvas *canvas, int x, int y, t_tuple color);
-t_tuple				view_pixel(t_canvas *canvas, int x, int y);
-char				*canvas_to_ppm(t_canvas *canvas);
-
 /** ######################################################################### *
  *  MATRICES                                                                # *
  *  ######################################################################### */
 
-typedef struct s_matrix2x2
-{
-	double			m[2][2];
-}				t_matrix2x2;
-
-typedef struct s_matrix3x3
-{
-	double			m[3][3];
-}				t_matrix3x3;
-
-typedef struct s_matrix4x4
-{
-	double			m[4][4];
-}				t_matrix4x4;
 
 t_matrix2x2			matrix2x2_identity(void);
 t_matrix3x3			matrix3x3_identity(void);

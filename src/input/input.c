@@ -6,13 +6,15 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 19:49:33 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 20:22:33 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:35:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <sys/time.h>
-#include "data.h"
+#include "input.h"
+#include "minirt.h"
+#include "types.h"
 
 void	tick_input(t_data *data)
 {

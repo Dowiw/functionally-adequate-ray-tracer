@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/18 16:48:27 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/19 17:23:35 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ HEADERS = minirt.h \
 	ray.h \
 	rendering.h \
 	scene.h \
+	types.h \
 	util/arrays.h \
 	util/colors.h \
 	util/cones.h \

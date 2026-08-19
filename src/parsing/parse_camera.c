@@ -6,11 +6,12 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 16:02:07 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:36:38 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include "graphics.h"
 #include "minirt.h"
 #include "parsing.h"
 #include "scene.h"

@@ -6,16 +6,17 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:35:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 19:45:43 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:32:02 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include "data.h"
+#include "graphics.h"
 #include "libft/libft.h"
 #include "parsing.h"
 #include "rendering.h"
 #include "scene.h"
+#include "types.h"
 
 static int	error(char *msg);
 

@@ -6,15 +6,14 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:09 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/18 16:48:17 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:25:45 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "minirt.h"
-# include "scene.h"
+# include "types.h"
 
 int	parse_scene(t_scene *scene, char *file);
 

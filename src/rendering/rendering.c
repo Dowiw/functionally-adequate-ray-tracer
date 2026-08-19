@@ -6,19 +6,16 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:25:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 20:22:13 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:41:39 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <mlx.h>
-#include "data.h"
-#include "debug.h"
+#include "graphics.h"
 #include "input.h"
 #include "minirt.h"
 #include "ray.h"
 #include "rendering.h"
-#include "scene.h"
 #include "util/colors.h"
 
 static void	render_pixel(t_data *data);
