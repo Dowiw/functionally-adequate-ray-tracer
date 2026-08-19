@@ -111,6 +111,7 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 	double		y1;
 	t_intersections	xs;
 
+	ray = transform(ray, cylinder->transform);
 	a = pow(ray.direction.x, 2.0) + pow(ray.direction.z, 2.0);
 	if (a < UNIT_EPSILON)
 	{
@@ -153,6 +154,7 @@ t_intersections	intersect_cone(t_cone *cone, t_ray ray)
 	double			y[2];
 	t_intersections	xs;
 
+	ray = transform(ray, cone->transform);
 	abc[0] = pow(ray.direction.x, 2.0) - pow(ray.direction.y, 2.0)
 		+ pow(ray.direction.z, 2.0);
 	abc[1] = (2 * ray.origin.x * ray.direction.x)
@@ -168,7 +170,7 @@ t_intersections	intersect_cone(t_cone *cone, t_ray ray)
 			intersect_caps_cone(cone, ray, &xs);
 			return (xs);
 		}
-		t[0] = -abc[2] / (2 * abc[1]);
+		t[0] = -abc[2] / abc[1];
 		y[0] = ray.origin.y + t[0] * ray.direction.y;
 		if (cone->min < y[0] && y[0] < cone->max)
 			xs = intersections_add(xs, create_intersection(CONE, cone, t[0]));

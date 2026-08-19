@@ -44,6 +44,34 @@ static inline void		intersect_caps_fast(t_cylinder *cyl, t_ray r, t_intersection
 		*hit = (t_intersection){t, (t_object){CYLINDER, cyl}};
 }
 
+static inline t_tuple	inline_matrix4x4_multiply_tuple(t_matrix4x4 a, t_tuple b)
+{
+	t_tuple	result;
+
+	result.x = a.m[0][0] * b.x
+		+ a.m[0][1] * b.y
+		+ a.m[0][2] * b.z
+		+ a.m[0][3] * b.w;
+	result.y = a.m[1][0] * b.x
+		+ a.m[1][1] * b.y
+		+ a.m[1][2] * b.z
+		+ a.m[1][3] * b.w;
+	result.z = a.m[2][0] * b.x
+		+ a.m[2][1] * b.y
+		+ a.m[2][2] * b.z
+		+ a.m[2][3] * b.w;
+	result.w = a.m[3][0] * b.x
+		+ a.m[3][1] * b.y
+		+ a.m[3][2] * b.z
+		+ a.m[3][3] * b.w;
+	return (result);
+};
+
+static inline t_ray		inline_transform(t_ray r, t_matrix4x4 m)
+{
+	return ((t_ray){inline_matrix4x4_multiply_tuple(m, r.origin), inline_matrix4x4_multiply_tuple(m, r.direction)});
+}
+
 void	intersect_cylinder_fast(t_cylinder *cylinder, t_ray ray, t_intersection *hit)
 {
 	double		abc[3];
@@ -51,6 +79,7 @@ void	intersect_cylinder_fast(t_cylinder *cylinder, t_ray ray, t_intersection *hi
 	double		t;
 	double		y;
 
+	ray = inline_transform(ray, cylinder->transform);
 	abc[0] = pow2(ray.direction.x) + pow2(ray.direction.z);
 	if (abc[0] < UNIT_EPSILON)
 	{

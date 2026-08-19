@@ -162,7 +162,7 @@ t_material		material(void);
 
 t_light			light(t_point p, t_color c);
 t_color			lighting(t_material m, t_light l, t_point pos, t_vector eye,
-					t_vector norm, int in_shadow);
+					t_vector norm, int in_shadow, t_ambience g);
 
 /** ######################################################################### *
  *  SHADOWS                                                                 # *

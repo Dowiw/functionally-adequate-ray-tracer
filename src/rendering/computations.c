@@ -46,7 +46,6 @@ t_ray	ray_for_pixel(t_camera camera, int x, int y)
 	return ((t_ray){origin, direction});
 }
 
-// TODO: handle different object types
 /**
  * @brief Precomputes a few values and stores them in the returned t_comps for ease of use.
  *
@@ -102,7 +101,8 @@ t_color	shade_hit(t_scene *scene, t_comps comps)
 			comps.point,
 			comps.eyev,
 			comps.normalv,
-			shadowed));
+			shadowed,
+			scene->ambience));
 }
 
 /**

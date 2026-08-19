@@ -59,7 +59,7 @@ int	test_cones_parallel_intersection(void)
 	t_intersections	xs = intersect(&obj, r);
 
 	UNIT_ASSERT_EQ(xs.count, 1);
-	UNIT_ASSERT_FEQ(xs.list[0]->t, 0.35355);
+	UNIT_ASSERT_FEQ(xs.list[0]->t, 0.70710);
 	return (0);
 }
 
