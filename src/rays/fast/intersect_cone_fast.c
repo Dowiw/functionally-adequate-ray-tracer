@@ -66,7 +66,7 @@ void	intersect_cone_fast(t_cone *cone, t_ray ray, t_intersection *hit)
 			intersect_caps_fast(cone, ray, hit);
 			return ;
 		}
-		t = -abc[2] / (2 * abc[1]);
+		t = -abc[2] / * abc[1];
 		y = ray.origin.y + t * ray.direction.y;
 		if (cone->min < y && y < cone->max && t >= 0.0 && (hit->t == -1.0 || t < hit->t))
 			*hit = (t_intersection){t, (t_object){CONE, cone}};

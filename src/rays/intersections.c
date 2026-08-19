@@ -168,7 +168,7 @@ t_intersections	intersect_cone(t_cone *cone, t_ray ray)
 			intersect_caps_cone(cone, ray, &xs);
 			return (xs);
 		}
-		t[0] = -abc[2] / (2 * abc[1]);
+		t[0] = -abc[2] / abc[1];
 		y[0] = ray.origin.y + t[0] * ray.direction.y;
 		if (cone->min < y[0] && y[0] < cone->max)
 			xs = intersections_add(xs, create_intersection(CONE, cone, t[0]));
