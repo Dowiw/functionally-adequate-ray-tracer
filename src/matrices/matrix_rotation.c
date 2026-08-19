@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 12:38:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:59:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,30 +76,30 @@ t_m4x4	m4x4_rotation_z(double radians)
  * @param direction
  * @return t_m4x4
  */
-t_m4x4 m4x4_rotation(t_vector direction)
+t_m4x4	m4x4_rotation(t_vector vec)
 {
-	double	horizontal;
-	double	vertical;
+	double	h;
+	double	v;
 
-	if (calc_mag(direction) == 0.0)
+	if (calc_mag(vec) == 0.0)
 		return (m4x4_identity());
-	direction = calc_norm(direction);
-	if (direction.z == 0.0)
+	vec = calc_norm(vec);
+	if (vec.z == 0.0)
 	{
-		if (direction.x > 0.0)
-			horizontal = PI * 0.5;
+		if (vec.x > 0.0)
+			h = PI * 0.5;
 		else
-			horizontal = PI * 1.5;
+			h = PI * 1.5;
 	}
-	else if (direction.z > 0.0)
-		horizontal = PI * 0.0 + atan(direction.x / direction.z);
+	else if (vec.z > 0.0)
+		h = PI * 0.0 + atan(vec.x / vec.z);
 	else
-		horizontal = PI * 1.0 + atan(direction.x / direction.z);
-	if (direction.y == 0.0)
-		vertical = PI * 0.5;
-	else if (direction.y > 0.0)
-		vertical = PI * 0.0 + atan(sqrt(direction.x * direction.x + direction.z * direction.z) / direction.y);
+		h = PI * 1.0 + atan(vec.x / vec.z);
+	if (vec.y == 0.0)
+		v = PI * 0.5;
+	else if (vec.y > 0.0)
+		v = PI * 0.0 + atan(sqrt(vec.x * vec.x + vec.z * vec.z) / vec.y);
 	else
-		vertical = PI * 1.0 + atan(sqrt(direction.x * direction.x + direction.z * direction.z) / direction.y);
-	return (m4x4_multiply(m4x4_rotation_y(horizontal), m4x4_rotation_x(vertical)));
+		v = PI * 1.0 + atan(sqrt(vec.x * vec.x + vec.z * vec.z) / vec.y);
+	return (m4x4_multiply(m4x4_rotation_y(h), m4x4_rotation_x(v)));
 }

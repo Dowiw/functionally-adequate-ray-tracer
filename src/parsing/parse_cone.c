@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 19:36:41 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:41:29 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@ int	parse_cone(t_scene *scene, char **params)
 	int		rgb_color;
 
 	if (array_len((void **) params) != 6)
-		return (parse_error(scene, "Bad format, expected cy <center> <vector> <diameter> <height> <color>"));
+		return (parse_error(scene,
+				"Expected cy <center> <vector> <diameter> <height> <color>"));
 	cone = malloc(sizeof(t_cone));
 	if (cone == NULL)
 		return (parse_error(scene, "Allocation Failure"));
-	if (!parse_point(scene, &cone->center, params[1]))
+	if (!parse_point(scene, &cone->pos, params[1]))
 		return (parse_cone_error(scene, cone, "Failed to parse center"));
 	if (!parse_vector(scene, &cone->vec, params[2]))
 		return (parse_cone_error(scene, cone, "Failed to parse vector"));
-	if (!parse_double(scene, &cone->diameter, params[3]))
+	if (!parse_double(scene, &cone->d, params[3]))
 		return (parse_cone_error(scene, cone, "Failed to parse diameter"));
 	if (!parse_double(scene, &cone->height, params[4]))
 		return (parse_cone_error(scene, cone, "Failed to parse height"));
@@ -58,11 +59,14 @@ int	parse_cone(t_scene *scene, char **params)
 
 static void	finish_cone(t_cone *cone, int rgb_color)
 {
-	cone->transform = m4x4_translation(cone->center.x, cone->center.y, cone->center.z);
-	cone->transform = m4x4_multiply(cone->transform, m4x4_rotation(cone->vec));
-	cone->transform = m4x4_multiply(cone->transform, m4x4_translation(0.0, cone->height / 2.0, 0.0));
-	cone->transform = m4x4_multiply(cone->transform, m4x4_scaling(cone->diameter / 2.0, cone->height, cone->diameter / 2.0));
-	cone->inverse = m4x4_inverse(cone->transform);
+	t_m4x4	m;
+
+	m = m4x4_translation(cone->pos.x, cone->pos.y, cone->pos.z);
+	m = m4x4_multiply(m, m4x4_rotation(cone->vec));
+	m = m4x4_multiply(m, m4x4_translation(0.0, cone->height / 2.0, 0.0));
+	m = m4x4_multiply(m, m4x4_scaling(cone->d / 2, cone->height, cone->d / 2));
+	cone->transform = m;
+	cone->inverse = m4x4_inverse(m);
 	cone->min = -1.0;
 	cone->max = 0.0;
 	cone->closed = 1;

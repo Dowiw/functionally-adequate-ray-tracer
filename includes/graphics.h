@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 17:28:18 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:34:00 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:56:26 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # endif
 
 int		init_mlx_lib(t_mlx *mlx, t_data *data);
-void	init_mlx(t_mlx *mlx);
 int		on_key_press(int keycode, void *param);
 int		on_key_release(int keycode, void *param);
 int		on_close(void *param);

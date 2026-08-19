@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 14:39:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:42:34 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	print_sphere(t_sphere *sphere)
 	printf("{\n");
 
 	printf("center: ");
-	print_tuple_ln(sphere->center);
+	print_tuple_ln(sphere->pos);
 
 	printf("material: ");
 	print_material(sphere->material);
@@ -64,7 +64,7 @@ void	print_sphere(t_sphere *sphere)
 	printf("transform: ");
 	print_m4x4_ln(sphere->transform);
 
-	printf("diameter: %f", sphere->diameter);
+	printf("diameter: %f", sphere->d);
 
 	printf("}\n");
 }

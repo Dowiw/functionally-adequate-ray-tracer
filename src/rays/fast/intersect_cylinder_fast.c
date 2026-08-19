@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:23:36 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:45:18 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static inline double	pow2(double d)
 {
 	return (d * d);
 }
-static inline int		check_cap_fast(t_ray r, double t)
+
+static inline int	check_cap_fast(t_ray r, double t)
 {
 	double	x;
 	double	z;
@@ -28,7 +29,7 @@ static inline int		check_cap_fast(t_ray r, double t)
 	return (pow2(x) + pow2(z) <= 1);
 }
 
-static inline void		intersect_caps_fast(t_cylinder *cyl, t_ray r, t_intersect *hit)
+static inline void	intersect_caps_fast(t_cylinder *cyl, t_ray r, t_intersect *hit)
 {
 	double	t;
 
@@ -63,9 +64,9 @@ static inline t_tuple	inline_m4x4_multiply_tuple(t_m4x4 a, t_tuple b)
 		+ a.m[3][2] * b.z
 		+ a.m[3][3] * b.w;
 	return (result);
-};
+}
 
-static inline t_ray		inline_transform(t_ray r, t_m4x4 m)
+static inline t_ray	inline_transform(t_ray r, t_m4x4 m)
 {
 	return ((t_ray){inline_m4x4_multiply_tuple(m, r.origin), inline_m4x4_multiply_tuple(m, r.dir)});
 }

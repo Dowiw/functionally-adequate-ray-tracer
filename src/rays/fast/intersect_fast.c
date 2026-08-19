@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:13:25 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:43:03 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 t_intersect	intersect_scene_and_hit(t_scene *scene, t_ray ray)
 {
 	t_intersect	result;
-	int				i;
+	int			i;
 
 	result.t = -1.0;
 	result.obj.type = SPHERE;

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 17:17:21 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:21:46 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:41:14 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
  */
 typedef struct s_tuple
 {
-	double	x;	// x-coordinate, red
-	double	y;	// y-coordinate, green
-	double	z;	// z-coordinate, blue
-	double	w;	// type, extra value
+	double	x;
+	double	y;
+	double	z;
+	double	w;
 }				t_tuple;
 
 typedef t_tuple	t_point;
@@ -56,8 +56,8 @@ typedef struct s_m4x4
  */
 typedef struct s_ray
 {
-	t_point		origin;		// starting point of a ray
-	t_vector	dir;	// where it points
+	t_point		origin;
+	t_vector	dir;
 }				t_ray;
 
 enum	e_object_type
@@ -79,8 +79,8 @@ typedef struct s_object
  */
 typedef struct s_intersect
 {
-	double		t;		// time
-	t_object	obj;	// the object
+	double		t;
+	t_object	obj;
 }					t_intersect;
 
 /**
@@ -90,7 +90,7 @@ typedef struct s_intersect
 typedef struct s_intersects
 {
 	t_intersect	**list;
-	int				count;
+	int			count;
 }				t_intersects;
 
 typedef struct s_material
@@ -117,8 +117,8 @@ typedef struct s_camera
 	double		horizontal;
 	double		vertical;
 
-	t_m4x4	transform;
-	t_m4x4	inverse;
+	t_m4x4		transform;
+	t_m4x4		inverse;
 	double		field_of_view;
 
 	int			width;
@@ -139,11 +139,11 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	t_point		center;
+	t_point		pos;
 	int			color;
-	double		diameter;
-	t_m4x4	transform;
-	t_m4x4	inverse;
+	double		d;
+	t_m4x4		transform;
+	t_m4x4		inverse;
 	t_material	material;
 }				t_sphere;
 
@@ -152,36 +152,36 @@ typedef struct s_plane
 	t_point		pos;
 	t_vector	vec;
 	t_material	material;
-	t_m4x4	transform;
-	t_m4x4	inverse;
+	t_m4x4		transform;
+	t_m4x4		inverse;
 }				t_plane;
 
 typedef struct s_cylinder
 {
-	t_point		center;
+	t_point		pos;
 	t_vector	vec;
-	double		diameter;
+	double		d;
 	double		height;
 	double		min;
 	double		max;
 	int			closed;
 	t_material	material;
-	t_m4x4	transform;
-	t_m4x4	inverse;
+	t_m4x4		transform;
+	t_m4x4		inverse;
 }				t_cylinder;
 
 typedef struct s_cone
 {
-	t_point		center;
+	t_point		pos;
 	t_vector	vec;
-	double		diameter;
+	double		d;
 	double		height;
 	double		min;
 	double		max;
 	int			closed;
 	t_material	material;
-	t_m4x4	transform;
-	t_m4x4	inverse;
+	t_m4x4		transform;
+	t_m4x4		inverse;
 }				t_cone;
 
 /**
@@ -200,13 +200,13 @@ typedef struct s_cone
  */
 typedef struct s_scene
 {
-	t_ambience	ambience;		// ambient lighting
-	t_camera	camera;			// scene camera
-	t_light		light;			// point light
-	t_sphere	**spheres;		// allocated sphere list
-	t_plane		**planes;		// allocated plane list
-	t_cylinder	**cylinders;	// allocated cylinder list
-	t_cone		**cones;		// allocated cone list
+	t_ambience	ambience;
+	t_camera	camera;
+	t_light		light;
+	t_sphere	**spheres;
+	t_plane		**planes;
+	t_cylinder	**cylinders;
+	t_cone		**cones;
 
 	int			has_ambience;
 	int			has_camera;
@@ -222,9 +222,9 @@ typedef struct s_scene
  */
 typedef struct s_canvas
 {
-	int		width;		// width of canvas
-	int		height;		// height of canvas
-	t_tuple	*pixels;	// 1D array of (width * height) representing colors
+	int		width;
+	int		height;
+	t_tuple	*pixels;
 }				t_canvas;
 
 /**
@@ -232,13 +232,13 @@ typedef struct s_canvas
  */
 typedef struct s_mlx
 {
-	void	*mlx_ptr;	// pointer to mlx lib that allocates a XWindow Display
-	void	*win_ptr;	// pointer to window allocated
-	void	*img_ptr;	// pointer to image buffer
-	char	*img_data;	// pointer to same img but as characters
-	int		bpp;		// bits per pixel
-	int		size_line;	// size of each line of pixes
-	int		endian;		// endian necessary for alignment
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_ptr;
+	char	*img_data;
+	int		bpp;
+	int		size_line;
+	int		endian;
 }				t_mlx;
 
 typedef struct s_comps {
@@ -260,29 +260,26 @@ typedef struct s_iter {
 }	t_iter;
 
 typedef struct s_input {
-	int	key_w;
-	int	key_a;
-	int	key_s;
-	int	key_d;
-	int	key_shift;
-	int	key_space;
-	int	key_up;
-	int	key_left;
-	int	key_down;
-	int	key_right;
+	int				key_w;
+	int				key_a;
+	int				key_s;
+	int				key_d;
+	int				key_shift;
+	int				key_space;
+	int				key_up;
+	int				key_left;
+	int				key_down;
+	int				key_right;
 
-	struct timeval last_time;
+	struct timeval	last_time;
 }	t_input;
 
-/**
- * @brief Data structure for all data passed to mlx loop
- */
 typedef struct s_data
 {
-	t_scene 	scene;
-	t_mlx		mlx;
-	t_iter		iter;
-	t_input		input;
+	t_scene	scene;
+	t_mlx	mlx;
+	t_iter	iter;
+	t_input	input;
 }				t_data;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:15:24 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:47:49 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	init_scene(t_scene *scene)
 	}
 	return (1);
 }
+
 /**
  * @brief Initializes the default scene
  *

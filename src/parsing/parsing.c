@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:17 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/18 16:49:50 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:23:38 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,13 @@
 #include "util/arrays.h"
 #include "util/strings.h"
 
-static int	parse_scene_line(t_scene *scene, char *line);
-
 static int	parse_scene_fd(t_scene *scene, int fd);
 
-// static void	finish_parsing(t_scene *scene);
+static int	parse_scene_line(t_scene *scene, char *line);
+
+static int	parse_scene_params(t_scene *scene, char **params);
 
 static int	error(t_scene *scene, char *msg);
-
-// TODO:
-//  - enforce ranges where the subject requires
-//   - partially done, still needs to be implemented for vectors
 
 /*
  * Parses the given .rt 'file' to the 'scene' pointer.
@@ -87,58 +83,38 @@ static int	parse_scene_line(t_scene *scene, char *line)
 {
 	int		result;
 	char	**params;
-	char	*id;
 
 	params = ft_split(line, ' ');
 	if (params == NULL)
 		return (parse_error(scene, "Allocation Failure"));
-	id = params[0];
-	if (id == NULL || id[0] == '#')
-		result = 1;
-	else if (string_equals(id, "A"))
-		result = parse_ambience(scene, params);
-	else if (string_equals(id, "C"))
-		result = parse_camera(scene, params);
-	else if (string_equals(id, "L"))
-		result = parse_light(scene, params);
-	else if (string_equals(id, "sp"))
-		result = parse_sphere(scene, params);
-	else if (string_equals(id, "pl"))
-		result = parse_plane(scene, params);
-	else if (string_equals(id, "cy"))
-		result = parse_cylinder(scene, params);
-	else if (string_equals(id, "co"))
-		result = parse_cone(scene, params);
-	else
-		result = parse_error(scene, "Unrecognized identifier");
+	result = parse_scene_params(scene, params);
 	free_array((void **) params);
 	return (result);
 }
 
-// TODO: what about ambience.color?
-// static void	finish_parsing(t_scene *scene)
-// {
-// 	int	i;
+static int	parse_scene_params(t_scene *scene, char **params)
+{
+	char	*id;
 
-// 	i = 0;
-// 	while (scene->spheres[i] != NULL)
-// 	{
-// 		scene->spheres[i]->material.ambient = scene->ambience.lighting;
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (scene->planes[i] != NULL)
-// 	{
-// 		scene->planes[i]->material.ambient = scene->ambience.lighting;
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (scene->cylinders[i] != NULL)
-// 	{
-// 		scene->cylinders[i]->material.ambient = scene->ambience.lighting;
-// 		i++;
-// 	}
-// }
+	id = params[0];
+	if (id == NULL || id[0] == '#')
+		return (1);
+	if (string_equals(id, "A"))
+		return (parse_ambience(scene, params));
+	if (string_equals(id, "C"))
+		return (parse_camera(scene, params));
+	if (string_equals(id, "L"))
+		return (parse_light(scene, params));
+	if (string_equals(id, "sp"))
+		return (parse_sphere(scene, params));
+	if (string_equals(id, "pl"))
+		return (parse_plane(scene, params));
+	if (string_equals(id, "cy"))
+		return (parse_cylinder(scene, params));
+	if (string_equals(id, "co"))
+		return (parse_cone(scene, params));
+	return (parse_error(scene, "Unrecognized identifier"));
+}
 
 static int	error(t_scene *scene, char *msg)
 {

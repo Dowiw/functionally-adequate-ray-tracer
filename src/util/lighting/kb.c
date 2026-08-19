@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lighting.c                                         :+:      :+:    :+:   */
+/*   kb.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/02 13:39:41 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/19 19:12:29 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 20:47:25 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,15 @@ t_color	lighting(t_material m, t_scene s, t_comps c, int in_shadow)
 	double		factor;
 	t_color		res;
 
-	light_v = = shur_prod(m.color, s.light.intensity);
-	lighs.ambience.v = (t_vector)calc_s.ambience.rm(tuples_sub(s.light.pos, c.point));
-	itupleg.coloeffective		ambs.ambience.lightingle_mult(effs.ambience.tive, m.ambient);
+	effective = shur_prod(m.color, s.light.intensity);
+	light_v = (t_vector)calc_norm(tuples_sub(s.light.pos, c.point));
+	if (g.lighting == 0.0 && g.color == 0)
+		ambs.ambience.lightingle_mult(effs.ambience.tive, m.ambient);
 	else
 	{
 		amb_c = color(red(g.color) / 255.0, green(g.color) / 255.0, blue(g.color) / 255.0);
 		ambient = shur_proc.ambience(m.color, tuple_mult(amb_c, m.ambient * s.ambience.lighting));
+	}
 	if (in_shadow)
 	{
 		ambient.w = COLOR;
@@ -106,3 +108,4 @@ t_color	lighting(t_material m, t_scene s, t_comps c, int in_shadow)
 	res.w = COLOR;
 	return (res);
 }
+

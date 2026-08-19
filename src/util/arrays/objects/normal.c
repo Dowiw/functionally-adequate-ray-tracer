@@ -6,13 +6,47 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 14:32:03 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/19 18:18:03 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 20:32:21 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "scene.h"
 #include <math.h>
+#include "minirt.h"
+
+static t_m4x4	get_inverse_transform(t_object *obj);
+
+static t_vector	local_normal_at(t_object *obj, t_point local_point);
+
+static t_vector	local_normal_cyl(t_cylinder *cyl, t_point local_point);
+
+static t_vector	local_normal_cone(t_cone *cone, t_point local_point);
+
+/**
+ * @brief Return the normalized vector of an object at p
+ *
+ * @param obj object
+ * @param p world_point
+ * @return t_vector normalized vector
+ */
+t_vector	normal_at(t_object *obj, t_point p)
+{
+	t_point		local_point;
+	t_vector	local_normal;
+	t_vector	world_normal;
+	t_m4x4		inv;
+
+	if (!obj || !obj->ptr)
+		return ((t_tuple){0.0, 0.0, 0.0, VECTOR});
+	inv = get_inverse_transform(obj);
+	local_point = m4x4_multiply_tuple(inv, p);
+	local_normal = local_normal_at(obj, local_point);
+	world_normal = m4x4_multiply_tuple(m4x4_transpose(inv),
+			local_normal);
+	world_normal.w = VECTOR;
+	if (calc_mag(world_normal) < UNIT_EPSILON)
+		return ((t_tuple){0.0, 0.0, 0.0, VECTOR});
+	return (calc_norm(world_normal));
+}
 
 static t_m4x4	get_inverse_transform(t_object *obj)
 {
@@ -29,79 +63,44 @@ static t_m4x4	get_inverse_transform(t_object *obj)
 
 static t_vector	local_normal_at(t_object *obj, t_point local_point)
 {
-	double		dist;
 	t_cylinder	*cyl;
 	t_cone		*cone;
-	double		y_val;
 
 	if (obj->type == SPHERE)
 		return ((t_tuple){local_point.x, local_point.y, local_point.z, VECTOR});
-	else if (obj->type == PLANE)
+	if (obj->type == PLANE)
 		return ((t_tuple){0.0, 1.0, 0.0, VECTOR});
-	else if (obj->type == CYLINDER)
-	{
-		cyl = (t_cylinder *)obj->ptr;
-		dist = pow(local_point.x, 2) + pow(local_point.z, 2);
-		if (dist < 1 && local_point.y >= cyl->max - UNIT_EPSILON)
-			return ((t_tuple){0.0, 1.0, 0.0, VECTOR});
-		else if (dist < 1 && local_point.y <= cyl->min + UNIT_EPSILON)
-			return ((t_tuple){0.0, -1.0, 0.0, VECTOR});
-		return ((t_tuple){local_point.x, 0.0, local_point.z, VECTOR});
-	}
-	else if (obj->type == CONE)
-	{
-		cone = (t_cone *)obj->ptr;
-		dist = pow(local_point.x, 2) + pow(local_point.z, 2);
-		if (dist < pow(cone->max, 2) && local_point.y >= cone->max - UNIT_EPSILON)
-			return ((t_tuple){0.0, 1.0, 0.0, VECTOR});
-		else if (dist < pow(cone->min, 2) && local_point.y <= cone->min + UNIT_EPSILON)
-			return ((t_tuple){0.0, -1.0, 0.0, VECTOR});
-		y_val = sqrt(dist);
-		if (local_point.y > 0)
-			y_val = -y_val;
-		return ((t_tuple){local_point.x, y_val, local_point.z, VECTOR});
-	}
+	if (obj->type == CYLINDER)
+		return (local_normal_cyl((t_cylinder *) obj->ptr, local_point));
+	if (obj->type == CONE)
+		return (local_normal_cone((t_cone *) obj->ptr, local_point));
 	return ((t_tuple){0.0, 0.0, 0.0, VECTOR});
 }
 
-/**
- * @brief Return the normalized vector of an object at p
- *
- * @param obj object
- * @param p world_point
- * @return t_vector normalized vector
- */
-t_vector	normal_at(t_object *obj, t_point p)
+static t_vector	local_normal_cyl(t_cylinder *cyl, t_point local_point)
 {
-	t_point		local_point;
-	t_vector	local_normal;
-	t_vector	world_normal;
-	t_m4x4	inv;
+	double		dist;
 
-	if (!obj || !obj->ptr)
-		return ((t_tuple){0.0, 0.0, 0.0, VECTOR});
-	inv = get_inverse_transform(obj);
-	local_point = m4x4_multiply_tuple(inv, p);
-	local_normal = local_normal_at(obj, local_point);
-	world_normal = m4x4_multiply_tuple(m4x4_transpose(inv),
-			local_normal);
-	world_normal.w = VECTOR;
-	if (calc_mag(world_normal) < UNIT_EPSILON)
-		return ((t_tuple){0.0, 0.0, 0.0, VECTOR});
-	return (calc_norm(world_normal));
+	dist = pow(local_point.x, 2) + pow(local_point.z, 2);
+	if (dist < 1 && local_point.y >= cyl->max - UNIT_EPSILON)
+		return ((t_tuple){0.0, 1.0, 0.0, VECTOR});
+	else if (dist < 1 && local_point.y <= cyl->min + UNIT_EPSILON)
+		return ((t_tuple){0.0, -1.0, 0.0, VECTOR});
+	return ((t_tuple){local_point.x, 0.0, local_point.z, VECTOR});
 }
 
-/**
- * @brief Reflect the vector passed based on the normal given
- *
- * @param v vector
- * @param n normal vector
- * @return t_vector reflected vector
- */
-t_vector	reflect(t_vector v, t_vector n)
+static t_vector	local_normal_cone(t_cone *cone, t_point local_point)
 {
-	t_vector	r;
+	double		dist;
+	double		y;
 
-	r = tuples_sub(v, tuple_mult(tuple_mult(n, 2), dot_product(v, n)));
-	return (r);
+	dist = pow(local_point.x, 2) + pow(local_point.z, 2);
+	if (dist < pow(cone->max, 2) && local_point.y >= cone->max - UNIT_EPSILON)
+		return ((t_tuple){0.0, 1.0, 0.0, VECTOR});
+	if (dist < pow(cone->min, 2) && local_point.y <= cone->min + UNIT_EPSILON)
+		return ((t_tuple){0.0, -1.0, 0.0, VECTOR});
+	y = sqrt(dist);
+	if (local_point.y > 0)
+		y = -y;
+	return ((t_tuple){local_point.x, y, local_point.z, VECTOR});
 }

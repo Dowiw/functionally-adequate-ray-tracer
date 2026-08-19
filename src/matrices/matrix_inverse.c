@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 17:36:36 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:13:23 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:40:29 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_m2x2	m2x2_inverse(t_m2x2 matrix)
 t_m3x3	m3x3_inverse(t_m3x3 matrix)
 {
 	t_m3x3	result;
-	double		determinant;
-	int			r;
-	int			c;
+	double	determinant;
+	int		r;
+	int		c;
 
 	determinant = m3x3_determinant(matrix);
 	if (determinant == 0)
@@ -63,9 +63,9 @@ t_m3x3	m3x3_inverse(t_m3x3 matrix)
 t_m4x4	m4x4_inverse(t_m4x4 matrix)
 {
 	t_m4x4	result;
-	double		determinant;
-	int			r;
-	int			c;
+	double	determinant;
+	int		r;
+	int		c;
 
 	determinant = m4x4_determinant(matrix);
 	if (determinant == 0)

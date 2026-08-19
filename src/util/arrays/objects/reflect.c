@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_error.c                                      :+:      :+:    :+:   */
+/*   reflect.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/09 16:49:41 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 19:12:15 by sstark           ###   ########.fr       */
+/*   Created: 2026/08/19 20:27:36 by sstark            #+#    #+#             */
+/*   Updated: 2026/08/19 20:27:50 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "scene.h"
+#include "minirt.h"
 
-int	parse_error(t_scene *scene, char *error)
+/**
+ * @brief Reflect the vector passed based on the normal given
+ *
+ * @param v vector
+ * @param n normal vector
+ * @return t_vector reflected vector
+ */
+t_vector	reflect(t_vector v, t_vector n)
 {
-	unsigned int	size_to_move;
+	t_vector	r;
+	double		dot;
 
-	size_to_move = (ERROR_STACK_SIZE - 1) * sizeof(char *);
-	ft_memmove(scene->error + 1, scene->error, size_to_move);
-	scene->error[0] = error;
-	return (0);
+	dot = dot_product(v, n);
+	r = tuples_sub(v, tuple_mult(tuple_mult(n, 2), dot));
+	return (r);
 }

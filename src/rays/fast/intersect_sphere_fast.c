@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:13:28 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:44:41 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static inline t_tuple	inline_m4x4_multiply_tuple(t_m4x4 a, t_tuple b)
 		+ a.m[3][2] * b.z
 		+ a.m[3][3] * b.w;
 	return (result);
-};
+}
 
-static inline t_ray		inline_transform(t_ray r, t_m4x4 m)
+static inline t_ray	inline_transform(t_ray r, t_m4x4 m)
 {
 	return ((t_ray){inline_m4x4_multiply_tuple(m, r.origin), inline_m4x4_multiply_tuple(m, r.dir)});
 }

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:25:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:41:39 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 20:40:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	render_init(t_iter *iter)
 	iter->pixels = 0;
 }
 
-int		render_loop(t_data *data)
+int	render_loop(t_data *data)
 {
 	tick_input(data);
 	render_frame(data);
@@ -68,14 +68,13 @@ int		render_loop(t_data *data)
 }
 
 /**
- * @brief Renders the amount of new pixels specified in data.iter.pixels_per_frame.
+ * @brief Renders the amount of new pixels specified in PIXELS_PER_FRAME.
  *        The mlx window is updated at the end of the frame.
- *        If the scene has already finished rendering, this function returns immediately.
+ *        Returns immediately if the scene has already finished rendering.
  *
  * @param data
  * @return int
  */
-	#include <stdlib.h>
 void	render_frame(t_data *data)
 {
 	t_iter	*iter;
@@ -123,7 +122,7 @@ static void	render_pixel(t_data *data)
 	ray = ray_for_pixel(data->scene.camera, iter->x, iter->y);
 	color = color_at(&data->scene, ray);
 	color_rgb = rgb(clamp_color(color.x), clamp_color(color.y), clamp_color(color.z));
-	fill_pixel(&data->mlx, iter->res, iter->x, iter->y, color_rgb);
+	fill_pixel(&data->mlx, iter, color_rgb);
 	iter->pixels++;
 }
 

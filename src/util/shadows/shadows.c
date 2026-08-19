@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 11:47:32 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:38:47 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,17 @@
 int	is_shadowed(t_scene w, t_point p)
 {
 	t_vector		v;
-	t_vector		direction;
 	t_ray			r;
-	t_intersect	hit;
+	t_intersect		hit;
 	double			distance;
-	int				shadowed;
 
 	v = tuples_sub(w.light.pos, p);
 	distance = calc_mag(v);
-	direction = calc_norm(v);
-	r = ray(p, direction);
+	r = ray(p, calc_norm(v));
 	hit = intersect_scene_and_hit(&w, r);
 	if (hit.t >= 0.0 && hit.t < distance)
-		shadowed = 1;
+		return (1);
 	else
-		shadowed = 0;
-	return (shadowed);
+		return (0);
+	return (0);
 }

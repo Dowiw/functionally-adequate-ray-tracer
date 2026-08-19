@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:19:46 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 15:34:45 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:04:46 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	parse_color_params(t_scene *scene, int *color, char **params)
 	int	blue;
 
 	if (array_len((void **) params) != 3)
-		return (parse_error(scene, "Bad format, expected <red>,<green>,<blue>"));
+		return (parse_error(scene, "Expected <red>,<green>,<blue>"));
 	if (!parse_int_range(scene, &red, params[0], 0, 255))
 		return (parse_error(scene, "Failed to parse red component"));
 	if (!parse_int_range(scene, &green, params[1], 0, 255))

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 15:19:02 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:47:38 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_camera	create_camera(int width, int height, double fov)
  *
  * @param camera
  */
-void		init_camera(t_camera *camera)
+void	init_camera(t_camera *camera)
 {
 	camera->half_view = tan(camera->field_of_view / 2.0);
 	camera->aspect_ratio = ((double) camera->width) / camera->height;

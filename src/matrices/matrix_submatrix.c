@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 17:35:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:13:23 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:40:49 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	matrix_submatrix(double *res, double *mat, int *info);
 t_m2x2	m3x3_submatrix(t_m3x3 matrix, int row, int column)
 {
 	t_m2x2	result;
-	int			info[3];
+	int		info[3];
 
 	info[0] = row;
 	info[1] = column;
@@ -37,7 +37,7 @@ t_m2x2	m3x3_submatrix(t_m3x3 matrix, int row, int column)
 t_m3x3	m4x4_submatrix(t_m4x4 matrix, int row, int column)
 {
 	t_m3x3	result;
-	int			info[3];
+	int		info[3];
 
 	info[0] = row;
 	info[1] = column;

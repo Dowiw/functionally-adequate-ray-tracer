@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:57 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:48:51 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	parse_sphere(t_scene *scene, char **params)
 	t_sphere	*sphere;
 
 	if (array_len((void **) params) != 4)
-		return (parse_error(scene, "Bad format, expected sp <center> <diameter> <color>"));
+		return (parse_error(scene, "Expected sp <center> <diameter> <color>"));
 	sphere = malloc(sizeof(t_sphere));
 	if (sphere == NULL)
 		return (parse_error(scene, "Allocation Failure"));
-	if (!parse_point(scene, &sphere->center, params[1]))
+	if (!parse_point(scene, &sphere->pos, params[1]))
 		return (parse_sphere_error(scene, sphere, "Failed to parse center"));
-	if (!parse_double(scene, &sphere->diameter, params[2]))
+	if (!parse_double(scene, &sphere->d, params[2]))
 		return (parse_sphere_error(scene, sphere, "Failed to parse diameter"));
 	if (!parse_color(scene, &sphere->color, params[3]))
 		return (parse_sphere_error(scene, sphere, "Failed to parse color"));
@@ -52,9 +52,14 @@ int	parse_sphere(t_scene *scene, char **params)
 
 static void	finish_sphere(t_sphere *sphere)
 {
-	sphere->transform = m4x4_translation(sphere->center.x, sphere->center.y, sphere->center.z);
-	sphere->transform = m4x4_multiply(sphere->transform, m4x4_scaling(sphere->diameter / 2.0, sphere->diameter / 2.0, sphere->diameter / 2.0));
-	sphere->inverse = m4x4_inverse(sphere->transform);
+	double	radius;
+	t_m4x4	m;
+
+	radius = sphere->d / 2.0;
+	m = m4x4_translation(sphere->pos.x, sphere->pos.y, sphere->pos.z);
+	m = m4x4_multiply(m, m4x4_scaling(radius, radius, radius));
+	sphere->transform = m;
+	sphere->inverse = m4x4_inverse(m);
 	sphere->material = material();
 	sphere->material.color = color(red(sphere->color) / 255.0, green(sphere->color) / 255.0, blue(sphere->color) / 255.0);
 }

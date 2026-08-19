@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 20:23:20 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:30:22 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 20:10:38 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define KEY_SPACE 32
 # define KEY_Z 122
 
+void	handle_input(t_input *input, int keycode, int down);
 void	tick_input(t_data *data);
 
 void	move(t_data *data, t_vector vec);

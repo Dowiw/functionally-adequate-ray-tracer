@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:43:27 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:42:27 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ t_cylinder	cylinder_create(void)
 {
 	t_cylinder	c;
 
-	c.center = (t_point){0, 0, 0, POINT};
+	c.pos = (t_point){0, 0, 0, POINT};
 	c.vec = vector(0, 1, 0);
 	c.transform = m4x4_identity();
 	c.inverse = m4x4_identity();
-	c.diameter = 2.0;
+	c.d = 2.0;
 	c.material = material();
 	c.min = -INFINITY;
 	c.max = INFINITY;

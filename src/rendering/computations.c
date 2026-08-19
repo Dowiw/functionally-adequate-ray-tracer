@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 14:26:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 20:22:51 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,24 @@
  */
 t_ray	ray_for_pixel(t_camera camera, int x, int y)
 {
-	double	x_offset;
-	double	y_offset;
 	double	world_x;
 	double	world_y;
 	t_tuple	pixel;
 	t_tuple	origin;
 	t_tuple	direction;
 
-	x_offset = (x + 0.5) * camera.pixel_size;
-	y_offset = (y + 0.5) * camera.pixel_size;
-	world_x = camera.half_width - x_offset;
-	world_y = camera.half_height - y_offset;
-	pixel = m4x4_multiply_tuple(camera.inverse, (t_tuple){world_x, world_y, -1.0, POINT});
-	origin = m4x4_multiply_tuple(camera.inverse, (t_tuple){0.0, 0.0, 0.0, POINT});
+	world_x = camera.half_width - (x + 0.5) * camera.pixel_size;
+	world_y = camera.half_height - (y + 0.5) * camera.pixel_size;
+	pixel = m4x4_multiply_tuple(camera.inverse,
+			(t_tuple){world_x, world_y, -1.0, POINT});
+	origin = m4x4_multiply_tuple(camera.inverse,
+			(t_tuple){0.0, 0.0, 0.0, POINT});
 	direction = calc_norm(tuples_sub(pixel, origin));
 	return ((t_ray){origin, direction});
 }
 
 /**
- * @brief Precomputes a few values and stores them in the returned t_comps for ease of use.
+ * @brief Precomputes a few values and stores them in the returned t_comps
  *
  * @param ray
  * @param hit
@@ -65,7 +63,8 @@ t_comps	prepare_computations(t_ray ray, t_intersect *hit)
 	result.inside = dot_product(result.normalv, result.eyev) < 0.0;
 	if (result.inside)
 		result.normalv = tuple_neg(result.normalv);
-	result.over_point = tuples_add(result.point, tuple_mult(result.normalv, UNIT_EPSILON));
+	result.over_point = tuples_add(result.point,
+			tuple_mult(result.normalv, UNIT_EPSILON));
 	return (result);
 }
 
@@ -83,7 +82,7 @@ static t_material	get_material(t_object obj)
 }
 
 /**
- * @brief Calculates the color at the intersection represented by the given comps.
+ * @brief Calculates the color at the intersection represented by the comps.
  *
  * @param scene
  * @param comps
@@ -96,13 +95,7 @@ t_color	shade_hit(t_scene *scene, t_comps comps)
 
 	mat = get_material(comps.obj);
 	shadowed = is_shadowed(*scene, comps.over_point);
-	return (lighting(mat,
-			scene->light,
-			comps.point,
-			comps.eyev,
-			comps.normalv,
-			shadowed,
-			scene->ambience));
+	return (lighting(mat, *scene, comps, shadowed));
 }
 
 /**
@@ -116,8 +109,8 @@ t_color	shade_hit(t_scene *scene, t_comps comps)
 t_color	color_at(t_scene *scene, t_ray ray)
 {
 	t_intersect	hit;
-	t_comps			comps;
-	t_color			res;
+	t_comps		comps;
+	t_color		res;
 
 	hit = intersect_scene_and_hit(scene, ray);
 	if (hit.t < 0.0)

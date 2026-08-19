@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 10:37:30 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:42:48 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,14 @@ t_intersects	intersect_plane(t_plane *plane, t_ray ray)
  */
 t_intersects	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 {
-	double		a;
-	double		b;
-	double		c;
-	double		disc;
-	double		t0;
-	double		t1;
-	double		y0;
-	double		y1;
+	double			a;
+	double			b;
+	double			c;
+	double			disc;
+	double			t0;
+	double			t1;
+	double			y0;
+	double			y1;
 	t_intersects	xs;
 
 	ray = transform(ray, cylinder->transform);
@@ -259,7 +259,7 @@ t_intersects	intersect_scene(t_scene *scene, t_ray ray)
 t_intersect	*intersect_hit(t_intersects intersections)
 {
 	t_intersect	*hit;
-	int				i;
+	int			i;
 
 	hit = NULL;
 	if (intersections.list == NULL)

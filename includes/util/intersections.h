@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 10:41:54 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:52:00 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_intersects	intersections_add_all(t_intersects xs, t_intersects to_add);
 int				intersections_len(t_intersects xs);
 
 void			free_intersections(t_intersects xs);
-
-int				intersections_compare(t_intersect *a, t_intersect *b);
 
 void			intersections_sort(t_intersects *xs);
 

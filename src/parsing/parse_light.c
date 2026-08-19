@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:19:46 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:38:11 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:04:46 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	parse_light(t_scene *scene, char **params)
 	if (scene->has_light)
 		return (parse_error(scene, "Light is already declared"));
 	if (array_len((void **) params) != 4)
-		return (parse_error(scene, "Bad format, expected L <pos> <brightness> <color>"));
+		return (parse_error(scene, "Expected L <pos> <brightness> <color>"));
 	if (!parse_point(scene, &scene->light.pos, params[1]))
 		return (parse_error(scene, "Failed to parse position"));
 	if (!parse_double_range(scene, &brightness, params[2], 0.0, 1.0))

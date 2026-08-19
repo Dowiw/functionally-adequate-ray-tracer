@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/19 17:23:35 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/19 18:50:55 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,6 @@ SOURCES = main.c \
 	scene/camera.c \
 	scene/scene.c \
 	util/arrays/arrays1.c \
-	util/arrays/arrays2.c \
 	util/arrays/cones/cones.c \
 	util/arrays/cones/cone_utils.c \
 	util/arrays/cylinders/cylinders.c \
