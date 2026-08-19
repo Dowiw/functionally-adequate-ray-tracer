@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:19:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 15:54:15 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 16:19:23 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	finish_cylinder(t_cylinder *cylinder, int rgb_color)
 	cylinder->transform = matrix4x4_translation(cylinder->center.x, cylinder->center.y, cylinder->center.z);
 	cylinder->transform = matrix4x4_multiply(cylinder->transform, matrix4x4_rotation(cylinder->vec));
 	cylinder->transform = matrix4x4_multiply(cylinder->transform, matrix4x4_scaling(cylinder->diameter / 2.0, cylinder->height, cylinder->diameter / 2.0));
+	cylinder->inverse = matrix4x4_inverse(cylinder->transform);
 	cylinder->min = -0.5;
 	cylinder->max = 0.5;
 	cylinder->closed = 1;
