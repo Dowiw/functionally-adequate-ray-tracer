@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:42:38 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:25:07 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	render_frame(t_data *data);
 
 t_ray	ray_for_pixel(t_camera camera, int x, int y);
 
-t_comps	prepare_computations(t_ray ray, t_intersection *hit);
+t_comps	prepare_computations(t_ray ray, t_intersect *hit);
 
 t_color shade_hit(t_scene *scene, t_comps comps);
 

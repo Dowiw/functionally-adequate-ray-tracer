@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:13:30 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:40:25 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "minirt.h"
 #include "util/intersections.h"
 
-static inline t_tuple	inline_matrix4x4_multiply_tuple(t_matrix4x4 a, t_tuple b)
+static inline t_tuple	inline_m4x4_multiply_tuple(t_m4x4 a, t_tuple b)
 {
 	t_tuple	result;
 
@@ -38,20 +38,20 @@ static inline t_tuple	inline_matrix4x4_multiply_tuple(t_matrix4x4 a, t_tuple b)
 	return (result);
 };
 
-static inline t_ray	inline_transform(t_ray r, t_matrix4x4 m)
+static inline t_ray	inline_transform(t_ray r, t_m4x4 m)
 {
-	return ((t_ray){inline_matrix4x4_multiply_tuple(m, r.origin), inline_matrix4x4_multiply_tuple(m, r.direction)});
+	return ((t_ray){inline_m4x4_multiply_tuple(m, r.origin), inline_m4x4_multiply_tuple(m, r.dir)});
 }
 
-void	intersect_plane_fast(t_plane *plane, t_ray ray, t_intersection *hit)
+void	intersect_plane_fast(t_plane *plane, t_ray ray, t_intersect *hit)
 {
 	t_ray			local_r;
 	double			time;
 
 	local_r = inline_transform(ray, plane->inverse);
-	if (fabs(local_r.direction.y) < UNIT_EPSILON)
+	if (fabs(local_r.dir.y) < UNIT_EPSILON)
 		return ;
-	time = -local_r.origin.y / local_r.direction.y;
+	time = -local_r.origin.y / local_r.dir.y;
 	if (time >= 0.0 && (hit->t == -1.0 || time < hit->t))
-		*hit = (t_intersection){time, (t_object){PLANE, plane}};
+		*hit = (t_intersect){time, (t_object){PLANE, plane}};
 }

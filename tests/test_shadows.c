@@ -34,7 +34,7 @@ int	test_shadow_is_shadowed(void)
 
 	t_point	p = point(0, 10, 0);
 	UNIT_ASSERT_EQ(is_shadowed(w, p), 0);
-	
+
 	t_point	p2 = point(10, -10, 10);
 	UNIT_ASSERT_EQ(is_shadowed(w, p2), 1);
 
@@ -68,16 +68,16 @@ int	test_shadow_shade(void)
 	if (!s2)
 		return (1);
 	*s2 = sphere_create();
-	s2->transform = matrix4x4_translation(0, 0, 10);
-	s2->inverse = matrix4x4_inverse(s2->transform);
+	s2->transform = m4x4_translation(0, 0, 10);
+	s2->inverse = m4x4_inverse(s2->transform);
 	w.spheres = spheres_add(w.spheres, s2);
 
 	t_ray r = ray(point(0, 0, 5), vector(0, 0, 1));
-	t_intersection *i = create_intersection(SPHERE, s2, 4);
+	t_intersect *i = create_intersection(SPHERE, s2, 4);
 
 	t_comps comps = prepare_computations(r, i);
 	t_color c = shade_hit(&w, comps);
-	
+
 	t_color cE = color(0.1, 0.1, 0.1);
 	UNIT_ASSERT_EQ(compare_tuples(&c, &cE), 0);
 
@@ -89,10 +89,10 @@ int	test_shadow_point_offsets(void)
 {
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_sphere	shape = sphere_create();
-	shape.transform = matrix4x4_translation(0, 0, 1);
-	shape.inverse = matrix4x4_inverse(shape.transform);
+	shape.transform = m4x4_translation(0, 0, 1);
+	shape.inverse = m4x4_inverse(shape.transform);
 
-	t_intersection *i = create_intersection(SPHERE, &shape, 5.0);
+	t_intersect *i = create_intersection(SPHERE, &shape, 5.0);
 
 	t_comps comps = prepare_computations(r, i);
 	UNIT_ASSERT(comps.over_point.z < -UNIT_EPSILON / 2);

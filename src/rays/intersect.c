@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 14:28:41 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/12 15:55:14 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@
 
 /**
  * @brief Generic polymorphic intersect dispatcher
- * 
- * @param obj 
- * @param ray 
- * @return t_intersections 
+ *
+ * @param obj
+ * @param ray
+ * @return t_intersects
  */
-t_intersections	intersect(t_object *obj, t_ray ray)
+t_intersects	intersect(t_object *obj, t_ray ray)
 {
-	if (!obj || !obj->object)
+	if (!obj || !obj->ptr)
 		return (intersections_create());
 	if (obj->type == SPHERE)
-		return (intersect_sphere((t_sphere *)obj->object, ray));
+		return (intersect_sphere((t_sphere *)obj->ptr, ray));
 	else if (obj->type == PLANE)
-		return (intersect_plane((t_plane *)obj->object, ray));
+		return (intersect_plane((t_plane *)obj->ptr, ray));
 	else if (obj->type == CYLINDER)
-		return (intersect_cylinder((t_cylinder *)obj->object, ray));
+		return (intersect_cylinder((t_cylinder *)obj->ptr, ray));
 	else if (obj->type == CONE)
-		return (intersect_cone((t_cone *)obj->object, ray));
+		return (intersect_cone((t_cone *)obj->ptr, ray));
 	return (intersections_create());
 }

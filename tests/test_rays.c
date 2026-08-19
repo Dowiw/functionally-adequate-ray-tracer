@@ -15,9 +15,9 @@ int test_ray(void) {
 	t_tuple direction = {4, 5, 6, VECTOR};
 
 	r.origin = origin;
-	r.direction = direction;
+	r.dir = direction;
 	UNIT_ASSERT_EQ(compare_tuples(&(r.origin), &origin), 0);
-	UNIT_ASSERT_EQ(compare_tuples(&(r.direction), &direction), 0);
+	UNIT_ASSERT_EQ(compare_tuples(&(r.dir), &direction), 0);
 
 	return 0;
 }
@@ -46,11 +46,11 @@ int test_ray_pos(void) {
 int test_ray_intersect(void) {
 	t_sphere s = sphere_create();
 	t_ray r;
-	t_intersections	xS;
+	t_intersects	xS;
 
 	// Scenario 0: A ray intersects a sphere at two points
 	r.origin = (t_point){0, 0, -5, POINT};
-	r.direction = (t_vector){0, 0, 1, VECTOR};
+	r.dir = (t_vector){0, 0, 1, VECTOR};
 	xS = intersect_sphere(&s, r);
 	UNIT_ASSERT_EQ(intersections_len(xS), 2);
 	UNIT_ASSERT_FEQ(xS.list[0]->t, 4.0);
@@ -59,7 +59,7 @@ int test_ray_intersect(void) {
 
 	// Scenario 1: A ray intersects a sphere at a tangent
 	r.origin = (t_point){0, 1, -5, POINT};
-	r.direction = (t_vector){0, 0, 1, VECTOR};
+	r.dir = (t_vector){0, 0, 1, VECTOR};
 	xS = intersect_sphere(&s, r);
 	UNIT_ASSERT_EQ(intersections_len(xS), 2);
 	UNIT_ASSERT_FEQ(xS.list[0]->t, 5.0);
@@ -68,14 +68,14 @@ int test_ray_intersect(void) {
 
 	// Scenario 2: A ray misses a sphere
 	r.origin = (t_point){0, 2, -5, POINT};
-	r.direction = (t_vector){0, 0, 1, VECTOR};
+	r.dir = (t_vector){0, 0, 1, VECTOR};
 	xS = intersect_sphere(&s, r);
 	UNIT_ASSERT_EQ(intersections_len(xS), 0);
 	free_intersections(xS);
 
 	// Scenario 3: A ray originates inside a sphere
 	r.origin = (t_point){0, 0, 0, POINT};
-	r.direction = (t_vector){0, 0, 1, VECTOR};
+	r.dir = (t_vector){0, 0, 1, VECTOR};
 	xS = intersect_sphere(&s, r);
 	UNIT_ASSERT_EQ(intersections_len(xS), 2);
 	UNIT_ASSERT_FEQ(xS.list[0]->t, -1.0);
@@ -84,7 +84,7 @@ int test_ray_intersect(void) {
 
 	// Scenario 4: A sphere is behind a ray
 	r.origin = (t_point){0, 0, 5, POINT};
-	r.direction = (t_vector){0, 0, 1, VECTOR};
+	r.dir = (t_vector){0, 0, 1, VECTOR};
 	xS = intersect_sphere(&s, r);
 	UNIT_ASSERT_EQ(intersections_len(xS), 2);
 	UNIT_ASSERT_FEQ(xS.list[0]->t, -6.0);
@@ -96,9 +96,9 @@ int test_ray_intersect(void) {
 
 int test_aggregating_intersections(void) {
 	t_sphere s;
-	t_intersection *i1;
-	t_intersection *i2;
-	t_intersections xs;
+	t_intersect *i1;
+	t_intersect *i2;
+	t_intersects xs;
 
 	s = sphere_create();
 	i1 = create_intersection(SPHERE, &s, 1.0);
@@ -109,16 +109,16 @@ int test_aggregating_intersections(void) {
 	UNIT_ASSERT_EQ(intersections_len(xs), 2);
 	UNIT_ASSERT_FEQ(xs.list[0]->t, 1.0);
 	UNIT_ASSERT_FEQ(xs.list[1]->t, 2.0);
-	UNIT_ASSERT_EQ(xs.list[0]->obj.object, &s);
-	UNIT_ASSERT_EQ(xs.list[1]->obj.object, &s);
+	UNIT_ASSERT_EQ(xs.list[0]->obj.ptr, &s);
+	UNIT_ASSERT_EQ(xs.list[1]->obj.ptr, &s);
 	free_intersections(xs);
 
 	t_ray r = {.origin = {0, 0, -5, POINT}, .direction = {0, 0, 1, VECTOR}};
 	t_sphere s1 = sphere_create();
-	t_intersections xS = intersect_sphere(&s1, r);
+	t_intersects xS = intersect_sphere(&s1, r);
 	UNIT_ASSERT_EQ(intersections_len(xS), 2);
-	UNIT_ASSERT_EQ(xS.list[0]->obj.object, &s1);
-	UNIT_ASSERT_EQ(xS.list[1]->obj.object, &s1);
+	UNIT_ASSERT_EQ(xS.list[0]->obj.ptr, &s1);
+	UNIT_ASSERT_EQ(xS.list[1]->obj.ptr, &s1);
 	free_intersections(xS);
 
 	return (0);
@@ -126,10 +126,10 @@ int test_aggregating_intersections(void) {
 
 int test_hit(void) {
 	t_sphere s;
-	t_intersection *i1;
-	t_intersection *i2;
-	t_intersections xS;
-	t_intersection *i;
+	t_intersect *i1;
+	t_intersect *i2;
+	t_intersects xS;
+	t_intersect *i;
 
 	s = sphere_create();
 	i1 = create_intersection(SPHERE, &s, 1.0);
@@ -139,7 +139,7 @@ int test_hit(void) {
 	xS = intersections_add(xS, i2);
 	i = intersect_hit(xS);
 
-	UNIT_ASSERT_EQ(i1->obj.object, i->obj.object);
+	UNIT_ASSERT_EQ(i1->obj.ptr, i->obj.ptr);
 	UNIT_ASSERT_FEQ(i1->t, i->t);
 
 	free_intersections(xS);
@@ -151,7 +151,7 @@ int test_hit(void) {
 	xS = intersections_add(xS, i2);
 	i = intersect_hit(xS);
 
-	UNIT_ASSERT_EQ(i2->obj.object, i->obj.object);
+	UNIT_ASSERT_EQ(i2->obj.ptr, i->obj.ptr);
 	UNIT_ASSERT_FEQ(i2->t, i->t);
 
 	free_intersections(xS);
@@ -167,8 +167,8 @@ int test_hit(void) {
 
 	free_intersections(xS);
 
-	t_intersection *i3;
-	t_intersection *i4;
+	t_intersect *i3;
+	t_intersect *i4;
 
 	i1 = create_intersection(SPHERE, &s, 5.0);
 	i2 = create_intersection(SPHERE, &s, 7.0);
@@ -181,7 +181,7 @@ int test_hit(void) {
 	xS = intersections_add(xS, i4);
 	i = intersect_hit(xS);
 
-	UNIT_ASSERT_EQ(i4->obj.object, i->obj.object);
+	UNIT_ASSERT_EQ(i4->obj.ptr, i->obj.ptr);
 	UNIT_ASSERT_FEQ(i4->t, i->t);
 
 	free_intersections(xS);
@@ -195,8 +195,8 @@ int	test_ray_transform(void)
 	t_ray		r2;
 	t_ray		t1;
 	t_ray		t2;
-	t_matrix4x4	m1;
-	t_matrix4x4	m2;
+	t_m4x4	m1;
+	t_m4x4	m2;
 	t_point		expected_origin1 = {4, 6, 8, POINT};
 	t_vector	expected_direction1 = {0, 1, 0, VECTOR};
 	t_point		expected_origin2 = {2, 6, 12, POINT};
@@ -207,7 +207,7 @@ int	test_ray_transform(void)
 		.direction = {0, 1, 0, VECTOR}
 	};
 
-	m1 = matrix4x4_translation(3, 4, 5);
+	m1 = m4x4_translation(3, 4, 5);
 	t1 = transform(r1, m1);
 
 	UNIT_ASSERT_EQ(compare_tuples(&(t1.origin), &expected_origin1), 0);
@@ -217,7 +217,7 @@ int	test_ray_transform(void)
 		.origin = {1, 2, 3, POINT},
 		.direction = {0, 1, 0, VECTOR}
 	};
-	m2 = matrix4x4_scaling(2, 3, 4);
+	m2 = m4x4_scaling(2, 3, 4);
 	t2 = transform(r2, m2);
 
 	UNIT_ASSERT_EQ(compare_tuples(&(t2.origin), &expected_origin2), 0);
@@ -230,19 +230,19 @@ int	test_sphere_ray_transform(void)
 {
 	t_sphere		s;
 	t_object		obj;
-	t_matrix4x4		identity;
-	t_matrix4x4		translation;
+	t_m4x4		identity;
+	t_m4x4		translation;
 	t_ray			r;
-	t_intersections	xs;
+	t_intersects	xs;
 
 	s = sphere_create();
 	obj = (t_object){SPHERE, &s};
-	identity = matrix4x4_identity();
-	UNIT_ASSERT_EQ(matrix4x4_compare(s.transform, identity), 0);
+	identity = m4x4_identity();
+	UNIT_ASSERT_EQ(m4x4_compare(s.transform, identity), 0);
 
-	translation = matrix4x4_translation(2, 3, 4);
+	translation = m4x4_translation(2, 3, 4);
 	set_transform(&obj, translation);
-	UNIT_ASSERT_EQ(matrix4x4_compare(s.transform, translation), 0);
+	UNIT_ASSERT_EQ(m4x4_compare(s.transform, translation), 0);
 
 	r = (t_ray){
 		.origin = {0, 0, -5, POINT},
@@ -250,7 +250,7 @@ int	test_sphere_ray_transform(void)
 	};
 	s = sphere_create();
 	obj = (t_object){SPHERE, &s};
-	set_transform(&obj, matrix4x4_scaling(2, 2, 2));
+	set_transform(&obj, m4x4_scaling(2, 2, 2));
 	xs = intersect_sphere(&s, r);
 	UNIT_ASSERT_EQ(intersections_len(xs), 2);
 	UNIT_ASSERT_FEQ(xs.list[0]->t, 3.0);
@@ -263,7 +263,7 @@ int	test_sphere_ray_transform(void)
 	};
 	s = sphere_create();
 	obj = (t_object){SPHERE, &s};
-	set_transform(&obj, matrix4x4_translation(5, 0, 0));
+	set_transform(&obj, m4x4_translation(5, 0, 0));
 	xs = intersect_sphere(&s, r);
 	UNIT_ASSERT_EQ(intersections_len(xs), 0);
 	free_intersections(xs);

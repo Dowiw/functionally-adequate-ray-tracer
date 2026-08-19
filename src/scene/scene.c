@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:15:24 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:42:12 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	default_scene(t_scene *scene)
 	if (sphere != NULL)
 	{
 		*sphere = sphere_create();
-		sphere->transform = matrix4x4_scaling(0.5, 0.5, 0.5);
-		sphere->inverse = matrix4x4_inverse(sphere->transform);
+		sphere->transform = m4x4_scaling(0.5, 0.5, 0.5);
+		sphere->inverse = m4x4_inverse(sphere->transform);
 	}
 	scene->spheres = spheres_add(scene->spheres, sphere);
 	if (scene->spheres == NULL)

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 21:43:23 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:42:41 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_plane	plane_create(void)
 	t_plane	p;
 
 	p.material = material();
-	p.transform = matrix4x4_identity();
-	p.inverse = matrix4x4_identity();
+	p.transform = m4x4_identity();
+	p.inverse = m4x4_identity();
 	p.pos = point(0, 0, 0);
 	p.vec = vector(0, 1, 0);
 	return (p);

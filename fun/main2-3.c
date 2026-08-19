@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main2-3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:35:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/15 23:07:54 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <X11/Xlib.h>
 
 /**
- * @brief Ray-casting a sphere silhouette onto a canvas. 
+ * @brief Ray-casting a sphere silhouette onto a canvas.
  *
  * This program casts rays from a viewpoint toward a virtual wall and checks
  * if they intersect a unit sphere at the origin.
@@ -85,7 +85,7 @@ int main(int argc, char **argv, char **envp) {
 	double	world_x = 0;
 	t_point	pos;
 
-	t_intersections	xS;
+	t_intersects	xS;
 	for (int y = 0; y < canvas_pixels; y++)
 	{
 		world_y = half - pixel_size * (double)y;
@@ -98,7 +98,7 @@ int main(int argc, char **argv, char **envp) {
 			pos.w = POINT;
 
 			r.origin = ray_origin;
-			r.direction = calc_norm(tuples_sub(pos, ray_origin));
+			r.dir = calc_norm(tuples_sub(pos, ray_origin));
 
 			xS = intersect(&s, r);
 			if (hit(&xS).obj != NULL && hit(&xS).t)

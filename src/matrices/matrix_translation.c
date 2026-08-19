@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 11:24:23 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/19 13:35:53 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
  * @param x
  * @param y
  * @param z
- * @return t_matrix4x4
+ * @return t_m4x4
  */
-t_matrix4x4	matrix4x4_translation(double x, double y, double z)
+t_m4x4	m4x4_translation(double x, double y, double z)
 {
-	t_matrix4x4	result;
+	t_m4x4	result;
 
-	result = matrix4x4_identity();
+	result = m4x4_identity();
 	result.m[0][3] = x;
 	result.m[1][3] = y;
 	result.m[2][3] = z;

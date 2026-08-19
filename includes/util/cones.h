@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cones.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 13:30:00 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/17 13:30:00 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ t_cone	cone_create(void);
 t_cone	**cones_add(t_cone **array, t_cone *cone);
 int		cones_len(t_cone **array);
 void	free_cones(t_cone **array);
-void	intersect_caps_cone(t_cone *cone, t_ray r, t_intersections *xs);
+void	intersect_caps_cone(t_cone *cone, t_ray r, t_intersects *xs);
 
 #endif

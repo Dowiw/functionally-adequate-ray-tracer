@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 17:34:42 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 20:16:00 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:23 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	matrix_transpose(double *result, double *matrix, int rows,
  * A matrix is transposed by flipping its rows and columns
  * Each element matrix[0][1] gets put into result[1][0] and so forth.
  */
-t_matrix2x2	matrix2x2_transpose(t_matrix2x2 matrix)
+t_m2x2	m2x2_transpose(t_m2x2 matrix)
 {
-	t_matrix2x2	result;
+	t_m2x2	result;
 
 	matrix_transpose(&result.m[0][0], &matrix.m[0][0], 2, 2);
 	return (result);
@@ -33,9 +33,9 @@ t_matrix2x2	matrix2x2_transpose(t_matrix2x2 matrix)
  * A matrix is transposed by flipping its rows and columns
  * Each element matrix[0][1] gets put into result[1][0] and so forth.
  */
-t_matrix3x3	matrix3x3_transpose(t_matrix3x3 matrix)
+t_m3x3	m3x3_transpose(t_m3x3 matrix)
 {
-	t_matrix3x3	result;
+	t_m3x3	result;
 
 	matrix_transpose(&result.m[0][0], &matrix.m[0][0], 3, 3);
 	return (result);
@@ -46,9 +46,9 @@ t_matrix3x3	matrix3x3_transpose(t_matrix3x3 matrix)
  * A matrix is transposed by flipping its rows and columns
  * Each element matrix[0][1] gets put into result[1][0] and so forth.
  */
-t_matrix4x4	matrix4x4_transpose(t_matrix4x4 matrix)
+t_m4x4	m4x4_transpose(t_m4x4 matrix)
 {
-	t_matrix4x4	result;
+	t_m4x4	result;
 
 	matrix_transpose(&result.m[0][0], &matrix.m[0][0], 4, 4);
 	return (result);

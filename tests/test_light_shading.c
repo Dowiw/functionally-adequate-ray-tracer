@@ -36,15 +36,15 @@ int	test_sphere_normal_transform(void)
 	t_object	obj;
 	t_vector	expected;
 	t_vector	n;
-	t_matrix4x4	m;
+	t_m4x4	m;
 
 	expected = vector(0, 0.70711, -0.70711);
 	s = sphere_create();
 	obj = (t_object){SPHERE, &s};
-	set_transform(&obj, matrix4x4_translation(0, 1, 0));
+	set_transform(&obj, m4x4_translation(0, 1, 0));
 	n = normal_at(&obj, point(0, 1.70711, -0.70711));
 	UNIT_ASSERT_EQ(compare_tuples(&n, &expected), 0);
-	m = matrix4x4_multiply(matrix4x4_scaling(1, 0.5, 1), matrix4x4_rotation_z(PI
+	m = m4x4_multiply(m4x4_scaling(1, 0.5, 1), m4x4_rotation_z(PI
 				/ 5));
 	set_transform(&obj, m);
 	expected = vector(0, 0.97014, -0.24254);
@@ -135,7 +135,7 @@ int	test_sphere_lighting(void)
 	t_color		expected_res;
 
 	t_ambience	def = {1.0, rgb(255, 255, 255)};
-	
+
 	m = material();
 	pos = point(0, 0, 0);
 	eyev = vector(0, 0, -1);

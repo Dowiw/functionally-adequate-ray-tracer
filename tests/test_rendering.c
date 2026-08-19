@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 15:43:19 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/16 15:58:20 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	test_default_scene(void)
 	UNIT_ASSERT_EQ(compare_tuples(&scene2.spheres[0]->material.color, &expected), 0);
 	UNIT_ASSERT_FEQ(scene2.spheres[0]->material.diffuse, 0.7);
 	UNIT_ASSERT_FEQ(scene2.spheres[0]->material.specular, 0.2);
-	UNIT_ASSERT_EQ(matrix4x4_compare(scene2.spheres[1]->transform, matrix4x4_scaling(0.5, 0.5, 0.5)), 0);
+	UNIT_ASSERT_EQ(m4x4_compare(scene2.spheres[1]->transform, m4x4_scaling(0.5, 0.5, 0.5)), 0);
 	UNIT_ASSERT_EQ(planes_len(scene2.planes), 0);
 	UNIT_ASSERT_EQ(cylinders_len(scene2.cylinders), 0);
 
@@ -57,7 +57,7 @@ int	test_intersect_scene(void)
 {
 	t_scene			scene;
 	t_ray			ray;
-	t_intersections	intersections;
+	t_intersects	intersections;
 
 	if (!default_scene(&scene))
 		return (1);
@@ -79,7 +79,7 @@ int	test_prepare_computations(void)
 {
 	t_ray			ray;
 	t_sphere		sphere;
-	t_intersection	*hit;
+	t_intersect	*hit;
 	t_comps			comps;
 
 	ray = (t_ray){point(0.0, 0.0, -5.0), vector(0.0, 0.0, 1.0)};
@@ -96,7 +96,7 @@ int	test_prepare_computations(void)
 	normalv = vector(0.0, 0.0, -1.0);
 
 	UNIT_ASSERT_FEQ(comps.t, hit->t);
-	UNIT_ASSERT_EQ(comps.obj.object, hit->obj.object);
+	UNIT_ASSERT_EQ(comps.obj.ptr, hit->obj.ptr);
 	UNIT_ASSERT_EQ(compare_tuples(&comps.point, &p), 0);
 	UNIT_ASSERT_EQ(compare_tuples(&comps.eyev, &eyev), 0);
 	UNIT_ASSERT_EQ(compare_tuples(&comps.normalv, &normalv), 0);
@@ -132,7 +132,7 @@ int	test_shade_hit(void)
 	t_scene			scene;
 	t_ray			ray;
 	t_sphere		*sphere;
-	t_intersection	*hit;
+	t_intersect	*hit;
 	t_comps			comps;
 	t_color			c;
 
@@ -232,34 +232,34 @@ int	test_view_transform(void)
 	to = point(0.0, 0.0, -1.0);
 	up = vector(0.0, 1.0, 0.0);
 
-	UNIT_ASSERT_EQ(matrix4x4_compare(view_transform(from, to, up), matrix4x4_identity()), 0);
+	UNIT_ASSERT_EQ(m4x4_compare(view_transform(from, to, up), m4x4_identity()), 0);
 
 	from = point(0.0, 0.0, 0.0);
 	to = point(0.0, 0.0, 1.0);
 	up = vector(0.0, 1.0, 0.0);
 
-	UNIT_ASSERT_EQ(matrix4x4_compare(view_transform(from, to, up), matrix4x4_scaling(-1.0, 1.0, -1.0)), 0);
+	UNIT_ASSERT_EQ(m4x4_compare(view_transform(from, to, up), m4x4_scaling(-1.0, 1.0, -1.0)), 0);
 
 	from = point(0.0, 0.0, 8.0);
 	to = point(0.0, 0.0, 0.0);
 	up = vector(0.0, 1.0, 0.0);
 
-	UNIT_ASSERT_EQ(matrix4x4_compare(view_transform(from, to, up), matrix4x4_translation(0.0, 0.0, -8.0)), 0);
+	UNIT_ASSERT_EQ(m4x4_compare(view_transform(from, to, up), m4x4_translation(0.0, 0.0, -8.0)), 0);
 
 	from = point(1.0, 3.0, 2.0);
 	to = point(4.0, -2.0, 8.0);
 	up = vector(1.0, 1.0, 0.0);
 
-	t_matrix4x4	expected;
+	t_m4x4	expected;
 
-	expected = (t_matrix4x4){{
+	expected = (t_m4x4){{
 		{-0.50709, 0.50709, 0.67612, -2.36643},
 		{0.76772, 0.60609, 0.12122, -2.82843},
 		{-0.35857, 0.59761, -0.71714, 0.00000},
 		{0.00000, 0.00000, 0.00000, 1.00000}
 	}};
 
-	UNIT_ASSERT_EQ(matrix4x4_compare(view_transform(from, to, up), expected), 0);
+	UNIT_ASSERT_EQ(m4x4_compare(view_transform(from, to, up), expected), 0);
 
 	return (0);
 }
@@ -273,7 +273,7 @@ int	test_camera(void)
 	UNIT_ASSERT_EQ(camera.width, 160);
 	UNIT_ASSERT_EQ(camera.height, 120);
 	UNIT_ASSERT_FEQ(camera.field_of_view, PI / 2.0);
-	UNIT_ASSERT_EQ(matrix4x4_compare(camera.transform, matrix4x4_identity()), 0);
+	UNIT_ASSERT_EQ(m4x4_compare(camera.transform, m4x4_identity()), 0);
 
 	camera = create_camera(200, 125, PI / 2.0);
 
@@ -297,7 +297,7 @@ int	test_ray_for_pixel(void)
 	direction = vector(0.0, 0.0, -1.0);
 
 	UNIT_ASSERT_EQ(compare_tuples(&ray.origin, &origin), 0);
-	UNIT_ASSERT_EQ(compare_tuples(&ray.direction, &direction), 0);
+	UNIT_ASSERT_EQ(compare_tuples(&ray.dir, &direction), 0);
 
 	camera = create_camera(201, 101, PI / 2.0);
 	ray = ray_for_pixel(camera, 0, 0);
@@ -306,18 +306,18 @@ int	test_ray_for_pixel(void)
 	direction = vector(0.66519, 0.33259, -0.66851);
 
 	UNIT_ASSERT_EQ(compare_tuples(&ray.origin, &origin), 0);
-	UNIT_ASSERT_EQ(compare_tuples(&ray.direction, &direction), 0);
+	UNIT_ASSERT_EQ(compare_tuples(&ray.dir, &direction), 0);
 
 	camera = create_camera(201, 101, PI / 2.0);
-	camera.transform = matrix4x4_multiply(matrix4x4_rotation_y(PI / 4.0), matrix4x4_translation(0.0, -2.0, 5.0));
-	camera.inverse = matrix4x4_inverse(camera.transform);
+	camera.transform = m4x4_multiply(m4x4_rotation_y(PI / 4.0), m4x4_translation(0.0, -2.0, 5.0));
+	camera.inverse = m4x4_inverse(camera.transform);
 	ray = ray_for_pixel(camera, 100, 50);
 
 	origin = point(0.0, 2.0, -5.0);
 	direction = vector(sqrt(2.0) / 2.0, 0.0, -sqrt(2.0) / 2.0);
 
 	UNIT_ASSERT_EQ(compare_tuples(&ray.origin, &origin), 0);
-	UNIT_ASSERT_EQ(compare_tuples(&ray.direction, &direction), 0);
+	UNIT_ASSERT_EQ(compare_tuples(&ray.dir, &direction), 0);
 
 	return (0);
 }
@@ -337,7 +337,7 @@ int	test_render_scene(void)
 	to = point(0.0, 0.0, 0.0);
 	up = vector(0.0, 1.0, 0.0);
 	scene.camera.transform = view_transform(from, to, up);
-	scene.camera.inverse = matrix4x4_inverse(scene.camera.transform);
+	scene.camera.inverse = m4x4_inverse(scene.camera.transform);
 	if (!canvas_create(&canvas, scene.camera.width, scene.camera.height))
 		return (1);
 

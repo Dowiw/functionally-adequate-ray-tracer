@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 19:36:41 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:37:12 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ int	parse_cone(t_scene *scene, char **params)
 
 static void	finish_cone(t_cone *cone, int rgb_color)
 {
-	cone->transform = matrix4x4_translation(cone->center.x, cone->center.y, cone->center.z);
-	cone->transform = matrix4x4_multiply(cone->transform, matrix4x4_rotation(cone->vec));
-	cone->transform = matrix4x4_multiply(cone->transform, matrix4x4_translation(0.0, cone->height / 2.0, 0.0));
-	cone->transform = matrix4x4_multiply(cone->transform, matrix4x4_scaling(cone->diameter / 2.0, cone->height, cone->diameter / 2.0));
-	cone->inverse = matrix4x4_inverse(cone->transform);
+	cone->transform = m4x4_translation(cone->center.x, cone->center.y, cone->center.z);
+	cone->transform = m4x4_multiply(cone->transform, m4x4_rotation(cone->vec));
+	cone->transform = m4x4_multiply(cone->transform, m4x4_translation(0.0, cone->height / 2.0, 0.0));
+	cone->transform = m4x4_multiply(cone->transform, m4x4_scaling(cone->diameter / 2.0, cone->height, cone->diameter / 2.0));
+	cone->inverse = m4x4_inverse(cone->transform);
 	cone->min = -1.0;
 	cone->max = 0.0;
 	cone->closed = 1;

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:36:38 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ static void	finish_camera(t_camera *camera, int width, int height)
 		camera->vertical = PI * 0.5;
 	else
 		camera->vertical = PI * -0.5;
-	camera->transform = matrix4x4_translation(camera->pos.x, camera->pos.y, camera->pos.z);
-	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_y(camera->horizontal));
-	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_x(camera->vertical));
-	camera->transform = matrix4x4_inverse(camera->transform);
+	camera->transform = m4x4_translation(camera->pos.x, camera->pos.y, camera->pos.z);
+	camera->transform = m4x4_multiply(camera->transform, m4x4_rotation_y(camera->horizontal));
+	camera->transform = m4x4_multiply(camera->transform, m4x4_rotation_x(camera->vertical));
+	camera->transform = m4x4_inverse(camera->transform);
 	init_camera(camera);
 }

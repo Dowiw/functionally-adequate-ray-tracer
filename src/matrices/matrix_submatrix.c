@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 17:35:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/19 10:41:37 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:23 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	matrix_submatrix(double *res, double *mat, int *info);
  * Returns a new 2x2 submatrix of the given 'matrix' with the given 'row'
  * and 'column' removed.
  */
-t_matrix2x2	matrix3x3_submatrix(t_matrix3x3 matrix, int row, int column)
+t_m2x2	m3x3_submatrix(t_m3x3 matrix, int row, int column)
 {
-	t_matrix2x2	result;
+	t_m2x2	result;
 	int			info[3];
 
 	info[0] = row;
@@ -34,9 +34,9 @@ t_matrix2x2	matrix3x3_submatrix(t_matrix3x3 matrix, int row, int column)
  * Returns a new 3x3 submatrix of the given 'matrix' with the given 'row'
  * and 'column' removed.
  */
-t_matrix3x3	matrix4x4_submatrix(t_matrix4x4 matrix, int row, int column)
+t_m3x3	m4x4_submatrix(t_m4x4 matrix, int row, int column)
 {
-	t_matrix3x3	result;
+	t_m3x3	result;
 	int			info[3];
 
 	info[0] = row;

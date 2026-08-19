@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:33:57 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:23 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,62 +82,62 @@ t_color				color_black(void);
  *  ######################################################################### */
 
 
-t_matrix2x2			matrix2x2_identity(void);
-t_matrix3x3			matrix3x3_identity(void);
-t_matrix4x4			matrix4x4_identity(void);
+t_m2x2			m2x2_identity(void);
+t_m3x3			m3x3_identity(void);
+t_m4x4			m4x4_identity(void);
 
-int					matrix2x2_compare(t_matrix2x2 a, t_matrix2x2 b);
-int					matrix3x3_compare(t_matrix3x3 a, t_matrix3x3 b);
-int					matrix4x4_compare(t_matrix4x4 a, t_matrix4x4 b);
+int					m2x2_compare(t_m2x2 a, t_m2x2 b);
+int					m3x3_compare(t_m3x3 a, t_m3x3 b);
+int					m4x4_compare(t_m4x4 a, t_m4x4 b);
 
-t_matrix2x2			matrix2x2_multiply(t_matrix2x2 a, t_matrix2x2 b);
-t_matrix3x3			matrix3x3_multiply(t_matrix3x3 a, t_matrix3x3 b);
-t_matrix4x4			matrix4x4_multiply(t_matrix4x4 a, t_matrix4x4 b);
+t_m2x2			m2x2_multiply(t_m2x2 a, t_m2x2 b);
+t_m3x3			m3x3_multiply(t_m3x3 a, t_m3x3 b);
+t_m4x4			m4x4_multiply(t_m4x4 a, t_m4x4 b);
 
-t_tuple				matrix4x4_multiply_tuple(t_matrix4x4 a, t_tuple b);
+t_tuple				m4x4_multiply_tuple(t_m4x4 a, t_tuple b);
 
-t_matrix2x2			matrix2x2_transpose(t_matrix2x2 matrix);
-t_matrix3x3			matrix3x3_transpose(t_matrix3x3 matrix);
-t_matrix4x4			matrix4x4_transpose(t_matrix4x4 matrix);
+t_m2x2			m2x2_transpose(t_m2x2 matrix);
+t_m3x3			m3x3_transpose(t_m3x3 matrix);
+t_m4x4			m4x4_transpose(t_m4x4 matrix);
 
-double				matrix2x2_determinant(t_matrix2x2 matrix);
-double				matrix3x3_determinant(t_matrix3x3 matrix);
-double				matrix4x4_determinant(t_matrix4x4 matrix);
+double				m2x2_determinant(t_m2x2 matrix);
+double				m3x3_determinant(t_m3x3 matrix);
+double				m4x4_determinant(t_m4x4 matrix);
 
-t_matrix2x2			matrix3x3_submatrix(t_matrix3x3 matrix, int row,
+t_m2x2			m3x3_submatrix(t_m3x3 matrix, int row,
 						int column);
-t_matrix3x3			matrix4x4_submatrix(t_matrix4x4 matrix, int row,
+t_m3x3			m4x4_submatrix(t_m4x4 matrix, int row,
 						int column);
 
-double				matrix3x3_minor(t_matrix3x3 matrix, int row, int column);
-double				matrix4x4_minor(t_matrix4x4 matrix, int row, int column);
+double				m3x3_minor(t_m3x3 matrix, int row, int column);
+double				m4x4_minor(t_m4x4 matrix, int row, int column);
 
-double				matrix3x3_cofactor(t_matrix3x3 matrix, int row, int column);
-double				matrix4x4_cofactor(t_matrix4x4 matrix, int row, int column);
+double				m3x3_cofactor(t_m3x3 matrix, int row, int column);
+double				m4x4_cofactor(t_m4x4 matrix, int row, int column);
 
-t_matrix2x2			matrix2x2_inverse(t_matrix2x2 matrix);
-t_matrix3x3			matrix3x3_inverse(t_matrix3x3 matrix);
-t_matrix4x4			matrix4x4_inverse(t_matrix4x4 matrix);
+t_m2x2			m2x2_inverse(t_m2x2 matrix);
+t_m3x3			m3x3_inverse(t_m3x3 matrix);
+t_m4x4			m4x4_inverse(t_m4x4 matrix);
 
-t_matrix4x4			matrix4x4_translation(double x, double y, double z);
+t_m4x4			m4x4_translation(double x, double y, double z);
 
-t_matrix4x4			matrix4x4_scaling(double x, double y, double z);
+t_m4x4			m4x4_scaling(double x, double y, double z);
 
-t_matrix4x4			matrix4x4_rotation_x(double radians);
-t_matrix4x4			matrix4x4_rotation_y(double radians);
-t_matrix4x4			matrix4x4_rotation_z(double radians);
-t_matrix4x4 		matrix4x4_rotation(t_vector direction);
+t_m4x4			m4x4_rotation_x(double radians);
+t_m4x4			m4x4_rotation_y(double radians);
+t_m4x4			m4x4_rotation_z(double radians);
+t_m4x4 		m4x4_rotation(t_vector direction);
 
-t_matrix4x4			matrix4x4_shearing(double *params);
+t_m4x4			m4x4_shearing(double *params);
 
-t_matrix4x4			view_transform(t_point from, t_point to, t_vector up);
+t_m4x4			view_transform(t_point from, t_point to, t_vector up);
 
 /** ######################################################################### *
  *  RAYS                                                                    # *
  *  ######################################################################### */
 
 t_point				position(t_ray ray, double time);
-t_ray				transform(t_ray r, t_matrix4x4 m);
+t_ray				transform(t_ray r, t_m4x4 m);
 t_ray	ray(t_point origin, t_vector direction);
 
 /** ######################################################################### *

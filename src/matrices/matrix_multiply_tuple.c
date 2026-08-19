@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 18:00:34 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 20:13:18 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 /*
  * Multiplies the given matrix 'a' by the tuple 'b'.
  * This works by interpreting the tuple as a 4x1 matrix.
- * See also matrix4x4_multiply.
+ * See also m4x4_multiply.
  */
-t_tuple	matrix4x4_multiply_tuple(t_matrix4x4 a, t_tuple b)
+t_tuple	m4x4_multiply_tuple(t_m4x4 a, t_tuple b)
 {
 	t_tuple	result;
 

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 14:32:03 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/17 18:53:47 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:18:03 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include "scene.h"
 #include <math.h>
 
-static t_matrix4x4	get_inverse_transform(t_object *obj)
+static t_m4x4	get_inverse_transform(t_object *obj)
 {
 	if (obj->type == SPHERE)
-		return (((t_sphere *)obj->object)->inverse);
+		return (((t_sphere *)obj->ptr)->inverse);
 	else if (obj->type == PLANE)
-		return (((t_plane *)obj->object)->inverse);
+		return (((t_plane *)obj->ptr)->inverse);
 	else if (obj->type == CYLINDER)
-		return (((t_cylinder *)obj->object)->inverse);
+		return (((t_cylinder *)obj->ptr)->inverse);
 	else if (obj->type == CONE)
-		return (((t_cone *)obj->object)->inverse);
-	return (matrix4x4_identity());
+		return (((t_cone *)obj->ptr)->inverse);
+	return (m4x4_identity());
 }
 
 static t_vector	local_normal_at(t_object *obj, t_point local_point)
@@ -40,7 +40,7 @@ static t_vector	local_normal_at(t_object *obj, t_point local_point)
 		return ((t_tuple){0.0, 1.0, 0.0, VECTOR});
 	else if (obj->type == CYLINDER)
 	{
-		cyl = (t_cylinder *)obj->object;
+		cyl = (t_cylinder *)obj->ptr;
 		dist = pow(local_point.x, 2) + pow(local_point.z, 2);
 		if (dist < 1 && local_point.y >= cyl->max - UNIT_EPSILON)
 			return ((t_tuple){0.0, 1.0, 0.0, VECTOR});
@@ -50,7 +50,7 @@ static t_vector	local_normal_at(t_object *obj, t_point local_point)
 	}
 	else if (obj->type == CONE)
 	{
-		cone = (t_cone *)obj->object;
+		cone = (t_cone *)obj->ptr;
 		dist = pow(local_point.x, 2) + pow(local_point.z, 2);
 		if (dist < pow(cone->max, 2) && local_point.y >= cone->max - UNIT_EPSILON)
 			return ((t_tuple){0.0, 1.0, 0.0, VECTOR});
@@ -76,14 +76,14 @@ t_vector	normal_at(t_object *obj, t_point p)
 	t_point		local_point;
 	t_vector	local_normal;
 	t_vector	world_normal;
-	t_matrix4x4	inv;
+	t_m4x4	inv;
 
-	if (!obj || !obj->object)
+	if (!obj || !obj->ptr)
 		return ((t_tuple){0.0, 0.0, 0.0, VECTOR});
 	inv = get_inverse_transform(obj);
-	local_point = matrix4x4_multiply_tuple(inv, p);
+	local_point = m4x4_multiply_tuple(inv, p);
 	local_normal = local_normal_at(obj, local_point);
-	world_normal = matrix4x4_multiply_tuple(matrix4x4_transpose(inv),
+	world_normal = m4x4_multiply_tuple(m4x4_transpose(inv),
 			local_normal);
 	world_normal.w = VECTOR;
 	if (calc_mag(world_normal) < UNIT_EPSILON)

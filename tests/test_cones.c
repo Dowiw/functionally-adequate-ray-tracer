@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 13:30:00 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/17 18:54:38 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	test_cones_intersections(void)
 	double			t1[3] = {5.0, 8.66025, 49.44994};
 	t_vector		direction;
 	t_ray			r;
-	t_intersections	xs;
+	t_intersects	xs;
 	t_object		obj = (t_object){CONE, &c};
 
 	for (int i = 0; i < 3; i++)
@@ -56,7 +56,7 @@ int	test_cones_parallel_intersection(void)
 	t_vector		direction = calc_norm(vector(0, 1, 1));
 	t_ray			r = ray(point(0, 0, -1), direction);
 	t_object		obj = (t_object){CONE, &c};
-	t_intersections	xs = intersect(&obj, r);
+	t_intersects	xs = intersect(&obj, r);
 
 	UNIT_ASSERT_EQ(xs.count, 1);
 	UNIT_ASSERT_FEQ(xs.list[0]->t, 0.70710);
@@ -83,7 +83,7 @@ int	test_cones_end_caps(void)
 	int				counts[3] = {0, 2, 4};
 	t_vector		direction;
 	t_ray			r;
-	t_intersections	xs;
+	t_intersects	xs;
 	t_object		obj = (t_object){CONE, &c};
 
 	for (int i = 0; i < 3; i++)

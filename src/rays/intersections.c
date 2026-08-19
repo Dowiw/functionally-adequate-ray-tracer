@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 10:37:30 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/17 10:51:04 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@
  * @param the type of object to be intersected
  * @param the object
  * @param time
- * @return t_intersection*
+ * @return t_intersect*
  */
-t_intersection	*create_intersection(enum e_object_type type, void *object, double t)
+t_intersect	*create_intersection(enum e_object_type type, void *object, double t)
 {
-	t_intersection	*result;
+	t_intersect	*result;
 
-	result = malloc(sizeof(t_intersection));
+	result = malloc(sizeof(t_intersect));
 	if (result == NULL)
 		return (NULL);
 	result->obj.type = type;
-	result->obj.object = object;
+	result->obj.ptr = object;
 	result->t = t;
 	return (result);
 }
@@ -46,11 +46,11 @@ t_intersection	*create_intersection(enum e_object_type type, void *object, doubl
  *
  * @param sphere
  * @param ray
- * @return t_intersection**
+ * @return t_intersect**
  */
-t_intersections	intersect_sphere(t_sphere *sphere, t_ray ray)
+t_intersects	intersect_sphere(t_sphere *sphere, t_ray ray)
 {
-	t_intersections	result;
+	t_intersects	result;
 	t_ray			local_ray;
 	t_tuple			sphere_to_ray;
 	double			abc[3];
@@ -59,8 +59,8 @@ t_intersections	intersect_sphere(t_sphere *sphere, t_ray ray)
 	result = intersections_create();
 	local_ray = transform(ray, sphere->inverse);
 	sphere_to_ray = tuples_sub(local_ray.origin, point(0.0, 0.0, 0.0));
-	abc[0] = dot_product(local_ray.direction, local_ray.direction);
-	abc[1] = 2 * dot_product(local_ray.direction, sphere_to_ray);
+	abc[0] = dot_product(local_ray.dir, local_ray.dir);
+	abc[1] = 2 * dot_product(local_ray.dir, sphere_to_ray);
 	abc[2] = dot_product(sphere_to_ray, sphere_to_ray) - 1;
 	discriminant = abc[1] * abc[1] - 4 * abc[0] * abc[2];
 	if (discriminant < 0.0)
@@ -72,34 +72,34 @@ t_intersections	intersect_sphere(t_sphere *sphere, t_ray ray)
 
 /**
  * @brief Calculates whether the ray intersects a plane.
- * 
- * @param plane 
- * @param ray 
- * @return t_intersections 
+ *
+ * @param plane
+ * @param ray
+ * @return t_intersects
  */
-t_intersections	intersect_plane(t_plane *plane, t_ray ray)
+t_intersects	intersect_plane(t_plane *plane, t_ray ray)
 {
-	t_intersections	result;
+	t_intersects	result;
 	t_ray			local_r;
 	double			t;
 
 	result = intersections_create();
 	local_r = transform(ray, plane->inverse);
-	if (fabs(local_r.direction.y) < UNIT_EPSILON)
+	if (fabs(local_r.dir.y) < UNIT_EPSILON)
 		return (result);
-	t = -local_r.origin.y / local_r.direction.y;
+	t = -local_r.origin.y / local_r.dir.y;
 	result = intersections_add(result, create_intersection(PLANE, plane, t));
 	return (result);
 }
 
 /**
  * @brief Calculates whether a ray intersects a cylinder.
- * 
+ *
  * @param cylinder
  * @param ray
- * @return t_intersections
+ * @return t_intersects
  */
-t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
+t_intersects	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 {
 	double		a;
 	double		b;
@@ -109,17 +109,17 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 	double		t1;
 	double		y0;
 	double		y1;
-	t_intersections	xs;
+	t_intersects	xs;
 
 	ray = transform(ray, cylinder->transform);
-	a = pow(ray.direction.x, 2.0) + pow(ray.direction.z, 2.0);
+	a = pow(ray.dir.x, 2.0) + pow(ray.dir.z, 2.0);
 	if (a < UNIT_EPSILON)
 	{
 		xs = intersections_create();
 		intersect_caps(cylinder, ray, &xs);
 		return (xs);
 	}
-	b = (2 * ray.origin.x * ray.direction.x) + (2 * ray.origin.z * ray.direction.z);
+	b = (2 * ray.origin.x * ray.dir.x) + (2 * ray.origin.z * ray.dir.z);
 	c = pow(ray.origin.x, 2.0) + pow(ray.origin.z, 2.0) - 1;
 	disc = pow(b, 2.0) - (4 * a * c);
 	if (disc < 0)
@@ -129,10 +129,10 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 	if (t0 > t1)
 		ft_swap(&t0, &t1);
 	xs = intersections_create();
-	y0 = ray.origin.y + t0 * ray.direction.y;
+	y0 = ray.origin.y + t0 * ray.dir.y;
 	if (cylinder->min < y0 && y0 < cylinder->max)
 		xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t0));
-	y1 = ray.origin.y + t1 * ray.direction.y;
+	y1 = ray.origin.y + t1 * ray.dir.y;
 	if (cylinder->min < y1 && y1 < cylinder->max)
 		xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t1));
 	intersect_caps(cylinder, ray, &xs);
@@ -141,25 +141,25 @@ t_intersections	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
 
 /**
  * @brief Calculates whether a ray intersects a cone.
- * 
+ *
  * @param cone
  * @param ray
- * @return t_intersections
+ * @return t_intersects
  */
-t_intersections	intersect_cone(t_cone *cone, t_ray ray)
+t_intersects	intersect_cone(t_cone *cone, t_ray ray)
 {
 	double			abc[3];
 	double			disc;
 	double			t[2];
 	double			y[2];
-	t_intersections	xs;
+	t_intersects	xs;
 
 	ray = transform(ray, cone->transform);
-	abc[0] = pow(ray.direction.x, 2.0) - pow(ray.direction.y, 2.0)
-		+ pow(ray.direction.z, 2.0);
-	abc[1] = (2 * ray.origin.x * ray.direction.x)
-		- (2 * ray.origin.y * ray.direction.y)
-		+ (2 * ray.origin.z * ray.direction.z);
+	abc[0] = pow(ray.dir.x, 2.0) - pow(ray.dir.y, 2.0)
+		+ pow(ray.dir.z, 2.0);
+	abc[1] = (2 * ray.origin.x * ray.dir.x)
+		- (2 * ray.origin.y * ray.dir.y)
+		+ (2 * ray.origin.z * ray.dir.z);
 	abc[2] = pow(ray.origin.x, 2.0) - pow(ray.origin.y, 2.0)
 		+ pow(ray.origin.z, 2.0);
 	xs = intersections_create();
@@ -171,7 +171,7 @@ t_intersections	intersect_cone(t_cone *cone, t_ray ray)
 			return (xs);
 		}
 		t[0] = -abc[2] / abc[1];
-		y[0] = ray.origin.y + t[0] * ray.direction.y;
+		y[0] = ray.origin.y + t[0] * ray.dir.y;
 		if (cone->min < y[0] && y[0] < cone->max)
 			xs = intersections_add(xs, create_intersection(CONE, cone, t[0]));
 		intersect_caps_cone(cone, ray, &xs);
@@ -187,10 +187,10 @@ t_intersections	intersect_cone(t_cone *cone, t_ray ray)
 	t[1] = (-abc[1] + sqrt(disc)) / (2 * abc[0]);
 	if (t[0] > t[1])
 		ft_swap(&t[0], &t[1]);
-	y[0] = ray.origin.y + t[0] * ray.direction.y;
+	y[0] = ray.origin.y + t[0] * ray.dir.y;
 	if (cone->min < y[0] && y[0] < cone->max)
 		xs = intersections_add(xs, create_intersection(CONE, cone, t[0]));
-	y[1] = ray.origin.y + t[1] * ray.direction.y;
+	y[1] = ray.origin.y + t[1] * ray.dir.y;
 	if (cone->min < y[1] && y[1] < cone->max)
 		xs = intersections_add(xs, create_intersection(CONE, cone, t[1]));
 	intersect_caps_cone(cone, ray, &xs);
@@ -202,11 +202,11 @@ t_intersections	intersect_cone(t_cone *cone, t_ray ray)
  *
  * @param scene
  * @param ray
- * @return t_intersections
+ * @return t_intersects
  */
-t_intersections	intersect_scene(t_scene *scene, t_ray ray)
+t_intersects	intersect_scene(t_scene *scene, t_ray ray)
 {
-	t_intersections	result;
+	t_intersects	result;
 	int				i;
 
 	result = intersections_create();
@@ -254,11 +254,11 @@ t_intersections	intersect_scene(t_scene *scene, t_ray ray)
  * @brief Returns the closest intersection, ignoring any that are behind the rays origin (and thus have a negative time)
  *
  * @param intersections
- * @return t_intersection*
+ * @return t_intersect*
  */
-t_intersection	*intersect_hit(t_intersections intersections)
+t_intersect	*intersect_hit(t_intersects intersections)
 {
-	t_intersection	*hit;
+	t_intersect	*hit;
 	int				i;
 
 	hit = NULL;

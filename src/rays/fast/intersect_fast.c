@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:13:25 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:40:05 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:20:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include "ray.h"
 #include "util/intersections.h"
 
-t_intersection	intersect_scene_and_hit(t_scene *scene, t_ray ray)
+t_intersect	intersect_scene_and_hit(t_scene *scene, t_ray ray)
 {
-	t_intersection	result;
+	t_intersect	result;
 	int				i;
 
 	result.t = -1.0;
 	result.obj.type = SPHERE;
-	result.obj.object = NULL;
+	result.obj.ptr = NULL;
 	i = 0;
 	while (scene->spheres[i] != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 17:33:53 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/16 20:11:47 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:23 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static double	matrix_product(double *a, double *b, int *rc, int size);
  * For example the product of [1, 0] would be calculated like this:
  *  a[1][0] * b[0][0] + a[1][1] * b[1][0]
  */
-t_matrix2x2	matrix2x2_multiply(t_matrix2x2 a, t_matrix2x2 b)
+t_m2x2	m2x2_multiply(t_m2x2 a, t_m2x2 b)
 {
-	t_matrix2x2	result;
+	t_m2x2	result;
 
 	matrix_multiply(&result.m[0][0], &a.m[0][0], &b.m[0][0], 2);
 	return (result);
@@ -39,9 +39,9 @@ t_matrix2x2	matrix2x2_multiply(t_matrix2x2 a, t_matrix2x2 b)
  * For example the product of [1, 2] would be calculated like this:
  *  a[1][0] * b[0][2] + a[1][1] * b[1][2] + a[1][2] * b[2][2]
  */
-t_matrix3x3	matrix3x3_multiply(t_matrix3x3 a, t_matrix3x3 b)
+t_m3x3	m3x3_multiply(t_m3x3 a, t_m3x3 b)
 {
-	t_matrix3x3	result;
+	t_m3x3	result;
 
 	matrix_multiply(&result.m[0][0], &a.m[0][0], &b.m[0][0], 3);
 	return (result);
@@ -55,9 +55,9 @@ t_matrix3x3	matrix3x3_multiply(t_matrix3x3 a, t_matrix3x3 b)
  * For example the product of [1, 2] would be calculated like this:
  *  a[1][0] * b[0][2] + a[1][1] * b[1][2] + a[1][2] * b[2][2] + a[1][3] * b[3][2]
  */
-t_matrix4x4	matrix4x4_multiply(t_matrix4x4 a, t_matrix4x4 b)
+t_m4x4	m4x4_multiply(t_m4x4 a, t_m4x4 b)
 {
-	t_matrix4x4	result;
+	t_m4x4	result;
 
 	matrix_multiply(&result.m[0][0], &a.m[0][0], &b.m[0][0], 4);
 	return (result);

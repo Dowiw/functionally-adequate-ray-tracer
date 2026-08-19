@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:19:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:37:23 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ int	parse_cylinder(t_scene *scene, char **params)
 
 static void	finish_cylinder(t_cylinder *cylinder, int rgb_color)
 {
-	cylinder->transform = matrix4x4_translation(cylinder->center.x, cylinder->center.y, cylinder->center.z);
-	cylinder->transform = matrix4x4_multiply(cylinder->transform, matrix4x4_rotation(cylinder->vec));
-	cylinder->transform = matrix4x4_multiply(cylinder->transform, matrix4x4_scaling(cylinder->diameter / 2.0, cylinder->height, cylinder->diameter / 2.0));
-	cylinder->inverse = matrix4x4_inverse(cylinder->transform);
+	cylinder->transform = m4x4_translation(cylinder->center.x, cylinder->center.y, cylinder->center.z);
+	cylinder->transform = m4x4_multiply(cylinder->transform, m4x4_rotation(cylinder->vec));
+	cylinder->transform = m4x4_multiply(cylinder->transform, m4x4_scaling(cylinder->diameter / 2.0, cylinder->height, cylinder->diameter / 2.0));
+	cylinder->inverse = m4x4_inverse(cylinder->transform);
 	cylinder->min = -0.5;
 	cylinder->max = 0.5;
 	cylinder->closed = 1;

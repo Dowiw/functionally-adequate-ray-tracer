@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 13:30:00 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/17 18:51:39 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 /**
  * @brief Default cone initialization.
- * 
- * @return t_cone 
+ *
+ * @return t_cone
  */
 t_cone	cone_create(void)
 {
@@ -26,8 +26,8 @@ t_cone	cone_create(void)
 
 	c.center = (t_point){0, 0, 0, POINT};
 	c.vec = vector(0, 1, 0);
-	c.transform = matrix4x4_identity();
-	c.inverse = matrix4x4_identity();
+	c.transform = m4x4_identity();
+	c.inverse = m4x4_identity();
 	c.diameter = 2.0;
 	c.material = material();
 	c.min = -INFINITY;
@@ -39,8 +39,8 @@ t_cone	cone_create(void)
 
 /**
  * @brief Create a cone array.
- * 
- * @return t_cone** 
+ *
+ * @return t_cone**
  */
 t_cone	**cones_create(void)
 {

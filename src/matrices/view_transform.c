@@ -6,13 +6,13 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 15:49:14 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 18:53:53 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_matrix4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left);
+static t_m4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left);
 
 /**
  * @brief Returns the view transformation matrix for the camera.
@@ -22,9 +22,9 @@ static t_matrix4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left);
  * @param from
  * @param to
  * @param up
- * @return t_matrix4x4
+ * @return t_m4x4
  */
-t_matrix4x4	view_transform(t_point from, t_point to, t_vector up)
+t_m4x4	view_transform(t_point from, t_point to, t_vector up)
 {
 	t_tuple		forward;
 	t_tuple		left;
@@ -33,12 +33,12 @@ t_matrix4x4	view_transform(t_point from, t_point to, t_vector up)
 	forward = calc_norm(tuples_sub(to, from));
 	left = cross_product(forward, calc_norm(up));
 	true_up = cross_product(left, forward);
-	return (matrix4x4_multiply(view_orientation(forward, true_up, left), matrix4x4_translation(-from.x, -from.y, -from.z)));
+	return (m4x4_multiply(view_orientation(forward, true_up, left), m4x4_translation(-from.x, -from.y, -from.z)));
 }
 
-static t_matrix4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left)
+static t_m4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left)
 {
-	t_matrix4x4	result;
+	t_m4x4	result;
 
 	result.m[0][0] = left.x;
 	result.m[0][1] = left.y;

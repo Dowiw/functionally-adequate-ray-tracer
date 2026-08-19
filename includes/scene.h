@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:19:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:20:08 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			destroy_scene(t_scene *scene);
 t_camera		create_camera(int width, int height, double fov);
 void			init_camera(t_camera *camera);
 
-void			set_transform(t_object *obj, t_matrix4x4 t);
+void			set_transform(t_object *obj, t_m4x4 t);
 
 /** ######################################################################### *
  *  SPHERES                                                                 # *

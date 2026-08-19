@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 18:59:54 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 17:34:53 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	update_camera(t_camera *camera);
 
 void	move(t_data *data, t_vector vec)
 {
-	data->scene.camera.pos = tuples_add(data->scene.camera.pos, matrix4x4_multiply_tuple(matrix4x4_rotation_y(data->scene.camera.horizontal), vec));
+	data->scene.camera.pos = tuples_add(data->scene.camera.pos, m4x4_multiply_tuple(m4x4_rotation_y(data->scene.camera.horizontal), vec));
 	update(data);
 }
 
@@ -53,9 +53,9 @@ static void	update(t_data *data)
 
 static void	update_camera(t_camera *camera)
 {
-	camera->transform = matrix4x4_translation(camera->pos.x, camera->pos.y, camera->pos.z);
-	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_y(camera->horizontal));
-	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_x(camera->vertical));
-	camera->transform = matrix4x4_inverse(camera->transform);
+	camera->transform = m4x4_translation(camera->pos.x, camera->pos.y, camera->pos.z);
+	camera->transform = m4x4_multiply(camera->transform, m4x4_rotation_y(camera->horizontal));
+	camera->transform = m4x4_multiply(camera->transform, m4x4_rotation_x(camera->vertical));
+	camera->transform = m4x4_inverse(camera->transform);
 	init_camera(camera);
 }

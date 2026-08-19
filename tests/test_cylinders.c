@@ -20,7 +20,7 @@ int test_cylinders_no_intersections(void)
 	r = ray(o[0], direction);
 
 	t_object obj = (t_object){CYLINDER, &c};
-	t_intersections xs = intersect(&obj, r);
+	t_intersects xs = intersect(&obj, r);
 
 	UNIT_ASSERT_EQ(xs.count, 0);
 
@@ -49,7 +49,7 @@ int test_cylinders_intersections(void)
 	double	t1[3] = {5, 6, 7.08872};
 	t_vector	direction;
 	t_ray		r;
-	t_intersections	xs;
+	t_intersects	xs;
 	t_object	obj = (t_object){CYLINDER, &c};
 
 	for (int i = 0; i < 3; i++)
@@ -89,7 +89,7 @@ int	test_cylinders_min_max(void)
 	 * apparently, comparing INFINITE to INFINITE using the UNIT_ASSERT_FEQ
 	 * macro results in a NaN because of how the compiler subtracts these values
 	 * if the flag -ffast-math, it becomes simplified to (a - a), which would make it pass
-	 * 
+	 *
 	 * just note that INFINITE, like NaN, is not a float or a double, maybe it is? seems weird
 	 */
 	UNIT_ASSERT_EQ(c.max, INFINITY);
@@ -113,7 +113,7 @@ int	test_cylinders_truncated(void)
 	t_vector		d;
 	t_ray			r;
 	t_object		o = (t_object){CYLINDER, &c};
-	t_intersections	xs;
+	t_intersects	xs;
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -153,7 +153,7 @@ int	test_cylinders_closed(void)
 
 	int	counts[5] = {2, 2, 2, 2, 2};
 
-	t_intersections	xs;
+	t_intersects	xs;
 	t_ray			r;
 	t_object		obj = {CYLINDER, &cyl};
 
