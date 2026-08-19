@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:49 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/16 15:56:22 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 15:54:22 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int parse_plane(t_scene *scene, char **params)
 
 static void finish_plane(t_plane *plane, int rgb_color)
 {
-	plane->transform =
-		matrix4x4_translation(plane->pos.x, plane->pos.y, plane->pos.z);
+	plane->transform = matrix4x4_translation(plane->pos.x, plane->pos.y, plane->pos.z);
+	plane->transform = matrix4x4_multiply(plane->transform, matrix4x4_rotation(plane->vec));
 	plane->inverse = matrix4x4_inverse(plane->transform);
 	plane->material = material();
 	plane->material.color =
