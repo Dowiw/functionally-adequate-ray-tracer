@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/17 19:32:07 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/18 16:48:27 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,9 @@ SOURCES = main.c \
 	parsing/parse_ambience.c \
 	parsing/parse_camera.c \
 	parsing/parse_color.c \
+	parsing/parse_cone.c \
 	parsing/parse_cylinder.c \
+	parsing/parse_direction.c \
 	parsing/parse_double.c \
 	parsing/parse_error.c \
 	parsing/parse_int.c \

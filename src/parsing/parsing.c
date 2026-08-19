@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:17 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 13:55:00 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/18 16:49:50 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int	parse_scene_line(t_scene *scene, char *line)
 	if (params == NULL)
 		return (parse_error(scene, "Allocation Failure"));
 	id = params[0];
-	if (id == NULL)
+	if (id == NULL || id[0] == '#')
 		result = 1;
 	else if (string_equals(id, "A"))
 		result = parse_ambience(scene, params);
@@ -107,6 +107,8 @@ static int	parse_scene_line(t_scene *scene, char *line)
 		result = parse_plane(scene, params);
 	else if (string_equals(id, "cy"))
 		result = parse_cylinder(scene, params);
+	else if (string_equals(id, "co"))
+		result = parse_cone(scene, params);
 	else
 		result = parse_error(scene, "Unrecognized identifier");
 	free_array((void **) params);

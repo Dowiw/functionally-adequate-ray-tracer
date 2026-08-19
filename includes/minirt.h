@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 20:20:08 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 15:49:07 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,7 @@ t_matrix4x4			matrix4x4_scaling(double x, double y, double z);
 t_matrix4x4			matrix4x4_rotation_x(double radians);
 t_matrix4x4			matrix4x4_rotation_y(double radians);
 t_matrix4x4			matrix4x4_rotation_z(double radians);
+t_matrix4x4 		matrix4x4_rotation(t_vector direction);
 
 t_matrix4x4			matrix4x4_shearing(double *params);
 
