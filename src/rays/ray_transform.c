@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_transform.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/28 23:45:39 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/12 15:55:14 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/17 18:52:26 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,25 @@ void	set_transform(t_object *obj, t_matrix4x4 t)
 	if (!obj || !obj->object)
 		return ;
 	if (obj->type == SPHERE)
+	{
 		((t_sphere *)obj->object)->transform = t;
+		((t_sphere *)obj->object)->inverse = matrix4x4_inverse(t);
+	}
 	else if (obj->type == CYLINDER)
+	{
 		((t_cylinder *)obj->object)->transform = t;
+		((t_cylinder *)obj->object)->inverse = matrix4x4_inverse(t);
+	}
 	else if (obj->type == PLANE)
+	{
 		((t_plane *)obj->object)->transform = t;
+		((t_plane *)obj->object)->inverse = matrix4x4_inverse(t);
+	}
 	else if (obj->type == CONE)
+	{
 		((t_cone *)obj->object)->transform = t;
+		((t_cone *)obj->object)->inverse = matrix4x4_inverse(t);
+	}
 }
 
 /**

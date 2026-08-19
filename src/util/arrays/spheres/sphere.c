@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 21:43:35 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/12 15:55:15 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/16 16:06:04 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_sphere	sphere_create(void)
 
 	sphere.center = (t_point){0, 0, 0, POINT};
 	sphere.transform = matrix4x4_identity();
+	sphere.inverse = matrix4x4_identity();
 	sphere.diameter = 2.0;
 	sphere.material = material();
 	return (sphere);

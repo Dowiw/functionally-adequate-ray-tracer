@@ -6,7 +6,7 @@
 /*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 11:47:32 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/10 17:06:23 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/16 16:22:05 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ int	is_shadowed(t_scene w, t_point p)
 	t_vector		v;
 	t_vector		direction;
 	t_ray			r;
-	t_intersections	xs;
-	t_intersection	*hit;
+	t_intersection	hit;
 	double			distance;
 	int				shadowed;
 
@@ -43,12 +42,10 @@ int	is_shadowed(t_scene w, t_point p)
 	distance = calc_mag(v);
 	direction = calc_norm(v);
 	r = ray(p, direction);
-	xs = intersect_scene(&w, r);
-	hit = intersect_hit(xs);
-	if (hit != NULL && hit->t < distance)
+	hit = intersect_scene_and_hit(&w, r);
+	if (hit.t >= 0.0 && hit.t < distance)
 		shadowed = 1;
 	else
 		shadowed = 0;
-	free_intersections(xs);
 	return (shadowed);
 }
