@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 18:53:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/18 14:28:53 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:07:21 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	intersect_cone_fast(t_cone *cone, t_ray ray, t_intersection *hit)
 	double			t;
 	double			y;
 
-	ray = inline_transform(ray, cone->transform);
+	ray = inline_transform(ray, cone->inverse);
 	abc[0] = pow2(ray.direction.x) - pow2(ray.direction.y)
 		+ pow2(ray.direction.z);
 	abc[1] = (2 * ray.origin.x * ray.direction.x)

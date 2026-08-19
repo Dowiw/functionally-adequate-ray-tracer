@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 16:23:36 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/18 14:25:05 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:07:17 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	intersect_cylinder_fast(t_cylinder *cylinder, t_ray ray, t_intersection *hi
 	double		t;
 	double		y;
 
-	ray = inline_transform(ray, cylinder->transform);
+	ray = inline_transform(ray, cylinder->inverse);
 	abc[0] = pow2(ray.direction.x) + pow2(ray.direction.z);
 	if (abc[0] < UNIT_EPSILON)
 	{
