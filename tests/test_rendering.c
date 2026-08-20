@@ -23,35 +23,35 @@
 #include "util/planes.h"
 #include "util/spheres.h"
 
-int	test_default_scene(void)
+static int	default_scene(t_scene *scene)
 {
-	t_scene	scene1;
+	t_sphere	*sphere;
 
-	if (!init_scene(&scene1))
-		return (1);
-
-	UNIT_ASSERT_EQ(spheres_len(scene1.spheres), 0);
-	UNIT_ASSERT_EQ(planes_len(scene1.planes), 0);
-	UNIT_ASSERT_EQ(cylinders_len(scene1.cylinders), 0);
-
-	t_scene	scene2;
-
-	if (!default_scene(&scene2))
-		return (1);
-
-	t_color	expected;
-
-	expected = color(0.8, 1.0, 0.6);
-
-	UNIT_ASSERT_EQ(spheres_len(scene2.spheres), 2);
-	UNIT_ASSERT_EQ(compare_tuples(&scene2.spheres[0]->material.color, &expected), 0);
-	UNIT_ASSERT_FEQ(scene2.spheres[0]->material.diffuse, 0.7);
-	UNIT_ASSERT_FEQ(scene2.spheres[0]->material.specular, 0.2);
-	UNIT_ASSERT_EQ(m4x4_compare(scene2.spheres[1]->transform, m4x4_scaling(0.5, 0.5, 0.5)), 0);
-	UNIT_ASSERT_EQ(planes_len(scene2.planes), 0);
-	UNIT_ASSERT_EQ(cylinders_len(scene2.cylinders), 0);
-
-	return (0);
+	init_scene(scene);
+	scene->light = (t_light){point(-10.0, 10.0, -10.0), color(1.0, 1.0, 1.0)};
+	sphere = malloc(sizeof(t_sphere));
+	if (sphere != NULL)
+	{
+		*sphere = sphere_create();
+		sphere->material.color = color(0.8, 1.0, 0.6);
+		sphere->material.diffuse = 0.7;
+		sphere->material.specular = 0.2;
+	}
+	scene->spheres = spheres_add(scene->spheres, sphere);
+	sphere = malloc(sizeof(t_sphere));
+	if (sphere != NULL)
+	{
+		*sphere = sphere_create();
+		sphere->transform = m4x4_scaling(0.5, 0.5, 0.5);
+		sphere->inverse = m4x4_inverse(sphere->transform);
+	}
+	scene->spheres = spheres_add(scene->spheres, sphere);
+	if (scene->spheres == NULL)
+	{
+		destroy_scene(scene);
+		return (0);
+	}
+	return (1);
 }
 
 int	test_intersect_scene(void)

@@ -16,7 +16,6 @@
 # include "types.h"
 
 int			init_scene(t_scene *scene);
-int			default_scene(t_scene *scene);
 void		destroy_scene(t_scene *scene);
 
 t_camera	create_camera(int width, int height, double fov);

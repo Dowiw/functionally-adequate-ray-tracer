@@ -48,45 +48,6 @@ int	init_scene(t_scene *scene)
 }
 
 /**
- * @brief Initializes the default scene
- *
- * @note has_ambience, has_camera and has_light will remain unset
- *
- * @param scene
- * @return returns 0 on fail, 1 on success
- */
-int	default_scene(t_scene *scene)
-{
-	t_sphere	*sphere;
-
-	init_scene(scene);
-	scene->light = (t_light){point(-10.0, 10.0, -10.0), color(1.0, 1.0, 1.0)};
-	sphere = malloc(sizeof(t_sphere));
-	if (sphere != NULL)
-	{
-		*sphere = sphere_create();
-		sphere->material.color = color(0.8, 1.0, 0.6);
-		sphere->material.diffuse = 0.7;
-		sphere->material.specular = 0.2;
-	}
-	scene->spheres = spheres_add(scene->spheres, sphere);
-	sphere = malloc(sizeof(t_sphere));
-	if (sphere != NULL)
-	{
-		*sphere = sphere_create();
-		sphere->transform = m4x4_scaling(0.5, 0.5, 0.5);
-		sphere->inverse = m4x4_inverse(sphere->transform);
-	}
-	scene->spheres = spheres_add(scene->spheres, sphere);
-	if (scene->spheres == NULL)
-	{
-		destroy_scene(scene);
-		return (0);
-	}
-	return (1);
-}
-
-/**
  * @brief Frees the scene structure
  *
  * @param scene

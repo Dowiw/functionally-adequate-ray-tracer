@@ -91,7 +91,6 @@ int	main(void)
 	load_test(light_shading_suite, "Sphere Material", &test_sphere_material);
 	load_test(light_shading_suite, "Sphere Lighiting", &test_sphere_lighting);
 	rendering_suite = load_suite(&suites, "Rendering Suite");
-	load_test(rendering_suite, "Default Scene", &test_default_scene);
 	load_test(rendering_suite, "Intersect Scene", &test_intersect_scene);
 	load_test(rendering_suite, "Prepare Computations", &test_prepare_computations);
 	load_test(rendering_suite, "Shade Hit", &test_shade_hit);
