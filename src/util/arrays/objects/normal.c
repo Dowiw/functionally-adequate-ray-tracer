@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 14:32:03 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/19 20:32:21 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 20:58:27 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,6 @@ static t_m4x4	get_inverse_transform(t_object *obj)
 
 static t_vector	local_normal_at(t_object *obj, t_point local_point)
 {
-	t_cylinder	*cyl;
-	t_cone		*cone;
-
 	if (obj->type == SPHERE)
 		return ((t_tuple){local_point.x, local_point.y, local_point.z, VECTOR});
 	if (obj->type == PLANE)
