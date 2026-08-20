@@ -18,7 +18,7 @@
 #include "util/colors.h"
 #include "util/cones.h"
 
-static void	finish_cone(t_cone *cone, int rgb_color);
+static void	finish_cone(t_cone *c, int rgb);
 
 static int	parse_cone_error(t_scene *scene, t_cone *cone, char *error);
 
@@ -57,21 +57,23 @@ int	parse_cone(t_scene *scene, char **params)
 	return (1);
 }
 
-static void	finish_cone(t_cone *cone, int rgb_color)
+static void	finish_cone(t_cone *c, int rgb)
 {
 	t_m4x4	m;
+	t_color	color;
 
-	m = m4x4_translation(cone->pos.x, cone->pos.y, cone->pos.z);
-	m = m4x4_multiply(m, m4x4_rotation(cone->vec));
-	m = m4x4_multiply(m, m4x4_translation(0.0, cone->height / 2.0, 0.0));
-	m = m4x4_multiply(m, m4x4_scaling(cone->d / 2, cone->height, cone->d / 2));
-	cone->transform = m;
-	cone->inverse = m4x4_inverse(m);
-	cone->min = -1.0;
-	cone->max = 0.0;
-	cone->closed = 1;
-	cone->material = material();
-	cone->material.color = color(red(rgb_color) / 255.0, green(rgb_color) / 255.0, blue(rgb_color) / 255.0);
+	m = m4x4_translation(c->pos.x, c->pos.y, c->pos.z);
+	m = m4x4_multiply(m, m4x4_rotation(c->vec));
+	m = m4x4_multiply(m, m4x4_translation(0.0, c->height / 2.0, 0.0));
+	m = m4x4_multiply(m, m4x4_scaling(c->d / 2, c->height, c->d / 2));
+	c->transform = m;
+	c->inverse = m4x4_inverse(m);
+	c->min = -1.0;
+	c->max = 0.0;
+	c->closed = 1;
+	c->material = material();
+	color = color(red(rgb) / 255.0, green(rgb) / 255.0, blue(rgb) / 255.0);
+	c->material.color = color;
 }
 
 static int	parse_cone_error(t_scene *scene, t_cone *cone, char *error)
