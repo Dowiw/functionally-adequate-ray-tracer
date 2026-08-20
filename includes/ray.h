@@ -15,7 +15,7 @@
 
 # include "types.h"
 
-t_intersect		*create_intersection(enum e_object_type type, void *object, double t);
+t_intersect		*create_intersection(enum e_shape type, void *obj, double t);
 t_intersects	intersect(t_object *obj, t_ray r);
 t_intersects	intersect_sphere(t_sphere *sphere, t_ray ray);
 t_intersects	intersect_plane(t_plane *plane, t_ray ray);

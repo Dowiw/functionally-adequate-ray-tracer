@@ -16,6 +16,7 @@
 #include "scene.h"
 #include "libft/libft.h"
 #include "util/intersections.h"
+#include "types.h"
 #include "util/cylinders.h"
 #include "util/cones.h"
 
@@ -27,7 +28,7 @@
  * @param time
  * @return t_intersect*
  */
-t_intersect	*create_intersection(enum e_object_type type, void *object, double t)
+t_intersect	*create_intersection(enum e_shape type, void *o, double t)
 {
 	t_intersect	*result;
 
@@ -35,7 +36,7 @@ t_intersect	*create_intersection(enum e_object_type type, void *object, double t
 	if (result == NULL)
 		return (NULL);
 	result->obj.type = type;
-	result->obj.ptr = object;
+	result->obj.ptr = o;
 	result->t = t;
 	return (result);
 }

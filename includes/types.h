@@ -60,7 +60,7 @@ typedef struct s_ray
 	t_vector	dir;
 }				t_ray;
 
-enum	e_object_type
+enum	e_shape
 {
 	SPHERE,
 	PLANE,
@@ -70,7 +70,7 @@ enum	e_object_type
 
 typedef struct s_object
 {
-	enum e_object_type	type;
+	enum e_shape		type;
 	void				*ptr;
 }					t_object;
 
