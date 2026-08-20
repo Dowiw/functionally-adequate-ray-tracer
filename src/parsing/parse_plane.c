@@ -51,16 +51,18 @@ int	parse_plane(t_scene *scene, char **params)
 	return (1);
 }
 
-static void	finish_plane(t_plane *plane, int rgb_color)
+static void	finish_plane(t_plane *plane, int rbg)
 {
 	t_m4x4	m;
+	t_color	color;
 
 	m = m4x4_translation(plane->pos.x, plane->pos.y, plane->pos.z);
 	m = m4x4_multiply(m, m4x4_rotation(plane->vec));
 	plane->transform = m;
 	plane->inverse = m4x4_inverse(m);
 	plane->material = material();
-	plane->material.color = color(red(rgb_color) / 255.0, green(rgb_color) / 255.0, blue(rgb_color) / 255.0);
+	color = color(red(rbg) / 255.0, green(rbg) / 255.0, blue(rbg) / 255.0);
+	plane->material.color = color;
 }
 
 static int	parse_plane_error(t_scene *scene, t_plane *plane, char *error)
