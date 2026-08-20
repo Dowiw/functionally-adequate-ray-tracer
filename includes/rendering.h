@@ -35,6 +35,6 @@ void	fill_pixel(t_mlx *mlx, t_iter *iter, int color);
 
 void	set_pixel(t_mlx *mlx, int x, int y, int color);
 
-void	put_frame(t_mlx mlx);
+void	put_frame(t_mlx mlx, int res);
 
 #endif

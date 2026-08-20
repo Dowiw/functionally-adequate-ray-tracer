@@ -108,7 +108,7 @@ void	render_frame(t_data *data)
 		iter->x = 0;
 		iter->res = iter->res / 2;
 		iter->first = 0;
-		put_frame(data->mlx);
+		put_frame(data->mlx, iter->res);
 		return ;
 	}
 	return ;

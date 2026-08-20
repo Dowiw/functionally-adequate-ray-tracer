@@ -72,8 +72,11 @@ void	set_pixel(t_mlx *mlx, int x, int y, int color)
  *
  * @param mlx
  */
-void	put_frame(t_mlx mlx)
+void	put_frame(t_mlx mlx, int res)
 {
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
+	if (res == 0)
+		mlx_string_put(mlx.mlx_ptr, mlx.win_ptr, 15, WIN_H - 15, 0xFFFFFF,
+			"Render Complete.");
 	mlx_do_sync(mlx.mlx_ptr);
 }
