@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
+#    By: kmonjard <kmonjard@student.42berlin.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/19 18:50:55 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/20 22:24:10 by kmonjard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ HEADERS = minirt.h \
 SOURCE_DIR = src
 SOURCES = main.c \
 	graphics/canvas.c \
+	graphics/hooks.c \
 	graphics/mlx.c \
 	input/controls.c \
 	input/input.c \

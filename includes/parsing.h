@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:09 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 19:10:17 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 22:24:09 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ int	parse_direction(t_scene *scene, t_vector *direction, char *str);
 
 int	parse_double(t_scene *scene, double *num, char *str);
 
-int	parse_double_range(t_scene *scene, double *num, char *str, double min, double max);
+int	parse_double_range(t_scene *scene, double *num, char *str,
+		double bounds[2]);
 
 int	parse_int(t_scene *scene, int *num, char *str);
 
-int	parse_int_range(t_scene *scene, int *num, char *str, int min, int max);
+int	parse_int_range(t_scene *scene, int *num, char *str, int bounds[2]);
 
 int	parse_point(t_scene *scene, t_point *point, char *str);
 
