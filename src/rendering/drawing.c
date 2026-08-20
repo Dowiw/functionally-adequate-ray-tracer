@@ -6,12 +6,15 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:57:36 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 20:20:17 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 20:57:26 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 #include "minirt.h"
+#include "rendering.h"
+
+void	set_pixel(t_mlx *mlx, int x, int y, int color);
 
 void	fill_pixel(t_mlx *mlx, t_iter *iter, int color)
 {

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 18:59:54 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 20:08:06 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 20:57:26 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	move(t_data *data, t_vector vec)
 {
 	t_camera	*camera;
 
+	camera = &data->scene.camera;
 	vec = m4x4_multiply_tuple(m4x4_rotation_y(camera->horizontal), vec);
 	data->scene.camera.pos = tuples_add(data->scene.camera.pos, vec);
 	update(data);
