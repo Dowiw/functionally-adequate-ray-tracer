@@ -60,7 +60,7 @@ int	parse_cone(t_scene *scene, char **params)
 static void	finish_cone(t_cone *c, int rgb)
 {
 	t_m4x4	m;
-	t_color	color;
+	t_color	clr;
 
 	m = m4x4_translation(c->pos.x, c->pos.y, c->pos.z);
 	m = m4x4_multiply(m, m4x4_rotation(c->vec));
@@ -72,8 +72,8 @@ static void	finish_cone(t_cone *c, int rgb)
 	c->max = 0.0;
 	c->closed = 1;
 	c->material = material();
-	color = color(red(rgb) / 255.0, green(rgb) / 255.0, blue(rgb) / 255.0);
-	c->material.color = color;
+	clr = color(red(rgb) / 255.0, green(rgb) / 255.0, blue(rgb) / 255.0);
+	c->material.color = clr;
 }
 
 static int	parse_cone_error(t_scene *scene, t_cone *cone, char *error)
