@@ -39,7 +39,8 @@ static inline t_tuple	inline_m4x4_multiply_tuple(t_m4x4 a, t_tuple b)
 
 static inline t_ray	inline_transform(t_ray r, t_m4x4 m)
 {
-	return ((t_ray){inline_m4x4_multiply_tuple(m, r.origin), inline_m4x4_multiply_tuple(m, r.dir)});
+	return ((t_ray){inline_m4x4_multiply_tuple(m, r.origin),
+		inline_m4x4_multiply_tuple(m, r.dir)});
 }
 
 static inline double	inline_dot_product(t_tuple a, t_tuple b)
@@ -56,7 +57,8 @@ void	intersect_sphere_fast(t_sphere *sphere, t_ray ray, t_intersect *hit)
 	double	time;
 
 	local_ray = inline_transform(ray, sphere->inverse);
-	sphere_to_ray = (t_vector){local_ray.origin.x, local_ray.origin.y, local_ray.origin.z, VECTOR};
+	sphere_to_ray = (t_vector){local_ray.origin.x, local_ray.origin.y,
+		local_ray.origin.z, VECTOR};
 	abc[0] = inline_dot_product(local_ray.dir, local_ray.dir);
 	abc[1] = 2 * inline_dot_product(local_ray.dir, sphere_to_ray);
 	abc[2] = inline_dot_product(sphere_to_ray, sphere_to_ray) - 1;

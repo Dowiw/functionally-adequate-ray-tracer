@@ -12,42 +12,21 @@
 
 #include <math.h>
 #include <stdlib.h>
-#include "minirt.h"
-#include "scene.h"
 #include "libft/libft.h"
-#include "util/intersections.h"
+#include "minirt.h"
+#include "ray.h"
+#include "scene.h"
 #include "types.h"
-#include "util/cylinders.h"
 #include "util/cones.h"
+#include "util/cylinders.h"
+#include "util/intersections.h"
 
 /**
- * @brief Allocates and initializes an intersection
- *
- * @param the type of object to be intersected
- * @param the object
- * @param time
- * @return t_intersect*
- */
-t_intersect	*create_intersection(enum e_shape type, void *o, double t)
-{
-	t_intersect	*result;
-
-	result = malloc(sizeof(t_intersect));
-	if (result == NULL)
-		return (NULL);
-	result->obj.type = type;
-	result->obj.ptr = o;
-	result->t = t;
-	return (result);
-}
-
-/**
- * @brief Calculates whether the ray intersects the sphere
- * and returns an array of intersections
- *
- * @param sphere
- * @param ray
- * @return t_intersect**
+ * @brief Find sphere intersects
+ * 
+ * @param sphere 
+ * @param ray 
+ * @return t_intersects 
  */
 t_intersects	intersect_sphere(t_sphere *sphere, t_ray ray)
 {
@@ -66,100 +45,116 @@ t_intersects	intersect_sphere(t_sphere *sphere, t_ray ray)
 	discriminant = abc[1] * abc[1] - 4 * abc[0] * abc[2];
 	if (discriminant < 0.0)
 		return (result);
-	result = intersections_add(result, create_intersection(SPHERE, (void *) sphere, (-abc[1] - sqrt(discriminant)) / (2 * abc[0])));
-	result = intersections_add(result, create_intersection(SPHERE, (void *) sphere, (-abc[1] + sqrt(discriminant)) / (2 * abc[0])));
+	result = intersections_add(result, create_intersection(SPHERE,
+				(void *)sphere, (-abc[1] - sqrt(discriminant))
+				/ (2 * abc[0])));
+	result = intersections_add(result, create_intersection(SPHERE,
+				(void *)sphere, (-abc[1] + sqrt(discriminant))
+				/ (2 * abc[0])));
 	return (result);
 }
 
 /**
- * @brief Calculates whether the ray intersects a plane.
- *
- * @param plane
- * @param ray
- * @return t_intersects
+ * @brief Adds a hit to the xs depending on height bounds by cylinder
+ * and cone, and add the last double from the array to the xs intersections
+ * 
+ * @param obj 
+ * @param bounds_t 
+ * @param r 
+ * @param xs 
  */
-t_intersects	intersect_plane(t_plane *plane, t_ray ray)
+static void	add_hit(t_object obj, double bounds_t[3], t_ray r,
+				t_intersects *xs)
 {
-	t_intersects	result;
-	t_ray			local_r;
-	double			t;
+	double	y;
 
-	result = intersections_create();
-	local_r = transform(ray, plane->inverse);
-	if (fabs(local_r.dir.y) < UNIT_EPSILON)
-		return (result);
-	t = -local_r.origin.y / local_r.dir.y;
-	result = intersections_add(result, create_intersection(PLANE, plane, t));
-	return (result);
+	y = r.origin.y + bounds_t[2] * r.dir.y;
+	if (bounds_t[0] < y && y < bounds_t[1])
+		*xs = intersections_add(*xs, create_intersection(obj.type, obj.ptr,
+					bounds_t[2]));
 }
 
 /**
- * @brief Calculates whether a ray intersects a cylinder.
- *
- * @param cylinder
- * @param ray
- * @return t_intersects
+ * @brief Finds the intersects of a cylinder
+ * 
+ * @param cyl 
+ * @param ray 
+ * @return t_intersects 
  */
-t_intersects	intersect_cylinder(t_cylinder *cylinder, t_ray ray)
-{
-	double			a;
-	double			b;
-	double			c;
-	double			disc;
-	double			t0;
-	double			t1;
-	double			y0;
-	double			y1;
-	t_intersects	xs;
-
-	ray = transform(ray, cylinder->transform);
-	a = pow(ray.dir.x, 2.0) + pow(ray.dir.z, 2.0);
-	if (a < UNIT_EPSILON)
-	{
-		xs = intersections_create();
-		intersect_caps(cylinder, ray, &xs);
-		return (xs);
-	}
-	b = (2 * ray.origin.x * ray.dir.x) + (2 * ray.origin.z * ray.dir.z);
-	c = pow(ray.origin.x, 2.0) + pow(ray.origin.z, 2.0) - 1;
-	disc = pow(b, 2.0) - (4 * a * c);
-	if (disc < 0)
-		return (intersections_create());
-	t0 = (-b - sqrt(disc)) / (2 * a);
-	t1 = (-b + sqrt(disc)) / (2 * a);
-	if (t0 > t1)
-		ft_swap(&t0, &t1);
-	xs = intersections_create();
-	y0 = ray.origin.y + t0 * ray.dir.y;
-	if (cylinder->min < y0 && y0 < cylinder->max)
-		xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t0));
-	y1 = ray.origin.y + t1 * ray.dir.y;
-	if (cylinder->min < y1 && y1 < cylinder->max)
-		xs = intersections_add(xs, create_intersection(CYLINDER, cylinder, t1));
-	intersect_caps(cylinder, ray, &xs);
-	return (xs);
-}
-
-/**
- * @brief Calculates whether a ray intersects a cone.
- *
- * @param cone
- * @param ray
- * @return t_intersects
- */
-t_intersects	intersect_cone(t_cone *cone, t_ray ray)
+t_intersects	intersect_cylinder(t_cylinder *cyl, t_ray ray)
 {
 	double			abc[3];
 	double			disc;
 	double			t[2];
-	double			y[2];
+	t_intersects	xs;
+
+	ray = transform(ray, cyl->transform);
+	abc[0] = pow(ray.dir.x, 2.0) + pow(ray.dir.z, 2.0);
+	if (abc[0] < UNIT_EPSILON)
+		return (xs = intersections_create(), intersect_caps(cyl, ray, &xs), xs);
+	abc[1] = (2 * ray.origin.x * ray.dir.x) + (2 * ray.origin.z * ray.dir.z);
+	abc[2] = pow(ray.origin.x, 2.0) + pow(ray.origin.z, 2.0) - 1;
+	disc = pow(abc[1], 2.0) - (4 * abc[0] * abc[2]);
+	if (disc < 0)
+		return (intersections_create());
+	t[0] = (-abc[1] - sqrt(disc)) / (2 * abc[0]);
+	t[1] = (-abc[1] + sqrt(disc)) / (2 * abc[0]);
+	if (t[0] > t[1])
+		ft_swap(&t[0], &t[1]);
+	xs = intersections_create();
+	add_hit((t_object){CYLINDER, cyl},
+		(double [3]){cyl->min, cyl->max, t[0]}, ray, &xs);
+	add_hit((t_object){CYLINDER, cyl},
+		(double [3]){cyl->min, cyl->max, t[1]}, ray, &xs);
+	return (intersect_caps(cyl, ray, &xs), xs);
+}
+
+/**
+ * @brief Cone intersect extension, finding hits and proceding
+ * 
+ * @param cone 
+ * @param ray 
+ * @param abc 
+ * @param xs 
+ */
+static void	intersect_cone_quad(t_cone *cone, t_ray ray, double abc[3],
+				t_intersects *xs)
+{
+	double	disc;
+	double	t[2];
+
+	disc = pow(abc[1], 2.0) - (4 * abc[0] * abc[2]);
+	if (disc < 0)
+	{
+		intersect_caps_cone(cone, ray, xs);
+		return ;
+	}
+	t[0] = (-abc[1] - sqrt(disc)) / (2 * abc[0]);
+	t[1] = (-abc[1] + sqrt(disc)) / (2 * abc[0]);
+	if (t[0] > t[1])
+		ft_swap(&t[0], &t[1]);
+	add_hit((t_object){CONE, cone},
+		(double [3]){cone->min, cone->max, t[0]}, ray, xs);
+	add_hit((t_object){CONE, cone},
+		(double [3]){cone->min, cone->max, t[1]}, ray, xs);
+	intersect_caps_cone(cone, ray, xs);
+}
+
+/**
+ * @brief Finds the intersections of a cone
+ * 
+ * @param cone 
+ * @param ray 
+ * @return t_intersects 
+ */
+t_intersects	intersect_cone(t_cone *cone, t_ray ray)
+{
+	double			abc[3];
 	t_intersects	xs;
 
 	ray = transform(ray, cone->transform);
-	abc[0] = pow(ray.dir.x, 2.0) - pow(ray.dir.y, 2.0)
-		+ pow(ray.dir.z, 2.0);
-	abc[1] = (2 * ray.origin.x * ray.dir.x)
-		- (2 * ray.origin.y * ray.dir.y)
+	abc[0] = pow(ray.dir.x, 2.0) - pow(ray.dir.y, 2.0) + pow(ray.dir.z, 2.0);
+	abc[1] = (2 * ray.origin.x * ray.dir.x) - (2 * ray.origin.y * ray.dir.y)
 		+ (2 * ray.origin.z * ray.dir.z);
 	abc[2] = pow(ray.origin.x, 2.0) - pow(ray.origin.y, 2.0)
 		+ pow(ray.origin.z, 2.0);
@@ -167,110 +162,11 @@ t_intersects	intersect_cone(t_cone *cone, t_ray ray)
 	if (fabs(abc[0]) < UNIT_EPSILON)
 	{
 		if (fabs(abc[1]) < UNIT_EPSILON)
-		{
-			intersect_caps_cone(cone, ray, &xs);
-			return (xs);
-		}
-		t[0] = -abc[2] / abc[1];
-		y[0] = ray.origin.y + t[0] * ray.dir.y;
-		if (cone->min < y[0] && y[0] < cone->max)
-			xs = intersections_add(xs, create_intersection(CONE, cone, t[0]));
-		intersect_caps_cone(cone, ray, &xs);
-		return (xs);
+			return (intersect_caps_cone(cone, ray, &xs), xs);
+		add_hit((t_object){CONE, cone},
+			(double [3]){cone->min, cone->max, -abc[2] / abc[1]}, ray, &xs);
+		return (intersect_caps_cone(cone, ray, &xs), xs);
 	}
-	disc = pow(abc[1], 2.0) - (4 * abc[0] * abc[2]);
-	if (disc < 0)
-	{
-		intersect_caps_cone(cone, ray, &xs);
-		return (xs);
-	}
-	t[0] = (-abc[1] - sqrt(disc)) / (2 * abc[0]);
-	t[1] = (-abc[1] + sqrt(disc)) / (2 * abc[0]);
-	if (t[0] > t[1])
-		ft_swap(&t[0], &t[1]);
-	y[0] = ray.origin.y + t[0] * ray.dir.y;
-	if (cone->min < y[0] && y[0] < cone->max)
-		xs = intersections_add(xs, create_intersection(CONE, cone, t[0]));
-	y[1] = ray.origin.y + t[1] * ray.dir.y;
-	if (cone->min < y[1] && y[1] < cone->max)
-		xs = intersections_add(xs, create_intersection(CONE, cone, t[1]));
-	intersect_caps_cone(cone, ray, &xs);
+	intersect_cone_quad(cone, ray, abc, &xs);
 	return (xs);
-}
-
-/**
- * @brief Calculates where the ray intersects any objects in the scene and returns an array of intersections
- *
- * @param scene
- * @param ray
- * @return t_intersects
- */
-t_intersects	intersect_scene(t_scene *scene, t_ray ray)
-{
-	t_intersects	result;
-	int				i;
-
-	result = intersections_create();
-	if (scene->spheres != NULL)
-	{
-		i = 0;
-		while (scene->spheres[i] != NULL)
-		{
-			result = intersections_add_all(result, intersect_sphere(scene->spheres[i], ray));
-			i++;
-		}
-	}
-	if (scene->planes != NULL)
-	{
-		i = 0;
-		while (scene->planes[i] != NULL)
-		{
-			result = intersections_add_all(result, intersect_plane(scene->planes[i], ray));
-			i++;
-		}
-	}
-	if (scene->cylinders != NULL)
-	{
-		i = 0;
-		while (scene->cylinders[i] != NULL)
-		{
-			result = intersections_add_all(result, intersect_cylinder(scene->cylinders[i], ray));
-			i++;
-		}
-	}
-	if (scene->cones != NULL)
-	{
-		i = 0;
-		while (scene->cones[i] != NULL)
-		{
-			result = intersections_add_all(result, intersect_cone(scene->cones[i], ray));
-			i++;
-		}
-	}
-	intersections_sort(&result);
-	return (result);
-}
-
-/**
- * @brief Returns the closest intersection, ignoring any that are behind the rays origin (and thus have a negative time)
- *
- * @param intersections
- * @return t_intersect*
- */
-t_intersect	*intersect_hit(t_intersects intersections)
-{
-	t_intersect	*hit;
-	int			i;
-
-	hit = NULL;
-	if (intersections.list == NULL)
-		return (NULL);
-	i = 0;
-	while (intersections.list[i] != NULL)
-	{
-		if (intersections.list[i]->t >= 0.0 && (hit == NULL || (intersections.list[i]->t < hit->t)))
-			hit = intersections.list[i];
-		i++;
-	}
-	return (hit);
 }

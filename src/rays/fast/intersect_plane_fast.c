@@ -40,7 +40,8 @@ static inline t_tuple	inline_m4x4_multiply_tuple(t_m4x4 a, t_tuple b)
 
 static inline t_ray	inline_transform(t_ray r, t_m4x4 m)
 {
-	return ((t_ray){inline_m4x4_multiply_tuple(m, r.origin), inline_m4x4_multiply_tuple(m, r.dir)});
+	return ((t_ray){inline_m4x4_multiply_tuple(m, r.origin),
+		inline_m4x4_multiply_tuple(m, r.dir)});
 }
 
 void	intersect_plane_fast(t_plane *plane, t_ray ray, t_intersect *hit)
