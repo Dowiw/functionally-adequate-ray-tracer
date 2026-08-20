@@ -20,8 +20,6 @@
 
 static void	render_pixel(t_data *data);
 
-static void	put_frame(t_mlx mlx);
-
 /**
  * @brief Renders the given scene onto the given canvas (who could've guessed?)
  *
@@ -32,6 +30,7 @@ void	render_scene(t_canvas *canvas, t_scene *scene)
 {
 	int		x;
 	int		y;
+	t_ray	r;
 
 	y = 0;
 	while (y < canvas->height)
@@ -39,7 +38,8 @@ void	render_scene(t_canvas *canvas, t_scene *scene)
 		x = 0;
 		while (x < canvas->width)
 		{
-			write_pixel(canvas, x, y, color_at(scene, ray_for_pixel(scene->camera, x, y)));
+			r = ray_for_pixel(scene->camera, x, y);
+			write_pixel(canvas, x, y, color_at(scene, r));
 			x++;
 		}
 		y++;
@@ -47,7 +47,8 @@ void	render_scene(t_canvas *canvas, t_scene *scene)
 }
 
 /**
- * @brief Initializes the iteration struct used for rendering across multiple frames.
+ * @brief Initializes the iteration struct used for rendering
+ *        across multiple frames.
  *
  * @param iter
  */
@@ -117,23 +118,13 @@ static void	render_pixel(t_data *data)
 	int		color_rgb;
 
 	iter = &data->iter;
-	if (!iter->first && iter->x % (iter->res * 2) == 0 && iter->y % (iter->res * 2) == 0)
+	if (!iter->first && iter->x % (iter->res * 2) == 0
+		&& iter->y % (iter->res * 2) == 0)
 		return ;
 	ray = ray_for_pixel(data->scene.camera, iter->x, iter->y);
 	color = color_at(&data->scene, ray);
-	color_rgb = rgb(clamp_color(color.x), clamp_color(color.y), clamp_color(color.z));
+	color_rgb = rgb(clamp_color(color.x), clamp_color(color.y),
+			clamp_color(color.z));
 	fill_pixel(&data->mlx, iter, color_rgb);
 	iter->pixels++;
-}
-
-/**
- * @brief Updates the mlx window with the current image data.
- *
- * @param mlx
- * @return int
- */
-static void	put_frame(t_mlx mlx)
-{
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
-	mlx_do_sync(mlx.mlx_ptr);
 }

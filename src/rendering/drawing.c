@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include "graphics.h"
 #include "minirt.h"
 #include "rendering.h"
@@ -48,4 +49,15 @@ void	set_pixel(t_mlx *mlx, int x, int y, int color)
 		return ;
 	dst = mlx->img_data + (y * mlx->size_line + x * (mlx->bpp / 8));
 	*(int *) dst = color;
+}
+
+/**
+ * @brief Updates the mlx window with the current image data.
+ *
+ * @param mlx
+ */
+void	put_frame(t_mlx mlx)
+{
+	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
+	mlx_do_sync(mlx.mlx_ptr);
 }
