@@ -26,8 +26,11 @@ t_intersect		*intersect_hit(t_intersects intersections);
 
 t_intersect		intersect_scene_and_hit(t_scene *scene, t_ray ray);
 void			intersect_cone_fast(t_cone *cone, t_ray ray, t_intersect *hit);
-void			intersect_cylinder_fast(t_cylinder *cylinder, t_ray ray, t_intersect *hit);
-void			intersect_plane_fast(t_plane *plane, t_ray ray, t_intersect *hit);
-void			intersect_sphere_fast(t_sphere *sphere, t_ray ray, t_intersect *hit);
+void			intersect_cylinder_fast(t_cylinder *cylinder, t_ray ray,
+					t_intersect *hit);
+void			intersect_plane_fast(t_plane *plane, t_ray ray,
+					t_intersect *hit);
+void			intersect_sphere_fast(t_sphere *sphere, t_ray ray,
+					t_intersect *hit);
 
 #endif

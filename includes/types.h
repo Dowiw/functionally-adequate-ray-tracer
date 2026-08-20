@@ -241,7 +241,8 @@ typedef struct s_mlx
 	int		endian;
 }				t_mlx;
 
-typedef struct s_comps {
+typedef struct s_comps
+{
 	double		t;
 	t_object	obj;
 	t_point		point;
@@ -249,17 +250,19 @@ typedef struct s_comps {
 	t_vector	eyev;
 	t_vector	normalv;
 	int			inside;
-}	t_comps;
+}				t_comps;
 
-typedef struct s_iter {
+typedef struct s_iter
+{
 	int		res;
 	int		first;
 	int		x;
 	int		y;
 	int		pixels;
-}	t_iter;
+}				t_iter;
 
-typedef struct s_input {
+typedef struct s_input
+{
 	int				key_w;
 	int				key_a;
 	int				key_s;
@@ -272,7 +275,7 @@ typedef struct s_input {
 	int				key_right;
 
 	struct timeval	last_time;
-}	t_input;
+}				t_input;
 
 typedef struct s_data
 {
