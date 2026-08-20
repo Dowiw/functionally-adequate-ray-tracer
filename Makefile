@@ -35,7 +35,6 @@ HEADERS = minirt.h \
 
 SOURCE_DIR = src
 SOURCES = main.c \
-	debug/debug.c \
 	graphics/canvas.c \
 	graphics/mlx.c \
 	input/controls.c \
