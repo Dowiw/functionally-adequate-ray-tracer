@@ -54,7 +54,6 @@ int	parse_plane(t_scene *scene, char **params)
 static void	finish_plane(t_plane *plane, int rbg)
 {
 	t_m4x4	m;
-	t_color	clr;
 
 	m = m4x4_translation(plane->pos.x, plane->pos.y, plane->pos.z);
 	m = m4x4_multiply(m, m4x4_rotation(plane->vec));
