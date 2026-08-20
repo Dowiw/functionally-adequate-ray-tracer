@@ -51,13 +51,13 @@ int	on_key_press(int keycode, void *param)
 {
 	if (keycode == KEY_ESC)
 		on_close(param);
-	update_input(&((t_data *) param)->input, keycode, 0);
+	handle_input(&((t_data *) param)->input, keycode, 0);
 	return (0);
 }
 
 int	on_key_release(int keycode, void *param)
 {
-	update_input(&((t_data *) param)->input, keycode, 0);
+	handle_input(&((t_data *) param)->input, keycode, 0);
 	return (0);
 }
 
