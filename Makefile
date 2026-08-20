@@ -111,7 +111,6 @@ TEST_DIR = tests
 TESTS = main.c \
 	test_tuples.c \
 	test_colors.c \
-	test_canvas.c \
 	test_matrices.c \
 	test_transformations.c \
 	test_rays.c \

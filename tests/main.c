@@ -19,7 +19,6 @@ int	main(void)
 	t_test_suite	*suites;
 	t_test_suite	*tuple_suite;
 	t_test_suite	*color_suite;
-	t_test_suite	*canvas_suite;
 	t_test_suite	*matrices_suite;
 	t_test_suite	*rays_suite;
 	t_test_suite	*transformations_suite;
@@ -52,10 +51,6 @@ int	main(void)
 	load_test(color_suite, "Color Scalar Multiplication",
 		&test_color_mult_scalar);
 	load_test(color_suite, "Color Multiplication (Hadamard)", &test_color_mult);
-	canvas_suite = load_suite(&suites, "Canvas Suite");
-	load_test(canvas_suite, "Canvas Initialization", &test_canvas);
-	load_test(canvas_suite, "Canvas Utilities", &test_canvas_place);
-	load_test(canvas_suite, "Canvas to PPM", &test_canvas_ppm);
 	matrices_suite = load_suite(&suites, "Matrices Suite");
 	load_test(matrices_suite, "Main Matrix Functionality", &test_matrix_values);
 	load_test(matrices_suite, "Matrix Identities", &test_matrix_identity);

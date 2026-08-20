@@ -23,7 +23,7 @@ int test_ray(void) {
 }
 
 int test_ray_pos(void) {
-	t_ray r = {.origin = {2, 3, 4, POINT}, .direction = {1, 0, 0, VECTOR}};
+	t_ray r = {.origin = {2, 3, 4, POINT}, .dir = {1, 0, 0, VECTOR}};
 
 	t_point pos1 = position(r, 0);
 	t_point pos2 = position(r, 1);
@@ -113,7 +113,7 @@ int test_aggregating_intersections(void) {
 	UNIT_ASSERT_EQ(xs.list[1]->obj.ptr, &s);
 	free_intersections(xs);
 
-	t_ray r = {.origin = {0, 0, -5, POINT}, .direction = {0, 0, 1, VECTOR}};
+	t_ray r = {.origin = {0, 0, -5, POINT}, .dir = {0, 0, 1, VECTOR}};
 	t_sphere s1 = sphere_create();
 	t_intersects xS = intersect_sphere(&s1, r);
 	UNIT_ASSERT_EQ(intersections_len(xS), 2);
@@ -204,24 +204,24 @@ int	test_ray_transform(void)
 
 	r1 = (t_ray){
 		.origin = {1, 2, 3, POINT},
-		.direction = {0, 1, 0, VECTOR}
+		.dir = {0, 1, 0, VECTOR}
 	};
 
 	m1 = m4x4_translation(3, 4, 5);
 	t1 = transform(r1, m1);
 
 	UNIT_ASSERT_EQ(compare_tuples(&(t1.origin), &expected_origin1), 0);
-	UNIT_ASSERT_EQ(compare_tuples(&(t1.direction), &expected_direction1), 0);
+	UNIT_ASSERT_EQ(compare_tuples(&(t1.dir), &expected_direction1), 0);
 
 	r2 = (t_ray){
 		.origin = {1, 2, 3, POINT},
-		.direction = {0, 1, 0, VECTOR}
+		.dir = {0, 1, 0, VECTOR}
 	};
 	m2 = m4x4_scaling(2, 3, 4);
 	t2 = transform(r2, m2);
 
 	UNIT_ASSERT_EQ(compare_tuples(&(t2.origin), &expected_origin2), 0);
-	UNIT_ASSERT_EQ(compare_tuples(&(t2.direction), &expected_direction2), 0);
+	UNIT_ASSERT_EQ(compare_tuples(&(t2.dir), &expected_direction2), 0);
 
 	return (0);
 }
@@ -246,7 +246,7 @@ int	test_sphere_ray_transform(void)
 
 	r = (t_ray){
 		.origin = {0, 0, -5, POINT},
-		.direction = {0, 0, 1, VECTOR}
+		.dir = {0, 0, 1, VECTOR}
 	};
 	s = sphere_create();
 	obj = (t_object){SPHERE, &s};
@@ -259,7 +259,7 @@ int	test_sphere_ray_transform(void)
 
 	r = (t_ray){
 		.origin = {0, 0, -5, POINT},
-		.direction = {0, 0, 1, VECTOR}
+		.dir = {0, 0, 1, VECTOR}
 	};
 	s = sphere_create();
 	obj = (t_object){SPHERE, &s};

@@ -15,10 +15,19 @@ int test_shadow_surface(void)
 	t_light light_p = light(point(0, 0, -10), color(1, 1, 1));
 	t_material m = material();
 	t_point	p = point(0, 0, 0);
+	t_scene	scene;
+	t_comps	comps;
 
 	t_ambience	def = {1.0, rgb(255, 255, 255)};
 
-	t_color	test = lighting(m, light_p, p, eye_v, normal_v, 1, def);
+	init_scene(&scene);
+	scene.light = light_p;
+	scene.ambience = def;
+	comps.point = p;
+	comps.eyev = eye_v;
+	comps.normalv = normal_v;
+
+	t_color	test = lighting(m, scene, comps, 1);
 
 	t_color	b = color(0.1, 0.1, 0.1);
 	UNIT_ASSERT_EQ(compare_tuples(&test, &b), 0);

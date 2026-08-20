@@ -133,43 +133,63 @@ int	test_sphere_lighting(void)
 	t_light		light_p;
 	t_color		res;
 	t_color		expected_res;
+	t_scene		scene;
+	t_comps		comps;
 
 	t_ambience	def = {1.0, rgb(255, 255, 255)};
 
+	init_scene(&scene);
 	m = material();
 	pos = point(0, 0, 0);
 	eyev = vector(0, 0, -1);
 	normalv = vector(0, 0, -1);
 	light_p = light(point(0, 0, -10), color(1, 1, 1));
-	res = lighting(m, light_p, pos, eyev, normalv, 0, def);
+	scene.light = light_p;
+	scene.ambience = def;
+	comps.point = pos;
+	comps.eyev = eyev;
+	comps.normalv = normalv;
+	res = lighting(m, scene, comps, 0);
 	expected_res = color(1.9, 1.9, 1.9);
 	UNIT_ASSERT_EQ(compare_tuples(&res, &expected_res), 0);
 	//
 	eyev = vector(0, sqrt(2) / 2, sqrt(2) / 2);
 	normalv = vector(0, 0, -1);
 	light_p = light(point(0, 0, -10), color(1, 1, 1));
-	res = lighting(m, light_p, pos, eyev, normalv, 0, def);
+	scene.light = light_p;
+	comps.eyev = eyev;
+	comps.normalv = normalv;
+	res = lighting(m, scene, comps, 0);
 	expected_res = color(1, 1, 1);
 	UNIT_ASSERT_EQ(compare_tuples(&res, &expected_res), 0);
 	//
 	eyev = vector(0, 0, -1);
 	normalv = vector(0, 0, -1);
 	light_p = light(point(0, 10, -10), color(1, 1, 1));
-	res = lighting(m, light_p, pos, eyev, normalv, 0, def);
+	scene.light = light_p;
+	comps.eyev = eyev;
+	comps.normalv = normalv;
+	res = lighting(m, scene, comps, 0);
 	expected_res = color(0.7364, 0.7364, 0.7364);
 	UNIT_ASSERT_EQ(compare_tuples(&res, &expected_res), 0);
 	//
 	eyev = vector(0, -(sqrt(2) / 2), -(sqrt(2) / 2));
 	normalv = vector(0, 0, -1);
 	light_p = light(point(0, 10, -10), color(1, 1, 1));
-	res = lighting(m, light_p, pos, eyev, normalv, 0, def);
+	scene.light = light_p;
+	comps.eyev = eyev;
+	comps.normalv = normalv;
+	res = lighting(m, scene, comps, 0);
 	expected_res = color(1.6364, 1.6364, 1.6364);
 	UNIT_ASSERT_EQ(compare_tuples(&res, &expected_res), 0);
 	//
 	eyev = vector(0, 0, -1);
 	normalv = vector(0, 0, -1);
 	light_p = light(point(0, 0, 10), color(1, 1, 1));
-	res = lighting(m, light_p, pos, eyev, normalv, 0, def);
+	scene.light = light_p;
+	comps.eyev = eyev;
+	comps.normalv = normalv;
+	res = lighting(m, scene, comps, 0);
 	expected_res = color(0.1, 0.1, 0.1);
 	UNIT_ASSERT_EQ(compare_tuples(&res, &expected_res), 0);
 	return (0);

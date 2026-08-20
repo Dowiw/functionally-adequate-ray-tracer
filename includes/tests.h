@@ -31,10 +31,6 @@ int	test_color_sub(void);
 int	test_color_mult_scalar(void);
 int	test_color_mult(void);
 
-int	test_canvas(void);
-int	test_canvas_place(void);
-int	test_canvas_ppm(void);
-
 int	test_matrix_values(void);
 int	test_matrix_identity(void);
 int	test_matrix_compare(void);

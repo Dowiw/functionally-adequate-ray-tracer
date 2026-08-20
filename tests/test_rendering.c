@@ -12,6 +12,7 @@
 
 #include <math.h>
 #include <stdlib.h>
+#include "graphics.h"
 #include "libunit_assert.h"
 #include "minirt.h"
 #include "ray.h"
