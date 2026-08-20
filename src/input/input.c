@@ -12,6 +12,7 @@
 
 #include <stddef.h>
 #include <sys/time.h>
+#include <X11/keysym.h>
 #include "input.h"
 #include "minirt.h"
 #include "types.h"
@@ -27,25 +28,25 @@ static void	process_input(t_data *data, double distance, double radians);
  */
 void	handle_input(t_input *input, int keycode, int down)
 {
-	if (keycode == KEY_SPACE)
+	if (keycode == XK_space)
 		input->key_space = down;
-	if (keycode == KEY_SHIFT)
+	if (keycode == XK_Shift_L)
 		input->key_shift = down;
-	if (keycode == KEY_W)
+	if (keycode == XK_w)
 		input->key_w = down;
-	if (keycode == KEY_A)
+	if (keycode == XK_a)
 		input->key_a = down;
-	if (keycode == KEY_S)
+	if (keycode == XK_s)
 		input->key_s = down;
-	if (keycode == KEY_D)
+	if (keycode == XK_d)
 		input->key_d = down;
-	if (keycode == KEY_UP)
+	if (keycode == XK_Up)
 		input->key_up = down;
-	if (keycode == KEY_LEFT)
+	if (keycode == XK_Left)
 		input->key_left = down;
-	if (keycode == KEY_DOWN)
+	if (keycode == XK_Down)
 		input->key_down = down;
-	if (keycode == KEY_RIGHT)
+	if (keycode == XK_Right)
 		input->key_right = down;
 }
 

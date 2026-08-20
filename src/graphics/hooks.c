@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <X11/keysym.h>
 #include "graphics.h"
 #include "input.h"
 #include "types.h"
@@ -25,21 +26,21 @@
  */
 static void	set_movement_key(t_input *input, int keycode, int state)
 {
-	if (keycode == KEY_W)
+	if (keycode == XK_w)
 		input->key_w = state;
-	if (keycode == KEY_A)
+	if (keycode == XK_a)
 		input->key_a = state;
-	if (keycode == KEY_S)
+	if (keycode == XK_s)
 		input->key_s = state;
-	if (keycode == KEY_D)
+	if (keycode == XK_d)
 		input->key_d = state;
-	if (keycode == KEY_UP)
+	if (keycode == XK_Up)
 		input->key_up = state;
-	if (keycode == KEY_LEFT)
+	if (keycode == XK_Left)
 		input->key_left = state;
-	if (keycode == KEY_DOWN)
+	if (keycode == XK_Down)
 		input->key_down = state;
-	if (keycode == KEY_RIGHT)
+	if (keycode == XK_Right)
 		input->key_right = state;
 }
 
@@ -56,11 +57,11 @@ int	on_key_press(int keycode, void *param)
 	t_input	*input;
 
 	input = &((t_data *)param)->input;
-	if (keycode == KEY_ESC)
+	if (keycode == XK_Escape)
 		on_close(param);
-	if (keycode == KEY_SPACE)
+	if (keycode == XK_space)
 		input->key_space = 1;
-	if (keycode == KEY_SHIFT)
+	if (keycode == XK_Shift_L)
 		input->key_shift = 1;
 	set_movement_key(input, keycode, 1);
 	return (0);
@@ -79,9 +80,9 @@ int	on_key_release(int keycode, void *params)
 	t_input	*input;
 
 	input = &((t_data *)params)->input;
-	if (keycode == KEY_SPACE)
+	if (keycode == XK_space)
 		input->key_space = 0;
-	if (keycode == KEY_SHIFT)
+	if (keycode == XK_Shift_L)
 		input->key_shift = 0;
 	set_movement_key(input, keycode, 0);
 	return (0);
