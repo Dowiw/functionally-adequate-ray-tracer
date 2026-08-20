@@ -108,22 +108,6 @@ SOURCES = main.c \
 	util/strings/strings1.c \
 	util/shadows/shadows.c
 
-TEST_DIR = tests
-TESTS = main.c \
-	test_tuples.c \
-	test_colors.c \
-	test_matrices.c \
-	test_transformations.c \
-	test_rays.c \
-	test_light_shading.c \
-	test_rendering.c \
-	test_shadows.c \
-	test_planes.c \
-	test_cylinders.c \
-	test_cones.c
-
-TEST_FILES = $(TESTS:%=$(TEST_DIR)/%)
-
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
@@ -132,14 +116,11 @@ MLX_REPO = https://github.com/42paris/minilibx-linux.git
 MLX_INCLUDE = -I$(MLX_DIR)
 MLX_LINKS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
-LIBUNIT = libunit/framework/libunit.a
-
 HEADER_FILES = $(HEADERS:%=$(HEADER_DIR)/%)
 SOURCE_FILES = $(SOURCES:%=$(SOURCE_DIR)/%)
 
 BUILD_DIR = ./build
 OBJECT_FILES = $(SOURCES:%.c=$(BUILD_DIR)/src/%.o)
-TEST_OBJS = $(TESTS:%.c=$(BUILD_DIR)/tests/%.o)
 
 all: $(NAME)
 
@@ -154,10 +135,6 @@ $(LIBFT):
 	@echo "[MAKE]: $(LIBFT_DIR)"
 	@make -C $(LIBFT_DIR) bonus
 
-$(LIBUNIT):
-	@echo "[MAKE] libunit/framework"
-	@$(MAKE) -C libunit/framework > /dev/null
-
 $(NAME): $(LIBFT) $(MLX_DIR)/libmlx.a $(OBJECT_FILES)
 	@$(CC) $(CFLAGS) $(OBJECT_FILES) $(LIBFT) $(MLX_LINKS) -o $(NAME)
 
@@ -166,41 +143,21 @@ $(BUILD_DIR)/src/%.o: $(SOURCE_DIR)/%.c $(HEADER_FILES)
 	@echo "[COMPILE]: $<"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) $(MLX_INCLUDE)
 
-$(BUILD_DIR)/tests/%.o: $(TEST_DIR)/%.c $(HEADER_FILES) | $(LIBUNIT)
-	@mkdir -p $(dir $@)
-	@echo "[COMPILE TEST]: $<"
-	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR) -Ilibunit/framework/inc
-
-test: $(LIBFT) $(LIBUNIT) $(TEST_OBJS) $(OBJECT_FILES) $(MLX_DIR)/libmlx.a
-	@echo "[LINK] test_bin"
-	@$(CC) $(CFLAGS) $(TEST_OBJS) $(filter-out $(BUILD_DIR)/src/main.o, $(OBJECT_FILES)) $(LIBFT) $(MLX_LINKS) -Ilibunit/framework/inc -Llibunit/framework -lunit -lm -o test_bin
-	@echo "--- RUNNING TESTS ---"
-	@./test_bin
-
 clean:
 	@echo "[FCLEAN] $(LIBFT_DIR) $<"
 	@make -C $(LIBFT_DIR) fclean
 	@echo "[CLEAN] $(MLX_DIR) $<"
 	@make -C $(MLX_DIR) clean
 	@echo "[CLEAN] libunit"
-	@if [ -d libunit/framework ]; then $(MAKE) -C libunit/framework clean; fi
 	@rm -rf $(BUILD_DIR)
 
 fclean: clean
-	rm -f $(NAME) test_bin
-	@if [ -d libunit/framework ]; then $(MAKE) -C libunit/framework fclean; fi
+	rm -f $(NAME)
 
 re: fclean all
 
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./$(NAME)
 
-bear:
-	@make clean
-	bear -- $(MAKE) all
-	bear --append -- $(MAKE) test
-	@mkdir -p .configs
-	mv compile_commands.json .configs/
-
-.PHONY: all clean fclean re test valgrind bear
+.PHONY: all clean fclean re valgrind
 

@@ -1,15 +1,4 @@
-# binaries
-*.o
 miniRT
 libft.a
-test_bin
-
-# files
-notes.md
-
-# directories
-mlx/
 build/
-.cache/
-.configs/
-.vscode/
+*.o
