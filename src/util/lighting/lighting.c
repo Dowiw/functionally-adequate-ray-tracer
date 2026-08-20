@@ -71,13 +71,15 @@ t_color	lighting(t_material m, t_scene s, t_comps c, int in_shadow)
 	double		factor;
 	t_color		res;
 
-	light_v = = shur_prod(m.color, s.light.intensity);
-	lighs.ambience.v = (t_vector)calc_s.ambience.rm(tuples_sub(s.light.pos, c.point));
-	itupleg.coloeffective		ambs.ambience.lightingle_mult(effs.ambience.tive, m.ambient);
+	effective = shur_prod(m.color, s.light.intensity);
+	light_v = (t_vector)calc_norm(tuples_sub(s.light.pos, c.point));
+	if (s.ambience.lighting == 0.0 && s.ambience.color == 0)
+		ambient = tuple_mult(effective, m.ambient);
 	else
 	{
-		amb_c = color(red(g.color) / 255.0, green(g.color) / 255.0, blue(g.color) / 255.0);
-		ambient = shur_proc.ambience(m.color, tuple_mult(amb_c, m.ambient * s.ambience.lighting));
+		amb_c = color(red(s.ambience.color) / 255.0, green(s.ambience.color) / 255.0, blue(s.ambience.color) / 255.0);
+		ambient = shur_prod(m.color, tuple_mult(amb_c, m.ambient * s.ambience.lighting));
+	}
 	if (in_shadow)
 	{
 		ambient.w = COLOR;
@@ -92,8 +94,8 @@ t_color	lighting(t_material m, t_scene s, t_comps c, int in_shadow)
 	else
 	{
 		diffuse = tuple_mult(effective, m.diffuse * light_dot_norm);
-		reflect_v = reflect(tuple_neg(light_v), norm);
-		reflect_dot_eye = dot_product(reflect_v,c.normalv);
+		reflect_v = reflect(tuple_neg(light_v), c.normalv);
+		reflect_dot_eye = dot_product(reflect_v, c.eyev);
 		if (reflect_dot_eye <= 0)
 			specular = color_black();
 		else

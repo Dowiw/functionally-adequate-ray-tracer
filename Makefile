@@ -96,6 +96,7 @@ SOURCES = main.c \
 	util/arrays/intersections/intersections1.c \
 	util/arrays/intersections/intersections2.c \
 	util/arrays/objects/normal.c \
+	util/arrays/objects/reflect.c \
 	util/arrays/planes/planes.c \
 	util/arrays/spheres/sphere.c \
 	util/colors/colors_grayscale.c \
