@@ -33,7 +33,7 @@ int	parse_double_range(t_scene *scene, double *num, char *str, double min, doubl
 
 int	parse_int(t_scene *scene, int *num, char *str);
 
-int	parse_int_range(t_scene *scene, char *str, int min, int max);
+int	parse_int_range(t_scene *scene, int *num, char *str, int min, int max);
 
 int	parse_point(t_scene *scene, t_point *point, char *str);
 

@@ -46,15 +46,12 @@ static int	parse_color_params(t_scene *scene, int *color, char **params)
 
 	if (array_len((void **) params) != 3)
 		return (parse_error(scene, "Expected <red>,<green>,<blue>"));
-	red = parse_int_range(scene, params[0], 0, 255);
-	if (red < 0)
-		return (parse_error(scene, "Failed to parse red component"));
-	green = parse_int_range(scene, params[1], 0, 255);
-	if (green < 0)
-		return (parse_error(scene, "Failed to parse green component"));
-	blue = parse_int_range(scene, params[2], 0, 255);
-	if (blue < 0)
-		return (parse_error(scene, "Failed to parse blue component"));
+	if (!parse_int_range(scene, &red, params[0], 0, 255))
+		return (0);
+	if (!parse_int_range(scene, &green, params[1], 0, 255))
+		return (0);
+	if (!parse_int_range(scene, &blue, params[2], 0, 255))
+		return (0);
 	*color = rgb(red, green, blue);
 	return (1);
 }
