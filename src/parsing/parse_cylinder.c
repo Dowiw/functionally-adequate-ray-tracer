@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:19:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 19:45:38 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ static void	finish_cylinder(t_cylinder *cyl, int rgb_color)
 	cyl->max = 0.5;
 	cyl->closed = 1;
 	cyl->material = material();
-	cyl->material.color = color(red(rgb_color) / 255.0, green(rgb_color) / 255.0, blue(rgb_color) / 255.0);
+	cyl->material.color = color(red(rgb_color) / 255.0,
+			green(rgb_color) / 255.0,
+			blue(rgb_color) / 255.0);
 }
 
 static int	parse_cylinder_error(t_scene *scene, t_cylinder *cyl, char *error)

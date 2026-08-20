@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:37:50 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 19:10:36 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ int	parse_double(t_scene *scene, double *num, char *str)
  * Parses the given 'str' (see parse_double) and checks the result against the
  * given range 'min' and 'max'.
  */
-int	parse_double_range(t_scene *scene, double *num, char *str, double min, double max)
+int	parse_double_range(t_scene *scene, double *num, char *str,
+		double bounds[2])
 {
 	if (!parse_double(scene, num, str))
 		return (0);
-	if (*num < min)
+	if (*num < bounds[0])
 		return (parse_error(scene, "Number is too small"));
-	if (*num > max)
+	if (*num > bounds[1])
 		return (parse_error(scene, "Number is too big"));
 	return (1);
 }

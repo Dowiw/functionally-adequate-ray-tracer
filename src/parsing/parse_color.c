@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:19:46 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 19:04:46 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static int	parse_color_params(t_scene *scene, int *color, char **params)
 
 	if (array_len((void **) params) != 3)
 		return (parse_error(scene, "Expected <red>,<green>,<blue>"));
-	if (!parse_int_range(scene, &red, params[0], 0, 255))
-		return (0);
-	if (!parse_int_range(scene, &green, params[1], 0, 255))
-		return (0);
-	if (!parse_int_range(scene, &blue, params[2], 0, 255))
-		return (0);
+	if (!parse_int_range(scene, &red, params[0], (int [2]){0, 255}))
+		return (parse_error(scene, "Failed to parse red component"));
+	if (!parse_int_range(scene, &green, params[1], (int [2]){0, 255}))
+		return (parse_error(scene, "Failed to parse green component"));
+	if (!parse_int_range(scene, &blue, params[2], (int [2]){0, 255}))
+		return (parse_error(scene, "Failed to parse blue component"));
 	*color = rgb(red, green, blue);
 	return (1);
 }

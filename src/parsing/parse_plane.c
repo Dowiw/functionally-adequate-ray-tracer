@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:49 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 19:46:58 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ static void	finish_plane(t_plane *plane, int rbg)
 	plane->transform = m;
 	plane->inverse = m4x4_inverse(m);
 	plane->material = material();
-	clr = color(red(rbg) / 255.0, green(rbg) / 255.0, blue(rbg) / 255.0);
-	plane->material.color = clr;
+	plane->material.color = color(red(rbg) / 255.0,
+			green(rbg) / 255.0,
+			blue(rbg) / 255.0);
 }
 
 static int	parse_plane_error(t_scene *scene, t_plane *plane, char *error)

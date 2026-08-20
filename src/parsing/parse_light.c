@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:19:46 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 19:04:46 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ int	parse_light(t_scene *scene, char **params)
 		return (parse_error(scene, "Expected L <pos> <brightness> <color>"));
 	if (!parse_point(scene, &scene->light.pos, params[1]))
 		return (parse_error(scene, "Failed to parse position"));
-	if (!parse_double_range(scene, &brightness, params[2], 0.0, 1.0))
+	if (!parse_double_range(scene, &brightness, params[2],
+			(double [2]){0.0, 1.0}))
 		return (parse_error(scene, "Failed to parse brightness"));
 	if (!parse_color(scene, &rgb_color, params[3]))
 		return (parse_error(scene, "Failed to parse color"));
-	intensity_color = color((double) red(rgb_color) * brightness / 255.0, (double) green(rgb_color) * brightness / 255.0, (double) blue(rgb_color) * brightness / 255.0);
+	intensity_color = color((double)red(rgb_color) * brightness / 255.0,
+			(double)green(rgb_color) * brightness / 255.0,
+			(double)blue(rgb_color) * brightness / 255.0);
 	scene->light.intensity = intensity_color;
 	scene->has_light = 1;
 	return (1);

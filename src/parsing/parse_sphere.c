@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:57 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 19:48:51 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ static void	finish_sphere(t_sphere *sphere)
 	sphere->transform = m;
 	sphere->inverse = m4x4_inverse(m);
 	sphere->material = material();
-	sphere->material.color = color(red(sphere->color) / 255.0, green(sphere->color) / 255.0, blue(sphere->color) / 255.0);
+	sphere->material.color = color(red(sphere->color) / 255.0,
+			green(sphere->color) / 255.0,
+			blue(sphere->color) / 255.0);
 }
 
 static int	parse_sphere_error(t_scene *scene, t_sphere *sphere, char *error)

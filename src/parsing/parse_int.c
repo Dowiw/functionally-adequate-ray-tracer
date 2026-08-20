@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:22:03 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 19:10:31 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ int	parse_int(t_scene *scene, int *num, char *str)
 	long	n;
 	int		i;
 	int		sign;
+	int		dummy;
 
+	if (num == NULL)
+		num = &dummy;
 	i = 0;
 	sign = 1;
-	if (str[i] == '-')
-		sign = -1;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			sign = -1;
 	if (!ft_isdigit(str[i]))
 		return (parse_error(scene, "Not a valid integer"));
 	n = 0;
@@ -42,12 +44,11 @@ int	parse_int(t_scene *scene, int *num, char *str)
 	{
 		if (!ft_isdigit(str[i]))
 			return (parse_error(scene, "Not a valid integer"));
-		n = n * 10 + (str[i] - '0') * sign;
+		n = n * 10 + (str[i++] - '0') * sign;
 		if (n < INT_MIN || n > INT_MAX)
 			return (parse_error(scene, "Number exceeds the integer limit"));
-		i++;
 	}
-	*num = (int) n;
+	*num = (int)n;
 	return (1);
 }
 
@@ -55,13 +56,17 @@ int	parse_int(t_scene *scene, int *num, char *str)
  * Parses the given 'str' (see parse_int) and checks the result against the
  * given range 'min' and 'max'.
  */
-int	parse_int_range(t_scene *scene, int *num, char *str, int min, int max)
+int	parse_int_range(t_scene *scene, int *num, char *str, int bounds[2])
 {
+	int	dummy;
+
+	if (num == NULL)
+		num = &dummy;
 	if (!parse_int(scene, num, str))
 		return (0);
-	if (*num < min)
+	if (*num < bounds[0])
 		return (parse_error(scene, "Number is too small"));
-	if (*num > max)
+	if (*num > bounds[1])
 		return (parse_error(scene, "Number is too big"));
 	return (1);
 }
