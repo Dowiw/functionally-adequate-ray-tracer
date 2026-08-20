@@ -40,7 +40,8 @@ t_intersects	intersections_create(void)
  */
 t_intersects	intersections_add(t_intersects xs, t_intersect *intersection)
 {
-	xs.list = (t_intersect **) array_add((void **) xs.list, (void *) intersection);
+	xs.list = (t_intersect **) array_add((void **) xs.list,
+			(void *) intersection);
 	if (xs.list == NULL)
 		xs.count = 0;
 	else
@@ -60,7 +61,8 @@ t_intersects	intersections_add(t_intersects xs, t_intersect *intersection)
  */
 t_intersects	intersections_add_all(t_intersects xs, t_intersects to_add)
 {
-	xs.list = (t_intersect **) array_add_all((void **) xs.list, (void **) to_add.list);
+	xs.list = (t_intersect **) array_add_all((void **) xs.list,
+			(void **) to_add.list);
 	if (xs.list == NULL)
 		xs.count = 0;
 	else

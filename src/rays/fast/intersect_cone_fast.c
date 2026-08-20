@@ -65,7 +65,7 @@ static inline t_ray	inline_transform(t_ray r, t_m4x4 m)
 		inline_m4x4_multiply_tuple(m, r.dir)});
 }
 
-static inline void	intersect_cone_quad_fast(t_cone *cone, t_ray ray, double abc[3],
+static inline void	intersect_cone_quad(t_cone *cone, t_ray ray, double abc[3],
 				t_intersect *hit)
 {
 	double	disc;
@@ -112,5 +112,5 @@ void	intersect_cone_fast(t_cone *cone, t_ray ray, t_intersect *hit)
 			*hit = (t_intersect){t, (t_object){CONE, cone}};
 		return (intersect_caps_fast(cone, ray, hit));
 	}
-	intersect_cone_quad_fast(cone, ray, abc, hit);
+	intersect_cone_quad(cone, ray, abc, hit);
 }

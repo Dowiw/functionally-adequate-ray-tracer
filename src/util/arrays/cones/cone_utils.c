@@ -17,7 +17,8 @@
 #include <math.h>
 
 /**
- * @brief Helper function to check if an intersection point on plane y lies within radius |y|
+ * @brief Helper function to check if an intersection point 
+ * on plane y lies within radius |y|
  *
  * @param r ray
  * @param t time

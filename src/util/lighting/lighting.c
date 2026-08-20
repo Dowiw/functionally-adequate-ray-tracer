@@ -10,17 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "minirt.h"
 #include "scene.h"
+#include "types.h"
 #include "util/colors.h"
-#include <math.h>
 
 /**
  * @brief Light constructor
  *
- * @param p the position of the light
- * @param c the color of the light
- * @return t_light the light with given variables
+ * @param p position of light source
+ * @param c color intensity of light source
+ * @return t_light constructed light struct
  */
 t_light	light(t_point p, t_color c)
 {
@@ -32,79 +33,102 @@ t_light	light(t_point p, t_color c)
 }
 
 /**
- * @brief Calculate color based on information.
- * A big idea of this is basically:
- * Final Color = Ambient + Diffuse + Specular
+ * @brief Computes ambient light component for a material surface.
  *
- * 1. Effective color is used to calculate the absorption/reflective
- * level of a surface material
- * 2. Calculating the light vector using the position of the light and
- * the position of the surface. And then normalize that to a unit of one so
- * that we are able to extract the direction only.
- * 3. Then we retrieve the ambient baseline for the object's material so that
- * we can calclate the baseline visibility of the object without any light.
- * 4. Finding the dotproduct of the norm and the light vector gives us the
- * angle between the light ray and the surface normal. Meaning, if the ray
- * is on an angle that is parallel it goes to the < 0, if not then
- *
- * TODO: Fix the 5 variable problem for norm
- *
- * @param m material
- * @param l light
- * @param pos position of eye
- * @param eye vector of eye
- * @param norm vector of surface normal
- * @param in_shadow boolean for shadow
- * @return t_color the color found
+ * @param m material properties
+ * @param s scene containing ambient light configuration
+ * @return t_color ambient lighting result
  */
-t_color	lighting(t_material m, t_scene s, t_comps c, int in_shadow)
+static t_color	calc_ambient(t_material m, t_scene s)
 {
-	t_color		effective;
-	t_color		ambient;
-	t_color		amb_c;
-	t_color		diffuse;
-	t_color		specular;
-	t_vector	light_v;
-	double		light_dot_norm;
+	t_color	effective;
+	t_color	amb_color;
+	double	factor;
+
+	effective = shur_prod(m.color, s.light.intensity);
+	if (s.ambience.lighting == 0.0 && s.ambience.color == 0)
+		return (tuple_mult(effective, m.ambient));
+	factor = m.ambient * s.ambience.lighting;
+	amb_color = color(red(s.ambience.color) / 255.0,
+			green(s.ambience.color) / 255.0,
+			blue(s.ambience.color) / 255.0);
+	return (shur_prod(m.color, tuple_mult(amb_color, factor)));
+}
+
+/**
+ * @brief Computes diffuse reflection based on Lambert's cosine law.
+ *
+ * @param m material properties
+ * @param light light source info
+ * @param light_dot_norm dot product between light vector and surface normal
+ * @return t_color diffuse light contribution
+ */
+static t_color	calc_diffuse(t_material m, t_light light, double light_dot_norm)
+{
+	t_color	effective;
+
+	if (light_dot_norm <= 0.0)
+		return (color_black());
+	effective = shur_prod(m.color, light.intensity);
+	return (tuple_mult(effective, m.diffuse * light_dot_norm));
+}
+
+/**
+ * @brief Computes specular highlight based on Phong reflection model.
+ *
+ * @param m material properties
+ * @param light light source info
+ * @param light_v normalized direction vector towards light
+ * @param c precomputed ray intersection details
+ * @return t_color specular highlight contribution
+ */
+static t_color	calc_specular(t_material m, t_light light, t_vector light_v,
+					t_comps c)
+{
 	t_vector	reflect_v;
 	double		reflect_dot_eye;
 	double		factor;
-	t_color		res;
 
-	effective = shur_prod(m.color, s.light.intensity);
-	light_v = (t_vector)calc_norm(tuples_sub(s.light.pos, c.point));
-	if (s.ambience.lighting == 0.0 && s.ambience.color == 0)
-		ambient = tuple_mult(effective, m.ambient);
-	else
-	{
-		amb_c = color(red(s.ambience.color) / 255.0, green(s.ambience.color) / 255.0, blue(s.ambience.color) / 255.0);
-		ambient = shur_prod(m.color, tuple_mult(amb_c, m.ambient * s.ambience.lighting));
-	}
+	reflect_v = reflect(tuple_neg(light_v), c.normalv);
+	reflect_dot_eye = dot_product(reflect_v, c.eyev);
+	if (reflect_dot_eye <= 0.0)
+		return (color_black());
+	factor = pow(reflect_dot_eye, m.shininess);
+	return (tuple_mult(light.intensity, m.specular * factor));
+}
+
+/**
+ * @brief Computes total Phong illumination at a point:
+ *        Final Color = Ambient + Diffuse + Specular
+ *
+ * @param m material properties
+ * @param s scene information
+ * @param c precomputed intersection data (point, eyev, normalv)
+ * @param in_shadow flag indicating whether surface point is in shadow
+ * @return t_color total illuminated color
+ */
+t_color	lighting(t_material m, t_scene s, t_comps c, int in_shadow)
+{
+	t_vector	light_v;
+	double		light_dot_norm;
+	t_color		ambient;
+	t_color		diffuse;
+	t_color		specular;
+
+	ambient = calc_ambient(m, s);
 	if (in_shadow)
 	{
 		ambient.w = COLOR;
 		return (ambient);
 	}
+	light_v = (t_vector)calc_norm(tuples_sub(s.light.pos, c.point));
 	light_dot_norm = dot_product(light_v, c.normalv);
-	if (light_dot_norm < 0)
-	{
-		diffuse = color_black();
+	diffuse = calc_diffuse(m, s.light, light_dot_norm);
+	if (light_dot_norm < 0.0)
 		specular = color_black();
-	}
 	else
-	{
-		diffuse = tuple_mult(effective, m.diffuse * light_dot_norm);
-		reflect_v = reflect(tuple_neg(light_v), c.normalv);
-		reflect_dot_eye = dot_product(reflect_v, c.eyev);
-		if (reflect_dot_eye <= 0)
-			specular = color_black();
-		else
-		{
-			factor = pow(reflect_dot_eye, m.shininess);
-			specular = tuple_mult(s.light.intensity, m.specular * factor);
-		}
-	}
-	res = tuples_add(tuples_add(ambient, diffuse), specular);
-	res.w = COLOR;
-	return (res);
+		specular = calc_specular(m, s.light, light_v, c);
+	ambient = tuples_add(tuples_add(ambient, diffuse), specular);
+	ambient.w = COLOR;
+	return (ambient);
 }
