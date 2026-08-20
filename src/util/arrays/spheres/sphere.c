@@ -47,11 +47,22 @@ t_sphere	**spheres_add(t_sphere **array, t_sphere *sphere)
 	return ((t_sphere **)array_add((void **)array, (void *)sphere));
 }
 
+/**
+ * @brief Counts the number of spheres in a NULL-terminated array.
+ *
+ * @param arr the array to measure
+ * @return the number of elements
+ */
 int	spheres_len(t_sphere **array)
 {
 	return (array_len((void **)array));
 }
 
+/**
+ * @brief Frees an array of sphere pointers and the array itself.
+ *
+ * @param arr the array to free
+ */
 void	free_spheres(t_sphere **array)
 {
 	free_array((void **)array);

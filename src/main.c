@@ -20,6 +20,15 @@
 
 static int	error(char *msg);
 
+/**
+ * @brief Main entry point for the miniRT raytracer.
+ * Initializes the scene, parses the input file, sets up the MLX window,
+ * and starts the rendering and event loops.
+ *
+ * @param argc argument count
+ * @param argv argument vector
+ * @return exit status
+ */
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -45,6 +54,12 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+/**
+ * @brief Prints an error message to standard error and returns 1.
+ *
+ * @param msg error message to display
+ * @return 1 (indicating failure)
+ */
 static int	error(char *msg)
 {
 	ft_putstr_fd("Error\n", STDERR_FILENO);

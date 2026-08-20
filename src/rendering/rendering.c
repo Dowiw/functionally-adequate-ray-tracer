@@ -61,6 +61,15 @@ void	render_init(t_iter *iter)
 	iter->pixels = 0;
 }
 
+/**
+ * @brief The main MLX render loop hook. Iteratively renders the image frame
+ * by frame.
+ * Enables smooth interactive rendering and handles progressive rendering
+ * updates.
+ *
+ * @param data pointer to the main data struct
+ * @return 0 on success
+ */
 int	render_loop(t_data *data)
 {
 	tick_input(data);
@@ -106,9 +115,11 @@ void	render_frame(t_data *data)
 }
 
 /**
- * @brief Renders the pixel at the current iteration stored in data.iter.
+ * @brief Computes the color for a single pixel by firing a ray through the
+ * scene.
  *
- * @param data
+ * @param iter pointer to the rendering iteration details
+ * @param data pointer to the main data struct (scene, camera, mlx)
  */
 static void	render_pixel(t_data *data)
 {

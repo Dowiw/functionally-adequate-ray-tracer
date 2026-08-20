@@ -51,6 +51,14 @@ int	parse_plane(t_scene *scene, char **params)
 	return (1);
 }
 
+/**
+ * @brief Finalizes a plane by setting up its transformation matrix.
+ * Computes rotations to align the plane's normal with the given orientation.
+ *
+ * @param plane pointer to the plane to finalize
+ * @param norm the orientation normal vector
+ * @param pos the position of the plane
+ */
 static void	finish_plane(t_plane *plane, int rbg)
 {
 	t_m4x4	m;
@@ -65,6 +73,14 @@ static void	finish_plane(t_plane *plane, int rbg)
 			blue(rbg) / 255.0);
 }
 
+/**
+ * @brief Helper to handle parsing errors for planes and free memory.
+ *
+ * @param error string describing the error
+ * @param arr split string array to free
+ * @param scene scene pointer for error logging
+ * @return 0 indicating failure
+ */
 static int	parse_plane_error(t_scene *scene, t_plane *plane, char *error)
 {
 	free(plane);

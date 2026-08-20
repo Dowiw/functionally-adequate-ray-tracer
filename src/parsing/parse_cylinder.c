@@ -57,6 +57,15 @@ int	parse_cylinder(t_scene *scene, char **params)
 	return (1);
 }
 
+/**
+ * @brief Finalizes a cylinder by computing its transformation matrix.
+ * Sets up translation, rotation, and scaling matrices based on orientation.
+ *
+ * @param cylinder pointer to the cylinder to finalize
+ * @param norm the orientation normal vector
+ * @param pos the position of the cylinder
+ * @param d the diameter of the cylinder
+ */
 static void	finish_cylinder(t_cylinder *cyl, int rgb_color)
 {
 	t_m4x4	m;
@@ -75,6 +84,14 @@ static void	finish_cylinder(t_cylinder *cyl, int rgb_color)
 			blue(rgb_color) / 255.0);
 }
 
+/**
+ * @brief Helper to handle parsing errors for cylinders and free memory.
+ *
+ * @param error string describing the error
+ * @param arr split string array to free
+ * @param scene scene pointer for error logging
+ * @return 0 indicating failure
+ */
 static int	parse_cylinder_error(t_scene *scene, t_cylinder *cyl, char *error)
 {
 	free(cyl);

@@ -14,6 +14,15 @@
 #include "input.h"
 #include "types.h"
 
+/**
+ * @brief Handles mapping keys to movement state within the input struct.
+ * Flags the specific key as pressed (1) or released (0).
+ *
+ * @param keycode the X11 keycode pressed or released
+ * @param input pointer to the input state tracking struct
+ * @param set 1 for pressed, 0 for released
+ * @return 1 if matched, 0 if not a movement key
+ */
 static void	set_movement_key(t_input *input, int keycode, int state)
 {
 	if (keycode == KEY_W)
@@ -34,6 +43,14 @@ static void	set_movement_key(t_input *input, int keycode, int state)
 		input->key_right = state;
 }
 
+/**
+ * @brief MLX hook for a key press event.
+ * Captures escape to close, or updates movement tracking.
+ *
+ * @param keycode the pressed keycode
+ * @param data pointer to the main data context
+ * @return 0 on success
+ */
 int	on_key_press(int keycode, void *param)
 {
 	t_input	*input;
@@ -49,6 +66,14 @@ int	on_key_press(int keycode, void *param)
 	return (0);
 }
 
+/**
+ * @brief MLX hook for a key release event.
+ * Updates movement tracking to halt motion.
+ *
+ * @param keycode the released keycode
+ * @param data pointer to the main data context
+ * @return 0 on success
+ */
 int	on_key_release(int keycode, void *params)
 {
 	t_input	*input;

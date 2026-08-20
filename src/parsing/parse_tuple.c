@@ -38,6 +38,14 @@ int	parse_tuple(t_scene *scene, t_tuple *tuple, char *str)
 	return (result);
 }
 
+/**
+ * @brief Parses x, y, and z double values into a generic tuple.
+ *
+ * @param params array of string parameters (x, y, z)
+ * @param t pointer to the tuple to populate
+ * @param line original line for error reporting
+ * @return 1 on success, 0 on failure
+ */
 static int	parse_tuple_params(t_scene *scene, t_tuple *tuple, char **params)
 {
 	if (array_len((void **) params) != 3)

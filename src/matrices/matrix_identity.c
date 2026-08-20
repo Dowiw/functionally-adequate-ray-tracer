@@ -12,6 +12,11 @@
 
 #include "minirt.h"
 
+/**
+ * @brief Returns a 2x2 identity matrix.
+ *
+ * @return 2x2 identity matrix
+ */
 t_m2x2	m2x2_identity(void)
 {
 	t_m2x2	result;
@@ -23,6 +28,11 @@ t_m2x2	m2x2_identity(void)
 	return (result);
 }
 
+/**
+ * @brief Returns a 3x3 identity matrix.
+ *
+ * @return 3x3 identity matrix
+ */
 t_m3x3	m3x3_identity(void)
 {
 	t_m3x3	result;
@@ -39,6 +49,11 @@ t_m3x3	m3x3_identity(void)
 	return (result);
 }
 
+/**
+ * @brief Returns a 4x4 identity matrix.
+ *
+ * @return 4x4 identity matrix
+ */
 t_m4x4	m4x4_identity(void)
 {
 	t_m4x4	result;

@@ -57,6 +57,15 @@ int	parse_cone(t_scene *scene, char **params)
 	return (1);
 }
 
+/**
+ * @brief Finalizes a cone by computing its transformation matrix.
+ * Sets up translation, rotation, and scaling matrices.
+ *
+ * @param cone pointer to the cone to finalize
+ * @param norm the orientation normal vector
+ * @param pos the position of the cone
+ * @param d the diameter of the cone
+ */
 static void	finish_cone(t_cone *c, int rgb)
 {
 	t_m4x4	m;
@@ -76,6 +85,14 @@ static void	finish_cone(t_cone *c, int rgb)
 			blue(rgb) / 255.0);
 }
 
+/**
+ * @brief Helper to handle parsing errors for cones and free memory.
+ *
+ * @param error string describing the error
+ * @param arr split string array to free
+ * @param scene scene pointer for error logging
+ * @return 0 indicating failure
+ */
 static int	parse_cone_error(t_scene *scene, t_cone *cone, char *error)
 {
 	free(cone);

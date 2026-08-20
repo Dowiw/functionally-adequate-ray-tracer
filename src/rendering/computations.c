@@ -68,6 +68,12 @@ t_comps	prepare_computations(t_ray ray, t_intersect *hit)
 	return (result);
 }
 
+/**
+ * @brief Retrieves the material properties of a generic shape object.
+ *
+ * @param obj pointer to the intersected object
+ * @return the material of the object
+ */
 static t_material	get_material(t_object obj)
 {
 	if (obj.type == SPHERE)

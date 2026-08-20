@@ -38,6 +38,15 @@ int	parse_color(t_scene *scene, int *color, char *str)
 	return (result);
 }
 
+/**
+ * @brief Parses the R, G, B components of a color from string arrays.
+ * Validates that each component is between 0 and 255.
+ *
+ * @param params array of string parameters (R, G, B)
+ * @param c pointer to the color struct to populate
+ * @param line original line for error reporting
+ * @return 1 on success, 0 on failure
+ */
 static int	parse_color_params(t_scene *scene, int *color, char **params)
 {
 	int	red;

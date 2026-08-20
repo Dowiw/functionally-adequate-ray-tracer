@@ -53,7 +53,8 @@ t_m3x3	m3x3_multiply(t_m3x3 a, t_m3x3 b)
  * multiplying elements in its row in matrix 'a' with elements in its
  * column in matrix 'b' in sequence.
  * For example the product of [1, 2] would be calculated like this:
- *  a[1][0] * b[0][2] + a[1][1] * b[1][2] + a[1][2] * b[2][2] + a[1][3] * b[3][2]
+ * a[1][0] * b[0][2] + a[1][1] * b[1][2] + a[1][2] * b[2][2] + a[1][3] *
+ * b[3][2]
  */
 t_m4x4	m4x4_multiply(t_m4x4 a, t_m4x4 b)
 {
@@ -63,6 +64,14 @@ t_m4x4	m4x4_multiply(t_m4x4 a, t_m4x4 b)
 	return (result);
 }
 
+/**
+ * @brief Multiplies two matrices of arbitrary size.
+ *
+ * @param res pointer to the resulting matrix (flat array)
+ * @param a pointer to the first matrix (flat array)
+ * @param b pointer to the second matrix (flat array)
+ * @param size the dimension of the matrices (e.g., 4 for 4x4)
+ */
 static void	matrix_multiply(double *result, double *a, double *b, int size)
 {
 	int	r;
@@ -84,6 +93,16 @@ static void	matrix_multiply(double *result, double *a, double *b, int size)
 	}
 }
 
+/**
+ * @brief Computes the dot product of a specific row and column for matrix
+ * multiplication.
+ *
+ * @param a pointer to the first matrix
+ * @param b pointer to the second matrix
+ * @param rc row col current index pair (encoded as size, row, col array)
+ * @param size ^^^
+ * @return the scalar product for that matrix cell
+ */
 static double	matrix_product(double *a, double *b, int *rc, int size)
 {
 	double	product;

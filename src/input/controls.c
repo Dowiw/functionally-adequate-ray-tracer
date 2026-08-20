@@ -22,6 +22,14 @@ static void	update(t_data *data);
 
 static void	update_camera(t_camera *camera);
 
+/**
+ * @brief Shifts the camera's position along a specified direction vector.
+ * Factors in delta time and a predefined movement speed.
+ *
+ * @param data pointer to the main context
+ * @param dt delta time since last frame
+ * @param dir direction vector for movement
+ */
 void	move(t_data *data, t_vector vec)
 {
 	t_camera	*camera;
@@ -32,12 +40,26 @@ void	move(t_data *data, t_vector vec)
 	update(data);
 }
 
+/**
+ * @brief Rotates the camera horizontally (yaw) around the global up axis.
+ *
+ * @param data pointer to the main context
+ * @param dir direction (+1 for right, -1 for left)
+ * @param dt delta time
+ */
 void	rotate_horizontal(t_data *data, double radians)
 {
 	data->scene.camera.horizontal += radians;
 	update(data);
 }
 
+/**
+ * @brief Rotates the camera vertically (pitch) around its local right axis.
+ *
+ * @param data pointer to the main context
+ * @param dir direction (+1 for up, -1 for down)
+ * @param dt delta time
+ */
 void	rotate_vertical(t_data *data, double radians)
 {
 	data->scene.camera.vertical += radians;
@@ -48,6 +70,12 @@ void	rotate_vertical(t_data *data, double radians)
 	update(data);
 }
 
+/**
+ * @brief Core update function for processing camera movement based on input.
+ * Calculates elapsed time and dispatches movement/rotation updates.
+ *
+ * @param data pointer to the main data context containing input and camera
+ */
 static void	update(t_data *data)
 {
 	update_camera(&data->scene.camera);
@@ -55,6 +83,11 @@ static void	update(t_data *data)
 	ft_bzero(data->mlx.img_data, WIN_W * WIN_H * sizeof(int));
 }
 
+/**
+ * @brief Recalculates the camera's view transformation matrix after movement.
+ *
+ * @param c pointer to the camera structure
+ */
 static void	update_camera(t_camera *camera)
 {
 	t_m4x4	m;

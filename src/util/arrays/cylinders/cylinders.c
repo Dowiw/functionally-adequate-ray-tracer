@@ -53,11 +53,22 @@ t_cylinder	**cylinders_add(t_cylinder **array, t_cylinder *cylinder)
 	return ((t_cylinder **) array_add((void **) array, (void *) cylinder));
 }
 
+/**
+ * @brief Counts the number of cylinders in a NULL-terminated array.
+ *
+ * @param arr the array to measure
+ * @return the number of elements
+ */
 int	cylinders_len(t_cylinder **array)
 {
 	return (array_len((void **) array));
 }
 
+/**
+ * @brief Frees an array of cylinder pointers and the array itself.
+ *
+ * @param arr the array to free
+ */
 void	free_cylinders(t_cylinder **array)
 {
 	free_array((void **) array);

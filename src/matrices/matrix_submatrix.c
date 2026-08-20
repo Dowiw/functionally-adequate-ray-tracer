@@ -46,6 +46,14 @@ t_m3x3	m4x4_submatrix(t_m4x4 matrix, int row, int column)
 	return (result);
 }
 
+/**
+ * @brief Extracts a submatrix by removing a specific row and column.
+ *
+ * @param sub pointer to the resulting submatrix
+ * @param m pointer to the source matrix
+ * @param size the dimension of the source matrix
+ * @param rm array containing the row and col to remove [row, col]
+ */
 static void	matrix_submatrix(double *res, double *mat, int *info)
 {
 	int	r;

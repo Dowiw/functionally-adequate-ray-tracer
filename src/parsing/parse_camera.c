@@ -50,6 +50,13 @@ int	parse_camera(t_scene *scene, char **params)
 	return (1);
 }
 
+/**
+ * @brief Finishes camera setup by computing the transform and pixel size.
+ * Calculates the half width and height based on the aspect ratio and FOV,
+ * and sets up the view transformation matrix.
+ *
+ * @param camera pointer to the camera structure to finalize
+ */
 static void	finish_camera(t_camera *cam, int width, int height)
 {
 	cam->width = width;
@@ -66,6 +73,13 @@ static void	finish_camera(t_camera *cam, int width, int height)
 	init_camera(cam);
 }
 
+/**
+ * @brief Calculates the horizontal component (right vector) of the camera.
+ * Used when constructing the view transformation matrix to align the camera.
+ *
+ * @param forward the forward direction vector
+ * @return the normalized right vector (horizontal axis)
+ */
 static double	calculate_horizontal(t_vector vec)
 {
 	if (vec.z == 0.0)
@@ -79,6 +93,14 @@ static double	calculate_horizontal(t_vector vec)
 	return (PI * 0.0 + atan(vec.x / vec.z));
 }
 
+/**
+ * @brief Calculates the vertical component (up vector) of the camera.
+ * Crosses the horizontal and forward vectors to find the true up vector.
+ *
+ * @param horizontal the computed right vector
+ * @param forward the forward direction vector
+ * @return the normalized up vector (vertical axis)
+ */
 static double	calculate_vertical(t_vector vec)
 {
 	if (vec.x != 0.0 || vec.z != 0.0)

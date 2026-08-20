@@ -17,6 +17,14 @@
 
 void	set_pixel(t_mlx *mlx, int x, int y, int color);
 
+/**
+ * @brief Fills a block of pixels corresponding to a single logical pixel when
+ * pixel_size > 1.
+ *
+ * @param iter current rendering iteration details
+ * @param data pointer to the main data struct containing mlx and camera config
+ * @param color the integer color to fill
+ */
 void	fill_pixel(t_mlx *mlx, t_iter *iter, int color)
 {
 	int	x_offset;
@@ -41,6 +49,14 @@ void	fill_pixel(t_mlx *mlx, t_iter *iter, int color)
 	}
 }
 
+/**
+ * @brief Sets a specific pixel on the MLX image buffer to a specific color.
+ *
+ * @param mlx pointer to the MLX data structure containing the image
+ * @param x x-coordinate of the pixel
+ * @param y y-coordinate of the pixel
+ * @param color the integer color value to set
+ */
 void	set_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;

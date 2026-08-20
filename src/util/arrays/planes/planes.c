@@ -52,11 +52,22 @@ t_plane	**planes_add(t_plane **array, t_plane *plane)
 	return ((t_plane **) array_add((void **) array, (void *) plane));
 }
 
+/**
+ * @brief Counts the number of planes in a NULL-terminated array.
+ *
+ * @param arr the array to measure
+ * @return the number of elements
+ */
 int	planes_len(t_plane **array)
 {
 	return (array_len((void **) array));
 }
 
+/**
+ * @brief Frees an array of plane pointers and the array itself.
+ *
+ * @param arr the array to free
+ */
 void	free_planes(t_plane **array)
 {
 	free_array((void **) array);

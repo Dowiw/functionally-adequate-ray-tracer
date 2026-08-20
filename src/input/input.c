@@ -18,6 +18,13 @@
 
 static void	process_input(t_data *data, double distance, double radians);
 
+/**
+ * @brief Resets the progressive render iteration state if any movement occurred.
+ * Ensures that camera changes immediately restart the render.
+ *
+ * @param data pointer to the main context
+ * @return 1 if movement occurred, 0 otherwise
+ */
 void	handle_input(t_input *input, int keycode, int down)
 {
 	if (keycode == KEY_SPACE)
@@ -42,6 +49,12 @@ void	handle_input(t_input *input, int keycode, int down)
 		input->key_right = down;
 }
 
+/**
+ * @brief Measures elapsed time and updates camera controls per frame.
+ *
+ * @param data pointer to the main context
+ * @return 1 if movement triggered an update, 0 otherwise
+ */
 void	tick_input(t_data *data)
 {
 	t_input			*input;
@@ -63,6 +76,12 @@ void	tick_input(t_data *data)
 	input->last_time = time;
 }
 
+/**
+ * @brief Processes continuous input states to execute movement each frame.
+ *
+ * @param data pointer to the main context
+ * @param dt delta time
+ */
 static void	process_input(t_data *data, double distance, double radians)
 {
 	if (data->input.key_space)

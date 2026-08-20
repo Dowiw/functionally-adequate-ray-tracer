@@ -14,6 +14,15 @@
 #include "minirt.h"
 #include "util/intersections.h"
 
+/**
+ * @brief Fast check for ray intersection with the caps of a cone.
+ * Identifies if the intersection point lies within the circular radius of the
+ * cap.
+ *
+ * @param cone pointer to the cone object
+ * @param ray transformed ray targeting the cone
+ * @param hit pointer to store the resulting intersection if closer
+ */
 static inline void	intersect_caps_fast(t_cone *cone, t_ray r,
 		t_intersect *hit)
 {
@@ -36,6 +45,14 @@ static inline void	intersect_caps_fast(t_cone *cone, t_ray r,
 		*hit = (t_intersect){t, (t_object){CONE, cone}};
 }
 
+/**
+ * @brief Inline optimization for matrix-tuple multiplication.
+ * Avoids function call overhead for fast intersections.
+ *
+ * @param a the 4x4 matrix
+ * @param b the tuple to multiply
+ * @return the resulting transformed tuple
+ */
 static inline t_tuple	inline_m4x4_multiply_tuple(t_m4x4 a, t_tuple b)
 {
 	t_tuple	result;
@@ -59,12 +76,28 @@ static inline t_tuple	inline_m4x4_multiply_tuple(t_m4x4 a, t_tuple b)
 	return (result);
 }
 
-static inline t_ray	inline_transform(t_ray r, t_m4x4 m)
+/**
+ * @brief Inline optimization for transforming a ray into object space.
+ * Avoids function call overhead during fast intersections.
+ *
+ * @param r the incident ray
+ * @param inv the inverse transformation matrix
+ * @return the transformed ray
+ */
+static inline t_ray	inline_transform(t_ray r, t_m4x4 inv)
 {
-	return ((t_ray){inline_m4x4_multiply_tuple(m, r.origin),
-		inline_m4x4_multiply_tuple(m, r.dir)});
+	return ((t_ray){inline_m4x4_multiply_tuple(inv, r.origin),
+		inline_m4x4_multiply_tuple(inv, r.dir)});
 }
 
+/**
+ * @brief Solves the quadratic equation for ray-cone intersection.
+ *
+ * @param cone pointer to the cone object
+ * @param ray transformed ray targeting the cone
+ * @param abc quadratic coefficients (a, b, c)
+ * @param hit pointer to store the closest valid intersection
+ */
 static inline void	intersect_cone_quad(t_cone *cone, t_ray ray, double abc[3],
 				t_intersect *hit)
 {
@@ -88,6 +121,14 @@ static inline void	intersect_cone_quad(t_cone *cone, t_ray ray, double abc[3],
 	intersect_caps_fast(cone, ray, hit);
 }
 
+/**
+ * @brief Fast overarching intersection check for a cone.
+ * Pre-calculates ray transformation and manages body and cap checks.
+ *
+ * @param cone pointer to the cone object
+ * @param ray incident world-space ray
+ * @param hit pointer to store the closest valid intersection
+ */
 void	intersect_cone_fast(t_cone *cone, t_ray ray, t_intersect *hit)
 {
 	double	abc[3];

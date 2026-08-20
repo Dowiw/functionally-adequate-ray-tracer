@@ -48,6 +48,14 @@ static inline double	inline_dot_product(t_tuple a, t_tuple b)
 	return (a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);
 }
 
+/**
+ * @brief Fast intersection check for a sphere.
+ * Uses geometric optimizations to resolve intersections efficiently.
+ *
+ * @param sphere pointer to the sphere object
+ * @param ray incident world-space ray
+ * @param hit pointer to store the resulting intersection
+ */
 void	intersect_sphere_fast(t_sphere *sphere, t_ray ray, t_intersect *hit)
 {
 	t_ray	local_ray;

@@ -12,6 +12,13 @@
 
 #include "minirt.h"
 
+/**
+ * @brief Transposes an arbitrary size matrix (swaps rows and columns).
+ *
+ * @param res pointer to the resulting transposed matrix
+ * @param m pointer to the source matrix
+ * @param size the dimension of the matrix
+ */
 static void	matrix_transpose(double *result, double *matrix, int rows,
 				int columns);
 
@@ -54,6 +61,13 @@ t_m4x4	m4x4_transpose(t_m4x4 matrix)
 	return (result);
 }
 
+/**
+ * @brief Transposes an arbitrary size matrix (swaps rows and columns).
+ *
+ * @param res pointer to the resulting transposed matrix
+ * @param m pointer to the source matrix
+ * @param size the dimension of the matrix
+ */
 static void	matrix_transpose(double *result, double *matrix, int rows,
 				int columns)
 {

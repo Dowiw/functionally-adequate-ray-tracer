@@ -13,6 +13,13 @@
 #include "libft/libft.h"
 #include "scene.h"
 
+/**
+ * @brief Pushes a parsing error message onto the scene's error stack.
+ *
+ * @param scene scene structure containing the error stack
+ * @param msg error message to push
+ * @return 0 indicating failure
+ */
 int	parse_error(t_scene *scene, char *error)
 {
 	unsigned int	size_to_move;

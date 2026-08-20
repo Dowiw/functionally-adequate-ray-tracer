@@ -25,6 +25,14 @@ static inline double	pow2(double d)
 	return (d * d);
 }
 
+/**
+ * @brief Fast check for ray intersection with the caps of a cylinder.
+ * Evaluates if the ray hits the end caps within the cylinder's radius.
+ *
+ * @param cylinder pointer to the cylinder object
+ * @param ray transformed ray targeting the cylinder
+ * @param hit pointer to store the closest valid intersection
+ */
 static inline void	intersect_caps_fast(t_cylinder *cyl, t_ray r,
 		t_intersect *hit)
 {
@@ -42,6 +50,14 @@ static inline void	intersect_caps_fast(t_cylinder *cyl, t_ray r,
 		*hit = (t_intersect){t, (t_object){CYLINDER, cyl}};
 }
 
+/**
+ * @brief Inline optimization for matrix-tuple multiplication.
+ * Avoids function call overhead for fast intersections.
+ *
+ * @param a the 4x4 matrix
+ * @param b the tuple to multiply
+ * @return the resulting transformed tuple
+ */
 static inline t_tuple	inline_m4x4_multiply_tuple(t_m4x4 a, t_tuple b)
 {
 	t_tuple	result;
@@ -65,12 +81,28 @@ static inline t_tuple	inline_m4x4_multiply_tuple(t_m4x4 a, t_tuple b)
 	return (result);
 }
 
-static inline t_ray	inline_transform(t_ray r, t_m4x4 m)
+/**
+ * @brief Inline optimization for transforming a ray into object space.
+ * Avoids function call overhead during fast intersections.
+ *
+ * @param r the incident ray
+ * @param inv the inverse transformation matrix
+ * @return the transformed ray
+ */
+static inline t_ray	inline_transform(t_ray r, t_m4x4 inv)
 {
-	return ((t_ray){inline_m4x4_multiply_tuple(m, r.origin),
-		inline_m4x4_multiply_tuple(m, r.dir)});
+	return ((t_ray){inline_m4x4_multiply_tuple(inv, r.origin),
+		inline_m4x4_multiply_tuple(inv, r.dir)});
 }
 
+/**
+ * @brief Fast overarching intersection check for a cylinder.
+ * Applies ray transformations and resolves both wall and cap intersections.
+ *
+ * @param cylinder pointer to the cylinder object
+ * @param ray incident world-space ray
+ * @param hit pointer to store the closest valid intersection
+ */
 void	intersect_cylinder_fast(t_cylinder *cyl, t_ray ray,
 		t_intersect *hit)
 {

@@ -16,6 +16,14 @@
 #include "ray.h"
 #include "util/intersections.h"
 
+/**
+ * @brief Finds the closest valid intersection for a ray across the entire scene.
+ * Uses fast, optimized intersection routines for all shapes.
+ *
+ * @param scene pointer to the populated scene
+ * @param ray the incident ray to test
+ * @return the closest intersection hit, or an empty intersection if none found
+ */
 t_intersect	intersect_scene_and_hit(t_scene *scene, t_ray ray)
 {
 	t_intersect	result;

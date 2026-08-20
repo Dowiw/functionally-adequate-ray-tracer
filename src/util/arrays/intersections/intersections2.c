@@ -13,6 +13,13 @@
 #include <stddef.h>
 #include "types.h"
 
+/**
+ * @brief Sorts an array of intersections by their t-value in ascending order.
+ * Uses bubble sort for simple ordering of intersection distances.
+ *
+ * @param list array of intersections to sort
+ * @param count number of elements in the list
+ */
 void	intersections_sort(t_intersects *xs)
 {
 	int			i;

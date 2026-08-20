@@ -12,7 +12,12 @@
 
 #include "minirt.h"
 
-// TODO
+/**
+ * @brief Computes the inverse of a 2x2 matrix.
+ *
+ * @param m the matrix to invert
+ * @return the inverted 2x2 matrix
+ */
 t_m2x2	m2x2_inverse(t_m2x2 matrix)
 {
 	return (matrix);

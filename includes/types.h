@@ -35,16 +35,25 @@ typedef t_tuple	t_point;
 typedef t_tuple	t_vector;
 typedef t_tuple	t_color;
 
+/**
+ * @brief 2by2 Matrix
+ */
 typedef struct s_m2x2
 {
 	double			m[2][2];
 }				t_m2x2;
 
+/**
+ * @brief 3by3 Matrix
+ */
 typedef struct s_m3x3
 {
 	double			m[3][3];
 }				t_m3x3;
 
+/**
+ * @brief 4by4 Matrix
+ */
 typedef struct s_m4x4
 {
 	double			m[4][4];
@@ -60,6 +69,10 @@ typedef struct s_ray
 	t_vector	dir;
 }				t_ray;
 
+/**
+ * @brief Shapes enumaration.
+ * No modifications yet. Only ordinal.
+ */
 enum	e_shape
 {
 	SPHERE,
@@ -68,6 +81,10 @@ enum	e_shape
 	CONE
 };
 
+/**
+ * @brief "Class"-like struct for shapes
+ * 
+ */
 typedef struct s_object
 {
 	enum e_shape		type;
@@ -93,6 +110,9 @@ typedef struct s_intersects
 	int			count;
 }				t_intersects;
 
+/**
+ * @brief Material like how your table feels and looks.
+ */
 typedef struct s_material
 {
 	t_color		color;
@@ -102,12 +122,18 @@ typedef struct s_material
 	double		shininess;
 }				t_material;
 
+/**
+ * @brief Ambient light as parsed in .rt
+ */
 typedef struct s_ambience
 {
 	double		lighting;
 	int			color;
 }				t_ambience;
 
+/**
+ * @brief Camera. Smile.
+ */
 typedef struct s_camera
 {
 	t_point		pos;
@@ -131,12 +157,18 @@ typedef struct s_camera
 	double		pixel_size;
 }				t_camera;
 
+/**
+ * @brief Light. more specfically, a point light.
+ */
 typedef struct s_light
 {
 	t_point		pos;
 	t_color		intensity;
 }				t_light;
 
+/**
+ * @brief Sphere.
+ */
 typedef struct s_sphere
 {
 	t_point		pos;
@@ -147,6 +179,10 @@ typedef struct s_sphere
 	t_material	material;
 }				t_sphere;
 
+/**
+ * @brief Mathematical Plane.
+ * The one with no wings.
+ */
 typedef struct s_plane
 {
 	t_point		pos;
@@ -156,6 +192,10 @@ typedef struct s_plane
 	t_m4x4		inverse;
 }				t_plane;
 
+/**
+ * @brief Cylinder.
+ * ein Vater.
+ */
 typedef struct s_cylinder
 {
 	t_point		pos;
@@ -170,6 +210,10 @@ typedef struct s_cylinder
 	t_m4x4		inverse;
 }				t_cylinder;
 
+/**
+ * @brief Cone.
+ * Cylinder's child.
+ */
 typedef struct s_cone
 {
 	t_point		pos;
@@ -241,6 +285,9 @@ typedef struct s_mlx
 	int		endian;
 }				t_mlx;
 
+/**
+ * @brief Pre-computations
+ */
 typedef struct s_comps
 {
 	double		t;
@@ -252,6 +299,9 @@ typedef struct s_comps
 	int			inside;
 }				t_comps;
 
+/**
+ * @brief Render iterations.
+ */
 typedef struct s_iter
 {
 	int		res;
@@ -261,6 +311,9 @@ typedef struct s_iter
 	int		pixels;
 }				t_iter;
 
+/**
+ * @brief Key input as integers.
+ */
 typedef struct s_input
 {
 	int				key_w;
@@ -277,6 +330,11 @@ typedef struct s_input
 	struct timeval	last_time;
 }				t_input;
 
+/**
+ * @brief Everything, everywhere, all at once.
+ *
+ * > non-profit use.
+ */
 typedef struct s_data
 {
 	t_scene	scene;

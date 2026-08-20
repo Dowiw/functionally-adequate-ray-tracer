@@ -52,6 +52,13 @@ int	parse_scene(t_scene *scene, char *file)
 	return (1);
 }
 
+/**
+ * @brief Reads and parses a scene file descriptor line by line.
+ *
+ * @param scene pointer to the scene to populate
+ * @param fd open file descriptor
+ * @return 1 on success, 0 on failure
+ */
 static int	parse_scene_fd(t_scene *scene, int fd)
 {
 	char	*line;
@@ -79,6 +86,13 @@ static int	parse_scene_fd(t_scene *scene, int fd)
 	return (1);
 }
 
+/**
+ * @brief Parses a single line from the scene description file.
+ *
+ * @param scene pointer to the scene to populate
+ * @param line raw string line
+ * @return 1 on success, 0 on failure
+ */
 static int	parse_scene_line(t_scene *scene, char *line)
 {
 	int		result;
@@ -92,6 +106,14 @@ static int	parse_scene_line(t_scene *scene, char *line)
 	return (result);
 }
 
+/**
+ * @brief Dispatches the parsed tokens of a line to the appropriate parser.
+ *
+ * @param scene pointer to the scene
+ * @param params array of string tokens from the line
+ * @param line original line string for error tracking
+ * @return 1 on success, 0 on failure
+ */
 static int	parse_scene_params(t_scene *scene, char **params)
 {
 	char	*id;
@@ -116,6 +138,13 @@ static int	parse_scene_params(t_scene *scene, char **params)
 	return (parse_error(scene, "Unrecognized identifier"));
 }
 
+/**
+ * @brief Logs an error message to standard error during parsing.
+ *
+ * @param scene pointer to the scene for logging
+ * @param msg error message to display
+ * @return 0 indicating failure
+ */
 static int	error(t_scene *scene, char *msg)
 {
 	int	i;

@@ -13,8 +13,25 @@
 #include "libft/libft.h"
 #include "parsing.h"
 
+/**
+ * @brief Parses the integer part of a double before the decimal point.
+ * Handles negative signs and invalid characters.
+ *
+ * @param str string containing the number
+ * @param res pointer to store the integer portion
+ * @param sign pointer to store the sign (-1 or 1)
+ * @return the remaining string after the integer part, or NULL on error
+ */
 static int	parse_double_before_decimal(double *num, char *str, int *i,
 				int sign);
+
+/**
+ * @brief Parses the fractional part of a double after the decimal point.
+ *
+ * @param str string containing the fractional digits
+ * @param res pointer to store the combined double value
+ * @return 1 on success, 0 on error
+ */
 static int	parse_double_after_decimal(double *num, char *str, int *i,
 				int sign);
 
@@ -65,6 +82,15 @@ int	parse_double_range(t_scene *scene, double *num, char *str,
 	return (1);
 }
 
+/**
+ * @brief Parses the integer part of a double before the decimal point.
+ * Handles negative signs and invalid characters.
+ *
+ * @param str string containing the number
+ * @param res pointer to store the integer portion
+ * @param sign pointer to store the sign (-1 or 1)
+ * @return the remaining string after the integer part, or NULL on error
+ */
 static int	parse_double_before_decimal(double *num, char *str, int *i,
 				int sign)
 {
@@ -81,6 +107,13 @@ static int	parse_double_before_decimal(double *num, char *str, int *i,
 	return (1);
 }
 
+/**
+ * @brief Parses the fractional part of a double after the decimal point.
+ *
+ * @param str string containing the fractional digits
+ * @param res pointer to store the combined double value
+ * @return 1 on success, 0 on error
+ */
 static int	parse_double_after_decimal(double *num, char *str, int *i,
 				int sign)
 {

@@ -39,6 +39,15 @@ t_m4x4	view_transform(t_point from, t_point to, t_vector up)
 	return (result);
 }
 
+/**
+ * @brief Constructs an orientation matrix based on left, true_up, and forward
+ * vectors.
+ *
+ * @param left the left vector (x axis)
+ * @param true_up the up vector (y axis)
+ * @param forward the forward vector (z axis)
+ * @return the constructed 4x4 orientation matrix
+ */
 static t_m4x4	view_orientation(t_tuple forward, t_tuple up, t_tuple left)
 {
 	t_m4x4	result;

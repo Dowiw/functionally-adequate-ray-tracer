@@ -50,6 +50,14 @@ int	parse_sphere(t_scene *scene, char **params)
 	return (1);
 }
 
+/**
+ * @brief Finalizes a sphere by computing its transformation matrices.
+ * Applies translation and uniform scaling based on its diameter.
+ *
+ * @param sphere pointer to the sphere to finalize
+ * @param pos position of the sphere
+ * @param d diameter of the sphere
+ */
 static void	finish_sphere(t_sphere *sphere)
 {
 	double	radius;
@@ -66,6 +74,14 @@ static void	finish_sphere(t_sphere *sphere)
 			blue(sphere->color) / 255.0);
 }
 
+/**
+ * @brief Helper to handle parsing errors for spheres and free memory.
+ *
+ * @param error string describing the error
+ * @param arr split string array to free
+ * @param scene scene pointer for error logging
+ * @return 0 indicating failure
+ */
 static int	parse_sphere_error(t_scene *scene, t_sphere *sphere, char *error)
 {
 	free(sphere);

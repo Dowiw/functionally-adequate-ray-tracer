@@ -48,6 +48,13 @@ t_vector	normal_at(t_object *obj, t_point p)
 	return (calc_norm(world_normal));
 }
 
+/**
+ * @brief Retrieves the inverse transformation matrix of a generic shape
+ * object.
+ *
+ * @param obj pointer to the object
+ * @return the inverse 4x4 matrix
+ */
 static t_m4x4	get_inverse_transform(t_object *obj)
 {
 	if (obj->type == SPHERE)
@@ -61,6 +68,14 @@ static t_m4x4	get_inverse_transform(t_object *obj)
 	return (m4x4_identity());
 }
 
+/**
+ * @brief Calculates the local surface normal of a generic object at a
+ * specific point.
+ *
+ * @param obj pointer to the object
+ * @param point the local point on the surface
+ * @return the local normal vector
+ */
 static t_vector	local_normal_at(t_object *obj, t_point local_point)
 {
 	if (obj->type == SPHERE)
@@ -74,6 +89,13 @@ static t_vector	local_normal_at(t_object *obj, t_point local_point)
 	return ((t_tuple){0.0, 0.0, 0.0, VECTOR});
 }
 
+/**
+ * @brief Calculates the local normal on a cylinder's surface or caps.
+ *
+ * @param cylinder pointer to the cylinder object
+ * @param point the local point on the cylinder
+ * @return the local normal vector
+ */
 static t_vector	local_normal_cyl(t_cylinder *cyl, t_point local_point)
 {
 	double		dist;
@@ -86,6 +108,13 @@ static t_vector	local_normal_cyl(t_cylinder *cyl, t_point local_point)
 	return ((t_tuple){local_point.x, 0.0, local_point.z, VECTOR});
 }
 
+/**
+ * @brief Calculates the local normal on a cone's surface or caps.
+ *
+ * @param cone pointer to the cone object
+ * @param point the local point on the cone
+ * @return the local normal vector
+ */
 static t_vector	local_normal_cone(t_cone *cone, t_point local_point)
 {
 	double		dist;
