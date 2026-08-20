@@ -55,13 +55,15 @@ int	parse_int(t_scene *scene, int *num, char *str)
  * Parses the given 'str' (see parse_int) and checks the result against the
  * given range 'min' and 'max'.
  */
-int	parse_int_range(t_scene *scene, int *num, char *str, int min, int max)
+int	parse_int_range(t_scene *scene, char *str, int min, int max)
 {
-	if (!parse_int(scene, num, str))
-		return (0);
-	if (*num < min)
-		return (parse_error(scene, "Number is too small"));
-	if (*num > max)
-		return (parse_error(scene, "Number is too big"));
-	return (1);
+	int	num;
+
+	if (!parse_int(scene, &num, str))
+		return (-1);
+	if (num < min)
+		return (parse_error(scene, "Number is too small"), -1);
+	if (num > max)
+		return (parse_error(scene, "Number is too big"), -1);
+	return (num);
 }
