@@ -51,6 +51,11 @@ void	tick_input(t_data *data)
 
 	input = &data->input;
 	gettimeofday(&time, NULL);
+	if (input->last_time.tv_sec == 0)
+	{
+		input->last_time = time;
+		return ;
+	}
 	usecs = (time.tv_sec - input->last_time.tv_sec) * 1000000;
 	usecs += time.tv_usec - input->last_time.tv_usec;
 	delta = usecs / 1000000.0;
