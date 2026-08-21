@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:49 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/21 12:29:17 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	finish_plane(t_plane *plane, int rbg)
 	plane->material.color = color(red(rbg) / 255.0,
 			green(rbg) / 255.0,
 			blue(rbg) / 255.0);
+	plane->material.ambient = 1.0;
 }
 
 /**
