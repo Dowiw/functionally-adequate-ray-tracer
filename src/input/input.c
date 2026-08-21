@@ -73,6 +73,8 @@ void	tick_input(t_data *data)
 	usecs = (time.tv_sec - input->last_time.tv_sec) * 1000000;
 	usecs += time.tv_usec - input->last_time.tv_usec;
 	delta = usecs / 1000000.0;
+	if (delta > 0.05)
+		delta = 0.05;
 	process_input(data, SPEED * delta, SENSITIVITY * delta);
 	input->last_time = time;
 }
