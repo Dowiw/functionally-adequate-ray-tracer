@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:17 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 19:23:38 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/21 12:41:41 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ static int	parse_scene_fd(t_scene *scene, int fd)
 		line = string_remove_suffix(line, "\n");
 		if (line == NULL)
 			return (parse_error(scene, "Allocation Failure"));
-		if (!parse_scene_line(scene, line))
-		{
+		if (scene->error_line == NULL && !parse_scene_line(scene, line))
 			scene->error_line = line;
-			return (0);
-		}
-		free(line);
+		else
+			free(line);
 		line = get_next_line(fd);
 	}
+	if (scene->error_line != NULL)
+		return (0);
 	if (!scene->has_ambience)
 		return (parse_error(scene, "Missing ambience declaration"));
 	if (!scene->has_camera)
