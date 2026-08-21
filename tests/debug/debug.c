@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 14:39:44 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/06 15:32:24 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:42:34 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_tuple_ln(t_tuple tuple)
 	printf("\n");
 }
 
-void	print_matrix4x4_ln(t_matrix4x4 matrix)
+void	print_m4x4_ln(t_m4x4 matrix)
 {
 	printf("[%f, %f, %f, %f]\n", matrix.m[0][0], matrix.m[0][1], matrix.m[0][2], matrix.m[0][3]);
 	printf("[%f, %f, %f, %f]\n", matrix.m[1][0], matrix.m[1][1], matrix.m[1][2], matrix.m[1][3]);
@@ -56,15 +56,15 @@ void	print_sphere(t_sphere *sphere)
 	printf("{\n");
 
 	printf("center: ");
-	print_tuple_ln(sphere->center);
+	print_tuple_ln(sphere->pos);
 
 	printf("material: ");
 	print_material(sphere->material);
 
 	printf("transform: ");
-	print_matrix4x4_ln(sphere->transform);
+	print_m4x4_ln(sphere->transform);
 
-	printf("diameter: %f", sphere->diameter);
+	printf("diameter: %f", sphere->d);
 
 	printf("}\n");
 }
@@ -107,7 +107,7 @@ void	print_camera(t_camera camera)
 	printf("fov: %f\n", camera.fov);
 
 	printf("transform: ");
-	print_matrix4x4_ln(camera.transform);
+	print_m4x4_ln(camera.transform);
 
 	printf("field_of_view: %f\n", camera.field_of_view);
 
@@ -173,7 +173,7 @@ void	print_ray(t_ray ray)
 	printf("origin: ");
 	print_tuple(ray.origin);
 	printf(", direction: ");
-	print_tuple(ray.direction);
+	print_tuple(ray.dir);
 	printf("}");
 }
 
@@ -183,7 +183,7 @@ void	print_ray_ln(t_ray ray)
 	printf("\n");
 }
 
-void	print_intersections(t_intersection **intersections)
+void	print_intersects(t_intersect **intersections)
 {
 	int	i;
 

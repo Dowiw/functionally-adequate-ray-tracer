@@ -6,15 +6,20 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 08:57:56 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/19 09:02:54 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:23 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_matrix2x2	matrix2x2_identity(void)
+/**
+ * @brief Returns a 2x2 identity matrix.
+ *
+ * @return 2x2 identity matrix
+ */
+t_m2x2	m2x2_identity(void)
 {
-	t_matrix2x2	result;
+	t_m2x2	result;
 
 	result.m[0][0] = 1.0;
 	result.m[0][1] = 0.0;
@@ -23,9 +28,14 @@ t_matrix2x2	matrix2x2_identity(void)
 	return (result);
 }
 
-t_matrix3x3	matrix3x3_identity(void)
+/**
+ * @brief Returns a 3x3 identity matrix.
+ *
+ * @return 3x3 identity matrix
+ */
+t_m3x3	m3x3_identity(void)
 {
-	t_matrix3x3	result;
+	t_m3x3	result;
 
 	result.m[0][0] = 1.0;
 	result.m[0][1] = 0.0;
@@ -39,9 +49,14 @@ t_matrix3x3	matrix3x3_identity(void)
 	return (result);
 }
 
-t_matrix4x4	matrix4x4_identity(void)
+/**
+ * @brief Returns a 4x4 identity matrix.
+ *
+ * @return 4x4 identity matrix
+ */
+t_m4x4	m4x4_identity(void)
 {
-	t_matrix4x4	result;
+	t_m4x4	result;
 
 	result.m[0][0] = 1.0;
 	result.m[0][1] = 0.0;

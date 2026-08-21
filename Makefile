@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+         #
+#    By: kmonjard <kmonjard@student.42berlin.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/09 20:02:32 by kmonjard          #+#    #+#              #
-#    Updated: 2026/08/18 16:48:27 by sstark           ###   ########.fr        #
+#    Updated: 2026/08/20 22:24:10 by kmonjard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ HEADERS = minirt.h \
 	ray.h \
 	rendering.h \
 	scene.h \
+	types.h \
 	util/arrays.h \
 	util/colors.h \
 	util/cones.h \
@@ -34,8 +35,8 @@ HEADERS = minirt.h \
 
 SOURCE_DIR = src
 SOURCES = main.c \
-	debug/debug.c \
 	graphics/canvas.c \
+	graphics/hooks.c \
 	graphics/mlx.c \
 	input/controls.c \
 	input/input.c \
@@ -89,7 +90,6 @@ SOURCES = main.c \
 	scene/camera.c \
 	scene/scene.c \
 	util/arrays/arrays1.c \
-	util/arrays/arrays2.c \
 	util/arrays/cones/cones.c \
 	util/arrays/cones/cone_utils.c \
 	util/arrays/cylinders/cylinders.c \
@@ -97,6 +97,7 @@ SOURCES = main.c \
 	util/arrays/intersections/intersections1.c \
 	util/arrays/intersections/intersections2.c \
 	util/arrays/objects/normal.c \
+	util/arrays/objects/reflect.c \
 	util/arrays/planes/planes.c \
 	util/arrays/spheres/sphere.c \
 	util/colors/colors_grayscale.c \
@@ -111,7 +112,6 @@ TEST_DIR = tests
 TESTS = main.c \
 	test_tuples.c \
 	test_colors.c \
-	test_canvas.c \
 	test_matrices.c \
 	test_transformations.c \
 	test_rays.c \

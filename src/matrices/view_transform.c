@@ -6,13 +6,13 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 15:49:14 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 18:53:53 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:58:56 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_matrix4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left);
+static t_m4x4	view_orientation(t_tuple forward, t_tuple up, t_tuple left);
 
 /**
  * @brief Returns the view transformation matrix for the camera.
@@ -22,23 +22,35 @@ static t_matrix4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left);
  * @param from
  * @param to
  * @param up
- * @return t_matrix4x4
+ * @return t_m4x4
  */
-t_matrix4x4	view_transform(t_point from, t_point to, t_vector up)
+t_m4x4	view_transform(t_point from, t_point to, t_vector up)
 {
-	t_tuple		forward;
-	t_tuple		left;
-	t_tuple		true_up;
+	t_m4x4	result;
+	t_tuple	forward;
+	t_tuple	left;
+	t_tuple	true_up;
 
 	forward = calc_norm(tuples_sub(to, from));
 	left = cross_product(forward, calc_norm(up));
 	true_up = cross_product(left, forward);
-	return (matrix4x4_multiply(view_orientation(forward, true_up, left), matrix4x4_translation(-from.x, -from.y, -from.z)));
+	result = view_orientation(forward, true_up, left);
+	result = m4x4_multiply(result, m4x4_translation(-from.x, -from.y, -from.z));
+	return (result);
 }
 
-static t_matrix4x4 view_orientation(t_tuple forward, t_tuple up, t_tuple left)
+/**
+ * @brief Constructs an orientation matrix based on left, true_up, and forward
+ * vectors.
+ *
+ * @param left the left vector (x axis)
+ * @param true_up the up vector (y axis)
+ * @param forward the forward vector (z axis)
+ * @return the constructed 4x4 orientation matrix
+ */
+static t_m4x4	view_orientation(t_tuple forward, t_tuple up, t_tuple left)
 {
-	t_matrix4x4	result;
+	t_m4x4	result;
 
 	result.m[0][0] = left.x;
 	result.m[0][1] = left.y;

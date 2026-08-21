@@ -77,6 +77,13 @@ t_tuple	view_pixel(t_canvas *canvas, int x, int y)
 	return (empty);
 }
 
+/**
+ * @brief Writes the pixel color data to a PPM image format stream.
+ * Handles formatting rules for PPM, wrapping lines when necessary.
+ *
+ * @param fd file descriptor to write to
+ * @param canvas pointer to the rendered canvas containing the pixels
+ */
 static void	write_ppm_pixels(t_canvas *canvas, int fd)
 {
 	int		x;

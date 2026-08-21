@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.h                                             :+:      :+:    :+:   */
+/*   reflect.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/11 13:40:31 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 19:44:54 by sstark           ###   ########.fr       */
+/*   Created: 2026/08/19 20:27:36 by sstark            #+#    #+#             */
+/*   Updated: 2026/08/19 20:27:50 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_H
-# define DATA_H
-
-# include "input.h"
-# include "minirt.h"
-# include "parsing.h"
-# include "rendering.h"
+#include "minirt.h"
 
 /**
- * @brief Data structure for all data passed to mlx loop
+ * @brief Reflect the vector passed based on the normal given
+ *
+ * @param v vector
+ * @param n normal vector
+ * @return t_vector reflected vector
  */
-typedef struct s_data
+t_vector	reflect(t_vector v, t_vector n)
 {
-	t_scene 	scene;
-	t_mlx		mlx;
-	t_iter		iter;
-	t_input		input;
-}				t_data;
+	t_vector	r;
+	double		dot;
 
-#endif
+	dot = dot_product(v, n);
+	r = tuples_sub(v, tuple_mult(tuple_mult(n, 2), dot));
+	return (r);
+}

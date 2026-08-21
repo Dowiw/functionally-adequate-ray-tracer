@@ -6,25 +6,40 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 11:08:38 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/10 17:06:23 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/19 18:50:30 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include "scene.h"
-#include "util/arrays.h"
+#include "types.h"
 
-int		intersections_compare(t_intersection *a, t_intersection *b)
+/**
+ * @brief Sorts an array of intersections by their t-value in ascending order.
+ * Uses bubble sort for simple ordering of intersection distances.
+ *
+ * @param list array of intersections to sort
+ * @param count number of elements in the list
+ */
+void	intersections_sort(t_intersects *xs)
 {
-	if (a->t > b->t)
-		return (1);
-	if (a->t < b->t)
-		return (-1);
-	return (0);
-}
+	int			i;
+	t_intersect	*temp;
 
-void	intersections_sort(t_intersections *xs)
-{
-	if (xs != NULL && xs->list != NULL)
-		arrays_sort((void **) xs->list, (int (*)(void *, void *)) &intersections_compare);
+	if (xs == NULL || xs->list == NULL)
+		return ;
+	if (xs->count < 2)
+		return ;
+	i = 0;
+	while (i < xs->count - 1)
+	{
+		if (xs->list[i]->t > xs->list[i + 1]->t)
+		{
+			temp = xs->list[i];
+			xs->list[i] = xs->list[i + 1];
+			xs->list[i + 1] = temp;
+			i = 0;
+			continue ;
+		}
+		i++;
+	}
 }

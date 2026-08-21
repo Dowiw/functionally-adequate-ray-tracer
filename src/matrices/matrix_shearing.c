@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 13:00:38 by sstark            #+#    #+#             */
-/*   Updated: 2026/06/19 13:39:17 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:13:06 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
  * @param params - Array of 6 doubles containing xy, xz, yx, yz, zx, zy
  * @return Shearing Matrix
  */
-t_matrix4x4	matrix4x4_shearing(double *params)
+t_m4x4	m4x4_shearing(double *params)
 {
-	t_matrix4x4	result;
+	t_m4x4	result;
 
-	result = matrix4x4_identity();
+	result = m4x4_identity();
 	result.m[0][1] = params[0];
 	result.m[0][2] = params[1];
 	result.m[1][0] = params[2];

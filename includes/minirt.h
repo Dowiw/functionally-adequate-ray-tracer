@@ -6,278 +6,117 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:30:47 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 15:49:07 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 18:58:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include "types.h"
+
 # ifndef UNIT_EPSILON
 #  define UNIT_EPSILON 0.00001
 # endif
 
-# define VECTOR 0.0
-# define POINT 1.0
-# define INVALID_NEG -1.0
-# define INVALID_POS 2.0
-# define COLOR 3.0
-
-# define PI 3.14159265358979323846
-
-# ifndef WIN_W
-#  define WIN_W 960
+# ifndef VECTOR
+#  define VECTOR 0.0
+# endif
+# ifndef POINT
+#  define POINT 1.0
+# endif
+# ifndef INVALID_NEG
+#  define INVALID_NEG -1.0
+# endif
+# ifndef INVALID_POS
+#  define INVALID_POS 2.0
+# endif
+# ifndef COLOR
+#  define COLOR 3.0
 # endif
 
-# ifndef WIN_H
-#  define WIN_H 540
+# ifndef PI
+#  define PI 3.14159265358979323846
 # endif
 
-# define PIXELS_PER_FRAME 1000
+# ifndef PIXELS_PER_FRAME
+#  define PIXELS_PER_FRAME 1000
+# endif
 
-# define KEY_ESC 65307
-# define KEY_UP 65362
-# define KEY_DOWN 65364
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_SHIFT 65505
-# define KEY_SPACE 32
-# define KEY_Z 122
+int			compare_doubles(const double a, const double b);
+int			compare_tuples(const t_tuple *a, const t_tuple *b);
 
-struct s_data;
+t_point		point(double x, double y, double z);
+t_vector	vector(double x, double y, double z);
+t_color		color(double x, double y, double z);
 
-/**
- * @brief Dynamic structure that represents a lot of things
- * from coordinates to colors.
- */
-typedef struct s_tuple
-{
-	double	x;	// x-coordinate, red
-	double	y;	// y-coordinate, green
-	double	z;	// z-coordinate, blue
-	double	w;	// type, extra value
-}				t_tuple;
+double		calc_mag(const t_tuple a);
+double		dot_product(const t_tuple a, const t_tuple b);
+t_tuple		calc_norm(const t_tuple a);
+t_tuple		cross_product(const t_tuple a, const t_tuple b);
 
-typedef t_tuple	t_point;
-typedef t_tuple	t_vector;
-typedef t_tuple	t_color;
+t_tuple		tuples_add(const t_tuple a, const t_tuple b);
+t_tuple		tuples_sub(const t_tuple a, const t_tuple b);
+t_tuple		tuple_neg(const t_tuple a);
+t_tuple		tuple_mult(const t_tuple a, const double scalar);
+t_tuple		tuple_div(const t_tuple a, const double scalar);
 
-/**
- * @brief Structure for rays.
- * Contains origin and direction.
- */
-typedef struct s_ray
-{
-	t_point		origin;		// starting point of a ray
-	t_vector	direction;	// where it points
-}				t_ray;
+t_tuple		shur_prod(const t_tuple color_a, const t_tuple color_b);
+int			clamp_color(double color);
+t_color		color_black(void);
 
-enum	e_object_type
-{
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	CONE
-};
+t_m2x2		m2x2_identity(void);
+t_m3x3		m3x3_identity(void);
+t_m4x4		m4x4_identity(void);
 
-typedef struct s_object
-{
-	enum e_object_type	type;
-	void				*object;
-}					t_object;
+int			m2x2_compare(t_m2x2 a, t_m2x2 b);
+int			m3x3_compare(t_m3x3 a, t_m3x3 b);
+int			m4x4_compare(t_m4x4 a, t_m4x4 b);
 
-/**
- * @brief Struct for an intersection.
- */
-typedef struct s_intersection
-{
-	double		t;		// time
-	t_object	obj;	// the object
-}					t_intersection;
+t_m2x2		m2x2_multiply(t_m2x2 a, t_m2x2 b);
+t_m3x3		m3x3_multiply(t_m3x3 a, t_m3x3 b);
+t_m4x4		m4x4_multiply(t_m4x4 a, t_m4x4 b);
 
-/**
- * @brief Struct for all intersections.
- * Contains a list of t_intersection and the amount.
- */
-typedef struct s_intersections
-{
-	t_intersection	**list;
-	int				count;
-}				t_intersections;
+t_tuple		m4x4_multiply_tuple(t_m4x4 a, t_tuple b);
 
-/**
- * @brief Structure for a canvas.
- * Allocates pixels in memory (width * height).
- */
-typedef struct s_canvas
-{
-	int		width;		// width of canvas
-	int		height;		// height of canvas
-	t_tuple	*pixels;	// 1D array of (width * height) representing colors
-}				t_canvas;
+t_m2x2		m2x2_transpose(t_m2x2 matrix);
+t_m3x3		m3x3_transpose(t_m3x3 matrix);
+t_m4x4		m4x4_transpose(t_m4x4 matrix);
 
-/**
- * @brief Structure for mlx data
- */
-typedef struct s_mlx
-{
-	void	*mlx_ptr;	// pointer to mlx lib that allocates a XWindow Display
-	void	*win_ptr;	// pointer to window allocated
-	void	*img_ptr;	// pointer to image buffer
-	char	*img_data;	// pointer to same img but as characters
-	int		bpp;		// bits per pixel
-	int		size_line;	// size of each line of pixes
-	int		endian;		// endian necessary for alignment
-}				t_mlx;
+double		m2x2_determinant(t_m2x2 matrix);
+double		m3x3_determinant(t_m3x3 matrix);
+double		m4x4_determinant(t_m4x4 matrix);
 
-/** ######################################################################### *
- *  TUPLES                                                                  # *
- *  ######################################################################### */
+t_m2x2		m3x3_submatrix(t_m3x3 matrix, int row, int column);
+t_m3x3		m4x4_submatrix(t_m4x4 matrix, int row, int column);
 
-// tuple_compare.c
+double		m3x3_minor(t_m3x3 matrix, int row, int column);
+double		m4x4_minor(t_m4x4 matrix, int row, int column);
 
-int					compare_doubles(const double a, const double b);
-int					compare_tuples(const t_tuple *a, const t_tuple *b);
+double		m3x3_cofactor(t_m3x3 matrix, int row, int column);
+double		m4x4_cofactor(t_m4x4 matrix, int row, int column);
 
-// tuple_constructs.c
+t_m2x2		m2x2_inverse(t_m2x2 matrix);
+t_m3x3		m3x3_inverse(t_m3x3 matrix);
+t_m4x4		m4x4_inverse(t_m4x4 matrix);
 
-t_point				point(double x, double y, double z);
-t_vector			vector(double x, double y, double z);
-t_color				color(double x, double y, double z);
+t_m4x4		m4x4_translation(double x, double y, double z);
 
-// tuple_utils.c
+t_m4x4		m4x4_scaling(double x, double y, double z);
 
-double				calc_mag(const t_tuple a);
-double				dot_product(const t_tuple a, const t_tuple b);
-t_tuple				calc_norm(const t_tuple a);
-t_tuple				cross_product(const t_tuple a, const t_tuple b);
+t_m4x4		m4x4_rotation_x(double radians);
+t_m4x4		m4x4_rotation_y(double radians);
+t_m4x4		m4x4_rotation_z(double radians);
+t_m4x4		m4x4_rotation(t_vector direction);
 
-// tuple_operations.c
+t_m4x4		m4x4_shearing(double *params);
 
-t_tuple				tuples_add(const t_tuple a, const t_tuple b);
-t_tuple				tuples_sub(const t_tuple a, const t_tuple b);
-t_tuple				tuple_neg(const t_tuple a);
-t_tuple				tuple_mult(const t_tuple a, const double scalar);
-t_tuple				tuple_div(const t_tuple a, const double scalar);
+t_m4x4		view_transform(t_point from, t_point to, t_vector up);
 
-/** ######################################################################### *
- *  COLORS                                                                  # *
- *  ######################################################################### */
+t_point		position(t_ray ray, double time);
+t_ray		transform(t_ray r, t_m4x4 m);
+t_ray		ray(t_point origin, t_vector direction);
 
-// colors_util.c
-
-t_tuple				shur_prod(const t_tuple color_a, const t_tuple color_b);
-int					clamp_color(double color);
-
-// colors_grayscale.c
-
-t_color				color_black(void);
-
-/** ######################################################################### *
- *  GRAPHICS                                                                # *
- *  ######################################################################### */
-
-int					init_mlx_lib(t_mlx *mlx, struct s_data *data);
-void				init_mlx(t_mlx *mlx);
-int					on_key_press(int keycode, void *param);
-int					on_key_release(int keycode, void *param);
-int					on_close(void *param);
-int					destroy_mlx(t_mlx *mlx);
-
-void				move(struct s_data *data, t_vector vec);
-void				rotate_horizontal(struct s_data *data, double radians);
-void				rotate_vertical(struct s_data *data, double radians);
-
-int					canvas_create(t_canvas *canvas, int width, int height);
-void				write_pixel(t_canvas *canvas, int x, int y, t_tuple color);
-t_tuple				view_pixel(t_canvas *canvas, int x, int y);
-char				*canvas_to_ppm(t_canvas *canvas);
-
-/** ######################################################################### *
- *  MATRICES                                                                # *
- *  ######################################################################### */
-
-typedef struct s_matrix2x2
-{
-	double			m[2][2];
-}				t_matrix2x2;
-
-typedef struct s_matrix3x3
-{
-	double			m[3][3];
-}				t_matrix3x3;
-
-typedef struct s_matrix4x4
-{
-	double			m[4][4];
-}				t_matrix4x4;
-
-t_matrix2x2			matrix2x2_identity(void);
-t_matrix3x3			matrix3x3_identity(void);
-t_matrix4x4			matrix4x4_identity(void);
-
-int					matrix2x2_compare(t_matrix2x2 a, t_matrix2x2 b);
-int					matrix3x3_compare(t_matrix3x3 a, t_matrix3x3 b);
-int					matrix4x4_compare(t_matrix4x4 a, t_matrix4x4 b);
-
-t_matrix2x2			matrix2x2_multiply(t_matrix2x2 a, t_matrix2x2 b);
-t_matrix3x3			matrix3x3_multiply(t_matrix3x3 a, t_matrix3x3 b);
-t_matrix4x4			matrix4x4_multiply(t_matrix4x4 a, t_matrix4x4 b);
-
-t_tuple				matrix4x4_multiply_tuple(t_matrix4x4 a, t_tuple b);
-
-t_matrix2x2			matrix2x2_transpose(t_matrix2x2 matrix);
-t_matrix3x3			matrix3x3_transpose(t_matrix3x3 matrix);
-t_matrix4x4			matrix4x4_transpose(t_matrix4x4 matrix);
-
-double				matrix2x2_determinant(t_matrix2x2 matrix);
-double				matrix3x3_determinant(t_matrix3x3 matrix);
-double				matrix4x4_determinant(t_matrix4x4 matrix);
-
-t_matrix2x2			matrix3x3_submatrix(t_matrix3x3 matrix, int row,
-						int column);
-t_matrix3x3			matrix4x4_submatrix(t_matrix4x4 matrix, int row,
-						int column);
-
-double				matrix3x3_minor(t_matrix3x3 matrix, int row, int column);
-double				matrix4x4_minor(t_matrix4x4 matrix, int row, int column);
-
-double				matrix3x3_cofactor(t_matrix3x3 matrix, int row, int column);
-double				matrix4x4_cofactor(t_matrix4x4 matrix, int row, int column);
-
-t_matrix2x2			matrix2x2_inverse(t_matrix2x2 matrix);
-t_matrix3x3			matrix3x3_inverse(t_matrix3x3 matrix);
-t_matrix4x4			matrix4x4_inverse(t_matrix4x4 matrix);
-
-t_matrix4x4			matrix4x4_translation(double x, double y, double z);
-
-t_matrix4x4			matrix4x4_scaling(double x, double y, double z);
-
-t_matrix4x4			matrix4x4_rotation_x(double radians);
-t_matrix4x4			matrix4x4_rotation_y(double radians);
-t_matrix4x4			matrix4x4_rotation_z(double radians);
-t_matrix4x4 		matrix4x4_rotation(t_vector direction);
-
-t_matrix4x4			matrix4x4_shearing(double *params);
-
-t_matrix4x4			view_transform(t_point from, t_point to, t_vector up);
-
-/** ######################################################################### *
- *  RAYS                                                                    # *
- *  ######################################################################### */
-
-t_point				position(t_ray ray, double time);
-t_ray				transform(t_ray r, t_matrix4x4 m);
-t_ray	ray(t_point origin, t_vector direction);
-
-/** ######################################################################### *
- *  SPHERES                                                                 # *
- *  ######################################################################### */
-
-t_vector			reflect(t_vector v, t_vector n);
+t_vector	reflect(t_vector v, t_vector n);
 
 #endif

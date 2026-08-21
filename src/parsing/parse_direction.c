@@ -14,6 +14,15 @@
 #include "parsing.h"
 #include "scene.h"
 
+/**
+ * @brief Parses a normalized direction vector from a string.
+ * Validates that each component is within the [-1.0, 1.0] range.
+ *
+ * @param str the string containing x,y,z components
+ * @param v pointer to the vector to populate
+ * @param line original line for error reporting
+ * @return 1 on success, 0 on failure
+ */
 int	parse_direction(t_scene *scene, t_vector *direction, char *str)
 {
 	if (!parse_vector(scene, direction, str))

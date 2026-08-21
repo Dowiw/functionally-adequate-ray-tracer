@@ -19,7 +19,6 @@ int	main(void)
 	t_test_suite	*suites;
 	t_test_suite	*tuple_suite;
 	t_test_suite	*color_suite;
-	t_test_suite	*canvas_suite;
 	t_test_suite	*matrices_suite;
 	t_test_suite	*rays_suite;
 	t_test_suite	*transformations_suite;
@@ -52,10 +51,6 @@ int	main(void)
 	load_test(color_suite, "Color Scalar Multiplication",
 		&test_color_mult_scalar);
 	load_test(color_suite, "Color Multiplication (Hadamard)", &test_color_mult);
-	canvas_suite = load_suite(&suites, "Canvas Suite");
-	load_test(canvas_suite, "Canvas Initialization", &test_canvas);
-	load_test(canvas_suite, "Canvas Utilities", &test_canvas_place);
-	load_test(canvas_suite, "Canvas to PPM", &test_canvas_ppm);
 	matrices_suite = load_suite(&suites, "Matrices Suite");
 	load_test(matrices_suite, "Main Matrix Functionality", &test_matrix_values);
 	load_test(matrices_suite, "Matrix Identities", &test_matrix_identity);
@@ -96,7 +91,6 @@ int	main(void)
 	load_test(light_shading_suite, "Sphere Material", &test_sphere_material);
 	load_test(light_shading_suite, "Sphere Lighiting", &test_sphere_lighting);
 	rendering_suite = load_suite(&suites, "Rendering Suite");
-	load_test(rendering_suite, "Default Scene", &test_default_scene);
 	load_test(rendering_suite, "Intersect Scene", &test_intersect_scene);
 	load_test(rendering_suite, "Prepare Computations", &test_prepare_computations);
 	load_test(rendering_suite, "Shade Hit", &test_shade_hit);

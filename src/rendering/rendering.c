@@ -6,24 +6,19 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 09:25:55 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 20:22:13 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 20:40:58 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <mlx.h>
-#include "data.h"
-#include "debug.h"
+#include "graphics.h"
 #include "input.h"
 #include "minirt.h"
 #include "ray.h"
 #include "rendering.h"
-#include "scene.h"
 #include "util/colors.h"
 
 static void	render_pixel(t_data *data);
-
-static void	put_frame(t_mlx mlx);
 
 /**
  * @brief Renders the given scene onto the given canvas (who could've guessed?)
@@ -35,6 +30,7 @@ void	render_scene(t_canvas *canvas, t_scene *scene)
 {
 	int		x;
 	int		y;
+	t_ray	r;
 
 	y = 0;
 	while (y < canvas->height)
@@ -42,7 +38,8 @@ void	render_scene(t_canvas *canvas, t_scene *scene)
 		x = 0;
 		while (x < canvas->width)
 		{
-			write_pixel(canvas, x, y, color_at(scene, ray_for_pixel(scene->camera, x, y)));
+			r = ray_for_pixel(scene->camera, x, y);
+			write_pixel(canvas, x, y, color_at(scene, r));
 			x++;
 		}
 		y++;
@@ -50,7 +47,8 @@ void	render_scene(t_canvas *canvas, t_scene *scene)
 }
 
 /**
- * @brief Initializes the iteration struct used for rendering across multiple frames.
+ * @brief Initializes the iteration struct used for rendering
+ *        across multiple frames.
  *
  * @param iter
  */
@@ -63,7 +61,16 @@ void	render_init(t_iter *iter)
 	iter->pixels = 0;
 }
 
-int		render_loop(t_data *data)
+/**
+ * @brief The main MLX render loop hook. Iteratively renders the image frame
+ * by frame.
+ * Enables smooth interactive rendering and handles progressive rendering
+ * updates.
+ *
+ * @param data pointer to the main data struct
+ * @return 0 on success
+ */
+int	render_loop(t_data *data)
 {
 	tick_input(data);
 	render_frame(data);
@@ -71,14 +78,13 @@ int		render_loop(t_data *data)
 }
 
 /**
- * @brief Renders the amount of new pixels specified in data.iter.pixels_per_frame.
+ * @brief Renders the amount of new pixels specified in PIXELS_PER_FRAME.
  *        The mlx window is updated at the end of the frame.
- *        If the scene has already finished rendering, this function returns immediately.
+ *        Returns immediately if the scene has already finished rendering.
  *
  * @param data
  * @return int
  */
-	#include <stdlib.h>
 void	render_frame(t_data *data)
 {
 	t_iter	*iter;
@@ -109,9 +115,11 @@ void	render_frame(t_data *data)
 }
 
 /**
- * @brief Renders the pixel at the current iteration stored in data.iter.
+ * @brief Computes the color for a single pixel by firing a ray through the
+ * scene.
  *
- * @param data
+ * @param iter pointer to the rendering iteration details
+ * @param data pointer to the main data struct (scene, camera, mlx)
  */
 static void	render_pixel(t_data *data)
 {
@@ -121,23 +129,13 @@ static void	render_pixel(t_data *data)
 	int		color_rgb;
 
 	iter = &data->iter;
-	if (!iter->first && iter->x % (iter->res * 2) == 0 && iter->y % (iter->res * 2) == 0)
+	if (!iter->first && iter->x % (iter->res * 2) == 0
+		&& iter->y % (iter->res * 2) == 0)
 		return ;
 	ray = ray_for_pixel(data->scene.camera, iter->x, iter->y);
 	color = color_at(&data->scene, ray);
-	color_rgb = rgb(clamp_color(color.x), clamp_color(color.y), clamp_color(color.z));
-	fill_pixel(&data->mlx, iter->res, iter->x, iter->y, color_rgb);
+	color_rgb = rgb(clamp_color(color.x), clamp_color(color.y),
+			clamp_color(color.z));
+	fill_pixel(&data->mlx, iter, color_rgb);
 	iter->pixels++;
-}
-
-/**
- * @brief Updates the mlx window with the current image data.
- *
- * @param mlx
- * @return int
- */
-static void	put_frame(t_mlx mlx)
-{
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
-	mlx_do_sync(mlx.mlx_ptr);
 }

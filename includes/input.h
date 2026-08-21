@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmonjard <kmonjard@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 20:23:20 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/17 10:51:45 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/19 20:10:38 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,29 @@
 # define INPUT_H
 
 # include <sys/time.h>
+# include "types.h"
 
 # define SPEED 10.0
 # define SENSITIVITY 1.0
 
-struct s_data;
+# define KEY_ESC 65307
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_SHIFT 65505
+# define KEY_SPACE 32
+# define KEY_Z 122
 
-typedef struct s_input {
-	int	key_w;
-	int	key_a;
-	int	key_s;
-	int	key_d;
-	int	key_shift;
-	int	key_space;
-	int	key_up;
-	int	key_left;
-	int	key_down;
-	int	key_right;
+void	handle_input(t_input *input, int keycode, int down);
+void	tick_input(t_data *data);
 
-	struct timeval last_time;
-}	t_input;
-
-void	tick_input(struct s_data *data);
+void	move(t_data *data, t_vector vec);
+void	rotate_horizontal(t_data *data, double radians);
+void	rotate_vertical(t_data *data, double radians);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:20:17 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/18 16:49:50 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/21 12:41:41 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,13 @@
 #include "util/arrays.h"
 #include "util/strings.h"
 
-static int	parse_scene_line(t_scene *scene, char *line);
-
 static int	parse_scene_fd(t_scene *scene, int fd);
 
-// static void	finish_parsing(t_scene *scene);
+static int	parse_scene_line(t_scene *scene, char *line);
+
+static int	parse_scene_params(t_scene *scene, char **params);
 
 static int	error(t_scene *scene, char *msg);
-
-// TODO:
-//  - enforce ranges where the subject requires
-//   - partially done, still needs to be implemented for vectors
 
 /*
  * Parses the given .rt 'file' to the 'scene' pointer.
@@ -56,6 +52,13 @@ int	parse_scene(t_scene *scene, char *file)
 	return (1);
 }
 
+/**
+ * @brief Reads and parses a scene file descriptor line by line.
+ *
+ * @param scene pointer to the scene to populate
+ * @param fd open file descriptor
+ * @return 1 on success, 0 on failure
+ */
 static int	parse_scene_fd(t_scene *scene, int fd)
 {
 	char	*line;
@@ -66,14 +69,14 @@ static int	parse_scene_fd(t_scene *scene, int fd)
 		line = string_remove_suffix(line, "\n");
 		if (line == NULL)
 			return (parse_error(scene, "Allocation Failure"));
-		if (!parse_scene_line(scene, line))
-		{
+		if (scene->error_line == NULL && !parse_scene_line(scene, line))
 			scene->error_line = line;
-			return (0);
-		}
-		free(line);
+		else
+			free(line);
 		line = get_next_line(fd);
 	}
+	if (scene->error_line != NULL)
+		return (0);
 	if (!scene->has_ambience)
 		return (parse_error(scene, "Missing ambience declaration"));
 	if (!scene->has_camera)
@@ -83,63 +86,65 @@ static int	parse_scene_fd(t_scene *scene, int fd)
 	return (1);
 }
 
+/**
+ * @brief Parses a single line from the scene description file.
+ *
+ * @param scene pointer to the scene to populate
+ * @param line raw string line
+ * @return 1 on success, 0 on failure
+ */
 static int	parse_scene_line(t_scene *scene, char *line)
 {
 	int		result;
 	char	**params;
-	char	*id;
 
 	params = ft_split(line, ' ');
 	if (params == NULL)
 		return (parse_error(scene, "Allocation Failure"));
-	id = params[0];
-	if (id == NULL || id[0] == '#')
-		result = 1;
-	else if (string_equals(id, "A"))
-		result = parse_ambience(scene, params);
-	else if (string_equals(id, "C"))
-		result = parse_camera(scene, params);
-	else if (string_equals(id, "L"))
-		result = parse_light(scene, params);
-	else if (string_equals(id, "sp"))
-		result = parse_sphere(scene, params);
-	else if (string_equals(id, "pl"))
-		result = parse_plane(scene, params);
-	else if (string_equals(id, "cy"))
-		result = parse_cylinder(scene, params);
-	else if (string_equals(id, "co"))
-		result = parse_cone(scene, params);
-	else
-		result = parse_error(scene, "Unrecognized identifier");
+	result = parse_scene_params(scene, params);
 	free_array((void **) params);
 	return (result);
 }
 
-// TODO: what about ambience.color?
-// static void	finish_parsing(t_scene *scene)
-// {
-// 	int	i;
+/**
+ * @brief Dispatches the parsed tokens of a line to the appropriate parser.
+ *
+ * @param scene pointer to the scene
+ * @param params array of string tokens from the line
+ * @param line original line string for error tracking
+ * @return 1 on success, 0 on failure
+ */
+static int	parse_scene_params(t_scene *scene, char **params)
+{
+	char	*id;
 
-// 	i = 0;
-// 	while (scene->spheres[i] != NULL)
-// 	{
-// 		scene->spheres[i]->material.ambient = scene->ambience.lighting;
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (scene->planes[i] != NULL)
-// 	{
-// 		scene->planes[i]->material.ambient = scene->ambience.lighting;
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (scene->cylinders[i] != NULL)
-// 	{
-// 		scene->cylinders[i]->material.ambient = scene->ambience.lighting;
-// 		i++;
-// 	}
-// }
+	id = params[0];
+	if (id == NULL || id[0] == '#')
+		return (1);
+	if (string_equals(id, "A"))
+		return (parse_ambience(scene, params));
+	if (string_equals(id, "C"))
+		return (parse_camera(scene, params));
+	if (string_equals(id, "L"))
+		return (parse_light(scene, params));
+	if (string_equals(id, "sp"))
+		return (parse_sphere(scene, params));
+	if (string_equals(id, "pl"))
+		return (parse_plane(scene, params));
+	if (string_equals(id, "cy"))
+		return (parse_cylinder(scene, params));
+	if (string_equals(id, "co"))
+		return (parse_cone(scene, params));
+	return (parse_error(scene, "Unrecognized identifier"));
+}
 
+/**
+ * @brief Logs an error message to standard error during parsing.
+ *
+ * @param scene pointer to the scene for logging
+ * @param msg error message to display
+ * @return 0 indicating failure
+ */
 static int	error(t_scene *scene, char *msg)
 {
 	int	i;

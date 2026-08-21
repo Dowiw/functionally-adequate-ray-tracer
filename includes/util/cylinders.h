@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:01:40 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/17 10:51:45 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/19 18:59:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int			cylinders_len(t_cylinder **array);
 
 void		free_cylinders(t_cylinder **array);
 
-void	intersect_caps(t_cylinder *cyl, t_ray r, t_intersections *xs);
+void		intersect_caps(t_cylinder *cyl, t_ray r, t_intersects *xs);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 12:38:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 15:49:19 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:59:53 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
  * @param radians - Rotation in radians (1 * PI is a full rotation)
  * @return Rotation Matrix around the X axis
  */
-t_matrix4x4	matrix4x4_rotation_x(double radians)
+t_m4x4	m4x4_rotation_x(double radians)
 {
-	t_matrix4x4	m;
+	t_m4x4	m;
 
-	m = matrix4x4_identity();
+	m = m4x4_identity();
 	m.m[1][1] = cos(radians);
 	m.m[1][2] = -sin(radians);
 	m.m[2][1] = sin(radians);
@@ -39,11 +39,11 @@ t_matrix4x4	matrix4x4_rotation_x(double radians)
  * @param radians - Rotation in radians (1 * PI is a full rotation)
  * @return Rotation Matrix around the Y axis
  */
-t_matrix4x4	matrix4x4_rotation_y(double radians)
+t_m4x4	m4x4_rotation_y(double radians)
 {
-	t_matrix4x4	m;
+	t_m4x4	m;
 
-	m = matrix4x4_identity();
+	m = m4x4_identity();
 	m.m[0][0] = cos(radians);
 	m.m[0][2] = sin(radians);
 	m.m[2][0] = -sin(radians);
@@ -58,11 +58,11 @@ t_matrix4x4	matrix4x4_rotation_y(double radians)
  * @param radians - Rotation in radians (1 * PI is a full rotation)
  * @return Rotation Matrix around the Z axis
  */
-t_matrix4x4	matrix4x4_rotation_z(double radians)
+t_m4x4	m4x4_rotation_z(double radians)
 {
-	t_matrix4x4	m;
+	t_m4x4	m;
 
-	m = matrix4x4_identity();
+	m = m4x4_identity();
 	m.m[0][0] = cos(radians);
 	m.m[0][1] = -sin(radians);
 	m.m[1][0] = sin(radians);
@@ -74,32 +74,32 @@ t_matrix4x4	matrix4x4_rotation_z(double radians)
  * @brief Returns a rotation matrix relative to vector(0.0, 1.0, 0.0)
  *
  * @param direction
- * @return t_matrix4x4
+ * @return t_m4x4
  */
-t_matrix4x4 matrix4x4_rotation(t_vector direction)
+t_m4x4	m4x4_rotation(t_vector vec)
 {
-	double	horizontal;
-	double	vertical;
+	double	h;
+	double	v;
 
-	if (calc_mag(direction) == 0.0)
-		return (matrix4x4_identity());
-	direction = calc_norm(direction);
-	if (direction.z == 0.0)
+	if (calc_mag(vec) == 0.0)
+		return (m4x4_identity());
+	vec = calc_norm(vec);
+	if (vec.z == 0.0)
 	{
-		if (direction.x > 0.0)
-			horizontal = PI * 0.5;
+		if (vec.x > 0.0)
+			h = PI * 0.5;
 		else
-			horizontal = PI * 1.5;
+			h = PI * 1.5;
 	}
-	else if (direction.z > 0.0)
-		horizontal = PI * 0.0 + atan(direction.x / direction.z);
+	else if (vec.z > 0.0)
+		h = PI * 0.0 + atan(vec.x / vec.z);
 	else
-		horizontal = PI * 1.0 + atan(direction.x / direction.z);
-	if (direction.y == 0.0)
-		vertical = PI * 0.5;
-	else if (direction.y > 0.0)
-		vertical = PI * 0.0 + atan(sqrt(direction.x * direction.x + direction.z * direction.z) / direction.y);
+		h = PI * 1.0 + atan(vec.x / vec.z);
+	if (vec.y == 0.0)
+		v = PI * 0.5;
+	else if (vec.y > 0.0)
+		v = PI * 0.0 + atan(sqrt(vec.x * vec.x + vec.z * vec.z) / vec.y);
 	else
-		vertical = PI * 1.0 + atan(sqrt(direction.x * direction.x + direction.z * direction.z) / direction.y);
-	return (matrix4x4_multiply(matrix4x4_rotation_y(horizontal), matrix4x4_rotation_x(vertical)));
+		v = PI * 1.0 + atan(sqrt(vec.x * vec.x + vec.z * vec.z) / vec.y);
+	return (m4x4_multiply(m4x4_rotation_y(h), m4x4_rotation_x(v)));
 }

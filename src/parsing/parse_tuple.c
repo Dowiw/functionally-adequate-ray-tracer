@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:19:42 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 15:55:51 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:04:46 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,18 @@ int	parse_tuple(t_scene *scene, t_tuple *tuple, char *str)
 	return (result);
 }
 
+/**
+ * @brief Parses x, y, and z double values into a generic tuple.
+ *
+ * @param params array of string parameters (x, y, z)
+ * @param t pointer to the tuple to populate
+ * @param line original line for error reporting
+ * @return 1 on success, 0 on failure
+ */
 static int	parse_tuple_params(t_scene *scene, t_tuple *tuple, char **params)
 {
 	if (array_len((void **) params) != 3)
-		return (parse_error(scene, "Bad format, expected <x>,<y>,<z>"));
+		return (parse_error(scene, "Expected <x>,<y>,<z>"));
 	if (!parse_double(scene, &tuple->x, params[0]))
 		return (parse_error(scene, "Failed to parse x component"));
 	if (!parse_double(scene, &tuple->y, params[1]))

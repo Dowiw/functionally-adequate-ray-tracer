@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:43:27 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/17 18:51:53 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 19:42:27 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@
 
 /**
  * @brief Default cylinder.
- * 
- * @return t_cylinder 
+ *
+ * @return t_cylinder
  */
 t_cylinder	cylinder_create(void)
 {
 	t_cylinder	c;
 
-	c.center = (t_point){0, 0, 0, POINT};
+	c.pos = (t_point){0, 0, 0, POINT};
 	c.vec = vector(0, 1, 0);
-	c.transform = matrix4x4_identity();
-	c.inverse = matrix4x4_identity();
-	c.diameter = 2.0;
+	c.transform = m4x4_identity();
+	c.inverse = m4x4_identity();
+	c.d = 2.0;
 	c.material = material();
 	c.min = -INFINITY;
 	c.max = INFINITY;
@@ -40,8 +40,8 @@ t_cylinder	cylinder_create(void)
 /**
  * @brief Create a cylinder array with:
  * array[0] = NULL and count = 0.
- * 
- * @return t_cylinder** 
+ *
+ * @return t_cylinder**
  */
 t_cylinder	**cylinders_create(void)
 {
@@ -53,11 +53,22 @@ t_cylinder	**cylinders_add(t_cylinder **array, t_cylinder *cylinder)
 	return ((t_cylinder **) array_add((void **) array, (void *) cylinder));
 }
 
+/**
+ * @brief Counts the number of cylinders in a NULL-terminated array.
+ *
+ * @param arr the array to measure
+ * @return the number of elements
+ */
 int	cylinders_len(t_cylinder **array)
 {
 	return (array_len((void **) array));
 }
 
+/**
+ * @brief Frees an array of cylinder pointers and the array itself.
+ *
+ * @param arr the array to free
+ */
 void	free_cylinders(t_cylinder **array)
 {
 	free_array((void **) array);

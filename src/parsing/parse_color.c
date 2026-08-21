@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:19:46 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 15:34:45 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ int	parse_color(t_scene *scene, int *color, char *str)
 	return (result);
 }
 
+/**
+ * @brief Parses the R, G, B components of a color from string arrays.
+ * Validates that each component is between 0 and 255.
+ *
+ * @param params array of string parameters (R, G, B)
+ * @param c pointer to the color struct to populate
+ * @param line original line for error reporting
+ * @return 1 on success, 0 on failure
+ */
 static int	parse_color_params(t_scene *scene, int *color, char **params)
 {
 	int	red;
@@ -45,12 +54,12 @@ static int	parse_color_params(t_scene *scene, int *color, char **params)
 	int	blue;
 
 	if (array_len((void **) params) != 3)
-		return (parse_error(scene, "Bad format, expected <red>,<green>,<blue>"));
-	if (!parse_int_range(scene, &red, params[0], 0, 255))
+		return (parse_error(scene, "Expected <red>,<green>,<blue>"));
+	if (!parse_int_range(scene, &red, params[0], (int [2]){0, 255}))
 		return (parse_error(scene, "Failed to parse red component"));
-	if (!parse_int_range(scene, &green, params[1], 0, 255))
+	if (!parse_int_range(scene, &green, params[1], (int [2]){0, 255}))
 		return (parse_error(scene, "Failed to parse green component"));
-	if (!parse_int_range(scene, &blue, params[2], 0, 255))
+	if (!parse_int_range(scene, &blue, params[2], (int [2]){0, 255}))
 		return (parse_error(scene, "Failed to parse blue component"));
 	*color = rgb(red, green, blue);
 	return (1);

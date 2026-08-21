@@ -6,10 +6,11 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:49 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 15:54:22 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/21 12:29:17 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minirt.h"
 #include "parsing.h"
 #include "scene.h"
 #include "util/arrays.h"
@@ -17,8 +18,8 @@
 #include "util/planes.h"
 #include <stdlib.h>
 
-static void finish_plane(t_plane *plane, int rgb_color);
-static int parse_plane_error(t_scene *scene, t_plane *plane, char *error);
+static void	finish_plane(t_plane *plane, int rgb_color);
+static int	parse_plane_error(t_scene *scene, t_plane *plane, char *error);
 
 /**
  * Parses the given 'params' and adds it to the scenes planes.
@@ -27,14 +28,13 @@ static int parse_plane_error(t_scene *scene, t_plane *plane, char *error);
  *   (for example: pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225)
  * Returns true if the parsing was succesful.
  */
-int parse_plane(t_scene *scene, char **params)
+int	parse_plane(t_scene *scene, char **params)
 {
-	t_plane *plane;
-	int rgb_color;
+	t_plane	*plane;
+	int		rgb_color;
 
 	if (array_len((void **)params) != 4)
-		return (parse_error(scene,
-							"Bad format, expected pl <pos> <vector> <color>"));
+		return (parse_error(scene, "Expected pl <pos> <vector> <color>"));
 	plane = malloc(sizeof(t_plane));
 	if (plane == NULL)
 		return (parse_error(scene, "Allocation Failure"));
@@ -51,18 +51,38 @@ int parse_plane(t_scene *scene, char **params)
 	return (1);
 }
 
-static void finish_plane(t_plane *plane, int rgb_color)
+/**
+ * @brief Finalizes a plane by setting up its transformation matrix.
+ * Computes rotations to align the plane's normal with the given orientation.
+ *
+ * @param plane pointer to the plane to finalize
+ * @param norm the orientation normal vector
+ * @param pos the position of the plane
+ */
+static void	finish_plane(t_plane *plane, int rbg)
 {
-	plane->transform = matrix4x4_translation(plane->pos.x, plane->pos.y, plane->pos.z);
-	plane->transform = matrix4x4_multiply(plane->transform, matrix4x4_rotation(plane->vec));
-	plane->inverse = matrix4x4_inverse(plane->transform);
+	t_m4x4	m;
+
+	m = m4x4_translation(plane->pos.x, plane->pos.y, plane->pos.z);
+	m = m4x4_multiply(m, m4x4_rotation(plane->vec));
+	plane->transform = m;
+	plane->inverse = m4x4_inverse(m);
 	plane->material = material();
-	plane->material.color =
-		color(red(rgb_color) / 255.0, green(rgb_color) / 255.0,
-			  blue(rgb_color) / 255.0);
+	plane->material.color = color(red(rbg) / 255.0,
+			green(rbg) / 255.0,
+			blue(rbg) / 255.0);
+	plane->material.ambient = 1.0;
 }
 
-static int parse_plane_error(t_scene *scene, t_plane *plane, char *error)
+/**
+ * @brief Helper to handle parsing errors for planes and free memory.
+ *
+ * @param error string describing the error
+ * @param arr split string array to free
+ * @param scene scene pointer for error logging
+ * @return 0 indicating failure
+ */
+static int	parse_plane_error(t_scene *scene, t_plane *plane, char *error)
 {
 	free(plane);
 	return (parse_error(scene, error));

@@ -6,19 +6,29 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 19:35:05 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/14 19:45:43 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/19 17:32:02 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include "data.h"
+#include "graphics.h"
 #include "libft/libft.h"
 #include "parsing.h"
 #include "rendering.h"
 #include "scene.h"
+#include "types.h"
 
 static int	error(char *msg);
 
+/**
+ * @brief Main entry point for the miniRT raytracer.
+ * Initializes the scene, parses the input file, sets up the MLX window,
+ * and starts the rendering and event loops.
+ *
+ * @param argc argument count
+ * @param argv argument vector
+ * @return exit status
+ */
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -44,6 +54,12 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+/**
+ * @brief Prints an error message to standard error and returns 1.
+ *
+ * @param msg error message to display
+ * @return 1 (indicating failure)
+ */
 static int	error(char *msg)
 {
 	ft_putstr_fd("Error\n", STDERR_FILENO);

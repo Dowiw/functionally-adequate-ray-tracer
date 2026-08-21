@@ -6,17 +6,22 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/19 16:02:07 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/21 12:25:31 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include "graphics.h"
 #include "minirt.h"
 #include "parsing.h"
 #include "scene.h"
 #include "util/arrays.h"
 
-static void	finish_camera(t_camera *camera, int width, int height);
+static void		finish_camera(t_camera *camera, int width, int height);
+
+static double	calculate_horizontal(t_vector vec);
+
+static double	calculate_vertical(t_vector vec);
 
 /**
  * Parses the given 'params' to the given 'scene's camera.
@@ -32,43 +37,75 @@ int	parse_camera(t_scene *scene, char **params)
 	if (scene->has_camera)
 		return (parse_error(scene, "Camera is already declared"));
 	if (array_len((void **) params) != 4)
-		return (parse_error(scene, "Bad format, expected C <pos> <orientation> <fov>"));
+		return (parse_error(scene, "Expected C <pos> <orientation> <fov>"));
 	if (!parse_point(scene, &scene->camera.pos, params[1]))
 		return (parse_error(scene, "Failed to parse position"));
 	if (!parse_direction(scene, &scene->camera.orientation, params[2]))
 		return (parse_error(scene, "Failed to parse orientation"));
-	if (!parse_double_range(scene, &scene->camera.fov, params[3], 0, 500))
+	if (!parse_double_range(scene, &scene->camera.fov, params[3],
+			(double [2]){0.0, 180.0}))
 		return (parse_error(scene, "Failed to parse fov"));
 	finish_camera(&scene->camera, WIN_W, WIN_H);
 	scene->has_camera = 1;
 	return (1);
 }
 
-static void	finish_camera(t_camera *camera, int width, int height)
+/**
+ * @brief Finishes camera setup by computing the transform and pixel size.
+ * Calculates the half width and height based on the aspect ratio and FOV,
+ * and sets up the view transformation matrix.
+ *
+ * @param camera pointer to the camera structure to finalize
+ */
+static void	finish_camera(t_camera *cam, int width, int height)
 {
-	camera->width = width;
-	camera->height = height;
-	camera->field_of_view = camera->fov * PI / 180.0;
-	if (camera->orientation.z == 0.0)
+	cam->width = width;
+	cam->height = height;
+	cam->field_of_view = cam->fov * PI / 180.0;
+	cam->horizontal = calculate_horizontal(cam->orientation);
+	cam->vertical = calculate_vertical(cam->orientation);
+	cam->transform = m4x4_translation(cam->pos.x, cam->pos.y, cam->pos.z);
+	cam->transform = m4x4_multiply(cam->transform,
+			m4x4_rotation_y(cam->horizontal));
+	cam->transform = m4x4_multiply(cam->transform,
+			m4x4_rotation_x(cam->vertical));
+	cam->transform = m4x4_inverse(cam->transform);
+	init_camera(cam);
+}
+
+/**
+ * @brief Calculates the horizontal component (right vector) of the camera.
+ * Used when constructing the view transformation matrix to align the camera.
+ *
+ * @param forward the forward direction vector
+ * @return the normalized right vector (horizontal axis)
+ */
+static double	calculate_horizontal(t_vector vec)
+{
+	if (vec.z == 0.0)
 	{
-		if (camera->orientation.x > 0.0)
-			camera->horizontal = PI * 1.5;
-		else
-			camera->horizontal = PI * 0.5;
+		if (vec.x > 0.0)
+			return (PI * 1.5);
+		return (PI * 0.5);
 	}
-	else if (camera->orientation.z > 0.0)
-		camera->horizontal = PI * 1.0 + atan(camera->orientation.x / camera->orientation.z);
-	else
-		camera->horizontal = PI * 0.0 + atan(camera->orientation.x / camera->orientation.z);
-	if (camera->orientation.x != 0.0 || camera->orientation.z != 0.0)
-		camera->vertical = atan(camera->orientation.y / sqrt(camera->orientation.x * camera->orientation.x + camera->orientation.z * camera->orientation.z));
-	else if (camera->orientation.y > 0.0)
-		camera->vertical = PI * 0.5;
-	else
-		camera->vertical = PI * -0.5;
-	camera->transform = matrix4x4_translation(camera->pos.x, camera->pos.y, camera->pos.z);
-	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_y(camera->horizontal));
-	camera->transform = matrix4x4_multiply(camera->transform, matrix4x4_rotation_x(camera->vertical));
-	camera->transform = matrix4x4_inverse(camera->transform);
-	init_camera(camera);
+	if (vec.z > 0.0)
+		return (PI * 1.0 + atan(vec.x / vec.z));
+	return (PI * 0.0 + atan(vec.x / vec.z));
+}
+
+/**
+ * @brief Calculates the vertical component (up vector) of the camera.
+ * Crosses the horizontal and forward vectors to find the true up vector.
+ *
+ * @param horizontal the computed right vector
+ * @param forward the forward direction vector
+ * @return the normalized up vector (vertical axis)
+ */
+static double	calculate_vertical(t_vector vec)
+{
+	if (vec.x != 0.0 || vec.z != 0.0)
+		return (atan(vec.y / sqrt(vec.x * vec.x + vec.z * vec.z)));
+	if (vec.y > 0.0)
+		return (PI * 0.5);
+	return (PI * -0.5);
 }

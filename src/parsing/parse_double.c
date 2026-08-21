@@ -6,15 +6,32 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:37:50 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/09 15:41:42 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "parsing.h"
 
+/**
+ * @brief Parses the integer part of a double before the decimal point.
+ * Handles negative signs and invalid characters.
+ *
+ * @param str string containing the number
+ * @param res pointer to store the integer portion
+ * @param sign pointer to store the sign (-1 or 1)
+ * @return the remaining string after the integer part, or NULL on error
+ */
 static int	parse_double_before_decimal(double *num, char *str, int *i,
 				int sign);
+
+/**
+ * @brief Parses the fractional part of a double after the decimal point.
+ *
+ * @param str string containing the fractional digits
+ * @param res pointer to store the combined double value
+ * @return 1 on success, 0 on error
+ */
 static int	parse_double_after_decimal(double *num, char *str, int *i,
 				int sign);
 
@@ -53,17 +70,27 @@ int	parse_double(t_scene *scene, double *num, char *str)
  * Parses the given 'str' (see parse_double) and checks the result against the
  * given range 'min' and 'max'.
  */
-int	parse_double_range(t_scene *scene, double *num, char *str, double min, double max)
+int	parse_double_range(t_scene *scene, double *num, char *str,
+		double bounds[2])
 {
 	if (!parse_double(scene, num, str))
 		return (0);
-	if (*num < min)
+	if (*num < bounds[0])
 		return (parse_error(scene, "Number is too small"));
-	if (*num > max)
+	if (*num > bounds[1])
 		return (parse_error(scene, "Number is too big"));
 	return (1);
 }
 
+/**
+ * @brief Parses the integer part of a double before the decimal point.
+ * Handles negative signs and invalid characters.
+ *
+ * @param str string containing the number
+ * @param res pointer to store the integer portion
+ * @param sign pointer to store the sign (-1 or 1)
+ * @return the remaining string after the integer part, or NULL on error
+ */
 static int	parse_double_before_decimal(double *num, char *str, int *i,
 				int sign)
 {
@@ -80,6 +107,13 @@ static int	parse_double_before_decimal(double *num, char *str, int *i,
 	return (1);
 }
 
+/**
+ * @brief Parses the fractional part of a double after the decimal point.
+ *
+ * @param str string containing the fractional digits
+ * @param res pointer to store the combined double value
+ * @return 1 on success, 0 on error
+ */
 static int	parse_double_after_decimal(double *num, char *str, int *i,
 				int sign)
 {
