@@ -2,3 +2,4 @@ miniRT
 libft.a
 build/
 *.o
+mlx/

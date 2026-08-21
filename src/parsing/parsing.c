@@ -72,6 +72,7 @@ static int	parse_scene_fd(t_scene *scene, int fd)
 		if (!parse_scene_line(scene, line))
 		{
 			scene->error_line = line;
+			get_next_line(-1);
 			return (0);
 		}
 		free(line);
