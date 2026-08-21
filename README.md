@@ -33,6 +33,8 @@ Run `make re` to run `make fclean` and `make`.
 Run the executable `miniRT` to start the program.
 It takes exactly one argument, which should be the location of a .rt file describing the scene to be rendered.
 
+For example: `./miniRT assets/all.rt`
+
 ### File Format
 
 The .rt file will be parsed line by line, ignoring empty lines and lines starting with '#'.
