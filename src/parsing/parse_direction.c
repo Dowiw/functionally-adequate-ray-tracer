@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 14:36:39 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/18 14:43:42 by sstark           ###   ########.fr       */
+/*   Updated: 2026/08/21 16:16:03 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "scene.h"
 
 /**
- * @brief Parses a normalized direction vector from a string.
+ * @brief Parses a direction vector from a string.
+ * Validates that the vectors magnitude is non-zero.
  * Validates that each component is within the [-1.0, 1.0] range.
  *
  * @param str the string containing x,y,z components
