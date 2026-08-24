@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:28:57 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/21 12:29:27 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	finish_sphere(t_sphere *sphere)
 	sphere->material.color = color(red(sphere->color) / 255.0,
 			green(sphere->color) / 255.0,
 			blue(sphere->color) / 255.0);
+	sphere->material.ambient = 1.0;
 }
 
 /**

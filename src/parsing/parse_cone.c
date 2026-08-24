@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 19:36:41 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/21 12:29:43 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static void	finish_cone(t_cone *c, int rgb)
 	c->material.color = color(red(rgb) / 255.0,
 			green(rgb) / 255.0,
 			blue(rgb) / 255.0);
+	c->material.ambient = 1.0;
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 22:19:07 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/21 12:29:37 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void	finish_cylinder(t_cylinder *cyl, int rgb_color)
 	cyl->material.color = color(red(rgb_color) / 255.0,
 			green(rgb_color) / 255.0,
 			blue(rgb_color) / 255.0);
+	cyl->material.ambient = 1.0;
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:03:29 by sstark            #+#    #+#             */
-/*   Updated: 2026/08/20 22:26:09 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/21 12:25:31 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	parse_camera(t_scene *scene, char **params)
 	if (!parse_direction(scene, &scene->camera.orientation, params[2]))
 		return (parse_error(scene, "Failed to parse orientation"));
 	if (!parse_double_range(scene, &scene->camera.fov, params[3],
-			(double [2]){0.0, 500.0}))
+			(double [2]){0.0, 180.0}))
 		return (parse_error(scene, "Failed to parse fov"));
 	finish_camera(&scene->camera, WIN_W, WIN_H);
 	scene->has_camera = 1;

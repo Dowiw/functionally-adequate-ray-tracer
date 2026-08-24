@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 11:48:41 by kmonjard          #+#    #+#             */
-/*   Updated: 2026/08/20 22:24:10 by kmonjard         ###   ########.fr       */
+/*   Updated: 2026/08/21 12:28:19 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	init_mlx_lib(t_mlx *mlx, t_data *data)
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
 		return (0);
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIN_W, WIN_H, "Fils de Fer");
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIN_W, WIN_H,
+			"Functionally Adequate RayTracer");
 	if (!mlx->win_ptr)
 		return (destroy_mlx(mlx));
 	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
